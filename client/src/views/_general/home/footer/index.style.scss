@@ -1,0 +1,145 @@
+.wrapper--footer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0px;
+  color: #333;
+  background-size: cover;
+  // background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  //  Common
+  img {
+    max-width: 100%;
+  }
+  p {
+    margin-bottom: 0;
+    padding: 0;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    color:  inherit;
+    text-decoration: none;
+  }
+
+  // Style
+  .content {
+    padding: 6.25rem 0;
+    .title--footer {
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: #fdb849;
+      padding-bottom: 2rem;
+    }
+    ul {
+      font-size: 1rem;
+      color: #333;
+    }
+    .register {
+      input {
+        font-size: .825rem;
+        padding-left: 0.625rem;
+        color: #333;
+        height: 40px;
+        box-shadow: none;
+        outline: none;
+        text-shadow: none;
+        border: 0;
+        width: 100%;
+        border-radius: .625rem;
+        background: #fff;
+        padding-right: 40px;
+        &::placeholder {
+          color: #999;
+        }
+      }
+      .icon--submit {
+        right: 10px;
+        top: 59%;
+        transform: translateY(-50%);
+        z-index: 10;
+        cursor: pointer;
+        svg {
+          color: #999;
+          transition: all .4s ease;
+          &:hover {
+            color: #666;
+          }
+        }
+      }
+      .list--contact {
+        .icon {
+          padding-right: 1rem;
+          svg {
+          // color: #fae9a0;
+          transition: 0.4s;
+          cursor: pointer;
+            &.facebook {
+              &:hover {
+                color: #4267b2;
+              }
+            }
+            &.youtube {
+              &:hover {
+                color: #ff0000;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .copy {
+    color: #666;
+    background-color: #eeeeee;
+    padding: 1rem 0;
+    font-size: .825rem;
+    .contact {
+      .items {
+        padding: 0 1rem;
+        transition: all .4s ease;
+        &:hover {
+          color: #444;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+
+// ============= RESPONSIVE
+@media screen and (max-width: 991px) {
+  .wrapper--footer {
+    .copy {
+      padding: 1rem 0;
+      .content--copy {
+        flex-direction: column;
+      }
+      .contact {
+        margin-left: 0!important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper--footer {
+    .content {
+      .title--footer {
+        padding-bottom: 0;
+      }
+    }
+    .copy {
+      .contact {
+        display: none!important;
+      }
+    }
+  }
+}
