@@ -8,7 +8,7 @@ module.exports = {
       "url": url,
       "data": data,
       "headers": {
-        "Authorization": headers + ","
+        "Authorization": `${headers},`
       }
     } );
   }
