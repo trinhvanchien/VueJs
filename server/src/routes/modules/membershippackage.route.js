@@ -17,4 +17,6 @@ router
   .post( auth, permission, PackageController.create )
   .delete( auth, permission, PackageController.delete );
 
+router.route( "/:userID" ).post( PackageController.isExist );
+
 module.exports = router;

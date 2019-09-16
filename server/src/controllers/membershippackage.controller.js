@@ -48,6 +48,15 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
+  "isExist": async ( req, res ) => {
+    const packageInfo = await MembershipPackage.findOne( { "members": req.params.userID } ).lean();
+
+    if ( !packageInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Tài khoản chưa được xét duyệt gói thành viên." } );
+    }
+
+    res.status( 200 ).json( { "status": "success", "data": packageInfo } );
+  },
   "update": async ( req, res ) => {
     const packageInfo = await MembershipPackage.findOne( { "_id": req.query._id } );
 
