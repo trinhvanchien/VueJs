@@ -15,17 +15,17 @@ export default {
           },
           to: "admin_dashboard"
         },
-        // {
-        //   text: "Thư viện bài viết",
-        //   icon: {
-        //     iconName: "script",
-        //     tagName: "icon-post",
-        //     width: 20,
-        //     height: 20,
-        //     viewBox: "0 0 540 540"
-        //   },
-        //   to: "libraries"
-        // },
+        {
+          text: "Gói tài khoản",
+          icon: {
+            iconName: "package",
+            tagName: "icon-post",
+            width: 20,
+            height: 20,
+            viewBox: "0 0 540 540"
+          },
+          to: "manage_package"
+        },
         {
           text: "Quản lý tài khoản",
           icon: {

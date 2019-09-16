@@ -85,8 +85,7 @@ export default {
       if ( this.$store.getters.authError === "405" ) {
         this.$router.push( { name: "user_expiration" } );
       } else {
-        console.log(1)
-        // window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
+        window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
       }
     }
   },

@@ -194,6 +194,23 @@ const generalRouter = {
       path: "code",
       name: "post_code",
       component: require("@/views/admin/code").default
+    },
+    {
+      path: "package",
+      component: require("@/views/admin/package").default,
+      children: [
+        {
+          path: "",
+          name: "manage_package",
+          component: require("@/views/admin/package/components/packages")
+            .default
+        },
+        {
+          path: "/:id",
+          name: "package_member",
+          component: require("@/views/admin/package/components/members").default
+        }
+      ]
     }
   ]
 };
