@@ -5,6 +5,56 @@ $row-bg: #ccc6;
 $row-color: #666;
 $row-bg-hover: #cccccc40;
 $row-color-hover: #fff;
+.header {
+  .left {
+    width: 40%;
+  }
+  .right {
+    width: 60%;
+    .back {
+      width: 110px;
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      background-color: #ffd899;
+      cursor: pointer;
+    }
+  }
+}
+
+.result {
+  width: 380px;
+  z-index: +9;
+  top: 105%;
+  right: 0;
+  background-color: #fff;
+  border-radius: .5rem;
+  cursor: pointer;
+  .action {
+    border: 1px solid #e4e4e4;
+    border-radius: .5rem;
+    padding: .5rem .875rem;
+    &:hover, &:active, &:visited, &:focus {
+      background-color: #ffb94a;
+      color: #fff;
+      transition: all .3s ease;
+    }
+  }
+}
+
+.info {
+  .default {
+    background-color: #ffb94a;
+  }
+  .size {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
 .desc {
   span {
     font-weight: 600;
@@ -15,6 +65,10 @@ $row-color-hover: #fff;
   margin: auto;
   width: 100%;
   max-width: 100%;
+  .empty {
+    background-color: #ffd899;
+    padding: .5rem;
+  }
 }
 
 .flex-table {

@@ -206,7 +206,7 @@ const generalRouter = {
             .default
         },
         {
-          path: "/:id",
+          path: "edit/:id",
           name: "package_member",
           component: require("@/views/admin/package/components/members").default
         }

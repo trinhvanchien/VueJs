@@ -5,8 +5,9 @@
         <!-- Start: Modal Body -->
         <div class="body">
           <div class="form_group">
-            <lable class="">Tạo package mới</lable>
+            <label class="">Tạo package mới</label>
             <input
+              v-model="membership.name"
               type="text"
               class="form_control"
               placeholder="Nhập tên thư mục"
@@ -16,6 +17,7 @@
           <div class="form_group">
             <label>Số bài đăng trong 1 ngày</label>
             <input
+              v-model="membership.limit.posts"
               type="number"
               placeholder="Nhập số bài đăng tối đa của gói"
               class="form_control"
@@ -23,10 +25,11 @@
           </div>
 
           <div class="form_group">
-            <label>Số thành viên tối đa</label>
+            <label>Số chiến dịch tạo trong 1 ngày</label>
             <input
+              v-model="membership.limit.campaigns"
               type="number"
-              placeholder="Nhập số thành viên tối đa của gói"
+              placeholder="Nhập số bài đăng tối đa của gói"
               class="form_control"
             />
           </div>
@@ -38,8 +41,19 @@
             <button class="btn bg_danger mr_2" @click="close">
               Hủy bỏ
             </button>
-            <button class="btn bg_primary" @click="createNewPackage">
+            <button
+              class="btn bg_primary"
+              v-if="isShowButtonDefault === true"
+              @click="createNewPackage"
+            >
               Tạo mới
+            </button>
+            <button
+              class="btn bg_primary"
+              v-if="isShowButtonDefault === false"
+              @click="updateMemberShipPackage"
+            >
+              Cập nhật
             </button>
           </div>
         </div>
@@ -51,15 +65,13 @@
 
 <script>
 export default {
-  props: {
-    currentTheme: String
-  },
+  props: ["isShowButtonDefault", "currentTheme"],
   data() {
     return {};
   },
   computed: {
-    package() {
-      return this.$store.getters.package;
+    membership() {
+      return this.$store.getters.membershipPackage;
     }
   },
   methods: {
@@ -67,9 +79,12 @@ export default {
       this.$emit("closePopup", false);
     },
     async createNewPackage() {
-      await this.$store.dispatch("createNewCategoryDefault", {
-        title: this.title
-      });
+      await this.$store.dispatch("createMemberShipPackage", this.membership);
+      this.close();
+    },
+    async updateMemberShipPackage() {
+      await this.$store.dispatch("updateMemberShipPackage", this.membership);
+      await this.$emit("changeButton", true);
       this.close();
     }
   }
