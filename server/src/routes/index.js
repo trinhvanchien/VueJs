@@ -15,6 +15,7 @@ router.use( "/category-default", require( "./modules/categorydefault.route" ) );
 router.use( "/campaign-default", require( "./modules/campaignDefault.route" ) );
 router.use( "/backup-account", require( "./modules/backupAccount.route" ) );
 router.use( "/log", require( "./modules/log.route" ) );
+router.use( "membership/package", require( "./modules/membershippackage.route" ) );
 
 // Help Route
 router.use( "/help", require( "./modules/help/help.route" ) );
