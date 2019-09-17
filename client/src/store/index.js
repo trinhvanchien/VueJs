@@ -11,6 +11,7 @@ import PostServer from "./modules/postserver.store";
 import HelpBlogStore from "./modules/user/help/blog.store";
 import HelpCategoriesStore from "./modules/user/help/category.store";
 import HelpStore from "./modules/help.store";
+import MemberShipPackage from "./modules/accountpackage.store";
 
 // Market
 import HomepageMarket from "./modules/market/homepage.store";
@@ -38,6 +39,7 @@ export default new Vuex.Store({
     HelpBlogStore,
     HelpCategoriesStore,
     HelpStore,
+    MemberShipPackage,
     // Market
     HomepageMarket,
     CategoryMarket,

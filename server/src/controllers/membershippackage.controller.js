@@ -49,6 +49,7 @@ module.exports = {
 
   },
   "isExist": async ( req, res ) => {
+    console.log("Hello")
     const packageInfo = await MembershipPackage.findOne( { "members": req.params.userID } ).lean();
 
     if ( !packageInfo ) {
@@ -66,11 +67,12 @@ module.exports = {
     }
 
     // Handle totalMembership
-    req.body.totalMembership = req.body.members;
+
+    req.body.totalMembership = req.body.members.length;
 
     // Handle _editor
     req.body._editor = req.uid;
 
-    res.status( 200 ).json( jsonResponse( "success", await MembershipPackage.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
+    res.status( 200 ).json( { "status": "success", "data": await MembershipPackage.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) } );
   }
 };
