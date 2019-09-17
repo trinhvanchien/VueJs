@@ -6,13 +6,17 @@ const mongoose = require( "mongoose" ),
   MembershipPackageSchema = new Schema( {
     "name": String,
     "limit": {
-      "posts": {
-        "type": Number,
-        "default": 1
-      },
-      "campaigns": {
+      "post": {
         "type": Number,
         "default": 0
+      },
+      "campaign": {
+        "type": Number,
+        "default": 0
+      },
+      "slot": {
+        "type": Number,
+        "default": 1
       }
     },
     "totalMembership": {
