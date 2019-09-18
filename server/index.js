@@ -35,7 +35,8 @@ require( "./src/process" );
 // connect to mongoose NoSQL DB
 mongoose.connect( `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`, {
   "useCreateIndex": true,
-  "useNewUrlParser": true
+  "useNewUrlParser": true,
+  "useUnifiedTopology": true
 } );
 mongoose.set( "useFindAndModify", false );
 

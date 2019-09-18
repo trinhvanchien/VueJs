@@ -49,7 +49,6 @@ module.exports = {
 
   },
   "isExist": async ( req, res ) => {
-    console.log("Hello")
     const packageInfo = await MembershipPackage.findOne( { "members": req.params.userID } ).lean();
 
     if ( !packageInfo ) {
