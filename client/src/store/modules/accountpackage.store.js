@@ -119,8 +119,9 @@ const actions = {
     commit("setMemberShip", {
       name: "",
       limit: {
-        posts: 1,
-        campaigns: 1
+        post: 1,
+        campaign: 1,
+        slot: 1
       }
     });
   }

@@ -17,7 +17,7 @@
           <div class="form_group">
             <label>Số bài đăng trong 1 ngày</label>
             <input
-              v-model="membership.limit.posts"
+              v-model="membership.limit.post"
               type="number"
               placeholder="Nhập số bài đăng tối đa của gói"
               class="form_control"
@@ -27,7 +27,17 @@
           <div class="form_group">
             <label>Số chiến dịch tạo trong 1 ngày</label>
             <input
-              v-model="membership.limit.campaigns"
+              v-model="membership.limit.campaign"
+              type="number"
+              placeholder="Nhập số bài đăng tối đa của gói"
+              class="form_control"
+            />
+          </div>
+
+          <div class="form_group">
+            <label>Số sự kiện tạo trong 1 ngày</label>
+            <input
+              v-model="membership.limit.slot"
               type="number"
               placeholder="Nhập số bài đăng tối đa của gói"
               class="form_control"
