@@ -38,6 +38,17 @@ export default {
           to: "admin_users"
         },
         {
+          text: "Quản lý ảnh",
+          icon: {
+            iconName: "manage-album",
+            tagName: "icon-image",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "album"
+        },
+        {
           text: "Quản lý VPS",
           icon: {
             iconName: "fbaccount",

@@ -50,6 +50,50 @@
     </div>
     <!-- END: HEADER CONTAIN SEARCH MEMBER -->
 
+    <!-- START: SHOW INFORMATION PACKAGE -->
+    <div
+      class="py_3 d_flex align_items_center justify_content_center"
+      v-if="this.$store.getters.statusMembership === 'loading'"
+    >
+      <span
+        >Thông tin gói tài khoản đang được cập nhật, xin chờ trong giây lát
+        ...</span
+      >
+    </div>
+    <div class="information py_2 px_3" v-else>
+      <div class="d_flex align_items_center">
+        <div class="name w_50">
+          <label>Tên gói tài khoản :</label
+          ><span>{{ memberShipPackage.name }}</span>
+        </div>
+        <div class="total w_50" v-if="memberShipPackage.limit">
+          <label>Số sự kiện được phép tạo trong 1 ngày :</label
+          ><span>{{ memberShipPackage.limit.slot }}</span>
+        </div>
+      </div>
+      <div class="d_flex align_items_center">
+        <div class="limit--post w_50" v-if="memberShipPackage.limit">
+          <label>Số bài viết được phép đăng trong 1 ngày :</label>
+          <span>{{ memberShipPackage.limit.post }}</span>
+        </div>
+        <div class="limit--campaign w_50" v-if="memberShipPackage.limit">
+          <label>Số kế hoạch được phép tạo trong 1 ngày :</label>
+          <span>{{ memberShipPackage.limit.campaign }}</span>
+        </div>
+      </div>
+      <div class="d_flex align_items_center">
+        <div class="now w_50" v-if="memberShipPackage.members">
+          <label>Tổng số thành viên hiện tại của gói</label>
+          <span>{{ memberShipPackage.members.length }}</span>
+        </div>
+        <div class="slot w_50" v-if="memberShipPackage.limit">
+          <label>Số lượng còn trống trong gói :</label>
+          <span>vô hạn</span>
+        </div>
+      </div>
+    </div>
+    <!-- END: SHOW INFORMATION PACKAGE -->
+
     <!-- START: TABLE CONTAIN LIST MEMBER -->
     <div class="body mt_2">
       <div class="content--body">
@@ -94,6 +138,9 @@ export default {
     },
     members() {
       return this.$store.getters.membersPackage;
+    },
+    memberShipPackage() {
+      return this.$store.getters.membershipPackage;
     }
   },
   async created() {
