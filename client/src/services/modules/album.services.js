@@ -2,18 +2,18 @@ import Api from "@/services";
 
 export default {
   index() {
-    return Api().get("album");
+    return Api().get("album/category");
   },
   create(data) {
-    return Api().post("album", data);
+    return Api().post("album/category", data);
   },
   delete(id) {
-    return Api().delete(`album?_id=${id}`);
+    return Api().delete(`album/category?_id=${id}`);
   },
   update(id, data) {
-    return Api().patch(`album?_id=${id}`, data);
+    return Api().patch(`album/category?_id=${id}`, data);
   },
   show(id) {
-    return Api().get(`album?_id=${id}`);
+    return Api().get(`album/category?_id=${id}`);
   }
 };

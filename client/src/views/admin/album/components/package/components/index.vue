@@ -7,6 +7,7 @@
           <div class="form_group">
             <label class="">Tên album</label>
             <input
+              v-model="albumCategory.name"
               type="text"
               class="form_control"
               placeholder="Nhập tên album"
@@ -23,14 +24,14 @@
             <button
               class="btn bg_primary"
               v-if="isShowButtonDefault === true"
-              @click="createNewPackage"
+              @click="createNewAlbum"
             >
               Tạo mới
             </button>
             <button
               class="btn bg_primary"
               v-if="isShowButtonDefault === false"
-              @click="updateMemberShipPackage"
+              @click="updateAlbum"
             >
               Cập nhật
             </button>
@@ -49,20 +50,20 @@ export default {
     return {};
   },
   computed: {
-    membership() {
-      return this.$store.getters.membershipPackage;
+    albumCategory() {
+      return this.$store.getters.album;
     }
   },
   methods: {
     close() {
       this.$emit("closePopup", false);
     },
-    async createNewPackage() {
-      await this.$store.dispatch("createMemberShipPackage", this.membership);
+    async createNewAlbum() {
+      await this.$store.dispatch("createAlbumCategory", this.albumCategory);
       this.close();
     },
-    async updateMemberShipPackage() {
-      await this.$store.dispatch("updateMemberShipPackage", this.membership);
+    async updateAlbum() {
+      await this.$store.dispatch("updateAlbumCategory", this.albumCategory);
       await this.$emit("changeButton", true);
       this.close();
     }

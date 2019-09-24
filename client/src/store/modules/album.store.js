@@ -21,7 +21,7 @@ const mutations = {
   album_success: state => {
     state.statusAlbum = "success";
   },
-  setAlbumPackages: (state, payload) => {
+  setAlbumCategory: (state, payload) => {
     state.albums = payload;
   },
   setAlbum: (state, payload) => {
@@ -46,36 +46,42 @@ const mutations = {
   }
 };
 const actions = {
-  getAllalbum: async ({ commit }) => {
+  getAlbumCategory: async ({ commit }) => {
+    let result;
     commit("album_request");
-    const result = await AlbumServices.index();
-    commit("setAlbumPackages", result.data.data);
+    result = await AlbumServices.index();
+    commit("setAlbumCategory", result.data.data);
     commit("album_success");
   },
   getInfoAlbum: async ({ commit }, payload) => {
+    let result;
     commit("album_request");
-    const result = await AlbumServices.show(payload);
+    result = await AlbumServices.show(payload);
     commit("setAlbum", result.data.data);
     commit("album_success");
   },
-  createAlbumPackage: async ({ commit }, payload) => {
+  createAlbumCategory: async ({ commit }, payload) => {
+    let result;
     commit("album_request");
     await AlbumServices.create(payload);
-    const result = await AlbumServices.index();
-    commit("setAlbumPackages", result.data.data);
+    result = await AlbumServices.index();
+    commit("setAlbumCategory", result.data.data);
     commit("album_success");
   },
-  deleteAlbumPackage: async ({ commit, state }, payload) => {
+  deleteAlbumCategory: async ({ commit, state }, payload) => {
+    let packages;
     commit("album_request");
 
-    const packages = state.albums.filter(item => {
+    packages = state.albums.filter(item => {
       if (item._id !== payload) return item;
     });
+    await AlbumServices.delete(payload);
+
     commit("setDeleteAlbum", packages);
 
     commit("album_success");
   },
-  updateAlbumPackage: async ({ commit }, payload) => {
+  updateAlbumCategory: async ({ commit }, payload) => {
     commit("album_request");
 
     commit("setUpdateAlbum", payload);
@@ -83,7 +89,7 @@ const actions = {
 
     commit("album_success");
   },
-  resetAlbum: ({ commit }, payload) => {
+  resetAlbumCategory: ({ commit }, payload) => {
     commit("reset_album", payload);
   },
   setCaseAlbum: ({ commit }, payload) => {
