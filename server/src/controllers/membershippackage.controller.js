@@ -9,6 +9,20 @@
 const MembershipPackage = require( "../models/MembershipPackage.model" );
 
 module.exports = {
+  "addMember": async ( req, res ) => {
+    let { member } = req.body,
+      currentPackageInfo = await MembershipPackage.findOne( { "_id": req.params.id } ),
+      packageInfo = await MembershipPackage.findOne( { "members": member } );
+
+    if ( packageInfo ) {
+      packageInfo.members.pull( member );
+      await packageInfo.save();
+    }
+    currentPackageInfo.members.push( member );
+    await currentPackageInfo.save();
+
+    res.status( 200 ).json( { "status": "success", "data": currentPackageInfo } );
+  },
   "create": async ( req, res ) => {
     // Handle creator
     req.body._creator = req.uid;
@@ -49,7 +63,7 @@ module.exports = {
 
   },
   "isExist": async ( req, res ) => {
-    const packageInfo = await MembershipPackage.findOne( { "members": req.params.userID } ).lean();
+    const packageInfo = await MembershipPackage.findOne( { "members": req.params.id } ).lean();
 
     if ( !packageInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Tài khoản chưa được xét duyệt gói thành viên." } );
