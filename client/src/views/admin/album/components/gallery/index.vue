@@ -5,29 +5,7 @@
         « Quay lại
       </div>
       <div class="right">
-        <label for="upload">
-          <icon-base
-            class="icon--image mr_2"
-            icon-name="image"
-            width="18"
-            height="18"
-            viewBox="0 0 21 21"
-          >
-            <icon-image />
-          </icon-base>
-          <span>Tải ảnh lên thư mục</span>
-        </label>
-        <form enctype="multipart/form-data" @submit.prevent="sendFile">
-          <input
-            id="upload"
-            hidden
-            type="file"
-            ref="file"
-            @change="selectFile"
-            accept="image/x-png,image/gif,image/jpeg"
-            multiple
-          />
-        </form>
+        <label @click="openUploadImages">Tải ảnh lên thư mục</label>
       </div>
     </div>
     <div class="grid">
@@ -97,7 +75,7 @@
 
     <!-- START: POPUP CREATE NEW PACKAGE-->
     <transition name="popup">
-      <upload-image v-if="isShowUpload === true" />
+      <upload-image v-if="casePhoto === 1" />
     </transition>
     <!-- END: POPUP CREATE NEW PACKAGE-->
   </div>
@@ -112,38 +90,17 @@ export default {
   },
   data() {
     return {
-      isShowUpload: false
+      file: ""
     };
   },
+  computed: {
+    casePhoto() {
+      return this.$store.getters.casePhoto;
+    }
+  },
   methods: {
-    selectFile() {
-      // this.file = this.$refs.file.files;
-      //
-      // this.sendFile();
-      //
-      // // reset ref
-      // const input = this.$refs.file;
-      // input.type = "text";
-      // input.type = "file";
-    },
-    async sendFile() {
-      // let uploadFiles;
-      // const formData = new FormData();
-      //
-      // Array.from(this.file).forEach(f => {
-      //   formData.append("attachments", f);
-      // });
-      //
-      // await this.$store.dispatch("uploadPostAttachments", formData);
-      // if (this.statusImage === "success") {
-      //   uploadFiles = this.postAttachmentsUpload.map(item => {
-      //     return {
-      //       link: item,
-      //       typeAttachment: 1
-      //     };
-      //   });
-      //   this.post.attachments = this.post.attachments.concat(uploadFiles);
-      // }
+    openUploadImages() {
+      this.$store.dispatch("setCasePhoto", 1);
     },
     redirectAlbum() {
       this.$router.go(-1);
