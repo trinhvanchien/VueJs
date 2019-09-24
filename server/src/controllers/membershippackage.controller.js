@@ -66,7 +66,6 @@ module.exports = {
     }
 
     // Handle totalMembership
-
     req.body.totalMembership = req.body.members.length;
 
     // Handle _editor

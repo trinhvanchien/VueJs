@@ -7,14 +7,18 @@
  * team: BE-RHP
  */
 const PhotoLibrary = require( "../models/PhotoLibrary.model" );
+const PhotoLibraryCategory = require( "../models/PhotoLibraryCategory.model" );
 
 module.exports = {
   "create": async ( req, res ) => {
     // Handle creator
     req.body._creator = req.uid;
 
-    const newPhotoLibrary = new PhotoLibrary( req.body );
+    const newPhotoLibrary = new PhotoLibrary( req.body ),
+      categoryInfo = await PhotoLibraryCategory.findOne( { "_id": req.body._category } );
 
+    categoryInfo.totalPhotos = categoryInfo.totalPhotos + 1;
+    await categoryInfo.save();
     await newPhotoLibrary.save();
 
     res.status( 201 ).json( { "status": "success", "data": newPhotoLibrary } );
@@ -25,13 +29,15 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "_id": "Vui lòng cung cấp query _id để xác thực ảnh muốn xóa!" } );
     }
 
-    const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } );
+    const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } ),
+      categoryInfo = await PhotoLibraryCategory.findOne( { "_id": photoInfo._category } );
 
     // Check error
     if ( !photoInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Ảnh không tồn tại!" } );
     }
 
+    categoryInfo.totalPhotos = categoryInfo.totalPhotos - 1;
     // Remove package
     await photoInfo.remove();
     res.status( 200 ).json( { "status": "success", "data": null } );
@@ -49,14 +55,20 @@ module.exports = {
 
   },
   "update": async ( req, res ) => {
-    const packageInfo = await PhotoLibrary.findOne( { "_id": req.query._id } );
+    const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } ),
+      categoryInfo = await PhotoLibraryCategory.findOne( { "_id": photoInfo._category } ),
+      newCategoryInfo = await PhotoLibraryCategory.findOne( { "_id": req.body._category } );
 
     // Check error
-    if ( !packageInfo ) {
+    if ( !photoInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Ảnh không tồn tại!" } );
     }
 
     // Handle _editor
+    categoryInfo.totalPhotos = categoryInfo.totalPhotos - 1;
+    await categoryInfo.save();
+    newCategoryInfo.totalPhotos = newCategoryInfo.totalPhotos + 1;
+    await newCategoryInfo.save();
     req.body._editor = req.uid;
 
     res.status( 200 ).json( { "status": "success", "data": await PhotoLibrary.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) } );

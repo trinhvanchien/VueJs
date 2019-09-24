@@ -12,9 +12,11 @@ const permission = require( "../../helpers/middleware/permission.middleware" );
 
 router
   .route( "/" )
-  .get( auth, permission, PhotoLibraryCategoryController.index )
+  .get( auth, PhotoLibraryCategoryController.index )
   .post( auth, permission, PhotoLibraryCategoryController.create )
   .patch( auth, permission, PhotoLibraryCategoryController.update )
   .delete( auth, permission, PhotoLibraryCategoryController.delete );
+
+router.route( "/:id" ).get( auth, PhotoLibraryCategoryController.getPhotoLibraryByUser );
 
 module.exports = router;
