@@ -6,6 +6,8 @@
  * date to: ___
  * team: BE-RHP
  */
+const MembershipPackage = require( "../models/MembershipPackage.model" );
+const PhotoLibrary = require( "../models/PhotoLibrary.model" );
 const PhotoLibraryCategory = require( "../models/PhotoLibraryCategory.model" );
 
 module.exports = {
@@ -47,6 +49,16 @@ module.exports = {
 
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
+  },
+  "getPhotoLibraryByUser": async ( req, res ) => {
+    try {
+      const membershipPackageInfo = await MembershipPackage.findOne( { "members": req.uid } ).lean(),
+        photoList = await PhotoLibrary.find( { "isAvailable": membershipPackageInfo._id, "_category": req.params.id } );
+
+      return res.status( 200 ).json( { "status": "success", "data": photoList } );
+    } catch ( e ) {
+      return res.status( 404 ).json( { "status": "error", "message": e } );
+    }
   },
   "update": async ( req, res ) => {
     const categoryInfo = await PhotoLibraryCategory.findOne( { "_id": req.query._id } );
