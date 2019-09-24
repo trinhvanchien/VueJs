@@ -1,77 +1,83 @@
 /**
- * Controller package for project
+ * Controller photo library for project
  * author: Sky Albert
  * updater: ___
- * date up: 26/06/2019
+ * date up: 23/09/2019
  * date to: ___
  * team: BE-RHP
  */
-const MembershipPackage = require( "../models/MembershipPackage.model" );
+const PhotoLibrary = require( "../models/PhotoLibrary.model" );
 
 module.exports = {
   "create": async ( req, res ) => {
     // Handle creator
     req.body._creator = req.uid;
 
-    const newPackage = new MembershipPackage( req.body );
+    const newPhotoLibrary = new PhotoLibrary( req.body );
 
-    await newPackage.save();
+    await newPhotoLibrary.save();
 
-    res.status( 201 ).json( { "status": "success", "data": newPackage } );
+    res.status( 201 ).json( { "status": "success", "data": newPhotoLibrary } );
   },
   "delete": async ( req, res ) => {
     // Check if don't use query
     if ( req.query._id === undefined || req.query._id.length === 0 ) {
-      return res.status( 403 ).json( { "status": "fail", "_id": "Vui lòng cung cấp query _id để xác thực gói thành viên muốn xóa!" } );
+      return res.status( 403 ).json( { "status": "fail", "_id": "Vui lòng cung cấp query _id để xác thực ảnh muốn xóa!" } );
     }
 
-    const packageInfo = await MembershipPackage.findOne( { "_id": req.query._id } );
+    const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } );
 
     // Check error
-    if ( !packageInfo ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Gói thành viên không tồn tại!" } );
+    if ( !photoInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Ảnh không tồn tại!" } );
     }
 
     // Remove package
-    await packageInfo.remove();
+    await photoInfo.remove();
     res.status( 200 ).json( { "status": "success", "data": null } );
   },
   "index": async ( req, res ) => {
     let dataResponse = null;
 
     if ( req.query._id ) {
-      dataResponse = await MembershipPackage.findOne( { "_id": req.query._id } ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
+      dataResponse = await PhotoLibrary.findOne( { "_id": req.query._id } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await MembershipPackage.find( {} ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
+      dataResponse = await PhotoLibrary.find( {} ).lean();
     }
 
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
-  "isExist": async ( req, res ) => {
-    const packageInfo = await MembershipPackage.findOne( { "members": req.params.userID } ).lean();
-
-    if ( !packageInfo ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Tài khoản chưa được xét duyệt gói thành viên." } );
-    }
-
-    res.status( 200 ).json( { "status": "success", "data": packageInfo } );
-  },
   "update": async ( req, res ) => {
-    const packageInfo = await MembershipPackage.findOne( { "_id": req.query._id } );
+    const packageInfo = await PhotoLibrary.findOne( { "_id": req.query._id } );
 
     // Check error
     if ( !packageInfo ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Gói thành viên không tồn tại!" } );
+      return res.status( 404 ).json( { "status": "error", "message": "Ảnh không tồn tại!" } );
     }
-
-    // Handle totalMembership
-
-    req.body.totalMembership = req.body.members.length;
 
     // Handle _editor
     req.body._editor = req.uid;
 
-    res.status( 200 ).json( { "status": "success", "data": await MembershipPackage.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) } );
+    res.status( 200 ).json( { "status": "success", "data": await PhotoLibrary.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) } );
+  },
+  "upload": async ( req, res ) => {
+    if ( !req.files || req.files.length === 0 ) {
+      return res
+        .status( 403 )
+        .json( {
+          "status": "fail",
+          "photos": "Không có ảnh upload, vui lòng kiểm tra lại!"
+        } );
+    }
+    const attachmentList = req.files.map( ( file ) => {
+      if ( file.fieldname === "attachments" && file.mimetype.includes( "image" ) ) {
+        return `${process.env.APP_URL}:${
+          process.env.PORT_BASE
+        }/${file.path.replace( /\\/gi, "/" )}`;
+      }
+    } );
+
+    return res.status( 200 ).json( { "status": "success", "data": attachmentList } );
   }
 };

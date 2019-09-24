@@ -6,18 +6,18 @@
  */
 const router = require( "express-promise-router" )();
 
-const PostServerController = require( "../../controllers/postserver.controller" );
+const PhotoLibraryController = require( "../../controllers/photolibrary.controller" );
 const auth = require( "../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../helpers/middleware/permission.middleware" );
+const UploadImage = require( "../../helpers/services/upload.service" );
 
 router
   .route( "/" )
-  .get( auth, permission, PostServerController.index )
-  .post( auth, permission, PostServerController.create )
-  .patch( auth, permission, PostServerController.update )
-  .delete( auth, permission, PostServerController.delete );
+  .get( auth, permission, PhotoLibraryController.index )
+  .post( auth, permission, PhotoLibraryController.create )
+  .patch( auth, permission, PhotoLibraryController.update )
+  .delete( auth, permission, PhotoLibraryController.delete );
 
-router.route( "/:uid/status" ).post( PostServerController.changeStatus );
-router.route( "/online" ).post( PostServerController.getServerOnline );
+router.route( "/upload" ).post( auth, permission, UploadImage.array( "./uploads/albums", "attachments", 25, null, "uid" ), PhotoLibraryController.upload );
 
 module.exports = router;
