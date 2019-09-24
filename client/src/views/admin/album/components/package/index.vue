@@ -1,6 +1,5 @@
 <template>
   <div class="simple">
-
     <!-- START: SHOW ALBUM PACKAGE-->
     <div class="body">
       <div class="r">
@@ -59,7 +58,6 @@
               </icon-base>
             </span>
           </div>
-
         </div>
 
         <div class="c_lg_6 c_xl_3 c_md_6 mb_3">
