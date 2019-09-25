@@ -73,6 +73,8 @@
                     multiple
                     placeholder="Chọn gói được sử dụng"
                     :options="membership"
+                    v-model="photo.isAvailable"
+                    @input="selectMemberShip"
                   />
                 </div>
               </div>
@@ -139,15 +141,20 @@ export default {
   },
   methods: {
     close() {
+      this.$emit("closePopup", false);
       this.$store.dispatch("setCasePhoto", 0);
     },
     createPhoto() {
+      this.photo._category = this.$route.params.id;
       this.$store.dispatch("createUploadPhotoLibrary", this.photo);
     },
     updateAttribute(val) {
       this.photo.attribute = val;
     },
     updatePhoto() {},
+    selectMemberShip(val) {
+      this.photo.isAvailable = val.map(item => item._id);
+    },
     selectFile() {
       this.file = this.$refs.file.files;
 

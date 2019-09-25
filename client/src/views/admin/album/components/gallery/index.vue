@@ -13,69 +13,39 @@
         <div
           class="action position_absolute d_flex align_items_center justify_content_center"
         >
-          <icon-base
-            class="icon--add"
-            icon-name="plus"
-            width="30"
-            height="30"
-            viewBox="0 0 15 15"
-          >
-            <icon-remove />
-          </icon-base>
+          <div class="mr_2" @click="editPhotoLibrary(1)">
+            <icon-base
+              class="icon--add"
+              icon-name="plus"
+              width="30"
+              height="30"
+              viewBox="0 0 20 20"
+            >
+              <icon-edit />
+            </icon-base>
+          </div>
+          <div @click="deletePhotoLibrary(0)">
+            <icon-base
+              class="icon--add"
+              icon-name="plus"
+              width="30"
+              height="30"
+              viewBox="0 0 15 15"
+            >
+              <icon-remove />
+            </icon-base>
+          </div>
         </div>
       </div>
-      <div class="item bg position_relative mr_2 mb_2">
-        <div
-          class="action position_absolute d_flex align_items_center justify_content_center"
-        >
-          <icon-base
-            class="icon--add"
-            icon-name="plus"
-            width="30"
-            height="30"
-            viewBox="0 0 15 15"
-          >
-            <icon-remove />
-          </icon-base>
-        </div>
-      </div>
-      <div class="item bg position_relative mr_2 mb_2">
-        <div
-          class="action position_absolute d_flex align_items_center justify_content_center"
-        >
-          <icon-base
-            class="icon--add"
-            icon-name="plus"
-            width="30"
-            height="30"
-            viewBox="0 0 15 15"
-          >
-            <icon-remove />
-          </icon-base>
-        </div>
-      </div>
-      <div class="item bg position_relative mr_2 mb_2">
-        <div
-          class="action position_absolute d_flex align_items_center justify_content_center"
-        >
-          <icon-base
-            class="icon--add"
-            icon-name="plus"
-            width="30"
-            height="30"
-            viewBox="0 0 15 15"
-          >
-            <icon-remove />
-          </icon-base>
-        </div>
-      </div>
-
       <div class="clear"></div>
     </div>
 
     <!-- START: POPUP CREATE NEW PACKAGE-->
     <transition name="popup">
-      <upload-image v-if="casePhoto === 1" />
+      <upload-image
+        v-if="isUploadPopup === true"
+        @closePopup="isUploadPopup = $event"
+      />
     </transition>
     <!-- END: POPUP CREATE NEW PACKAGE-->
   </div>
@@ -90,7 +60,7 @@ export default {
   },
   data() {
     return {
-      file: ""
+      isUploadPopup: false
     };
   },
   computed: {
@@ -98,9 +68,20 @@ export default {
       return this.$store.getters.casePhoto;
     }
   },
+  created() {
+    const albumId = this.$route.params.id;
+    this.$store.dispatch("getInfoAlbum", albumId);
+  },
   methods: {
+    editPhotoLibrary() {
+      // console.log(val);
+    },
+    deletePhotoLibrary() {
+      // console.log(val);
+    },
     openUploadImages() {
-      this.$store.dispatch("setCasePhoto", 1);
+      this.isUploadPopup = true;
+      this.$store.dispatch("resetPhotoUpload");
     },
     redirectAlbum() {
       this.$router.go(-1);
