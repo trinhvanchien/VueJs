@@ -16,6 +16,8 @@ router.use( "/campaign-default", require( "./modules/campaignDefault.route" ) );
 router.use( "/backup-account", require( "./modules/backupAccount.route" ) );
 router.use( "/log", require( "./modules/log.route" ) );
 router.use( "/membership/package", require( "./modules/membershippackage.route" ) );
+router.use( "/album/category", require( "./modules/photolibrarycategory.route" ) );
+router.use( "/photo-library", require( "./modules/photolibrary.route" ) );
 
 // Help Route
 router.use( "/help", require( "./modules/help/help.route" ) );

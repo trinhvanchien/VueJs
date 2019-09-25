@@ -12,6 +12,8 @@ import HelpBlogStore from "./modules/user/help/blog.store";
 import HelpCategoriesStore from "./modules/user/help/category.store";
 import HelpStore from "./modules/help.store";
 import MemberShipPackage from "./modules/accountpackage.store";
+import AlbumStore from "./modules/album.store";
+import PhotoLibraryStore from "./modules/photolibrary.store";
 
 // Market
 import HomepageMarket from "./modules/market/homepage.store";
@@ -40,6 +42,8 @@ export default new Vuex.Store({
     HelpCategoriesStore,
     HelpStore,
     MemberShipPackage,
+    AlbumStore,
+    PhotoLibraryStore,
     // Market
     HomepageMarket,
     CategoryMarket,

@@ -211,6 +211,22 @@ const generalRouter = {
           component: require("@/views/admin/package/components/members").default
         }
       ]
+    },
+    {
+      path: "album",
+      component: require("@/views/admin/album").default,
+      children: [
+        {
+          path: "",
+          name: "album",
+          component: require("@/views/admin/album/components/package").default
+        },
+        {
+          path: "edit/:id",
+          name: "album_package",
+          component: require("@/views/admin/album/components/gallery").default
+        }
+      ]
     }
   ]
 };
