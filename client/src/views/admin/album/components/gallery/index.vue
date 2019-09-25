@@ -9,7 +9,10 @@
       </div>
     </div>
     <div class="grid">
-      <div v-if="photos && photos.length === 0" class="text_center px_3 py_3 alert_danger">
+      <div
+        v-if="photos && photos.length === 0"
+        class="text_center px_3 py_3 alert_danger"
+      >
         Album chưa có ảnh nào, vui lòng thêm ảnh.
       </div>
       <div
@@ -89,7 +92,7 @@ export default {
   },
   methods: {
     editPhotoLibrary(val) {
-        this.$store.dispatch("getInfoPhoto", val);
+      this.$store.dispatch("getInfoPhoto", val);
       this.isUploadPopup = true;
     },
     deletePhotoLibrary(val) {

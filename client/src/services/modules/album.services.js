@@ -10,7 +10,7 @@ export default {
   delete(id) {
     return Api().delete(`album/category?_id=${id}`);
   },
-  getPhoto(id){
+  getPhoto(id) {
     return Api().get(`album/category/${id}/bz`);
   },
   update(id, data) {
