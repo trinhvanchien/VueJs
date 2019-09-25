@@ -50,6 +50,15 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
+  "getPhotoLibrary": async ( req, res ) => {
+    try {
+      const photoList = await PhotoLibrary.find( { "_category": req.params.id } ).lean();
+
+      return res.status( 200 ).json( { "status": "success", "data": photoList } );
+    } catch ( e ) {
+      return res.status( 404 ).json( { "status": "error", "message": e } );
+    }
+  },
   "getPhotoLibraryByUser": async ( req, res ) => {
     try {
       const membershipPackageInfo = await MembershipPackage.findOne( { "members": req.uid } ).lean(),
