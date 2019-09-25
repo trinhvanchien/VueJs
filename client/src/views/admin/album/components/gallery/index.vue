@@ -9,11 +9,20 @@
       </div>
     </div>
     <div class="grid">
-      <div class="item bg position_relative mr_2 mb_2">
+      <div v-if="photos && photos.length === 0" class="text_center px_3 py_3 alert_danger">
+        Album chưa có ảnh nào, vui lòng thêm ảnh.
+      </div>
+      <div
+        class="item bg position_relative mr_2 mb_2"
+        v-else
+        v-for="(item, index) in photos"
+        :key="index"
+        :style="{ backgroundImage: 'url(' + item.url + ')' }"
+      >
         <div
           class="action position_absolute d_flex align_items_center justify_content_center"
         >
-          <div class="mr_2" @click="editPhotoLibrary(1)">
+          <div class="mr_2" @click="editPhotoLibrary(item._id)">
             <icon-base
               class="icon--add"
               icon-name="plus"
@@ -24,7 +33,7 @@
               <icon-edit />
             </icon-base>
           </div>
-          <div @click="deletePhotoLibrary(0)">
+          <div @click="deletePhotoLibrary(item._id)">
             <icon-base
               class="icon--add"
               icon-name="plus"
@@ -66,18 +75,25 @@ export default {
   computed: {
     casePhoto() {
       return this.$store.getters.casePhoto;
+    },
+    photos() {
+      return this.$store.getters.photoAlbum;
     }
   },
   created() {
     const albumId = this.$route.params.id;
+    // if check have data then dont dispatch event.
+
     this.$store.dispatch("getInfoAlbum", albumId);
+    this.$store.dispatch("getPhotoAlbumCategory", albumId);
   },
   methods: {
-    editPhotoLibrary() {
-      // console.log(val);
+    editPhotoLibrary(val) {
+        this.$store.dispatch("getInfoPhoto", val);
+      this.isUploadPopup = true;
     },
-    deletePhotoLibrary() {
-      // console.log(val);
+    deletePhotoLibrary(val) {
+      this.$store.dispatch("deletePhotoAlbum", val);
     },
     openUploadImages() {
       this.isUploadPopup = true;

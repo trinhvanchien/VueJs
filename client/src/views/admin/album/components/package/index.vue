@@ -134,7 +134,8 @@ export default {
       this.isShowPopup = true;
       this.isShowButtonDefault = true;
     },
-    showInfoAlbumCategory(val) {
+    async showInfoAlbumCategory(val) {
+      await this.$store.dispatch("getPhotoAlbumCategory", val);
       this.$router.push({ name: "album_package", params: { id: val } });
     }
   }

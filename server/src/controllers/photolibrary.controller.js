@@ -46,7 +46,7 @@ module.exports = {
     let dataResponse = null;
 
     if ( req.query._id ) {
-      dataResponse = await PhotoLibrary.findOne( { "_id": req.query._id } ).lean();
+      dataResponse = await PhotoLibrary.findOne( { "_id": req.query._id } ).populate( { "path": "isAvailable", "select": "name _id" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       dataResponse = await PhotoLibrary.find( {} ).lean();
     }

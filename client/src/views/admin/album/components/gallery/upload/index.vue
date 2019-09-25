@@ -147,13 +147,17 @@ export default {
     createPhoto() {
       this.photo._category = this.$route.params.id;
       this.$store.dispatch("createUploadPhotoLibrary", this.photo);
+      this.close();
     },
     updateAttribute(val) {
       this.photo.attribute = val;
     },
-    updatePhoto() {},
+    updatePhoto() {
+      this.$store.dispatch("updatePhotoAlbum", this.photo);
+      this.close();
+    },
     selectMemberShip(val) {
-      this.photo.isAvailable = val.map(item => item._id);
+      this.photo.isAvailable = val;
     },
     selectFile() {
       this.file = this.$refs.file.files;

@@ -15,5 +15,8 @@ export default {
   },
   upload(files) {
     return Api().post("photo-library/upload", files);
+  },
+  show(id){
+    return Api().get(`photo-library?_id=${id}`);
   }
 };
