@@ -127,10 +127,7 @@ export default {
       this.$store.dispatch("deleteAlbumCategory", val);
     },
     async openPopupCreateAlbum() {
-      await this.$store.dispatch("resetAlbumCategory", {
-        key: "name",
-        value: ""
-      });
+      await this.$store.dispatch("resetAlbumCategory");
       this.isShowPopup = true;
       this.isShowButtonDefault = true;
     },
