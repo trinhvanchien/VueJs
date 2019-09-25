@@ -18,5 +18,6 @@ router
   .delete( auth, permission, PhotoLibraryCategoryController.delete );
 
 router.route( "/:id" ).get( auth, PhotoLibraryCategoryController.getPhotoLibraryByUser );
+router.route( "/:id/bz" ).get( auth, permission, PhotoLibraryCategoryController.getPhotoLibrary );
 
 module.exports = router;
