@@ -10,6 +10,7 @@ const mongoose = require( "mongoose" ),
     },
     "owner": Object,
     "postInfo": Object,
+    "message": String,
     "status": {
       "type": Number,
       "default": 1 // 1 - Success, 2 - Error
