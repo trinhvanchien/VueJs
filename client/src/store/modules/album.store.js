@@ -42,7 +42,7 @@ const mutations = {
     state.albums[position] = payload;
   },
   reset_album: (state, payload) => {
-    state.album[payload.key] = payload.value;
+    state.album = payload;
   }
 };
 const actions = {
@@ -89,8 +89,10 @@ const actions = {
 
     commit("album_success");
   },
-  resetAlbumCategory: ({ commit }, payload) => {
-    commit("reset_album", payload);
+  resetAlbumCategory: ({ commit }) => {
+    commit("reset_album", {
+      name: ""
+    });
   },
   setCaseAlbum: ({ commit }, payload) => {
     commit("set_case", payload);
