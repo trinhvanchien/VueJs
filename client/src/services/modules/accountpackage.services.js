@@ -3,7 +3,7 @@ export default {
   index() {
     return Api().get("membership/package");
   },
-  addMember(id, data){
+  addMember(id, data) {
     return Api().post(`membership/package/${id}/member`, data);
   },
   create(data) {
