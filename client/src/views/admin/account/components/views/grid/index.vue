@@ -35,12 +35,16 @@
       <!-- Start: Grid Content -->
       <div class="grid--content">
         <div class="ct_f p_0">
+          <!-- Start: Empty Data -->
+          <div class="data--empty text_center pt_4" v-if="!user.name">
+            Nhập email hoặc số điện thoại của người dùng để tìm kiếm tài khoản
+            trên hệ thống
+          </div>
+          <!-- End: Empty Data -->
           <!-- Start: User Data -->
-          <div v-if="users && users.length > 0">
+          <div v-else>
             <div
               class="card bdr-0 d_flex align_items_center justify_content_center mt_5"
-              v-for="(user, index) in users"
-              :key="index"
             >
               <div
                 class="card_body user w-80 d_flex align_items_center justify_content_between"
@@ -62,7 +66,7 @@
                     class="avatar--content avatar--default position_relative d_block"
                     @click="openPopupInfo(user._id)"
                   >
-                    <span class="position_absolute">{{
+                    <span class="position_absolute" v-if="user.name">{{
                       user.name | getFirstLetter
                     }}</span>
                   </div>
@@ -89,7 +93,7 @@
 
                     <div>
                       <label>Gói tài khoản áp dụng: </label>
-                      <span>{{ user.name }}</span>
+                      <span>{{ user.membershipPackage }}</span>
                     </div>
 
                     <div>
@@ -101,7 +105,7 @@
                   <div class="w-50">
                     <div>
                       <label>Phân quyền người dùng: </label>
-                      <span>{{ user._role.level }}</span>
+                      <span v-if="user._role">{{ user._role.level }}</span>
                     </div>
 
                     <div>
@@ -111,7 +115,7 @@
 
                     <div>
                       <label>Server đang hoạt động: </label>
-                      <span>{{ user.name }}</span>
+                      <span>{{ user._server ? user._server.title : 3 }}</span>
                     </div>
 
                     <div>
@@ -148,11 +152,6 @@
             </div>
           </div>
           <!-- Start: User Data -->
-          <!-- Start: Empty Data -->
-          <div class="data--empty text_center pt_4" v-else>
-            Không có dữ liệu.
-          </div>
-          <!-- End: Empty Data -->
         </div>
       </div>
       <!-- End: Grid Content -->

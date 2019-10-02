@@ -121,13 +121,14 @@ module.exports = {
     res.status( 304 ).json( jsonResponse( "fail", "API này không được cung cấp!" ) );
   },
   "searchUser": async ( req, res ) => {
-    const userInfo = await Account.find( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword }, { "presenter": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).populate( { "path": "_server", "select": "title" } ).lean(),
+    const userInfo = await Account.findOne( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword }, { "presenter": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).populate( { "path": "_server", "select": "title" } ).lean(),
       membershipInfo = await MembershipPackage.findOne( { "members": userInfo._id } );
 
     if ( !userInfo ) {
-      return res.status( 403 ).json( { "status": "fail", "message": "Tài khoản không tồn tại" } );
+      return res.status( 403 ).json( { "status": "error", "message": "Tài khoản không tồn tại" } );
+    } else if ( membershipInfo ) {
+      userInfo.membershipPackage = membershipInfo.name;
     }
-    userInfo.membershipPackage = membershipInfo.name;
     res.status( 200 ).json( jsonResponse( "success", userInfo ) );
   },
   "renewById": async ( req, res ) => {

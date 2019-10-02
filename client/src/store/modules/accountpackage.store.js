@@ -45,6 +45,19 @@ const mutations = {
   }
 };
 const actions = {
+  addMemberToMemberShip: async ({ commit }, payload) => {
+    let result, dataSender;
+    commit("membership_request");
+    dataSender = {
+      member: payload.idMember
+    };
+    await AccountPackageServices.addMember(payload.idPackage, dataSender);
+    result = await AccountPackageServices.show(payload.idPackage);
+    commit("setMemberShip", result.data.data);
+    commit("setListMembers", result.data.data.members);
+
+    commit("membership_success");
+  },
   getMemberShipPackage: async ({ commit }) => {
     let result;
     commit("membership_request");
