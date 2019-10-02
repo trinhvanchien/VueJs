@@ -37,7 +37,6 @@
         <div class="ct_f p_0">
           <!-- Start: User Data -->
           <div v-if="users && users.length > 0">
-
             <div
               class="card bdr-0 d_flex align_items_center justify_content_center mt_5"
               v-for="(user, index) in users"
@@ -97,7 +96,6 @@
                       <label>Ngày tạo tài khoản: </label>
                       <span>{{ user.created_at | formatDate }}</span>
                     </div>
-
                   </div>
 
                   <div class="w-50">
@@ -118,7 +116,9 @@
 
                     <div>
                       <label>Trạng thái tài khoản: </label>
-                      <span :class="user.status === true ? 'alive': 'die'">{{ user.status === true ? 'Hoạt động' : 'Ngừng hoạt động' }}</span>
+                      <span :class="user.status === true ? 'alive' : 'die'">{{
+                        user.status === true ? "Hoạt động" : "Ngừng hoạt động"
+                      }}</span>
                     </div>
 
                     <div>
