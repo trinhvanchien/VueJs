@@ -1,3 +1,19 @@
+$size: (
+  '-100': 100%,
+  '-80': 80%,
+  '-50': 50%,
+  '-30': 30%,
+  '-20': 20%,
+  '-65': 65%,
+  '-15': 15%,
+);
+
+@each $name, $value in $size {
+  .w#{$name} {
+    width: $value;
+  }
+}
+
 .wrapper {
   .grid {
     .grid--header {
@@ -47,8 +63,10 @@
     }
     .grid--content {
       border-top: 1px solid;
-      border-bottom: 1px solid;
       padding-bottom: 1.5rem;
+      .bdr-0 {
+        border: none;
+      }
       .c_md_3 {
         padding: 0 .75rem;
       }
@@ -57,11 +75,25 @@
       }
       .user {
         border: 1px solid;
-        height: 100%;
         border-radius: .5rem;
         padding-bottom: 1rem;
         &--action {
           justify-content: right;
+        }
+        .information {
+          label {
+            font-weight: 600;
+            margin-right: .5rem;
+          }
+          span {
+            font-size: 15px;
+            &.alive {
+              color: #00c853;
+            }
+            &.die {
+              color: #ff0000;
+            }
+          }
         }
         .checkbox {
           border: 0;
@@ -100,7 +132,6 @@
         }
         .user--edit {
           margin-top: .75rem;
-          padding: 0 3.5rem;
           .btn--edit {
             font-size: 14px;
             padding: .5rem .75rem;
@@ -128,7 +159,7 @@
           border-radius: 50%;
           cursor: pointer;
           overflow: hidden;
-          width: 70px;
+          width: 145px;
           &:before {
             content: "";
             display: block;
@@ -140,7 +171,7 @@
             background-position: center center;
           }
           &.avatar--default {
-            font-size: 32px;
+            font-size: 75px;
             font-weight: 700;
             span {
               left: 50%;
@@ -264,8 +295,8 @@
         .avatar--content {
           border-color: #f7f7f7;
           &.avatar--default {
-            background-color: #f7f7f7;
-            color: #ffb94a;
+            background-color: #ffb94a;
+            color: #fff;
           }
         }
         .user--name {
