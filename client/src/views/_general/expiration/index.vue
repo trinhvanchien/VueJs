@@ -2,15 +2,15 @@
   <div class="wrapper">
     <!-- Start: App desktop -->
     <!-- <div class="d_none d_md_block"> -->
-      <!-- Start: Header -->
-      <app-header></app-header>
-      <!-- End: Header -->
-      <!-- Start: Main -->
-      <app-main></app-main>
-      <!-- End: Main -->
-      <!-- Start: Footer -->
-      <app-footer />
-      <!-- End: Footer -->
+    <!-- Start: Header -->
+    <app-header></app-header>
+    <!-- End: Header -->
+    <!-- Start: Main -->
+    <app-main></app-main>
+    <!-- End: Main -->
+    <!-- Start: Footer -->
+    <app-footer />
+    <!-- End: Footer -->
     <!-- </div> -->
     <!-- End: App desktop -->
     <!-- Start: App mobile -->
@@ -28,7 +28,6 @@
 import AppHeader from "./header";
 import AppMain from "./main";
 import AppFooter from "./footer";
-
 
 export default {
   components: {

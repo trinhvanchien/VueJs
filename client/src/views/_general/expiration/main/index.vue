@@ -2,7 +2,7 @@
   <div class="wrapper--main">
     <!-- Start: Price -->
     <section id="price" class="price">
-      <price-expire/>
+      <price-expire />
     </section>
     <!-- End: Price -->
     <!-- Start: guide -->
@@ -35,8 +35,8 @@
               <li><span class="mr_5">Ngân hàng:</span> Vietcombank</li>
               <li><span class="mr_5">Chi nhánh:</span> Tây Hồ - Hà Nội</li>
               <li>
-                Thông tin chuyển khoản với nội dung: "Email đăng ký Zinbee
-                của bạn"
+                Thông tin chuyển khoản với nội dung: "Email đăng ký Zinbee của
+                bạn"
               </li>
               <li>Zinbee sẽ nâng cấp cho bạn ngay lập tức</li>
             </ul>

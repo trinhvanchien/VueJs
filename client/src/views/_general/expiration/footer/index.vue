@@ -43,7 +43,7 @@ a {
 }
 
 // RESPONSIVE
-@media screen and (max-width: 414px) {  
+@media screen and (max-width: 414px) {
   .copy {
     font-size: 0.82rem;
     .copyright {
