@@ -26,7 +26,10 @@
         <div class="c_lg_3 mb_3">
           <div class="title--footer">Thông Tin Hỗ Trợ</div>
           <ul>
-            <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
+            <li>
+              Địa Chỉ: Tầng 2, Toà Nhà Capital Garden, 102 Trường Chinh, Phường
+              Phương Mai, Quận Đống Đa, Hà Nội
+            </li>
             <li>
               Hotline:
               <!-- <span v-if="agencyInfo" v-text="agencyInfo.phone"></span> -->
