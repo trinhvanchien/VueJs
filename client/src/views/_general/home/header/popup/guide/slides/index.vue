@@ -6,26 +6,57 @@
           <transition name="slide-fade">
             <div class="items display" v-if="currentIndexInfo === 0">
               <div class="mb_2">Hướng dẫn đăng ký Zinbee</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/B6yDMCWTpLI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/B6yDMCWTpLI"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="content items" v-if="currentIndexInfo === 1">
-
-              <div class="mb_2">Hướng dẫn kết nối facebook với tài khoản Zinbee</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/8UhYCOZAxWQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="mb_2">
+                Hướng dẫn kết nối facebook với tài khoản Zinbee
+              </div>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/8UhYCOZAxWQ"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="automation items" v-if="currentIndexInfo === 2">
               <div class="mb_2">Hướng dẫn tổng quan về kho nội dung</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/oWvyBT9U5JI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/oWvyBT9U5JI"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="function items" v-if="currentIndexInfo === 3">
-              <div class="mb_2">Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Zinbee</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/3fHgoQO6bac" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="mb_2">
+                Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Zinbee
+              </div>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/3fHgoQO6bac"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
         </div>
@@ -111,7 +142,7 @@ export default {
         this.currentIndexInfo--;
       }
     }
-  },
+  }
   // mounted() {
   //   this.sliderWhyChooseZinbee();
   // }
@@ -165,7 +196,7 @@ export default {
   }
   .content--options {
     color: #ccc;
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
     overflow: hidden;
     &:hover {
       .action--slider-info {

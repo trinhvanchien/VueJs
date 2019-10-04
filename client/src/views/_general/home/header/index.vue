@@ -33,10 +33,18 @@
           <div class="d_flex nav--menu ml_auto">
             <nav>
               <ul class="d_flex nav--menu">
-                <li class="items--header align_items_center d_flex support" @click="showPopupVideo">
+                <li
+                  class="items--header align_items_center d_flex support"
+                  @click="showPopupVideo"
+                >
                   <p class="mb_0 pr_1">Hướng dẫn</p>
-                  <icon-base icon-name="hướng dẫn" width="20" height="20" viewBox="0 0 415 415">
-                    <icon-play/>
+                  <icon-base
+                    icon-name="hướng dẫn"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 415 415"
+                  >
+                    <icon-play />
                   </icon-base>
                 </li>
                 <li class="items--header" @click="goToSignIn">Đăng nhập</li>
@@ -76,10 +84,18 @@
                     <icon-cancel></icon-cancel>
                   </icon-base>
                 </span>
-                <li class="items--header align_items_center d_flex support" @click="showPopupVideoMobile">
+                <li
+                  class="items--header align_items_center d_flex support"
+                  @click="showPopupVideoMobile"
+                >
                   <p class="mb_0 pr_1">Hướng dẫn</p>
-                  <icon-base icon-name="hướng dẫn" width="20" height="20" viewBox="0 0 415 415">
-                    <icon-play/>
+                  <icon-base
+                    icon-name="hướng dẫn"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 415 415"
+                  >
+                    <icon-play />
                   </icon-base>
                 </li>
                 <li class="items--header login" @click="goToSignIn">
@@ -96,14 +112,20 @@
         <!-- /.container-fluid -->
       </nav>
     </div>
-    <div class="d_none d_md_block">      
+    <div class="d_none d_md_block">
       <transition name="popup">
-        <video-guide v-if="isShowPopupVideo === true" @closePopup="isShowPopupVideo = $event"/>
+        <video-guide
+          v-if="isShowPopupVideo === true"
+          @closePopup="isShowPopupVideo = $event"
+        />
       </transition>
     </div>
-    <div class="d_block d_md_none">      
+    <div class="d_block d_md_none">
       <transition name="popup--mobile">
-        <video-guide-mobile v-if="isShowPopupVideoMobile === true" @closePopup="isShowPopupVideoMobile = $event"/>
+        <video-guide-mobile
+          v-if="isShowPopupVideoMobile === true"
+          @closePopup="isShowPopupVideoMobile = $event"
+        />
       </transition>
     </div>
   </div>

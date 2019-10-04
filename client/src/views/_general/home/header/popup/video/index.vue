@@ -37,16 +37,16 @@ export default {
   data() {
     return {
       currentIndex: 0
-    }
+    };
   },
   methods: {
     close() {
       this.$emit("closePopup", false);
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "index.style";
+@import "index.style";
 </style>
