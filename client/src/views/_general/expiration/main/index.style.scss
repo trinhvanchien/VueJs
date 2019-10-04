@@ -1,0 +1,121 @@
+.wrapper--main {
+  img {
+    max-width: 100%;
+  }
+
+  // guide
+  .guide {
+    padding: 6rem 0;
+    margin-bottom: 0 !important;
+  }
+
+  .info--transfer {
+    li {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.section--title-content {
+  max-width: 60vw;
+  margin: 0 auto 1rem;
+
+  .title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 2.5rem;
+    line-height: 55px;
+    color: #333;
+    position: relative;
+    padding-bottom: 26px;
+
+    &:before {
+      content: "";
+      width: 100px;
+      height: 2px;
+      background: #333;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+  }
+
+  .desc {
+    // display: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 35px;
+    color: #333;
+    padding: 0 0.93rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .price {
+    .item {
+      &--header {
+        .items {
+          .month, .money {
+            font-size: 0.875rem;
+          }
+          .register {
+            width: 80%;
+          }
+        }
+      }
+      &--body {
+        .items {
+          &--main {
+            padding: 1rem 0.35rem;
+            &.function {
+              font-size: 0.875rem;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 666px) {
+  .section--title-content {
+    max-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 666px) {
+  .section--title-content {
+    .title {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .wrapper--main {
+    .info--transfer {
+      span {
+        padding: 0!important;
+        margin: 0!important;
+      }
+    }
+    .section--title-content {
+      .title {
+        font-size: 1.5rem;
+      }
+      .desc {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
