@@ -5,6 +5,7 @@ const mongoose = require( "mongoose" ),
 
   PhotoLibrarySchema = new Schema( {
     "name": String,
+    "previewUrl": String,
     "url": String,
     "attribute": Array,
     "numberOfClick": {
