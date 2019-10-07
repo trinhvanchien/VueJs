@@ -9,13 +9,18 @@
 const PhotoLibrary = require( "../models/PhotoLibrary.model" );
 const PhotoLibraryCategory = require( "../models/PhotoLibraryCategory.model" );
 
+const sharp = require( "sharp" );
+const RAND = require( "randomstring" );
+
 module.exports = {
   "create": async ( req, res ) => {
+    let categoryInfo, newPhotoLibrary;
+
     // Handle creator
     req.body._creator = req.uid;
 
-    const newPhotoLibrary = new PhotoLibrary( req.body ),
-      categoryInfo = await PhotoLibraryCategory.findOne( { "_id": req.body._category } );
+    newPhotoLibrary = new PhotoLibrary( req.body );
+    categoryInfo = await PhotoLibraryCategory.findOne( { "_id": req.body._category } );
 
     categoryInfo.totalPhotos = categoryInfo.totalPhotos + 1;
     await categoryInfo.save();
@@ -54,6 +59,7 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
+  "search": async () => {}, // TODO
   "update": async ( req, res ) => {
     const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } ),
       categoryInfo = await PhotoLibraryCategory.findOne( { "_id": photoInfo._category } ),
@@ -75,20 +81,20 @@ module.exports = {
   },
   "upload": async ( req, res ) => {
     if ( !req.files || req.files.length === 0 ) {
-      return res
-        .status( 403 )
-        .json( {
-          "status": "fail",
-          "photos": "Không có ảnh upload, vui lòng kiểm tra lại!"
-        } );
+      return res.status( 403 ).json( { "status": "error", "message": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
     }
-    const attachmentList = req.files.map( ( file ) => {
+    const attachmentList = await Promise.all( req.files.map( async ( file ) => {
       if ( file.fieldname === "attachments" && file.mimetype.includes( "image" ) ) {
-        return `${process.env.APP_URL}:${
-          process.env.PORT_BASE
-        }/${file.path.replace( /\\/gi, "/" )}`;
+        let previewPhotoName = `${Date.now()}-${RAND.generate( 16 )}.jpeg`,
+          previewPhotoUrl = `uploads/albums/${previewPhotoName}`;
+
+        await sharp( file.path ).resize( 150, 150 ).jpeg().toFile( `./${previewPhotoUrl}` );
+        return {
+          "url": `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path.replace( /\\/gi, "/" )}`,
+          "previewUrl": previewPhotoUrl
+        };
       }
-    } );
+    } ) );
 
     return res.status( 200 ).json( { "status": "success", "data": attachmentList } );
   }
