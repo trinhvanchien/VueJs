@@ -136,9 +136,6 @@ export default {
       return this.$store.getters.membershipPackages;
     }
   },
-  created() {
-    this.$store.dispatch("getMemberShipPackage");
-  },
   methods: {
     close() {
       this.$emit("closePopup", false);
