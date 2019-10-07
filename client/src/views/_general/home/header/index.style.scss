@@ -18,9 +18,6 @@
           transition: 0.4s;
           color: #f8b448;
         }
-        &.support {
-          border-color: #f8b448;
-        }
       }
     }
   }
@@ -32,9 +29,13 @@
       &:hover {
         opacity: 1;
       }
-      &.support {
+      &.login:hover  {
+        border-color: #f8b448;
+        color: #f8b448;
+      }
+      &.login {
         border: 1px solid #666;
-        border-radius: 1.5rem;
+        border-radius: 1rem;
       }
     }
   }

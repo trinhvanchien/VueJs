@@ -193,7 +193,7 @@ export default {
     }
   }
   .content--options {
-    color: #ccc;
+    color: #333;
     overflow: hidden;
     &:hover {
       .action--slider-info {
