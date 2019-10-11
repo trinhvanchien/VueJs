@@ -134,7 +134,7 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters.usersFilter[0];
+      return this.$store.getters.usersFilter;
     },
     members() {
       return this.$store.getters.membersPackage;
@@ -149,14 +149,11 @@ export default {
   },
   methods: {
     async addMemberForPackage(val) {
-      let dataSender;
-      this.members.push(val);
-
-      dataSender = {
-        _id: this.$route.params.id,
-        members: this.members
+      const dataSender = {
+        idMember: val,
+        idPackage: this.$route.params.id
       };
-      await this.$store.dispatch("updateMemberShipPackage", dataSender);
+      await this.$store.dispatch("addMemberToMemberShip", dataSender);
       this.isShowResultSearchMember = false;
     },
     searchMembers() {

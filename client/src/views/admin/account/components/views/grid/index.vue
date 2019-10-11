@@ -35,54 +35,23 @@
       <!-- Start: Grid Content -->
       <div class="grid--content">
         <div class="ct_f p_0">
+          <!-- Start: Empty Data -->
+          <div class="data--empty text_center pt_4" v-if="!user.name">
+            Nhập email hoặc số điện thoại của người dùng để tìm kiếm tài khoản
+            trên hệ thống
+          </div>
+          <!-- End: Empty Data -->
           <!-- Start: User Data -->
-          <div class="r" v-if="users && users.length > 0">
+          <div v-else>
             <div
-              class="c_md_3 mt_4"
-              v-for="(user, index) in users"
-              :key="index"
+              class="card bdr-0 d_flex align_items_center justify_content_center mt_5"
             >
-              <div class="user">
-                <!-- Start: Checkbox -->
-                <div class="user--action d_flex">
-                  <input
-                    type="checkbox"
-                    class="checkbox"
-                    name
-                    v-model="selected"
-                    :value="user._id"
-                  />
-                </div>
-                <!-- End: Checkbox -->
-                <!-- Start: Status -->
-                <div
-                  class="d_flex justify_content_center align_items_center text_center"
-                >
-                  <div class="user--name">{{ user.name }}</div>
-                  <div
-                    class="user--status ml_2"
-                    :class="[user.status === true ? 'user--active' : '']"
-                  >
-                    <icon-base
-                      icon-name="check-active"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                    >
-                      <icon-check-active />
-                    </icon-base>
-                  </div>
-                </div>
-                <!-- End: Status -->
-                <!-- Start: Email -->
-                <div class="user--mail text_center">{{ user.email }}</div>
-                <!-- End: Email -->
-                <!-- Start: Phone -->
-                <div class="user--phone mb_3 text_center">{{ user.phone }}</div>
-                <!-- End: Phone -->
+              <div
+                class="card_body user w-80 d_flex align_items_center justify_content_between"
+              >
                 <!-- Start: Avatar -->
                 <div
-                  class="user--avatar mt_2 mb_3 d_flex justify_content_center"
+                  class="user--avatar w-20 mt_2 mb_3 d_flex justify_content_center"
                 >
                   <div
                     v-if="user.imageAvatar"
@@ -97,32 +66,75 @@
                     class="avatar--content avatar--default position_relative d_block"
                     @click="openPopupInfo(user._id)"
                   >
-                    <span class="position_absolute">{{
+                    <span class="position_absolute" v-if="user.name">{{
                       user.name | getFirstLetter
                     }}</span>
                   </div>
                 </div>
                 <!-- End: Avatar -->
-                <!-- Start: ExpireDate & Limited Accounts -->
-                <div
-                  class="d_flex justify_content_between align_items_center data--wrap"
-                >
-                  <div class="user--data">
-                    <div class="user--data-desc">Ngày hết hạn</div>
-                    <div class="user--data-number mt_1 mb_1">
-                      {{ user.expireDate | formatDate }}
+
+                <!-- START: USER INFO -->
+                <div class="information w-65 d_flex align_items_center">
+                  <div class="w-50">
+                    <div>
+                      <label>Tên người dùng: </label>
+                      <span>{{ user.name }}</span>
+                    </div>
+
+                    <div>
+                      <label>Email người dùng: </label>
+                      <span>{{ user.email }}</span>
+                    </div>
+
+                    <div>
+                      <label>Số điện thoại: </label>
+                      <span>{{ user.phone }}</span>
+                    </div>
+
+                    <div>
+                      <label>Gói tài khoản áp dụng: </label>
+                      <span>{{ user.membershipPackage }}</span>
+                    </div>
+
+                    <div>
+                      <label>Ngày tạo tài khoản: </label>
+                      <span>{{ user.created_at | formatDate }}</span>
                     </div>
                   </div>
-                  <div class="user--data">
-                    <div class="user--data-desc">Giới hạn</div>
-                    <div class="user--data-number mt_1 mb_1">
-                      {{ user.maxAccountFb }} tài khoản
+
+                  <div class="w-50">
+                    <div>
+                      <label>Phân quyền người dùng: </label>
+                      <span v-if="user._role">{{ user._role.level }}</span>
+                    </div>
+
+                    <div>
+                      <label>Giới hạn tài khoản Facebook: </label>
+                      <span>{{ user.maxAccountFb }}</span>
+                    </div>
+
+                    <div>
+                      <label>Server đang hoạt động: </label>
+                      <span>{{ user._server ? user._server.title : 3 }}</span>
+                    </div>
+
+                    <div>
+                      <label>Trạng thái tài khoản: </label>
+                      <span :class="user.status === true ? 'alive' : 'die'">{{
+                        user.status === true ? "Hoạt động" : "Ngừng hoạt động"
+                      }}</span>
+                    </div>
+
+                    <div>
+                      <label>Ngày hết hạn: </label>
+                      <span>{{ user.expireDate | formatDate }}</span>
                     </div>
                   </div>
                 </div>
-                <!-- End: ExpireDate & Limited Accounts -->
+                <!-- END: USER INFO -->
+
                 <!-- Start: Edit Btn -->
-                <div class="user--edit text_center">
+                <div class="user--edit text_center w-15">
                   <div class="btn--edit" @click="openPopupEdit(user._id)">
                     <span class="mr_2">Chỉnh sửa</span>
                     <icon-base
@@ -140,11 +152,6 @@
             </div>
           </div>
           <!-- Start: User Data -->
-          <!-- Start: Empty Data -->
-          <div class="data--empty text_center pt_4" v-else>
-            Không có dữ liệu.
-          </div>
-          <!-- End: Empty Data -->
         </div>
       </div>
       <!-- End: Grid Content -->
