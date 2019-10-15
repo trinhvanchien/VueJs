@@ -242,7 +242,7 @@
             </div>
             <div class="items--main">
               <icon-base
-                icon-name="Cửa hàng content phong phú"
+                icon-name="Chatbot profile"
                 class
                 width="20"
                 height="20"
@@ -363,7 +363,7 @@
               <div class="title">Cửa hàng content phong phú</div>
               <div class="content">
                 <icon-base
-                  icon-name="Cửa hàng content phong phú"
+                  icon-name="Tự động tìm nội dung"
                   class
                   width="20"
                   height="20"
@@ -452,7 +452,7 @@
               <div class="title">Cửa hàng content phong phú</div>
               <div class="content">
                 <icon-base
-                  icon-name="Cửa hàng content phong phú"
+                  icon-name="Tự động tìm nội dung"
                   class
                   width="20"
                   height="20"
@@ -485,7 +485,7 @@
           <VuePerfectScrollbar class="scroll--price-mobile">
             <div class="items d_flex align_items_center">
               <div class="title">Tài khoản facebook</div>
-              <div class="content">2</div>
+              <div class="content">1</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Pages</div>
@@ -662,9 +662,18 @@
 <style scoped lang="scss">
 @import "../index.style";
 // price
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
 .price {
   color: #333;
-  padding: 6.25rem 0;
+  padding: 6rem 0;
   border-bottom: 1px solid #e8e9eb;
   .item {
     &--header {
