@@ -36,7 +36,7 @@
               <div
                 v-else
                 class="item bg"
-                :style="{ backgroundImage: 'url(' + photo.url + ')' }"
+                :style="{ backgroundImage: 'url(' + src + photoUpload[0].previewUrl + ')' }"
               ></div>
             </div>
             <!-- END: SHOW LIST IMAGES UPLOAD -->
@@ -123,7 +123,9 @@
 export default {
   props: ["isShowButtonDefault", "currentTheme"],
   data() {
-    return {};
+    return {
+      src: `${process.env.VUE_APP_URL}`
+    };
   },
   computed: {
     photo() {
@@ -175,7 +177,7 @@ export default {
 
       await this.$store.dispatch("uploadPhotoLibrary", formData);
 
-      this.photo.url = this.photoUpload[0];
+      this.photo.url = this.photoUpload[0].url;
     }
   }
 };
