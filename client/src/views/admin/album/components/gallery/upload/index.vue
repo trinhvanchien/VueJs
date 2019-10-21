@@ -36,7 +36,10 @@
               <div
                 v-else
                 class="item bg"
-                :style="{ backgroundImage: 'url(' + src + photoUpload[0].previewUrl + ')' }"
+                :style="{
+                  backgroundImage:
+                    'url(' + src + photoUpload[0].previewUrl + ')'
+                }"
               ></div>
             </div>
             <!-- END: SHOW LIST IMAGES UPLOAD -->
