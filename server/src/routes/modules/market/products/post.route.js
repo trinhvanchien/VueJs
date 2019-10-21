@@ -41,5 +41,6 @@ router.route( "/" )
 router.route( "/search" ).post( MarketPostController.search );
 router.route( "/upload" ).post( auth, collaborator,
   upload.array( "photos" ), MarketPostController.upload );
+router.route( "/:id/collection" ).post( MarketPostController.addPost );
 
 module.exports = router;
