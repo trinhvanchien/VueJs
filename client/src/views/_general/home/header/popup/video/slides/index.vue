@@ -4,11 +4,11 @@
       <div class="slide--image">
         <transition name="slide-fade">
           <div class="items display" v-if="currentIndexInfo === 0">
-            <div class="mb_3 title">Hướng dẫn đăng ký Zinbee</div>
+            <div class="mb_2">Hướng dẫn đăng ký Zinbee</div>
             <iframe
               :style="widthDefault"
-              height="300"
-              src="https://www.youtube.com/embed/B6yDMCWTpLI"
+              height="500"
+              src="https://www.youtube.com/embed/dgOyLfhlgos"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -17,13 +17,13 @@
         </transition>
         <transition name="slide-fade">
           <div class="content items" v-if="currentIndexInfo === 1">
-            <div class="mb_3 title">
+            <div class="mb_2">
               Hướng dẫn kết nối facebook với tài khoản Zinbee
             </div>
             <iframe
               :style="widthDefault"
-              height="300"
-              src="https://www.youtube.com/embed/8UhYCOZAxWQ"
+              height="500"
+              src="https://www.youtube.com/embed/FEnUaAghtqo"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -32,11 +32,11 @@
         </transition>
         <transition name="slide-fade">
           <div class="automation items" v-if="currentIndexInfo === 2">
-            <div class="mb_3 title">Hướng dẫn tổng quan về kho nội dung</div>
+            <div class="mb_2">Hướng dẫn tổng quan về kho nội dung</div>
             <iframe
               :style="widthDefault"
-              height="300"
-              src="https://www.youtube.com/embed/oWvyBT9U5JI"
+              height="500"
+              src="https://www.youtube.com/embed/Bbo6txouMc0"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -45,13 +45,39 @@
         </transition>
         <transition name="slide-fade">
           <div class="function items" v-if="currentIndexInfo === 3">
-            <div class="mb_3 title">
+            <div class="mb_2">
               Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Zinbee
             </div>
             <iframe
               :style="widthDefault"
-              height="300"
-              src="https://www.youtube.com/embed/3fHgoQO6bac"
+              height="500"
+              src="https://www.youtube.com/embed/Ku5sFPqTIWQ"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </transition>
+        <transition name="slide-fade">
+          <div class="function items" v-if="currentIndexInfo === 4">
+            <div class="mb_2">Hướng dẫn tổng quan về chiến dịch đăng bài</div>
+            <iframe
+              :style="widthDefault"
+              height="500"
+              src="https://www.youtube.com/embed/_qstuWBI2V8"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </transition>
+        <transition name="slide-fade">
+          <div class="function items" v-if="currentIndexInfo === 5">
+            <div class="mb_2">Hướng dẫn tổng quan về hẹn giờ đăng bài</div>
+            <iframe
+              :style="widthDefault"
+              height="500"
+              src="https://www.youtube.com/embed/39ZR5wdgSPY"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -60,7 +86,7 @@
         </transition>
       </div>
       <div class="action text_center">
-        <ul class="m_0 p_0">
+        <ul>
           <li
             :class="[currentIndexInfo === 0 ? 'active' : '']"
             @click="currentIndexInfo = 0"
@@ -76,6 +102,14 @@
           <li
             :class="[currentIndexInfo === 3 ? 'active' : '']"
             @click="currentIndexInfo = 3"
+          ></li>
+          <li
+            :class="[currentIndexInfo === 4 ? 'active' : '']"
+            @click="currentIndexInfo = 4"
+          ></li>
+          <li
+            :class="[currentIndexInfo === 5 ? 'active' : '']"
+            @click="currentIndexInfo = 5"
           ></li>
         </ul>
       </div>
@@ -127,8 +161,8 @@ export default {
   },
   methods: {
     nextInfo() {
-      if (this.currentIndexInfo === 3) {
-        this.currentIndexInfo = 3;
+      if (this.currentIndexInfo === 5) {
+        this.currentIndexInfo = 5;
       } else {
         this.currentIndexInfo++;
       }
