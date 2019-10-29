@@ -59,7 +59,7 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
-  "search": async () => {}, // TODO
+  "search": async () => {},
   "update": async ( req, res ) => {
     const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } ),
       categoryInfo = await PhotoLibraryCategory.findOne( { "_id": photoInfo._category } ),
