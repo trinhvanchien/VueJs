@@ -1,6 +1,6 @@
 const Account = require( "../models/Account.model" ),
 
-  accountStatistics = async () => {
+  accountStatistics = async ( req, res ) => {
     // Handle number of active account
     const numberOfActiveAccount = await Account.countDocuments( { "expireDate": { "$gte": ( new Date() ).toISOString() } } );
 

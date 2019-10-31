@@ -19,6 +19,9 @@ export default {
   },
   computed: {
     newRegisteredUserChartOptions() {
+      const dateTimeArr = this.registerAccountStatistics.map(item => {
+        return item.date;
+      });
       return {
         chart: {
           type: "line",
@@ -104,7 +107,7 @@ export default {
         },
         xaxis: {
           type: "datetime",
-          // categories: timeCampaign,
+          categories: dateTimeArr,
           labels: {
             style: {
               colors: ["#444", "#444", "#444", "#444", "#444", "#444"]
@@ -144,7 +147,7 @@ export default {
         title: {
           text: "Thống kê số lượng người dùng đăng kí trong 7 ngày",
           align: "left",
-          margin: 0,
+          margin: 5,
           offsetX: 0,
           offsetY: 0,
           floating: false,
@@ -157,12 +160,18 @@ export default {
       };
     },
     newRegisteredUserSeries() {
+      const arr = this.registerAccountStatistics.map(item => {
+        return item.amount;
+      });
       return [
         {
           name: "SL đăng kí",
-          data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+          data: arr
         }
       ];
+    },
+    registerAccountStatistics() {
+      return this.$store.getters.registerAccountStatistics;
     }
   }
 };

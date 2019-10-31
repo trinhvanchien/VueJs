@@ -8,7 +8,7 @@
       <statistics></statistics>
       <!-- End: Statistics -->
       <!-- Start: Charts -->
-      <charts class="mt_3"></charts>
+      <charts class="mt_4"></charts>
       <!-- End: Charts -->
     </div>
   </div>
@@ -22,6 +22,9 @@ export default {
   components: {
     Charts,
     Statistics
+  },
+  async created() {
+    await this.$store.dispatch("accountStatistics");
   }
 };
 </script>

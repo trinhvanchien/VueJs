@@ -17,7 +17,7 @@
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
-          <div class="col--count pl_3">68</div>
+          <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
       </div>
       <div class="c_3 col">
@@ -36,7 +36,7 @@
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
-          <div class="col--count pl_3">68</div>
+          <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
       </div>
       <div class="c_3 col">
@@ -55,7 +55,7 @@
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
-          <div class="col--count pl_3">68</div>
+          <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
       </div>
       <div class="c_3 col">
@@ -74,7 +74,7 @@
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
-          <div class="col--count pl_3">68</div>
+          <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
       </div>
     </div>
@@ -82,7 +82,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    activeAccountStatistics() {
+      return this.$store.getters.activeAccountStatistics;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
