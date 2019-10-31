@@ -3,7 +3,9 @@
     <div class="r">
       <div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
-          <div class="col--icon d_flex align_items_center justify_content_center">
+          <div
+            class="col--icon d_flex align_items_center justify_content_center"
+          >
             <icon-base
               class="icon--user"
               icon-name="user"
@@ -11,7 +13,7 @@
               width="20px"
               viewBox="0 0 16 16"
             >
-              <icon-user/>
+              <icon-user />
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
@@ -20,7 +22,9 @@
       </div>
       <div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
-          <div class="col--icon d_flex align_items_center justify_content_center">
+          <div
+            class="col--icon d_flex align_items_center justify_content_center"
+          >
             <icon-base
               class="icon--user"
               icon-name="user"
@@ -28,7 +32,7 @@
               width="20px"
               viewBox="0 0 16 16"
             >
-              <icon-user/>
+              <icon-user />
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
@@ -37,7 +41,9 @@
       </div>
       <div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
-          <div class="col--icon d_flex align_items_center justify_content_center">
+          <div
+            class="col--icon d_flex align_items_center justify_content_center"
+          >
             <icon-base
               class="icon--user"
               icon-name="user"
@@ -45,7 +51,7 @@
               width="20px"
               viewBox="0 0 16 16"
             >
-              <icon-user/>
+              <icon-user />
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
@@ -54,7 +60,9 @@
       </div>
       <div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
-          <div class="col--icon d_flex align_items_center justify_content_center">
+          <div
+            class="col--icon d_flex align_items_center justify_content_center"
+          >
             <icon-base
               class="icon--user"
               icon-name="user"
@@ -62,7 +70,7 @@
               width="20px"
               viewBox="0 0 16 16"
             >
-              <icon-user/>
+              <icon-user />
             </icon-base>
           </div>
           <div class="col--label pl_3">Còn hạn sử dụng</div>
@@ -80,14 +88,14 @@ export default {};
 <style lang="scss" scoped>
 .section {
   background-color: #fff;
-  border-radius: .625rem;
+  border-radius: 0.625rem;
 }
 .col {
   &--body {
     border-right: 1px solid #f0f0f0;
   }
   &--icon {
-    background-color: #FFB94A;
+    background-color: #ffb94a;
     border-radius: 50%;
     height: 48px;
     width: 48px;
@@ -113,7 +121,7 @@ export default {};
   }
   &:nth-child(2) {
     .col--icon {
-      background-color: #54E69D;
+      background-color: #54e69d;
     }
   }
   &:nth-child(3) {
@@ -123,7 +131,7 @@ export default {};
   }
   &:nth-child(4) {
     .col--icon {
-      background-color: #FF7676;
+      background-color: #ff7676;
     }
   }
 }
