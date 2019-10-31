@@ -5,11 +5,11 @@
         <div class="slide--image">
           <transition name="slide-fade">
             <div class="items display" v-if="currentIndexInfo === 0">
-              <div class="mb_2">Hướng dẫn đăng ký Zinbee</div>
+              <div class="mb_2">Giới thiệu phiên bản mới của Zinbee</div>
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/B6yDMCWTpLI"
+                src="https://www.youtube.com/embed/dgOyLfhlgos"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -24,7 +24,7 @@
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/8UhYCOZAxWQ"
+                src="https://www.youtube.com/embed/FEnUaAghtqo"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -33,11 +33,11 @@
           </transition>
           <transition name="slide-fade">
             <div class="automation items" v-if="currentIndexInfo === 2">
-              <div class="mb_2">Hướng dẫn tổng quan về kho nội dung</div>
+              <div class="mb_2">Hướng dẫn tổng quan về thư viện bài viết</div>
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/oWvyBT9U5JI"
+                src="https://www.youtube.com/embed/Bbo6txouMc0"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -52,7 +52,33 @@
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/3fHgoQO6bac"
+                src="https://www.youtube.com/embed/Ku5sFPqTIWQ"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </transition>
+          <transition name="slide-fade">
+            <div class="function items" v-if="currentIndexInfo === 4">
+              <div class="mb_2">Hướng dẫn tổng quan về chiến dịch đăng bài</div>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/_qstuWBI2V8"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </transition>
+          <transition name="slide-fade">
+            <div class="function items" v-if="currentIndexInfo === 5">
+              <div class="mb_2">Hướng dẫn tổng quan về hẹn giờ đăng bài</div>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/39ZR5wdgSPY"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -78,9 +104,17 @@
               :class="[currentIndexInfo === 3 ? 'active' : '']"
               @click="currentIndexInfo = 3"
             ></li>
+            <li
+              :class="[currentIndexInfo === 4 ? 'active' : '']"
+              @click="currentIndexInfo = 4"
+            ></li>
+            <li
+              :class="[currentIndexInfo === 5 ? 'active' : '']"
+              @click="currentIndexInfo = 5"
+            ></li>
           </ul>
         </div>
-        <!-- <div
+        <div
           class="position_absolute action--slider-info d_flex align_items_center"
         >
           <span
@@ -101,7 +135,7 @@
           <span
             class="next ml_auto action"
             @click="nextInfo"
-            v-if="currentIndexInfo !== 3"
+            v-if="currentIndexInfo !== 5"
           >
             <icon-base
               class="icon--arrow-left"
@@ -113,7 +147,7 @@
               <icon-arrow-left></icon-arrow-left>
             </icon-base>
           </span>
-        </div> -->
+        </div>
       </div>
     </div>
   </section>
@@ -129,8 +163,8 @@ export default {
   },
   methods: {
     nextInfo() {
-      if (this.currentIndexInfo === 3) {
-        this.currentIndexInfo = 3;
+      if (this.currentIndexInfo === 5) {
+        this.currentIndexInfo = 5;
       } else {
         this.currentIndexInfo++;
       }
@@ -141,6 +175,14 @@ export default {
       } else {
         this.currentIndexInfo--;
       }
+    },
+    sliderWhyChooseZinbee() {
+      setInterval(() => {
+        this.currentIndexInfo++;
+        if (this.currentIndexInfo === 5) {
+          this.currentIndexInfo = 0;
+        }
+      }, 6000);
     }
   }
   // mounted() {

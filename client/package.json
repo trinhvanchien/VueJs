@@ -26,6 +26,7 @@
     "@vue/cli-service": "^3.7.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "1.0.0-beta.29",
+    "apexcharts": "^3.10.1",
     "babel-eslint": "^10.0.1",
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
@@ -37,6 +38,7 @@
     "quill-image-resize-module": "^3.0.0",
     "sass-loader": "^7.1.0",
     "typed.js": "^2.0.10",
+    "vue-apexcharts": "^1.5.0",
     "vue-quill": "^1.5.1",
     "vue-template-compiler": "^2.5.21"
   },
