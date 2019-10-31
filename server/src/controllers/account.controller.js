@@ -282,7 +282,7 @@ module.exports = {
 
     newUser = await new Account( {
       name,
-      email,
+      "email": email.toString().toLowerCase(),
       phone,
       presenter,
       password,

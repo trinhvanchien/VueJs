@@ -43,5 +43,6 @@ router.use( "/agency", require( "./modules/agency/agency.route" ) );
 
 // Code Route
 router.use( "/code", auth, permission, require( "./modules/code.route" ) );
+router.use( "/statistic", auth, permission, require( "./modules/statistics.route" ) );
 
 module.exports = router;
