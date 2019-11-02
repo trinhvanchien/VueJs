@@ -60,7 +60,7 @@ export default {
   .title {
     color: #444;
     font-size: 1.75rem;
-    font-weight: bold;
+    font-weight: 600;
   }
   .info {
     margin: auto;
@@ -75,7 +75,8 @@ export default {
         color: #fff;
         font-weight: 600;
         transition: all 0.4s ease;
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           background-color: #80bdff;
         }
       }
