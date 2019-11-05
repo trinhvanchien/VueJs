@@ -20,7 +20,9 @@
         v-else
         v-for="(item, index) in photos"
         :key="index"
-        :style="{ backgroundImage: 'url(' + item.url + ')' }"
+        :style="{
+          backgroundImage: 'url(' + baseUrl + '/' + item.previewUrl + ')'
+        }"
       >
         <div
           class="action position_absolute d_flex align_items_center justify_content_center"
@@ -72,7 +74,8 @@ export default {
   },
   data() {
     return {
-      isUploadPopup: false
+      baseUrl: `${process.env.VUE_APP_API_URL}`,
+      isUploadPopup: false,
     };
   },
   computed: {
@@ -92,8 +95,8 @@ export default {
     this.$store.dispatch("getMemberShipPackage");
   },
   methods: {
-    editPhotoLibrary(val) {
-      this.$store.dispatch("getInfoPhoto", val);
+    async editPhotoLibrary(val) {
+      await this.$store.dispatch("getInfoPhoto", val);
       this.isUploadPopup = true;
     },
     deletePhotoLibrary(val) {

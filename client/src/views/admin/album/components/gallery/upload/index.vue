@@ -38,7 +38,7 @@
                 class="item bg"
                 :style="{
                   backgroundImage:
-                    'url(' + src + photoUpload[0].previewUrl + ')'
+                    'url(' + baseUrl + '/' + photo.previewUrl + ')'
                 }"
               ></div>
             </div>
@@ -82,7 +82,7 @@
                 </div>
               </div>
 
-              <div class="d_flex align_items_center mb_2">
+              <!--<div class="d_flex align_items_center mb_2">
                 <label class="title">Đường dẫn ảnh:</label>
                 <div class="select">
                   <input
@@ -92,7 +92,7 @@
                     class="form_control"
                   />
                 </div>
-              </div>
+              </div>-->
             </div>
             <!-- END: SHOW OPTION SELECT PACKAGE -->
           </div>
@@ -127,7 +127,7 @@ export default {
   props: ["isShowButtonDefault", "currentTheme"],
   data() {
     return {
-      src: `${process.env.VUE_APP_URL}`
+      baseUrl: `${process.env.VUE_APP_API_URL}`
     };
   },
   computed: {
@@ -181,6 +181,7 @@ export default {
       await this.$store.dispatch("uploadPhotoLibrary", formData);
 
       this.photo.url = this.photoUpload[0].url;
+      this.photo.previewUrl = this.photoUpload[0].previewUrl;
     }
   }
 };
