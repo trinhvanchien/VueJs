@@ -37,8 +37,7 @@
                 v-else
                 class="item bg"
                 :style="{
-                  backgroundImage:
-                    'url(' + photo.previewUrl + ')'
+                  backgroundImage: 'url(' + photo.previewUrl + ')'
                 }"
               ></div>
             </div>
