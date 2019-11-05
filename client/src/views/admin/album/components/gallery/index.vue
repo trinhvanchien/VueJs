@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       baseUrl: `${process.env.VUE_APP_API_URL}`,
-      isUploadPopup: false,
+      isUploadPopup: false
     };
   },
   computed: {
