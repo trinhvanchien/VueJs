@@ -38,7 +38,7 @@
                 class="item bg"
                 :style="{
                   backgroundImage:
-                    'url(' + baseUrl + '/' + photo.previewUrl + ')'
+                    'url(' + photo.previewUrl + ')'
                 }"
               ></div>
             </div>
@@ -125,11 +125,6 @@
 <script>
 export default {
   props: ["isShowButtonDefault", "currentTheme"],
-  data() {
-    return {
-      baseUrl: `${process.env.VUE_APP_API_URL}`
-    };
-  },
   computed: {
     photo() {
       return this.$store.getters.photoLibrary;

@@ -21,7 +21,7 @@
         v-for="(item, index) in photos"
         :key="index"
         :style="{
-          backgroundImage: 'url(' + baseUrl + '/' + item.previewUrl + ')'
+          backgroundImage: 'url(' + item.previewUrl + ')'
         }"
       >
         <div
@@ -74,7 +74,6 @@ export default {
   },
   data() {
     return {
-      baseUrl: `${process.env.VUE_APP_API_URL}`,
       isUploadPopup: false
     };
   },
