@@ -33,13 +33,20 @@ const multer = require( "multer" ),
     }
   } );
 
-router.route( "/" )
+router
+  .route( "/" )
   .get( auth, MarketPostController.index )
   .post( auth, collaborator, MarketPostController.create )
   .patch( auth, collaborator, MarketPostController.update )
   .delete( auth, collaborator, MarketPostController.delete );
 router.route( "/search" ).post( auth, MarketPostController.search );
-router.route( "/upload" ).post( auth, collaborator,
-  upload.array( "photos" ), MarketPostController.upload );
-
+router
+  .route( "/upload" )
+  .post(
+    auth,
+    collaborator,
+    upload.array( "photos" ),
+    MarketPostController.upload
+  );
+router.route( "/download" ).post( auth, MarketPostController.search );
 module.exports = router;

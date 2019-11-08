@@ -127,5 +127,13 @@ module.exports = {
     }
 
     res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": page, "total": data.length } } );
+  },
+  "download": async ( req, res ) => {
+    return res
+      .status( 404 )
+      .json( {
+        "status": "success",
+        "data": "meomeo"
+      } );
   }
 };
