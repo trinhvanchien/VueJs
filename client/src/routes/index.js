@@ -6,7 +6,6 @@ import Router from "vue-router";
  */
 import adminGeneralRouter from "./modules/admin";
 import signinRouterAdmin from "./modules/admin/signin";
-import signupRouterAdmin from "./modules/admin/signup";
 
 /**
  * Router for System Member
@@ -40,7 +39,6 @@ export default new Router({
      */
     adminGeneralRouter,
     signinRouterAdmin,
-    signupRouterAdmin,
     /**
      * Router for System Member
      */

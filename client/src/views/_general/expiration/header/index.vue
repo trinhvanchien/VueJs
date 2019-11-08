@@ -35,7 +35,7 @@
       </div>
       <!-- End: Header Top -->
       <!-- Start: Header Main -->
-      <div class="header--main mt_3">
+      <div class="header--main mt_3 pb_5">
         <!-- Start: Alert -->
         <div class="alert--expiration mx_auto p_4">
           <div class="content text_center">
@@ -69,6 +69,7 @@ export default {};
 
 <style scoped lang="scss">
 .wrapper--header {
+  background: #f7f7f7;
   .header--top {
     .link--login {
       color: #fff;

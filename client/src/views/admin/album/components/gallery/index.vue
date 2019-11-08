@@ -89,6 +89,7 @@ export default {
 
     this.$store.dispatch("getInfoAlbum", albumId);
     this.$store.dispatch("getPhotoAlbumCategory", albumId);
+    this.$store.dispatch("getMemberShipPackage");
   },
   methods: {
     editPhotoLibrary(val) {

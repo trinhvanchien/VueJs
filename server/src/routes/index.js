@@ -15,6 +15,7 @@ router.use( "/category-default", require( "./modules/categorydefault.route" ) );
 router.use( "/campaign-default", require( "./modules/campaignDefault.route" ) );
 router.use( "/backup-account", require( "./modules/backupAccount.route" ) );
 router.use( "/log", require( "./modules/log.route" ) );
+router.use( "/log/post-slot", require( "./modules/postslotlog.route" ) );
 router.use( "/membership/package", require( "./modules/membershippackage.route" ) );
 router.use( "/album/category", require( "./modules/photolibrarycategory.route" ) );
 router.use( "/photo-library", require( "./modules/photolibrary.route" ) );
@@ -42,5 +43,6 @@ router.use( "/agency", require( "./modules/agency/agency.route" ) );
 
 // Code Route
 router.use( "/code", auth, permission, require( "./modules/code.route" ) );
+router.use( "/statistic", auth, permission, require( "./modules/statistics.route" ) );
 
 module.exports = router;

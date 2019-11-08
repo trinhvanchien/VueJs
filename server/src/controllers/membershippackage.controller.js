@@ -66,7 +66,13 @@ module.exports = {
     const packageInfo = await MembershipPackage.findOne( { "members": req.params.id } ).lean();
 
     if ( !packageInfo ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Tài khoản chưa được xét duyệt gói thành viên." } );
+      // Create package
+      const packageDefaultInfo = ( await MembershipPackage.find( {} ) )[ 0 ];
+
+      packageDefaultInfo.members = req.params.id;
+      await packageDefaultInfo.save();
+
+      return res.status( 200 ).json( { "status": "success", "data": packageDefaultInfo } );
     }
 
     res.status( 200 ).json( { "status": "success", "data": packageInfo } );

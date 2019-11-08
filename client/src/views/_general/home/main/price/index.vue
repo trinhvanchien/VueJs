@@ -228,10 +228,10 @@
             </div>
           </div>
           <div class="items d_flex align_items_center">
-            <div class="items--main function">Tự động like</div>
+            <div class="items--main function">Cửa hàng content phong phú</div>
             <div class="items--main">
               <icon-base
-                icon-name="Tự động like"
+                icon-name="Cửa hàng content phong phú"
                 class
                 width="20"
                 height="20"
@@ -242,148 +242,7 @@
             </div>
             <div class="items--main">
               <icon-base
-                icon-name="Tự động like"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động like"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động like"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-          </div>
-          <!-- <div class="items d_flex align_items_center">
-            <div class="items--main function">Tự động thêm bạn</div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động thêm bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động thêm bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động thêm bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động thêm bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-          </div>-->
-          <div class="items d_flex align_items_center">
-            <div class="items--main function">Tự động huỷ kết bạn</div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động huỷ kết bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động huỷ kết bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động huỷ kết bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Tự động huỷ kết bạn"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-          </div>
-          <div class="items d_flex align_items_center">
-            <div class="items--main function">Chatbot profile</div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Chatbot profile"
-                class
-                width="20"
-                height="20"
-                viewBox="0 0 290 290"
-              >
-                <icon-check-circle />
-              </icon-base>
-            </div>
-            <div class="items--main">
-              <icon-base
-                icon-name="Chatbot profile"
+                icon-name="Cửa hàng content phong phú"
                 class
                 width="20"
                 height="20"
@@ -452,11 +311,11 @@
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Pages</div>
-              <div class="content">5</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Groups</div>
-              <div class="content">500</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Tìm nội dung hot</div>
@@ -501,52 +360,10 @@
               </div>
             </div>
             <div class="items d_flex align_items_center">
-              <div class="title">Tự động like</div>
+              <div class="title">Cửa hàng content phong phú</div>
               <div class="content">
                 <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động thêm bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động huỷ kết bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Chatbot profile</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
+                  icon-name="Cửa hàng content phong phú"
                   class
                   width="20"
                   height="20"
@@ -583,11 +400,11 @@
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Pages</div>
-              <div class="content">10</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Groups</div>
-              <div class="content">500</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Tìm nội dung hot</div>
@@ -632,52 +449,10 @@
               </div>
             </div>
             <div class="items d_flex align_items_center">
-              <div class="title">Tự động like</div>
+              <div class="title">Cửa hàng content phong phú</div>
               <div class="content">
                 <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động thêm bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động huỷ kết bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Chatbot profile</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
+                  icon-name="Cửa hàng content phong phú"
                   class
                   width="20"
                   height="20"
@@ -710,15 +485,15 @@
           <VuePerfectScrollbar class="scroll--price-mobile">
             <div class="items d_flex align_items_center">
               <div class="title">Tài khoản facebook</div>
-              <div class="content">1</div>
+              <div class="content">2</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Pages</div>
-              <div class="content">5</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Groups</div>
-              <div class="content">500</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Tìm nội dung hot</div>
@@ -763,49 +538,7 @@
               </div>
             </div>
             <div class="items d_flex align_items_center">
-              <div class="title">Tự động like</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động thêm bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động huỷ kết bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Chatbot profile</div>
+              <div class="title">Cửa hàng content phong phú</div>
               <div class="content">
                 <icon-base
                   icon-name="Tự động tìm nội dung"
@@ -841,15 +574,15 @@
           <VuePerfectScrollbar class="scroll--price-mobile">
             <div class="items d_flex align_items_center">
               <div class="title">Tài khoản facebook</div>
-              <div class="content">1</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Pages</div>
-              <div class="content">5</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Groups</div>
-              <div class="content">500</div>
+              <div class="content">Không giới hạn</div>
             </div>
             <div class="items d_flex align_items_center">
               <div class="title">Tìm nội dung hot</div>
@@ -894,49 +627,7 @@
               </div>
             </div>
             <div class="items d_flex align_items_center">
-              <div class="title">Tự động like</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động thêm bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Tự động huỷ kết bạn</div>
-              <div class="content">
-                <icon-base
-                  icon-name="Tự động tìm nội dung"
-                  class
-                  width="20"
-                  height="20"
-                  viewBox="0 0 290 290"
-                >
-                  <icon-check-circle />
-                </icon-base>
-              </div>
-            </div>
-            <div class="items d_flex align_items_center">
-              <div class="title">Chatbot profile</div>
+              <div class="title">Cửa hàng content phong phú</div>
               <div class="content">
                 <icon-base
                   icon-name="Tự động tìm nội dung"

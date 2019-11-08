@@ -35,7 +35,8 @@ export default {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    users() {
+    user() {
+      // if(Object.entries(this.$store.getters.usersFilter).length === 0 && this.$store.getters.usersFilter.constructor === Object) return;
       return this.$store.getters.usersFilter;
     },
     selectAll: {

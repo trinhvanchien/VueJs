@@ -14,6 +14,7 @@ import HelpStore from "./modules/help.store";
 import MemberShipPackage from "./modules/accountpackage.store";
 import AlbumStore from "./modules/album.store";
 import PhotoLibraryStore from "./modules/photolibrary.store";
+import StatisticsStore from "./modules/statistics.store";
 
 // Market
 import HomepageMarket from "./modules/market/homepage.store";
@@ -44,6 +45,7 @@ export default new Vuex.Store({
     MemberShipPackage,
     AlbumStore,
     PhotoLibraryStore,
+    StatisticsStore,
     // Market
     HomepageMarket,
     CategoryMarket,

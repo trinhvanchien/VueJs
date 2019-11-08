@@ -18,6 +18,9 @@
           transition: 0.4s;
           color: #f8b448;
         }
+        &.support {
+          border-color: #f8b448;
+        }
       }
     }
   }
@@ -28,6 +31,10 @@
       opacity: .8;
       &:hover {
         opacity: 1;
+      }
+      &.support {
+        border: 1px solid #666;
+        border-radius: 1.5rem;
       }
     }
   }
@@ -115,7 +122,7 @@
         left: -100vw;
         background: #cccccc85;
       }
-      .login {
+      .support {
         margin-top: 30px;
       }
       li {
@@ -133,6 +140,19 @@
   }
 }
 
+.popup--mobile-enter {
+  transform: translateX(100%);
+}
+
+.popup--mobile-enter-to {
+  transition: transform 0.75s;
+  transform: translateX(0);
+}
+
+.popup--mobile-leave-to {
+  transition: transform 0.75s;
+  transform: translateX(100%);
+}
 
 //  RESPONSIVE 
 

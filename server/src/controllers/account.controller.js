@@ -11,6 +11,7 @@ const Role = require( "../models/Role.model" );
 const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
 const Code = require( "../models/Code.model" );
+const MembershipPackage = require( "../models/MembershipPackage.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
@@ -120,12 +121,15 @@ module.exports = {
     res.status( 304 ).json( jsonResponse( "fail", "API này không được cung cấp!" ) );
   },
   "searchUser": async ( req, res ) => {
-    const findAccount = await Account.find( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword }, { "presenter": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
+    const userInfo = await Account.findOne( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword }, { "presenter": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).populate( { "path": "_server", "select": "title" } ).lean(),
+      membershipInfo = await MembershipPackage.findOne( { "members": userInfo._id } );
 
-    if ( !findAccount ) {
-      return res.status( 403 ).json( { "status": "fail", "message": "Tài khoản không tồn tại" } );
+    if ( !userInfo ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Tài khoản không tồn tại" } );
+    } else if ( membershipInfo ) {
+      userInfo.membershipPackage = membershipInfo.name;
     }
-    res.status( 200 ).json( jsonResponse( "success", findAccount ) );
+    res.status( 200 ).json( jsonResponse( "success", userInfo ) );
   },
   "renewById": async ( req, res ) => {
     let data, resUserSync;
@@ -241,7 +245,7 @@ module.exports = {
   },
   "signIn": async ( req, res ) => {
     const { email } = req.body,
-      userInfo = await Account.findOne( { "email": email } ),
+      userInfo = await Account.findOne( { "email": email.toString().toLowerCase() } ),
       memberRole = await Role.findOne( { "_id": userInfo._role } ),
       serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
 
@@ -278,7 +282,7 @@ module.exports = {
 
     newUser = await new Account( {
       name,
-      email,
+      "email": email.toString().toLowerCase(),
       phone,
       presenter,
       password,
