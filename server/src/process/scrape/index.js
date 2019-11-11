@@ -1,61 +1,41 @@
-const Account = require( "../../models/Account.model" );
-const PostFacebook = require( "../../models/Post.model" );
+/* eslint-disable one-var */
+const io = require( "socket.io" );
+const server = io.listen( process.env.PORT_SCRAPE_SOCKET );
 
-const io = require( "socket.io-client" ),
-  socket = io.connect( process.env.SOCKET_SCRAPE_URL );
+const ScrapeServer = require( ".././../models/ScrapeServer.model" );
 
-let keywords = [];
-
-( async () => {
-  console.log( "Process: Scrape started..." );
-
-  socket.on( "connect", async () => {
-    console.log(
-      `Connected to crawl server which address is ${
-        process.env.SOCKET_SCRAPE_URL
-      }`
+const startScrapeSocket = async () => {
+  // Clean before start
+  await ScrapeServer.deleteMany( {} );
+  
+  server.on( "connection", ( socket ) => {
+    console.info(
+      "[SCRAPE SERVER][SOCKET] A scrape server has CONNECTED"
     );
-
-    socket.emit( "newKey", "handle here" );
-
-    // Step 1: Listen keyword user send and move to crawl server
-    socket.on( "getKey", async ( data ) => {
-      console.log( data );
-
-      // Step 1.1: Get keyword from database
-      const accountList = await Account.find( {} )
-          .select( "keywords" )
-          .lean(),
-        postList = await PostFacebook.find( { "generate": 1 } )
-          .select( "feedId like share photos content generate -_id" )
-          .lean();
-
-      // Step 1.2: concat all keywords
-      await Promise.all(
-        accountList.map( ( account ) => {
-          keywords = keywords.concat( account.keywords );
-        } )
-      );
-
-      // Step 1.3: Send info to crawl server
-      socket.emit( "infoCrawl", {
-        "keywords": keywords,
-        "postList": postList
-      } );
+  
+    socket.on( "scrape-server-info", async ( data ) => {
+      const connectSession = {
+        "session_id": socket.id,
+        "name": data.name,
+        "url": data.url
+      };
+  
+      await new ScrapeServer( connectSession ).save();
+      console.log( "[SCRAPE SERVER][SOCKET] Infomation:", connectSession );
     } );
-
-    // Step final: Listen data response and process
-    socket.on( "listPostCrawled", async ( data ) => {
-      console.log( data );
-      console.log( typeof data );
-      await PostFacebook.insertMany( data, function( error ) {
-        if ( error ) {
-          console.log( error );
-        }
-        console.log( "successfully!" );
-      } );
-
-      console.log( "Crawler post facebook finnished!" );
+  
+    socket.on( "disconnect", async() => {
+      await ScrapeServer.deleteOne( { "session_id": socket.id } );
+      console.info(
+        "[SCRAPE SERVER][SOCKET] Scrape server has DISCONNECTED"
+      );
     } );
   } );
-} )();
+};
+
+
+const init = () => {
+  startScrapeSocket();
+};
+
+init();
