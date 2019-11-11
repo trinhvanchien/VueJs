@@ -25,7 +25,7 @@
         <button type="submit" class="btn btn_info form_control">
           Đăng nhập
         </button>
-        <div class="mb_2 mt_2">
+        <div class="mb_2 mt_2 d_none">
           Chưa có tài khoản
           <router-link tag="a" :to="{ name: 'admin_signup' }">
             đăng ký ngay
