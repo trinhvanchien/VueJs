@@ -13,9 +13,9 @@
     width: 100%;
 
     .modal--content {
-      background-color: #2F3136;
+      background-color: #eeeeee;
       border-radius: .5rem;
-      color: #ccc;
+      color: #333;
       padding: 1.25rem 0;
       width: 60vw;
       max-height: 95vh;
@@ -29,7 +29,7 @@
           text-align: center;
         }
         .desc {
-          color: #999999;
+          color: #333;
         }
         .divine {
           width: 50px;
@@ -56,34 +56,20 @@
       .modal--footer {
         font-size: .875rem;
 
-        .btn--submit {
-          background-color: #ffb94a;
-          border: 1px solid #ffb94a;
-          border-radius: .625rem;
-          color: #fff;
-          cursor: pointer;
-          font-weight: 600;
-          outline: none;
-          padding: 0.5rem 0.75rem;
-          transition: all 0.4s ease;
-
-          &:hover {
-            background-color: #ff9e4a;
-          }
-        }
-
         .btn--skip {
           background-color: transparent;
           border-radius: 10px;
           border: 0;
           cursor: pointer;
-          color: #999;
+          color: #333;
           font-weight: 600;
           outline: none;
           padding: 0.5rem 0.75rem;
+          transition: all 0.5s ease;
 
           &:hover {
-            background-color: #f7f7f7;
+            background-color: #ff9e4a;
+            color: #fff;
           }
         }
       }
@@ -134,7 +120,7 @@
       &-input {
         background-color: #27292d;
         border: 1px solid #444;
-        color: #f7f7f7;
+        color: #333;
         &::placeholder {
           color: #666;
         }

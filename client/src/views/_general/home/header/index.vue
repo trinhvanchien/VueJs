@@ -34,7 +34,7 @@
             <nav>
               <ul class="d_flex nav--menu">
                 <li
-                  class="items--header align_items_center d_flex support"
+                  class="items--header align_items_center d_flex support mr_1"
                   @click="showPopupVideo"
                 >
                   <p class="mb_0 pr_1">Hướng dẫn</p>
@@ -47,7 +47,13 @@
                     <icon-play />
                   </icon-base>
                 </li>
-                <li class="items--header" @click="goToSignIn">Đăng nhập</li>
+                <li
+                  class="items--header login"
+                  :class="changeBackgroundHeader === 2 ? 'active' : ''"
+                  @click="goToSignIn"
+                >
+                  Đăng nhập
+                </li>
                 <li
                   class="items--header try ml_2"
                   v-if="changeBackgroundHeader === 2"
