@@ -33,7 +33,7 @@ require( "./src/helpers/services/passport.service" );
 require( "./src/process" );
 
 // connect to mongoose NoSQL DB
-mongoose.connect( `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`, {
+mongoose.connect( `${process.env.DB_CONNECTION}://${process.env.DB_ACCOUNT}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`, {
   "useCreateIndex": true,
   "useNewUrlParser": true,
   "useUnifiedTopology": true
