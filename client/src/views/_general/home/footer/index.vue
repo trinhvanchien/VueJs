@@ -26,7 +26,7 @@
         <div class="c_lg_3 mb_3">
           <div class="title--footer">Thông Tin Hỗ Trợ</div>
           <ul>
-            <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
+            <li>Địa Chỉ: Toà nhà Capital, 102 Trường Chinh, Hà Nội</li>
             <li>
               Hotline:
               <!-- <span v-if="agencyInfo" v-text="agencyInfo.phone"></span> -->
@@ -50,21 +50,23 @@
         <div class="c_lg_3 mb_3 register">
           <div class="title--footer">Đăng Ký Bản Tin</div>
           <div class="position_relative">
-            <input type="text" placeholder="Email" />
-            <span class="icon--submit position_absolute">
-              <icon-base
-                class
-                icon-name="Submit"
-                width="22"
-                height="22"
-                viewBox="0 0 33 33"
-              >
-                <icon-arrow-right />
-              </icon-base>
-              <!-- <icon-base class="fb" icon-name="Submit" width="24" height="24" viewBox="0 0 25 25">
-                <icon-close/>
-              </icon-base>-->
-            </span>
+            <form action="" method="POST">
+              <input type="email" required placeholder="Email" />
+              <span class="icon--submit position_absolute">
+                <icon-base
+                  class
+                  icon-name="Submit"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 33 33"
+                >
+                  <icon-arrow-right />
+                </icon-base>
+                <!-- <icon-base class="fb" icon-name="Submit" width="24" height="24" viewBox="0 0 25 25">
+                  <icon-close/>
+                </icon-base>-->
+              </span>
+            </form>
           </div>
           <div class="list--contact d_flex mt_4">
             <div class="icon">

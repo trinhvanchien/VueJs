@@ -31,11 +31,13 @@
       }
       &.login:hover  {
         border-color: #f8b448;
-        color: #f8b448;
       }
       &.login {
         border: 1px solid #666;
         border-radius: 1rem;
+      }
+      &.active {        
+        color: #f8b448;
       }
     }
   }

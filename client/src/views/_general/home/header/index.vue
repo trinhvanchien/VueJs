@@ -49,7 +49,7 @@
                 </li>
                 <li
                   class="items--header login"
-                  :class="changeBackgroundHeader === 2 ? 'd_none' : ''"
+                  :class="changeBackgroundHeader === 2 ? 'active' : ''"
                   @click="goToSignIn"
                 >
                   Đăng nhập
