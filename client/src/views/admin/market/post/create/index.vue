@@ -105,7 +105,10 @@
       <!-- Start: tag -->
       <div class="item mb_4">
         <span>*Thẻ</span>
-        <div class="mt_2" :class="{ 'input--error': inputValidateError.productTags }">
+        <div
+          class="mt_2"
+          :class="{ 'input--error': inputValidateError.productTags }"
+        >
           <taggle
             class="taggle form_control"
             placeholder="Nhập từ khóa và enter để kết thúc"
