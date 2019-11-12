@@ -59,6 +59,9 @@
         cursor: pointer;
       }
     }
+    .input--error {
+      border: 1px solid #f96666 !important;
+    }
   }
 }
 .gallery {

@@ -3,10 +3,11 @@
     <div class="section--body ct_0">
       <!-- Start: Name -->
       <div class="item mb_4">
-        <span>Tên bài viết</span>
+        <span>*Tên bài viết</span>
         <input
           type="text"
           class="item--input mt_2"
+          :class="{ 'input--error': inputValidateError.postTitle }"
           placeholder="Nhập tên bài viết"
           v-model="postMarket.title"
         />
@@ -16,22 +17,26 @@
       <!-- Start: Categrories and Price -->
       <div class="enhance d_flex align_items_center">
         <div class="item mb_4 pr_2">
-          <span>Danh mục bài viết</span>
-          <div class="cate mt_2">
+          <span>*Danh mục sản phẩm</span>
+          <div
+            class="cate mt_2"
+            :class="{ 'input--error': inputValidateError.productCategory }"
+          >
             <multiselect
               label="name"
               placeholder="Chọn danh mục đăng bài..."
               :options="categories"
-              :value="convertCategoryPost(product._category)"
+              :value="convertCategoryPost"
               @input="updateProductCategory"
             />
           </div>
         </div>
         <div class="item mb_4 pl_2">
-          <span>Đơn giá</span>
+          <span>*Đơn giá</span>
           <input
             type="number"
             class="item--input mt_2"
+            :class="{ 'input--error': inputValidateError.productPrice }"
             placeholder="Nhập đơn giá bài viết"
             v-model="product.priceCents"
           />
@@ -99,8 +104,8 @@
 
       <!-- Start: tag -->
       <div class="item mb_4">
-        <span>Thẻ</span>
-        <div class="mt_2">
+        <span>*Thẻ</span>
+        <div class="mt_2" :class="{ 'input--error': inputValidateError.productTags }">
           <taggle
             class="taggle form_control"
             placeholder="Nhập từ khóa và enter để kết thúc"
@@ -111,18 +116,22 @@
       <!-- End: tag -->
 
       <!-- Start: image -->
-      <div class="form_group">
-        <label for class>Ảnh đại diện</label>
-        <div class="img--preview mb_2" v-if="product.previews">
+      <div class="item form_group">
+        <span>*Ảnh đại diện</span>
+        <div
+          class="img--preview my_2"
+          v-if="product.previews && product.previews.thumbnail"
+        >
           <img :src="product.previews.thumbnail" alt="" height="120px" />
         </div>
-        <div class>
+        <div class="mt_2">
           <input
             type="file"
             ref="file"
             @change="selectFile()"
             accept="image/x-png,image/gif,image/jpeg"
             class="form_control p_1"
+            :class="{ 'input--error': inputValidateError.productThumbnail }"
           />
         </div>
         <div class="contain--images"></div>
@@ -131,8 +140,11 @@
 
       <!-- Start: Content -->
       <div class="item mb_4">
-        <span>Nội dung</span>
-        <div class="wrap mt_2">
+        <span>*Nội dung</span>
+        <div
+          class="wrap mt_2"
+          :class="{ 'input--error': inputValidateError.postContent }"
+        >
           <contenteditable
             tag="div"
             class="contenteditable"
@@ -182,7 +194,15 @@ export default {
   },
   data() {
     return {
-      file: ""
+      file: "",
+      inputValidateError: {
+        postTitle: false,
+        postContent: false,
+        productCategory: false,
+        productPrice: false,
+        productTags: false,
+        productThumbnail: false
+      }
     };
   },
   computed: {
@@ -196,6 +216,20 @@ export default {
       // });
       // return arrCategoriesChildren;
       return this.$store.getters.allCategory;
+    },
+    convertCategoryPost() {
+      let dataCategory = {
+        _id: "",
+        name: ""
+      };
+      if (!this.product._category) return "";
+      this.categories.forEach(item => {
+        if (item._id === this.product._category) {
+          dataCategory._id = item._id;
+          dataCategory.name = item.name;
+        }
+      });
+      return dataCategory;
     },
     currentTheme() {
       return this.$store.getters.themeName;
@@ -215,8 +249,52 @@ export default {
     }
     await this.$store.dispatch("getcategories");
   },
+  watch: {
+    "postMarket.title"(val) {
+      this.inputValidateError.postTitle = !val || val === "";
+    },
+    "postMarket.content"(val) {
+      this.inputValidateError.postContent = !val || val === "";
+    },
+    "product._category"(val) {
+      this.inputValidateError.productCategory = !val || val === "";
+    },
+    "product.priceCents"(val) {
+      this.inputValidateError.productPrice = !val || val === "" || val < 0;
+    }
+  },
   methods: {
     async createPost() {
+      // Validate
+      if (!this.postMarket.title || this.postMarket.title === "") {
+        this.inputValidateError.postTitle = true;
+        return;
+      }
+      if (!this.product._category || this.product._category === "") {
+        this.inputValidateError.productCategory = true;
+        return;
+      }
+      if (
+        !this.product.priceCents ||
+        this.product.priceCents === "" ||
+        this.product.priceCents < 0
+      ) {
+        this.inputValidateError.productPrice = true;
+        return;
+      }
+      if (!this.product.tags || this.product.tags.length === 0) {
+        this.inputValidateError.productTags = true;
+        return;
+      }
+      if (!this.product.previews || this.product.previews.thumbnail === "") {
+        this.inputValidateError.productThumbnail = true;
+        return;
+      }
+      if (!this.postMarket.content || this.postMarket.content === "") {
+        this.inputValidateError.postContent = true;
+        return;
+      }
+
       //create post simple
       await this.$store.dispatch("createMarketPost", this.postMarket);
       //create post product market
@@ -259,19 +337,6 @@ export default {
       await this.$store.dispatch("uploadMarketPostPhotos", formData);
       const dataEmit = await this.$store.getters.marketPostPhotosUpload;
       this.product.previews.thumbnail = dataEmit[0];
-    },
-    convertCategoryPost(category) {
-      let dataCategory = {
-        _id: "",
-        name: ""
-      };
-      this.categories.map(item => {
-        if (item._id === category) {
-          dataCategory._id = item._id;
-          dataCategory.name = item.name;
-        }
-      });
-      return dataCategory;
     },
     updateProductCategory(value) {
       this.product._category = value._id;
