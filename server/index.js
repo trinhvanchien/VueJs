@@ -32,8 +32,17 @@ if ( process.env.APP_ENV === "production" ) {
 require( "./src/helpers/services/passport.service" );
 require( "./src/process" );
 
+// eslint-disable-next-line one-var
+let databaseURI = "";
+
+if ( process.env.APP_ENV === "production" ) {
+  databaseURI = `${process.env.DB_CONNECTION}://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
+} else {
+  databaseURI = `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
+}
+
 // connect to mongoose NoSQL DB
-mongoose.connect( `${process.env.DB_CONNECTION}://${process.env.DB_ACCOUNT}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`, {
+mongoose.connect( databaseURI, {
   "useCreateIndex": true,
   "useNewUrlParser": true,
   "useUnifiedTopology": true
