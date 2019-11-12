@@ -245,7 +245,7 @@ module.exports = {
   },
   "signIn": async ( req, res ) => {
     const { email } = req.body,
-      userInfo = await Account.findOne( { "email": email } ),
+      userInfo = await Account.findOne( { "email": email.toString().toLowerCase() } ),
       memberRole = await Role.findOne( { "_id": userInfo._role } ),
       serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
 
@@ -282,7 +282,7 @@ module.exports = {
 
     newUser = await new Account( {
       name,
-      email,
+      "email": email.toString().toLowerCase(),
       phone,
       presenter,
       password,

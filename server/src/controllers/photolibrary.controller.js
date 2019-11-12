@@ -59,7 +59,7 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
-  "search": async () => {}, // TODO
+  "search": async () => {},
   "update": async ( req, res ) => {
     const photoInfo = await PhotoLibrary.findOne( { "_id": req.query._id } ),
       categoryInfo = await PhotoLibraryCategory.findOne( { "_id": photoInfo._category } ),
@@ -91,7 +91,7 @@ module.exports = {
         await sharp( file.path ).resize( 150, 150 ).jpeg().toFile( `./${previewPhotoUrl}` );
         return {
           "url": `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path.replace( /\\/gi, "/" )}`,
-          "previewUrl": previewPhotoUrl
+          "previewUrl": `${process.env.APP_URL}:${process.env.PORT_BASE}/${previewPhotoUrl}`
         };
       }
     } ) );

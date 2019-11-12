@@ -1,8 +1,8 @@
 <template>
-  <div class="wrap">
-    <div class="info d_flex align_items_center justify_content_center p_3 mt_5">
-      <form @submit.prevent="signIn">
-        <h3>Đăng nhập vào hệ thống Admin</h3>
+  <div class="wrap d_flex align_items_center justify_content_center">
+    <div class="info">
+      <h3 class="title mb_3 text_center">Xác thực quản trị viên</h3>
+      <form class="form--wrap px_5 py_5" @submit.prevent="signIn">
         <div class="form_group">
           <label>Email đăng nhập</label>
           <input
@@ -22,15 +22,9 @@
             v-model="user.password"
           />
         </div>
-        <button type="submit" class="btn btn_info form_control">
+        <button type="submit" class="btn btn_success form_control">
           Đăng nhập
         </button>
-        <div class="mb_2 mt_2 d_none">
-          Chưa có tài khoản
-          <router-link tag="a" :to="{ name: 'admin_signup' }">
-            đăng ký ngay
-          </router-link>
-        </div>
       </form>
     </div>
   </div>
@@ -60,13 +54,33 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrap {
+  background-color: #f7f7f7;
   width: 100vw;
   height: 100vh;
+  .title {
+    color: #444;
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
   .info {
-    border: 1px solid #e4e4e4;
-    border-radius: 10px;
     margin: auto;
     width: 500px;
+    form {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      .btn_success {
+        background-color: #88c9ff;
+        border: 0;
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.4s ease;
+        &:hover,
+        &:focus {
+          background-color: #80bdff;
+        }
+      }
+    }
   }
 }
 </style>
