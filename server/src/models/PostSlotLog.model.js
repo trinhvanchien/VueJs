@@ -8,6 +8,10 @@ const mongoose = require( "mongoose" ),
       "type": String,
       "default": "None"
     },
+    "postDate": {
+      "type": Date,
+      "default": new Date()
+    },
     "owner": Object,
     "postInfo": Object,
     "message": String,
