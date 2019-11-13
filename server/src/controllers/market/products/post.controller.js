@@ -1,3 +1,6 @@
+/* eslint-disable one-var */
+const axios = require( "axios" );
+const fs = require( "fs" );
 const MarketPost = require( "../../../models/market/products/post.model" );
 
 module.exports = {
@@ -136,6 +139,74 @@ module.exports = {
     } );
 
     return res.status( 200 ).json( { "status": "success", "data": photosList } );
+  },
+  "download": async ( req, res ) => {
+    const { link } = req.body;
+
+    try {
+      const downloadedFile = await axios( {
+        "url": link,
+        "method": "GET",
+        "responseType": "arraybuffer"
+      } );
+
+      const pad = ( num, len ) => {
+        return "0".repeat( len - num.toString().length ) + num;
+      };
+        
+      const rootDir = process.cwd();
+      const postImageDir = `${rootDir}/uploads/post_facebook`;
+
+      if ( !fs.existsSync( `${rootDir}/uploads` ) ) {
+        fs.mkdirSync( `${rootDir}/uploads` );
+      }
+      if ( !fs.existsSync( postImageDir ) ) {
+        fs.mkdirSync( postImageDir );
+      }
+
+
+      fs.readdir( postImageDir, ( _err, folders ) => {
+
+        let totalSubfolder = folders.length;
+        let folderIndex = pad( totalSubfolder, 7 );
+        let dir = `${postImageDir}/${folderIndex}`;
+        let filename = "";
+        let randomNumber = Math.floor( Math.random() * 899999 ) + 100000;
+
+        // If post_facebook folder is empty, create one
+        if ( totalSubfolder === 0 ) {
+          folderIndex = pad( totalSubfolder + 1, 7 );
+          dir = `${postImageDir}/${folderIndex}`;
+          fs.mkdirSync( dir );
+          filename = `${folderIndex}_${Date.now()}_${randomNumber}.jpg`;
+          fs.createWriteStream( `${dir}/${filename}` ).write( downloadedFile.data );
+          return res.status( 200 ).json( { "status": "success", "path": `uploads/post_facebook/${folderIndex}/${filename}` } );
+        }
+        fs.readdir( dir, ( error, files ) => {
+        // If total file in sub folder less than 10000 file, write file.
+          if ( files.length < 10000 ) {
+            filename = `${folderIndex}_${Date.now()}_${randomNumber}.jpg`;
+            fs.createWriteStream( `${dir}/${filename}` ).write( downloadedFile.data );
+            return res.status( 200 ).json( { "status": "success", "path": `uploads/post_facebook/${folderIndex}/${filename}` } );
+          }
+          // Else, create new folder to store files
+          folderIndex = pad( totalSubfolder + 1, 7 );
+          dir = `${postImageDir}/${folderIndex}`;
+          fs.mkdirSync( dir );
+          filename = `${folderIndex}_${Date.now()}_${randomNumber}.jpg`;
+          fs.createWriteStream( `${dir}/${filename}` ).write( downloadedFile.data );
+          return res.status( 200 ).json( { "status": "success", "path": `uploads/post_facebook/${folderIndex}/${filename}` } );
+        
+        } );
+
+
+      } );
+
+    } catch ( error ) {
+      console.log( error );
+      return res.status( 400 ).json( { "status": "error", "message": "Có lỗi xảy ra" } );
+    }
+   
   }
 
 };
