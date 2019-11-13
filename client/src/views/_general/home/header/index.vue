@@ -108,7 +108,10 @@
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">
-                  <a href="#">Trải nghiệm ngay</a>
+                  <a href="#">Đăng ký</a>
+                </li>
+                <li class="items--header">
+                  <a href="javascript:void(0);">Cửa hàng nội dung</a>
                 </li>
               </ul>
             </transition>
@@ -171,6 +174,10 @@ export default {
     showPopupVideoMobile() {
       this.isShowPopupVideoMobile = true;
       this.closeMenu();
+    },
+    goToMarket() {
+      this.menu = false;
+      this.$router.push({ name: "market_home" });
     },
     goToSignIn() {
       // const routeSignIn = this.$router.resolve({ name: "user_signin" });
