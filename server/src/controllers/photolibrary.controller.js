@@ -91,7 +91,7 @@ module.exports = {
         await sharp( file.path ).resize( 150, 150 ).jpeg().toFile( `./${previewPhotoUrl}` );
         return {
           "url": `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path.replace( /\\/gi, "/" )}`,
-          "previewUrl": previewPhotoUrl
+          "previewUrl": `${process.env.APP_URL}:${process.env.PORT_BASE}/${previewPhotoUrl}`
         };
       }
     } ) );

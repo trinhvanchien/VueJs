@@ -55,6 +55,8 @@ module.exports = {
 
     if ( req.query._id ) {
       dataResponse = await MembershipPackage.findOne( { "_id": req.query._id } ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
+    } else if ( req.query.member ) {
+      dataResponse = await MembershipPackage.findOne( { "members": req.query.member } ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       dataResponse = await MembershipPackage.find( {} ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
     }

@@ -237,7 +237,7 @@ export default {
     }
   }
   .content--options {
-    color: #ccc;
+    color: #333;
     padding: 0 0.5rem;
     overflow: hidden;
     &:hover {

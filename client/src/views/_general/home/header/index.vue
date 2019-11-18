@@ -34,7 +34,7 @@
             <nav>
               <ul class="d_flex nav--menu">
                 <li
-                  class="items--header align_items_center d_flex support"
+                  class="items--header align_items_center d_flex support mr_1"
                   @click="showPopupVideo"
                 >
                   <p class="mb_0 pr_1">Hướng dẫn</p>
@@ -47,7 +47,13 @@
                     <icon-play />
                   </icon-base>
                 </li>
-                <li class="items--header" @click="goToSignIn">Đăng nhập</li>
+                <li
+                  class="items--header login"
+                  :class="changeBackgroundHeader === 2 ? 'active' : ''"
+                  @click="goToSignIn"
+                >
+                  Đăng nhập
+                </li>
                 <li
                   class="items--header try ml_2"
                   v-if="changeBackgroundHeader === 2"
@@ -102,7 +108,10 @@
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">
-                  <a href="#">Trải nghiệm ngay</a>
+                  <a href="#">Đăng ký</a>
+                </li>
+                <li class="items--header">
+                  <a href="javascript:void(0);">Cửa hàng nội dung</a>
                 </li>
               </ul>
             </transition>
@@ -165,6 +174,10 @@ export default {
     showPopupVideoMobile() {
       this.isShowPopupVideoMobile = true;
       this.closeMenu();
+    },
+    goToMarket() {
+      this.menu = false;
+      this.$router.push({ name: "market_home" });
     },
     goToSignIn() {
       // const routeSignIn = this.$router.resolve({ name: "user_signin" });

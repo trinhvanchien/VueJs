@@ -15,8 +15,8 @@
           100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK CHỈ VỚI VÀI THAO TÁC
         </div>
         <div class="d_flex action">
-          <div class="register mr_3" @click="goToSignUp">
-            TRẢI NGHIỆM NGAY
+          <div class="register mr_3" @click="goToSignIn">
+            ĐĂNG NHẬP
           </div>
           <div class="goto--market" @click="goToMarket">
             CỬA HÀNG NỘI DUNG
@@ -49,8 +49,8 @@ export default {
 
       window.open(route.href, "_blank");
     },
-    goToSignUp() {
-      const routeSignUp = this.$router.resolve({ name: "user_signup" });
+    goToSignIn() {
+      const routeSignUp = this.$router.resolve({ name: "user_signin" });
 
       window.open(routeSignUp.href, "_blank");
     }

@@ -7,6 +7,7 @@ const state = {
   photoLibrary: {
     name: "",
     url: "",
+    previewUrl: "",
     attribute: [],
     _category: {},
     isAvailable: []
@@ -117,6 +118,7 @@ const actions = {
     commit("setPhotoLibrary", {
       name: "",
       url: "",
+      previewUrl: "",
       attribute: [],
       _category: {},
       isAvailable: []
