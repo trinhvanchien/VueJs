@@ -4,7 +4,18 @@ const state = {
   campaignStatus: "",
   campaigns: [],
   campaign: [],
-  campaignDetail: []
+  campaignDetail: {
+    title: "",
+    totalDay: "",
+    postCategory: {
+      morning: "",
+      night: ""
+    },
+    mix: {
+      open: "",
+      close: ""
+    }
+  }
 };
 const getters = {
   campaignStatus: state => state.campaignStatus,
@@ -43,6 +54,12 @@ const mutations = {
 const actions = {
   createCampaign: async ({ commit }, payload) => {
     commit("campaign_request");
+    if(payload.postCategory.morning) {
+      payload.postCategory.morning = payload.postCategory.morning._id;
+    }
+    if(payload.postCategory.night) {
+      payload.postCategory.night = payload.postCategory.night._id;
+    }
     await CampaignServices.create(payload);
     const result = await CampaignServices.index();
     commit("setAllCampaign", result.data.data);
@@ -78,7 +95,15 @@ const actions = {
   setCampaignDefault: async ({ commit }) => {
     await commit("setCampaignDefault", {
       title: "",
-      totalDay: null
+      totalDay: null,
+      postCategory: {
+        morning: "",
+        night: ""
+      },
+      mix: {
+        open: "",
+        close: ""
+      }
     });
   }
 };

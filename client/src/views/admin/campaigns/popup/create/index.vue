@@ -27,30 +27,55 @@
             </div>
           </div>
           <div class="font_weight_bold mt_2">
-            Chọn bài viết sử dụng trong chiến dịch
+            Chọn danh mục sử dụng trong chiến dịch
           </div>
           <div class="post mt_1">
-            <div class="table-container" role="table" aria-label="Destinations">
-              <div class="flex-table header" role="rowgroup">
-                <div class="flex-row first" role="columnheader">Tiêu đề</div>
-                <div class="flex-row content" role="columnheader">Nội dung</div>
-                <div class="flex-row action" role="columnheader">Hành động</div>
-              </div>
-              <div
-                v-if="posts && posts.length === 0"
-                class="d_flex align_items_center justify_content_center no--post py_3"
-              >
-                Chưa có bài viết nào
-              </div>
-              <div v-else v-for="(post, index) in posts" :key="`p-${index}`">
-                <item
-                  :item="post"
-                  @pushPostToCampaign="pushToCampaign($event)"
-                />
-              </div>
+            <div>
+              <p class="font_weight_bold">Danh mục đăng buổi sáng:</p>
+              <multiselect
+                label="title"
+                placeholder="Chọn danh mục sử dụng"
+                :options="categories"
+                v-model="campaign.postCategory.morning"
+                @input="selectCategoryMorning"
+              />
+            </div>
+            <div>
+              <p class="font_weight_bold">Danh mục đăng buổi tối:</p>
+              <multiselect
+                label="title"
+                placeholder="Chọn danh mục sử dụng"
+                :options="categories"
+                v-model="campaign.postCategory.night"
+                @input="selectCategoryNight"
+              />
             </div>
           </div>
-          <post-paginate class="mt_3" />
+          <div class="font_weight_bold mt_2">
+            Chọn danh mục mở bài và kết bài
+          </div>
+          <div class="post mt_1">
+            <div>
+              <p class="font_weight_bold">Danh mục mở bài:</p>
+              <multiselect
+                label="title"
+                placeholder="Chọn danh mục mở bài"
+                :options="categories"
+                v-model="campaign.mix.open"
+                @input="selectCategoryOpen"
+              />
+            </div>
+            <div>
+              <p class="font_weight_bold">Danh mục kết bài:</p>
+              <multiselect
+                label="title"
+                placeholder="Chọn danh mục kết bài"
+                :options="categories"
+                v-model="campaign.mix.close"
+                @input="selectCategoryClose"
+              />
+            </div>
+          </div>
         </div>
         <!-- End: Modal Body -->
         <!-- Start: Modal Footer -->
@@ -71,14 +96,7 @@
 </template>
 
 <script>
-import Item from "./components/item";
-import PostPaginate from "./components/paginate";
-
 export default {
-  components: {
-    Item,
-    PostPaginate
-  },
   props: {
     currentTheme: String
   },
@@ -93,22 +111,36 @@ export default {
     },
     campaign() {
       return this.$store.getters.campaignDetail;
+    },
+    categories() {
+      return this.$store.getters.allCategoryDefault;
     }
   },
   async created() {
-    await this.$store.dispatch("setCampaignDefault");
+    await this.$store.dispatch("getAllCategoryDefault");
   },
   methods: {
     close() {
       this.$emit("closePopup", false);
     },
     async createNewFolder() {
-      this.campaign.postCustom = [...new Set(this.postList)];
       await this.$store.dispatch("createCampaign", this.campaign);
       this.close();
     },
     pushToCampaign(val) {
       this.postList.push(val);
+    },
+    selectCategoryMorning(val) {
+      this.campaign.postCategory.morning = val;
+    },
+    selectCategoryNight(val) {
+      this.campaign.postCategory.night = val;
+    },
+    selectCategoryOpen(val) {
+      this.campaign.mix.open = val;
+    },
+    selectCategoryClose(val) {
+      this.campaign.mix.close = val;
     }
   }
 };

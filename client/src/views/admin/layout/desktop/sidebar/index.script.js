@@ -71,7 +71,7 @@ export default {
           to: "admin_help"
         },
         {
-          text: "Dữ liệu mẫu",
+          text: "Danh mục mẫu",
           icon: {
             iconName: "folder",
             tagName: "icon-folder",

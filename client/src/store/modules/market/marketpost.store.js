@@ -8,7 +8,8 @@ const state = {
   marketPostPhotosUpload: [],
   postMarket: {},
   variableControl: 0,
-  pageCurrent: 1
+  pageCurrent: 1,
+  typeProduct: 1
 };
 const getters = {
   allMarketPosts: state => state.allMarketPosts,
@@ -18,7 +19,8 @@ const getters = {
   marketPostPhotosUpload: state => state.marketPostPhotosUpload,
   postMarket: state => state.postMarket,
   variableControl: state => state.variableControl,
-  pageCurrent: state => state.pageCurrent
+  pageCurrent: state => state.pageCurrent,
+  typeProduct: state => state.typeProduct
 };
 const mutations = {
   setAllMarketPosts: (state, payload) => {
@@ -47,6 +49,9 @@ const mutations = {
   },
   setDeleteMarketPost: (state, payload) => {
     state.allMarketPosts = payload;
+  },
+  setTypeProductMarket: (state, payload) => {
+    state.typeProduct = payload;
   }
 };
 const actions = {
@@ -117,11 +122,17 @@ const actions = {
     await commit("setPostDefault", {
       title: "",
       content: "",
-      photos: []
+      photos: [],
+      typeMarket: null
     });
   },
   setVariableControl: async ({ commit }, payload) => {
     await commit("setVariableControl", payload);
+  },
+  setTypePost: ({commit}, payload) => {
+    commit("statusSearchProducts", "loading");
+    commit("setTypeProductMarket", payload);
+    commit("statusSearchProducts", "success");
   }
 };
 

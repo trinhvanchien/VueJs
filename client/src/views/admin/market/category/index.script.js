@@ -1,8 +1,11 @@
 export default {
   data() {
     return {
-      nameCategory: "",
-      parent: "",
+      category: {
+        name: "",
+        parent: null,
+        typeMarket: 0
+      },
       isUpdateCategory: false,
       isCreateCategory: true,
       categoryUpdate: {}
@@ -27,26 +30,38 @@ export default {
     }
   },
   methods: {
+    cancelCategory() {
+      this.isUpdateCategory = false;
+    },
     // create
     create() {
-      const dataSender = {
-        name: this.nameCategory,
-        parent: this.parent._id
-      };
-      this.$store.dispatch("createCategory", dataSender);
+      let dataSender;
+      try {
+        dataSender = {
+          name: this.category.name,
+          parent: this.category.parent === null ? "" : this.category.parent._id,
+          typeMarket: this.category.typeMarket === 1 ? 0 : null
+        };
+        this.$store.dispatch("createCategory", dataSender);
+        this.category.name = "";
+        this.category.parent = "";
+        this.category.typeMarket = 0;
+      } catch (e) {
+        return;
+      }
     },
     actionUpdate(content) {
       this.isUpdateCategory = true;
-      this.isCreateCategory = false;
       this.categoryUpdate = content;
     },
     updateCategory() {
+      let dataSender;
       this.isUpdateCategory = false;
-      this.isCreateCategory = true;
-      const dataSender = {
+      dataSender = {
         _id: this.categoryUpdate._id,
         parent: this.nameParent._id,
-        name: this.categoryUpdate.name
+        name: this.categoryUpdate.name,
+        typeMarket: this.categoryUpdate.typeMarket === "1" ? 0 : null
       };
       this.$store.dispatch("updateCategory", dataSender);
     },
@@ -75,6 +90,9 @@ export default {
         }
       });
       return arr.nameParentCate;
+    },
+    selectCategoryParent(val) {
+      this.category.parent = val;
     }
   },
   async created() {

@@ -18,9 +18,27 @@
         </div>
       </router-link>
     </div>
-    <ul class="sidebar--menu">
+    <ul class="sidebar--menu" v-if="roles && roles !== 'Admin'">
       <router-link
-        v-if="roles && roles !== 'Admin'"
+        class="menu--item d_flex align_items_center"
+        tag="li"
+        active-class="active"
+        exact
+        :to="{ name: 'album' }"
+      >
+        <a href="#">
+          <icon-base
+            icon-name="icon-account"
+            width="24"
+            height="24"
+            viewBox="0 0 26 26"
+          >
+            <icon-image />
+          </icon-base>
+          <span class="ml_2">Quản lý ảnh</span>
+        </a>
+      </router-link>
+      <router-link
         class="menu--item d_flex align_items_center"
         tag="li"
         active-class="active"
@@ -39,9 +57,47 @@
           <span class="ml_2">Quản lý market</span>
         </a>
       </router-link>
-
       <router-link
-        v-else
+        class="menu--item d_flex align_items_center"
+        tag="li"
+        active-class="active"
+        exact
+        :to="{ name: 'simple_data' }"
+      >
+        <a href="#">
+          <icon-base
+            icon-name="icon-account"
+            width="20"
+            height="20"
+            viewBox="0 0 540 540"
+          >
+            <icon-post />
+          </icon-base>
+          <span class="ml_2">Danh mục mẫu</span>
+        </a>
+      </router-link>
+      <router-link
+        class="menu--item d_flex align_items_center"
+        tag="li"
+        active-class="active"
+        exact
+        :to="{ name: 'campaigns' }"
+      >
+        <a href="#">
+          <icon-base
+            icon-name="icon-account"
+            width="24"
+            height="24"
+            viewBox="0 0 540 540"
+          >
+            <icon-folder />
+          </icon-base>
+          <span class="ml_2">Chiến dịch mẫu</span>
+        </a>
+      </router-link>
+    </ul>
+    <ul class="sidebar--menu" v-else>
+      <router-link
         class="menu--item d_flex align_items_center"
         tag="li"
         active-class="active"
