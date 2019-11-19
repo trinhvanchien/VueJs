@@ -20,7 +20,9 @@
         <p>Tên chiến dịch mẫu: {{ campaign.title }}</p>
         <p>Số ngày sử dụng : {{ campaign.totalDay }}</p>
         <div v-if="campaign.postCategory">
-          <p>Danh mục đăng buổi sáng: {{ campaign.postCategory.morning.title }}</p>
+          <p>
+            Danh mục đăng buổi sáng: {{ campaign.postCategory.morning.title }}
+          </p>
           <p>Danh mục đăng buổi tối: {{ campaign.postCategory.night.title }}</p>
         </div>
         <div v-if="campaign.mix">

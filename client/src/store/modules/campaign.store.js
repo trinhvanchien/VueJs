@@ -54,10 +54,10 @@ const mutations = {
 const actions = {
   createCampaign: async ({ commit }, payload) => {
     commit("campaign_request");
-    if(payload.postCategory.morning) {
+    if (payload.postCategory.morning) {
       payload.postCategory.morning = payload.postCategory.morning._id;
     }
-    if(payload.postCategory.night) {
+    if (payload.postCategory.night) {
       payload.postCategory.night = payload.postCategory.night._id;
     }
     await CampaignServices.create(payload);

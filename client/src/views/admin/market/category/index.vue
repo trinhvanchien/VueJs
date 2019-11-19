@@ -69,7 +69,10 @@
             <div class="form_group w_50 ml_3">
               <label class>Loại danh mục</label>
               <div class="">
-                <select v-model="categoryUpdate.typeMarket" class="form_control">
+                <select
+                  v-model="categoryUpdate.typeMarket"
+                  class="form_control"
+                >
                   <option value="0">0</option>
                   <option value="1">1</option>
                 </select>
@@ -78,8 +81,12 @@
             <div>{{ categoryUpdate }}</div>
           </div>
           <div class="bottom">
-            <label class="btn btn_success" @click="updateCategory">Update</label>
-            <label class="btn btn_danger ml_3" @click="cancelCategory">Hủy</label>
+            <label class="btn btn_success" @click="updateCategory"
+              >Update</label
+            >
+            <label class="btn btn_danger ml_3" @click="cancelCategory"
+              >Hủy</label
+            >
           </div>
         </form>
       </div>

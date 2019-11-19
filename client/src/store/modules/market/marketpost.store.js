@@ -129,7 +129,7 @@ const actions = {
   setVariableControl: async ({ commit }, payload) => {
     await commit("setVariableControl", payload);
   },
-  setTypePost: ({commit}, payload) => {
+  setTypePost: ({ commit }, payload) => {
     commit("statusSearchProducts", "loading");
     commit("setTypeProductMarket", payload);
     commit("statusSearchProducts", "success");
