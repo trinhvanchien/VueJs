@@ -32,8 +32,8 @@
                 </div>
                 <div class="desc">
                   Tôi đã tiết kiệm được rất nhiều thời gian kể từ khi sử dụng
-                  Hoot, tôi không phải lo nghĩ lúc nào cũng phải ngồi đăng
-                  bài, kết bạn,... thật sự tuyệt vời.
+                  Hoot, tôi không phải lo nghĩ lúc nào cũng phải ngồi đăng bài,
+                  kết bạn,... thật sự tuyệt vời.
                 </div>
               </div>
             </transition>
@@ -53,8 +53,8 @@
                 </div>
                 <div class="desc">
                   Trước kia lúc nào tôi cũng phải vội vàng sắp xếp thời gian để
-                  đăng bài, tương tác, lên từng page, group, từ khi có Hoot,
-                  mọi thứ thật đơn giản.
+                  đăng bài, tương tác, lên từng page, group, từ khi có Hoot, mọi
+                  thứ thật đơn giản.
                 </div>
               </div>
             </transition>

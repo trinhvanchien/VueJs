@@ -11,8 +11,8 @@
               <div class="left text">
                 <div class="title--why">Giao diện thân thiện</div>
                 <div class="desc">
-                  Đội ngũ Hoot không ngừng cải tiến, nâng cấp nhằm xây dựng
-                  một hệ thống tiện lợi nhất cho người dùng
+                  Đội ngũ Hoot không ngừng cải tiến, nâng cấp nhằm xây dựng một
+                  hệ thống tiện lợi nhất cho người dùng
                 </div>
               </div>
               <div
@@ -46,8 +46,8 @@
                 <div class="title--why">Tự động hóa</div>
                 <div class="desc">
                   Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của
-                  Hoot, mọi thứ chỉ cần setup và Hoot sẽ thay bạn thực hiện
-                  bất kể ngày hay đêm
+                  Hoot, mọi thứ chỉ cần setup và Hoot sẽ thay bạn thực hiện bất
+                  kể ngày hay đêm
                 </div>
               </div>
               <div

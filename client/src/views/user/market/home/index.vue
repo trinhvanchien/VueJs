@@ -182,8 +182,8 @@
           ></div>
           <div class="title mt_4"><b>Giao diện thân thiện.</b></div>
           <div>
-            Hoot luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân
-            thiện với người dùng. Hoạt động tốt trên tất cả các trình duyệt web.
+            Hoot luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân thiện
+            với người dùng. Hoạt động tốt trên tất cả các trình duyệt web.
           </div>
         </div>
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">

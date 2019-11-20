@@ -16,9 +16,9 @@
       <div class="section--title-content">
         <h3 class="title">Công cụ hỗ trợ marketing – bán hàng</h3>
         <div class="desc">
-          Hoot cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều hoạt
-          động trong quá trình làm marketing, bán hàng và tương tác với khách
-          hàng trên Facebook.
+          Hoot cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều hoạt động
+          trong quá trình làm marketing, bán hàng và tương tác với khách hàng
+          trên Facebook.
         </div>
       </div>
       <div class="r content mb_md_4">
@@ -46,8 +46,8 @@
             </div>
             <div class="text">
               <p>
-                Hoot cung cấp kho nội dung mẫu đa dạng, cùng tính năng đăng
-                bài tự động
+                Hoot cung cấp kho nội dung mẫu đa dạng, cùng tính năng đăng bài
+                tự động
               </p>
             </div>
           </div>

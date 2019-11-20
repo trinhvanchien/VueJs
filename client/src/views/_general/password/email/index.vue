@@ -23,8 +23,8 @@
       <div class="card--body">
         <div class="title mt_2">Đặt lại mật khẩu</div>
         <div class="desc my_3">
-          Nhập email tài khoản Hoot của bạn, chúng tôi sẽ gửi đường dẫn đặt
-          lại mật khẩu thông qua email.
+          Nhập email tài khoản Hoot của bạn, chúng tôi sẽ gửi đường dẫn đặt lại
+          mật khẩu thông qua email.
         </div>
         <!-- Start: Alert -->
         <div
