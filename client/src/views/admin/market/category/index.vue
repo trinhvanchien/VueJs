@@ -32,8 +32,8 @@
               <label for class>Loại danh mục</label>
               <div class="">
                 <select v-model="category.typeMarket" class="form_control">
-                  <option>0</option>
-                  <option>1</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
                 </select>
               </div>
             </div>
@@ -78,7 +78,6 @@
                 </select>
               </div>
             </div>
-            <div>{{ categoryUpdate }}</div>
           </div>
           <div class="bottom">
             <label class="btn btn_success" @click="updateCategory"

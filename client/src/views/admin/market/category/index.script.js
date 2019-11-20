@@ -40,7 +40,7 @@ export default {
         dataSender = {
           name: this.category.name,
           parent: this.category.parent === null ? "" : this.category.parent._id,
-          typeMarket: this.category.typeMarket === 1 ? 0 : null
+          typeMarket: this.category.typeMarket === "1" ? 0 : null
         };
         this.$store.dispatch("createCategory", dataSender);
         this.category.name = "";

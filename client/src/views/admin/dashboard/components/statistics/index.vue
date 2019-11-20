@@ -1,6 +1,7 @@
 <template>
   <div class="section px_3 py_4">
     <div class="r">
+      <!-- Start: Active Account Statistics -->
       <div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
           <div
@@ -20,7 +21,9 @@
           <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
       </div>
-      <div class="c_3 col">
+      <!-- End: Active Account Statistics -->
+      <!-- Start: -->
+      <!--<div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
           <div
             class="col--icon d_flex align_items_center justify_content_center"
@@ -38,8 +41,10 @@
           <div class="col--label pl_3">Còn hạn sử dụng</div>
           <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
-      </div>
-      <div class="c_3 col">
+      </div>-->
+      <!-- End: -->
+      <!-- Start: -->
+      <!--<div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
           <div
             class="col--icon d_flex align_items_center justify_content_center"
@@ -57,8 +62,10 @@
           <div class="col--label pl_3">Còn hạn sử dụng</div>
           <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
-      </div>
-      <div class="c_3 col">
+      </div>-->
+      <!-- End: -->
+      <!-- Start: -->
+      <!--<div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
           <div
             class="col--icon d_flex align_items_center justify_content_center"
@@ -76,7 +83,8 @@
           <div class="col--label pl_3">Còn hạn sử dụng</div>
           <div class="col--count pl_3">{{ activeAccountStatistics }}</div>
         </div>
-      </div>
+      </div>-->
+      <!-- End: -->
     </div>
   </div>
 </template>
