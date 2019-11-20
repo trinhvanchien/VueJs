@@ -5,7 +5,7 @@
         <div
           class="modal--header d_flex flex_column align_items_center justify_content_center"
         >
-          <div class="title">Hướng dẫn sử dụng phần mềm ZinBee</div>
+          <div class="title">Hướng dẫn sử dụng phần mềm Hoot</div>
           <div class="divine mt_2 mb_1"></div>
         </div>
         <div class="modal--body mt_3">

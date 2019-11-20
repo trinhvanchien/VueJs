@@ -16,7 +16,7 @@
       <div class="section--title-content">
         <h3 class="title">Công cụ hỗ trợ marketing – bán hàng</h3>
         <div class="desc">
-          Zinbee cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều hoạt
+          Hoot cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều hoạt
           động trong quá trình làm marketing, bán hàng và tương tác với khách
           hàng trên Facebook.
         </div>
@@ -32,7 +32,7 @@
           ></div>
         </div>
         <div class="c_lg_6 c_md_12 right position_relative">
-          <div class="title--content">Những tính năng nổi trội của Zinbee</div>
+          <div class="title--content">Những tính năng nổi trội của Hoot</div>
           <div class="items d_flex align_items_center">
             <div class="icon">
               <icon-base
@@ -46,7 +46,7 @@
             </div>
             <div class="text">
               <p>
-                Zinbee cung cấp kho nội dung mẫu đa dạng, cùng tính năng đăng
+                Hoot cung cấp kho nội dung mẫu đa dạng, cùng tính năng đăng
                 bài tự động
               </p>
             </div>
@@ -82,7 +82,7 @@
             </div>
             <div class="text">
               <p>
-                Zinbee là bộ công cụ giúp tự động hóa việc marketing, bán hàng
+                Hoot là bộ công cụ giúp tự động hóa việc marketing, bán hàng
                 cũng như tự động tương tác với khách hàng trên Facebook.
               </p>
             </div>
@@ -91,7 +91,7 @@
       </div>
       <div class="r content benefit">
         <div class="c_lg_6 c_md_12 mb_md_3 left">
-          <div class="title--content">Lợi ích Zinbee mang lại</div>
+          <div class="title--content">Lợi ích Hoot mang lại</div>
           <div class="items d_flex align_items_center">
             <div class="icon">
               <icon-base

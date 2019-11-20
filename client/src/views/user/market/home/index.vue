@@ -182,7 +182,7 @@
           ></div>
           <div class="title mt_4"><b>Giao diện thân thiện.</b></div>
           <div>
-            Zinbee luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân
+            Hoot luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân
             thiện với người dùng. Hoạt động tốt trên tất cả các trình duyệt web.
           </div>
         </div>
@@ -195,7 +195,7 @@
           ></div>
           <div class="title mt_4"><b>Bài post, chiến dịch mẫu.</b></div>
           <div>
-            Để tăng hiệu quả sử dụng phần mềm, Zinbee có những post, chiến dịch
+            Để tăng hiệu quả sử dụng phần mềm, Hoot có những post, chiến dịch
             mẫu để bạn tham khảo và sử dụng.
           </div>
         </div>

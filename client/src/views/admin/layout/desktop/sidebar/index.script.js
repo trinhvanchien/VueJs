@@ -114,6 +114,52 @@ export default {
           },
           to: "agency_list"
         }
+      ],
+      menusCoborator: [
+        {
+          text: "Quản lý ảnh",
+          icon: {
+            iconName: "manage-album",
+            tagName: "icon-image",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "album"
+        },
+        {
+          text: "Danh mục mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "simple_data"
+        },
+        {
+          text: "Chiến dịch mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "campaigns"
+        },
+        {
+          text: "Quản lý market",
+          icon: {
+            iconName: "manage-market",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "manage_product"
+        }
       ]
     };
   },

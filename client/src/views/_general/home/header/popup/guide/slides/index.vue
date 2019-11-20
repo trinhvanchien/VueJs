@@ -5,7 +5,7 @@
         <div class="slide--image">
           <transition name="slide-fade">
             <div class="items display" v-if="currentIndexInfo === 0">
-              <div class="mb_2">Giới thiệu phiên bản mới của Zinbee</div>
+              <div class="mb_2">Giới thiệu phiên bản mới của Hoot</div>
               <iframe
                 :style="widthDefault"
                 height="500"
@@ -19,7 +19,7 @@
           <transition name="slide-fade">
             <div class="content items" v-if="currentIndexInfo === 1">
               <div class="mb_2">
-                Hướng dẫn kết nối facebook với tài khoản Zinbee
+                Hướng dẫn kết nối facebook với tài khoản Hoot
               </div>
               <iframe
                 :style="widthDefault"
@@ -47,7 +47,7 @@
           <transition name="slide-fade">
             <div class="function items" v-if="currentIndexInfo === 3">
               <div class="mb_2">
-                Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Zinbee
+                Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Hoot
               </div>
               <iframe
                 :style="widthDefault"

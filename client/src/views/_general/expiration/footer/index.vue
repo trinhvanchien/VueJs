@@ -1,7 +1,7 @@
 <template>
   <div class="copy">
     <div class="ct m_auto d_flex align_items_center">
-      <div class="copyright">Copyright © 2019 Zinbee.vn</div>
+      <div class="copyright">Copyright © 2019 hoot.vn</div>
       <div class="ml_auto d_flex contact">
         <div class="icon">
           <a href="https://www.facebook.com/zinbeeauto/" target="_blank">
