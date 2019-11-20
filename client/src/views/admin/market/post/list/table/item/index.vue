@@ -53,7 +53,11 @@
     <div
       class="col d_flex align_items_center justify_content_center col--action px_4 text_center"
     >
-      <span class="mx_1" v-if="item.typeMarket !== '0'" @click="showCreatePopup">
+      <span
+        class="mx_1"
+        v-if="item.typeMarket !== '0'"
+        @click="showCreatePopup"
+      >
         <icon-base
           width="20"
           height="20"

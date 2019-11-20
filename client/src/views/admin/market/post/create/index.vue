@@ -46,160 +46,160 @@
       <!-- START: SHOW CONTENT PRODUCT MARKET -->
       <div v-if="type === 1">
         <!-- Start: Categrories and Price -->
-      <div class="enhance d_flex align_items_center">
-        <div class="item mb_4 pr_2">
-          <span>*Danh mục sản phẩm</span>
+        <div class="enhance d_flex align_items_center">
+          <div class="item mb_4 pr_2">
+            <span>*Danh mục sản phẩm</span>
+            <div
+              class="cate mt_2"
+              :class="{ 'input--error': inputValidateError.productCategory }"
+            >
+              <multiselect
+                label="name"
+                placeholder="Chọn danh mục đăng bài..."
+                :options="categories"
+                :value="convertCategoryPost"
+                @input="updateProductCategory"
+              />
+            </div>
+          </div>
+
+          <div class="item mb_4 pl_2">
+            <span>*Đơn giá</span>
+            <input
+              type="number"
+              class="item--input mt_2"
+              :class="{ 'input--error': inputValidateError.productPrice }"
+              placeholder="Nhập đơn giá bài viết"
+              v-model="product.priceCents"
+            />
+          </div>
+        </div>
+        <!-- End:  Categrories and Price -->
+
+        <!-- Start: Attribute and Property -->
+        <div class="item mb_4">
+          <span>Đặc điểm</span>
           <div
-            class="cate mt_2"
-            :class="{ 'input--error': inputValidateError.productCategory }"
+            class="enhance d_flex align_items_center position_relative pr_4"
+            v-for="(att, index) in product.attributes"
+            :key="index"
           >
-            <multiselect
-              label="name"
-              placeholder="Chọn danh mục đăng bài..."
-              :options="categories"
-              :value="convertCategoryPost"
-              @input="updateProductCategory"
-            />
+            <div class="item pr_3">
+              <input
+                type="text"
+                class="item--input mt_2"
+                placeholder="Nhập tên"
+                v-model="att.name"
+              />
+            </div>
+            <div class="item">
+              <input
+                type="text"
+                class="item--input mt_2"
+                placeholder="Nhập giá trị"
+                v-model="att.value"
+              />
+            </div>
+            <div
+              class="icon--remove position_absolute"
+              @click="deleteAttribute(index)"
+            >
+              <icon-base
+                icon-name="remove"
+                class="icon--remove"
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+              >
+                <icon-remove />
+              </icon-base>
+            </div>
           </div>
-        </div>
 
-        <div class="item mb_4 pl_2">
-          <span>*Đơn giá</span>
-          <input
-            type="number"
-            class="item--input mt_2"
-            :class="{ 'input--error': inputValidateError.productPrice }"
-            placeholder="Nhập đơn giá bài viết"
-            v-model="product.priceCents"
-          />
-        </div>
-      </div>
-      <!-- End:  Categrories and Price -->
-
-      <!-- Start: Attribute and Property -->
-      <div class="item mb_4">
-        <span>Đặc điểm</span>
-        <div
-          class="enhance d_flex align_items_center position_relative pr_4"
-          v-for="(att, index) in product.attributes"
-          :key="index"
-        >
-          <div class="item pr_3">
-            <input
-              type="text"
-              class="item--input mt_2"
-              placeholder="Nhập tên"
-              v-model="att.name"
-            />
-          </div>
-          <div class="item">
-            <input
-              type="text"
-              class="item--input mt_2"
-              placeholder="Nhập giá trị"
-              v-model="att.value"
-            />
-          </div>
           <div
-            class="icon--remove position_absolute"
-            @click="deleteAttribute(index)"
+            class="add--attribute d_inline_flex mt_3 align_items_center p_2"
+            @click="addAtttibute"
           >
             <icon-base
-              icon-name="remove"
-              class="icon--remove"
-              width="20"
-              height="20"
-              viewBox="0 0 16 16"
+              icon-name="icon-plus"
+              class="icon-plus mr_2"
+              width="25"
+              height="25"
+              viewBox="0 0 60 70"
             >
-              <icon-remove />
+              <icon-plus />
             </icon-base>
+            Thêm đặc điểm
           </div>
         </div>
+        <!-- End: Attribute and Property -->
 
-        <div
-          class="add--attribute d_inline_flex mt_3 align_items_center p_2"
-          @click="addAtttibute"
-        >
-          <icon-base
-            icon-name="icon-plus"
-            class="icon-plus mr_2"
-            width="25"
-            height="25"
-            viewBox="0 0 60 70"
+        <!-- Start: tag -->
+        <div class="item mb_4">
+          <span>*Thẻ</span>
+          <div
+            class="mt_2"
+            :class="{ 'input--error': inputValidateError.productTags }"
           >
-            <icon-plus />
-          </icon-base>
-          Thêm đặc điểm
+            <taggle
+              class="taggle form_control"
+              placeholder="Nhập từ khóa và enter để kết thúc"
+              v-model="product.tags"
+            />
+          </div>
         </div>
-      </div>
-      <!-- End: Attribute and Property -->
+        <!-- End: tag -->
 
-      <!-- Start: tag -->
-      <div class="item mb_4">
-        <span>*Thẻ</span>
-        <div
-          class="mt_2"
-          :class="{ 'input--error': inputValidateError.productTags }"
-        >
-          <taggle
-            class="taggle form_control"
-            placeholder="Nhập từ khóa và enter để kết thúc"
-            v-model="product.tags"
-          />
+        <!-- Start: image -->
+        <div class="item form_group">
+          <span>*Ảnh đại diện</span>
+          <div
+            class="img--preview my_2"
+            v-if="product.previews && product.previews.thumbnail"
+          >
+            <img :src="product.previews.thumbnail" alt="" height="120px" />
+          </div>
+          <div class="mt_2">
+            <input
+              type="file"
+              ref="file"
+              @change="selectFile()"
+              accept="image/x-png,image/gif,image/jpeg"
+              class="form_control p_1"
+              :class="{ 'input--error': inputValidateError.productThumbnail }"
+            />
+          </div>
+          <div class="contain--images"></div>
         </div>
-      </div>
-      <!-- End: tag -->
+        <!-- End: image -->
 
-      <!-- Start: image -->
-      <div class="item form_group">
-        <span>*Ảnh đại diện</span>
-        <div
-          class="img--preview my_2"
-          v-if="product.previews && product.previews.thumbnail"
-        >
-          <img :src="product.previews.thumbnail" alt="" height="120px" />
+        <!-- Start: Content -->
+        <div class="item mb_4">
+          <span>*Nội dung</span>
+          <div
+            class="wrap mt_2"
+            :class="{ 'input--error': inputValidateError.postContent }"
+          >
+            <contenteditable
+              tag="div"
+              class="contenteditable"
+              contenteditable
+              v-model="postMarket.content"
+              placeholder="Cập nhật nội dung bài viết"
+            />
+          </div>
         </div>
-        <div class="mt_2">
-          <input
-            type="file"
-            ref="file"
-            @change="selectFile()"
-            accept="image/x-png,image/gif,image/jpeg"
-            class="form_control p_1"
-            :class="{ 'input--error': inputValidateError.productThumbnail }"
-          />
+        <!-- End: Content -->
+        <!-- Start: Image -->
+        <div class="item mb_4">
+          <span>Hình ảnh</span>
+          <image-gallery
+            :photos="postMarket.photos"
+            @updatePhotos="updatePhotos($event)"
+            @removePhoto="postMarket.photos = $event"
+          ></image-gallery>
         </div>
-        <div class="contain--images"></div>
-      </div>
-      <!-- End: image -->
-
-      <!-- Start: Content -->
-      <div class="item mb_4">
-        <span>*Nội dung</span>
-        <div
-          class="wrap mt_2"
-          :class="{ 'input--error': inputValidateError.postContent }"
-        >
-          <contenteditable
-            tag="div"
-            class="contenteditable"
-            contenteditable
-            v-model="postMarket.content"
-            placeholder="Cập nhật nội dung bài viết"
-          />
-        </div>
-      </div>
-      <!-- End: Content -->
-      <!-- Start: Image -->
-      <div class="item mb_4">
-        <span>Hình ảnh</span>
-        <image-gallery
-          :photos="postMarket.photos"
-          @updatePhotos="updatePhotos($event)"
-          @removePhoto="postMarket.photos = $event"
-        ></image-gallery>
-      </div>
-      <!-- End: Image -->  
+        <!-- End: Image -->
       </div>
       <!-- END: SHOW CONTENT PRODUCT MARKET -->
       <!-- START: SHOW CONTENT CATEGORY DEFAULT -->
@@ -220,32 +220,32 @@
           </div>
         </div>
         <!-- Start: Content -->
-      <div class="item mb_4">
-        <span>*Nội dung</span>
-        <div
-          class="wrap mt_2"
-          :class="{ 'input--error': inputValidateError.postContent }"
-        >
-          <contenteditable
-            tag="div"
-            class="contenteditable"
-            contenteditable
-            v-model="postMarket.content"
-            placeholder="Cập nhật nội dung bài viết"
-          />
+        <div class="item mb_4">
+          <span>*Nội dung</span>
+          <div
+            class="wrap mt_2"
+            :class="{ 'input--error': inputValidateError.postContent }"
+          >
+            <contenteditable
+              tag="div"
+              class="contenteditable"
+              contenteditable
+              v-model="postMarket.content"
+              placeholder="Cập nhật nội dung bài viết"
+            />
+          </div>
         </div>
-      </div>
-      <!-- End: Content -->
-      <!-- Start: Image -->
-      <div class="item mb_4">
-        <span>Hình ảnh</span>
-        <image-gallery
-          :photos="postMarket.photos"
-          @updatePhotos="updatePhotos($event)"
-          @removePhoto="postMarket.photos = $event"
-        ></image-gallery>
-      </div>
-      <!-- End: Image --> 
+        <!-- End: Content -->
+        <!-- Start: Image -->
+        <div class="item mb_4">
+          <span>Hình ảnh</span>
+          <image-gallery
+            :photos="postMarket.photos"
+            @updatePhotos="updatePhotos($event)"
+            @removePhoto="postMarket.photos = $event"
+          ></image-gallery>
+        </div>
+        <!-- End: Image -->
       </div>
       <!-- END: SHOW CONTENT CATEGORY DEFAULT -->
       <div class="d_flex align_items_center">
