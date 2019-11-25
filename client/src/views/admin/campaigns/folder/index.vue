@@ -36,17 +36,29 @@
 
           <div
             class="above d_flex align_items_center position_absolute"
-            @click="deleteFolder(item._id)"
           >
-            <icon-base
-              class="icon--remove"
-              icon-name="plus"
-              width="24"
-              height="24"
-              viewBox="0 0 20 20"
-            >
-              <icon-remove />
-            </icon-base>
+            <span class="mr_2" @click="editInfoCampaignExample(item._id)">
+              <icon-base
+                class="icon--edit"
+                icon-name="plus"
+                width="24"
+                height="24"
+                viewBox="0 0 25 25"
+                >
+                  <icon-edit />
+              </icon-base>
+            </span>
+            <span @click="deleteFolder(item._id)">
+              <icon-base
+                class="icon--remove"
+                icon-name="plus"
+                width="24"
+                height="24"
+                viewBox="0 0 20 20"
+                >
+                  <icon-remove />
+              </icon-base>
+            </span>
           </div>
 
           <!--*********** POPUP *************-->
@@ -119,12 +131,16 @@ export default {
     }
   },
   methods: {
-    showInfoFolder(itemId) {
-      this.$store.dispatch("getCampaignDetail", itemId);
-      this.$router.push({ name: "campaigns_edit", params: { id: itemId } });
+    editInfoCampaignExample(val) {
+      this.$store.dispatch("getCampaignDetail", val);
+      this.isShowCreateGroup = true;
     },
     deleteFolder(val) {
       this.$store.dispatch("deleteCampaign", val);
+    },
+    showInfoFolder(itemId) {
+      this.$store.dispatch("getCampaignDetail", itemId);
+      this.$router.push({ name: "campaigns_edit", params: { id: itemId } });
     }
   }
 };

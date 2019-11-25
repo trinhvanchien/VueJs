@@ -6,7 +6,7 @@ const state = {
   campaign: [],
   campaignDetail: {
     title: "",
-    totalDay: "",
+    totalDay: 7,
     postCategory: {
       morning: "",
       night: ""
@@ -60,6 +60,12 @@ const actions = {
     if (payload.postCategory.night) {
       payload.postCategory.night = payload.postCategory.night._id;
     }
+    if (payload.mix.open) {
+      payload.mix.open = payload.mix.open._id;
+    }
+    if (payload.mix.close) {
+      payload.mix.close = payload.mix.close._id;
+    }
     await CampaignServices.create(payload);
     const result = await CampaignServices.index();
     commit("setAllCampaign", result.data.data);
@@ -75,6 +81,7 @@ const actions = {
     commit("campaign_request");
     const result = await CampaignServices.getCampaignById(payload);
     commit("setCampaign", result.data.data);
+    commit("setCampaignDefault", result.data.data);
     commit("campaign_success");
   },
   deleteCampaign: async ({ commit }, payload) => {
@@ -92,10 +99,28 @@ const actions = {
     commit("setUpdate", payload);
     commit("campaign_success");
   },
+  updateCampaignExample: async ({ commit }, payload) => {
+    commit("campaign_request");
+    if (payload.postCategory.morning) {
+      payload.postCategory.morning = payload.postCategory.morning._id;
+    }
+    if (payload.postCategory.night) {
+      payload.postCategory.night = payload.postCategory.night._id;
+    }
+    if (payload.mix.open) {
+      payload.mix.open = payload.mix.open._id;
+    }
+    if (payload.mix.close) {
+      payload.mix.close = payload.mix.close._id;
+    }
+    await CampaignServices.update(payload._id, payload);
+    commit("setUpdate", payload);
+    commit("campaign_success");
+  },
   setCampaignDefault: async ({ commit }) => {
     await commit("setCampaignDefault", {
       title: "",
-      totalDay: null,
+      totalDay: 7,
       postCategory: {
         morning: "",
         night: ""

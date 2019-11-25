@@ -7,6 +7,7 @@
  * team: BE-RHP
  */
 // const MarketProductPost = require( "../models/market/products/post.model" );
+const CategoryDefault = require( "../models/CategoryDefault.model" );
 const CampaignDefault = require( "../models/CampaignDefault.model" );
 const Account = require( "../models/Account.model" );
 const Server = require( "../models/Server.model" );
@@ -97,10 +98,15 @@ module.exports = {
   "duplicate": async ( req, res ) => {
     const findCampaignExample = await CampaignDefault.findOne( { "_id": req.query._campaignId } )
         .select( "-updated_at -__v" )
-        .populate( "postCategory.morning postCategory.night mix.open mix.close" ).lean(),
+        .populate( "postCategory.morning postCategory.night mix.open mix.close" )
+        .populate( { "path": "postCategory.morning", "populate": { "path": "postList", "select": "title content _id attachments" } } )
+        .populate( { "path": "postCategory.night", "populate": { "path": "postList", "select": "title content _id attachments" } } )
+        .populate( { "path": "mix.open", "populate": { "path": "postList", "select": "title content _id" } } )
+        .populate( { "path": "mix.close", "populate": { "path": "postList", "select": "title content _id" } } )
+        .lean(),
       userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
-    console.log(vpsContainServer);
+
     // Check catch when duplicate
     if ( !findCampaignExample ) {
       return res.status( 404 ).json( { "status": "error", "message": "Chiến dịch không tồn tại!" } );
@@ -110,7 +116,11 @@ module.exports = {
         "campaignExample": findCampaignExample,
         "facebookId": req.body.facebookId
       },
-      resCampaignSync = await syncCampaignExample( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/campaigns/sync/duplicate`, data, req.headers.authorization );
+      resCampaignSync = await syncCampaignExample(
+        `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/campaigns/sync/duplicate`,
+        data,
+        req.headers.authorization
+      );
 
     if ( resCampaignSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
