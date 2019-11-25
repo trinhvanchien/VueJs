@@ -34,9 +34,7 @@
             <div class="desc">{{ item.title }}</div>
           </div>
 
-          <div
-            class="above d_flex align_items_center position_absolute"
-          >
+          <div class="above d_flex align_items_center position_absolute">
             <span class="mr_2" @click="editInfoCampaignExample(item._id)">
               <icon-base
                 class="icon--edit"
@@ -44,8 +42,8 @@
                 width="24"
                 height="24"
                 viewBox="0 0 25 25"
-                >
-                  <icon-edit />
+              >
+                <icon-edit />
               </icon-base>
             </span>
             <span @click="deleteFolder(item._id)">
@@ -55,8 +53,8 @@
                 width="24"
                 height="24"
                 viewBox="0 0 20 20"
-                >
-                  <icon-remove />
+              >
+                <icon-remove />
               </icon-base>
             </span>
           </div>

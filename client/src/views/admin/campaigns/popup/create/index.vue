@@ -36,7 +36,10 @@
             <div class="post mb_3">
               <div>
                 <p class="font_weight_bold mb_2">Danh mục đăng buổi sáng:</p>
-                <div class="item" :class="alertCategoryMorning === true ? 'danger' : ''">
+                <div
+                  class="item"
+                  :class="alertCategoryMorning === true ? 'danger' : ''"
+                >
                   <multiselect
                     label="title"
                     placeholder="Chọn danh mục sử dụng"
@@ -48,7 +51,10 @@
               </div>
               <div>
                 <p class="font_weight_bold mb_2">Danh mục đăng buổi tối:</p>
-                <div class="item" :class="alertCategoryNight === true ? 'danger' : ''">
+                <div
+                  class="item"
+                  :class="alertCategoryNight === true ? 'danger' : ''"
+                >
                   <multiselect
                     label="title"
                     placeholder="Chọn danh mục sử dụng"
@@ -63,7 +69,10 @@
             <div class="post">
               <div>
                 <p class="font_weight_bold mb_2">Danh mục mở bài:</p>
-                <div class="item" :class="alertCategoryOpen === true ? 'danger' : ''">
+                <div
+                  class="item"
+                  :class="alertCategoryOpen === true ? 'danger' : ''"
+                >
                   <multiselect
                     label="title"
                     placeholder="Chọn danh mục mở bài"
@@ -75,7 +84,10 @@
               </div>
               <div>
                 <p class="font_weight_bold mb_2">Danh mục kết bài:</p>
-                <div class="item" :class="alertCategoryClose === true ? 'danger' : ''">
+                <div
+                  class="item"
+                  :class="alertCategoryClose === true ? 'danger' : ''"
+                >
                   <multiselect
                     label="title"
                     placeholder="Chọn danh mục kết bài"
@@ -96,7 +108,11 @@
             <button class="btn bg_danger mr_2" @click="close">
               Hủy bỏ
             </button>
-            <button v-if="campaign._id" class="btn bg_success" @click="updateCampaign">
+            <button
+              v-if="campaign._id"
+              class="btn bg_success"
+              @click="updateCampaign"
+            >
               Cập nhật
             </button>
             <button v-else class="btn bg_primary" @click="createNewFolder">
@@ -139,12 +155,12 @@ export default {
   },
   watch: {
     "campaign.title"(val) {
-      if( val.length > 0) {
+      if (val.length > 0) {
         this.alertTitle = false;
       }
     },
     "campaign.totalDay"(val) {
-      if( parseInt(val) <= 7) {
+      if (parseInt(val) <= 7) {
         this.alertDay = false;
       }
     }
@@ -157,29 +173,41 @@ export default {
     async createNewFolder() {
       // check validator before create campaign
       try {
-        if( this.campaign.title === "" || this.campaign.title.length === 0 ) {
+        if (this.campaign.title === "" || this.campaign.title.length === 0) {
           this.alertTitle = true;
           return false;
-        } else if(parseInt(this.campaign.totalDay) > 7) {
+        } else if (parseInt(this.campaign.totalDay) > 7) {
           this.alertDay = true;
           return false;
-        } else if( this.campaign.postCategory.morning === "" || this.campaign.postCategory.morning.length === 0 ) {
+        } else if (
+          this.campaign.postCategory.morning === "" ||
+          this.campaign.postCategory.morning.length === 0
+        ) {
           this.alertCategoryMorning = true;
           return false;
-        } else if (this.campaign.postCategory.night === "" || this.campaign.postCategory.night.length === 0) {
+        } else if (
+          this.campaign.postCategory.night === "" ||
+          this.campaign.postCategory.night.length === 0
+        ) {
           this.alertCategoryNight = true;
           return false;
-        } else if (this.campaign.mix.open === "" || this.campaign.mix.open.length === 0) {
+        } else if (
+          this.campaign.mix.open === "" ||
+          this.campaign.mix.open.length === 0
+        ) {
           this.alertCategoryOpen = true;
           return false;
-        } else if (this.campaign.mix.close === "" || this.campaign.mix.close.length === 0) {
+        } else if (
+          this.campaign.mix.close === "" ||
+          this.campaign.mix.close.length === 0
+        ) {
           this.alertCategoryClose = true;
           return false;
         }
         // create campaign example
         await this.$store.dispatch("createCampaign", this.campaign);
         this.close();
-      } catch(error) {
+      } catch (error) {
         return error;
       }
     },
@@ -201,10 +229,10 @@ export default {
     updateCampaign() {
       try {
         // check validator
-        if( this.campaign.title === "" || this.campaign.title.length === 0 ) {
+        if (this.campaign.title === "" || this.campaign.title.length === 0) {
           this.alertTitle = true;
           return false;
-        } else if(parseInt(this.campaign.totalDay) > 7) {
+        } else if (parseInt(this.campaign.totalDay) > 7) {
           this.alertDay = true;
           return false;
         }
