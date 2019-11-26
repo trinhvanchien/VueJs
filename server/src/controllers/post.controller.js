@@ -24,6 +24,7 @@ const Server = require( "../models/Server.model" );
 const jsonResponse = require( "../configs/response" );
 const dictionary = require( "../configs/dictionaries" ),
   convertUnicode = require( "../helpers/utils/unicode.util" ),
+  shuffleArray = require( "../helpers/utils/shuffleArray.util" ),
   { syncPostFolderExample, syncFolderExample, syncKeyWordSearch } = require( "../microservices/synchronize/post" );
 
 
@@ -147,7 +148,7 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
-    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() ), resKeywordSync,
+    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).lean() ), resKeywordSync,
       keywordExist = ( content ) => {
         return userInfo.keywordSearch.some( function( el ) {
           return convertUnicode( el.content.toLowerCase() ) === content;
@@ -163,6 +164,12 @@ module.exports = {
       }
     }
 
+    // Shuffle results
+    if ( data.length > req.query._size ) {
+      data = shuffleArray( data );
+    }
+
+
     if ( req.query._size && req.query._page ) {
       dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
     } else if ( req.query._size ) {
@@ -176,6 +183,23 @@ module.exports = {
         page = Math.floor( data.length / req.query._size ) + 1;
       }
     }
+
+    dataResponse = data.map( ( post ) => {
+      return {
+        "_id": post._id,
+        "feedId": post.feedId,
+        "like": post.reaction,
+        "share": post.share,
+        "content": post.content,
+        "attachments": post.downloadedImage.map( ( imagePath ) => {
+          return {
+            "link": `${process.env.APP_URL}:${process.env.PORT_BASE}/${imagePath}`,
+            "typeAttachment": 1
+          };
+        } )
+      };
+    } );
+    console.log( "[Message]: dataResponse", dataResponse );
 
     return res
       .status( 200 )
@@ -306,7 +330,6 @@ module.exports = {
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   },
   "duplicateFolder": async ( req, res ) => {
-    console.log( req.query );
     const findCategoryDefault = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).populate( { "path": "postList", "select": "_id title photos content " } ).lean(),
       userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
