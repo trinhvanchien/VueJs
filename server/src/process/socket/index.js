@@ -40,7 +40,8 @@ const startSocket = async () => {
         const connectSession = {
           "session_id": socket.id,
           "name": data.name,
-          "uid": data.uid
+          "uid": data.uid,
+          "status": true
         };
 
         await new PostServer( connectSession ).save();
