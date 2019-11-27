@@ -99,8 +99,8 @@ module.exports = {
     const findCampaignExample = await CampaignDefault.findOne( { "_id": req.query._campaignId } )
         .select( "-updated_at -__v" )
         .populate( "postCategory.morning postCategory.night mix.open mix.close" )
-        .populate( { "path": "postCategory.morning", "populate": { "path": "postList", "select": "title content _id attachments" } } )
-        .populate( { "path": "postCategory.night", "populate": { "path": "postList", "select": "title content _id attachments" } } )
+        .populate( { "path": "postCategory.morning", "populate": { "path": "postList", "select": "title content _id photos" } } )
+        .populate( { "path": "postCategory.night", "populate": { "path": "postList", "select": "title content _id photos" } } )
         .populate( { "path": "mix.open", "populate": { "path": "postList", "select": "title content _id" } } )
         .populate( { "path": "mix.close", "populate": { "path": "postList", "select": "title content _id" } } )
         .lean(),
@@ -114,7 +114,8 @@ module.exports = {
 
     let data = {
         "campaignExample": findCampaignExample,
-        "facebookId": req.body.facebookId
+        "facebookId": req.body.facebookId,
+        "finished_at": req.body.finished_at
       },
       resCampaignSync = await syncCampaignExample(
         `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/campaigns/sync/duplicate`,
