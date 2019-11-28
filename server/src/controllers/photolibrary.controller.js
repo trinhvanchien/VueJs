@@ -80,22 +80,28 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": await PhotoLibrary.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) } );
   },
   "upload": async ( req, res ) => {
+
     if ( !req.files || req.files.length === 0 ) {
       return res.status( 403 ).json( { "status": "error", "message": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
     }
-    const attachmentList = await Promise.all( req.files.map( async ( file ) => {
-      if ( file.fieldname === "attachments" && file.mimetype.includes( "image" ) ) {
-        let previewPhotoName = `${Date.now()}-${RAND.generate( 16 )}.jpeg`,
-          previewPhotoUrl = `uploads/albums/${previewPhotoName}`;
+    try {
+      const attachmentList = await Promise.all( req.files.map( async ( file ) => {
+        if ( file.fieldname === "attachments" && file.mimetype.includes( "image" ) ) {
+          let previewPhotoName = `${Date.now()}-${RAND.generate( 16 )}.jpeg`,
+            previewPhotoUrl = `uploads/albums/${previewPhotoName}`;
 
-        await sharp( file.path ).resize( 150, 150 ).jpeg().toFile( `./${previewPhotoUrl}` );
-        return {
-          "url": `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path.replace( /\\/gi, "/" )}`,
-          "previewUrl": `${process.env.APP_URL}:${process.env.PORT_BASE}/${previewPhotoUrl}`
-        };
-      }
-    } ) );
+          await sharp( file.path ).resize( 150, 150 ).jpeg().toFile( `./${previewPhotoUrl}` );
+          return {
+            "url": `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path.replace( /\\/gi, "/" )}`,
+            "previewUrl": `${process.env.APP_URL}:${process.env.PORT_BASE}/${previewPhotoUrl}`
+          };
+        }
+      } ) );
 
-    return res.status( 200 ).json( { "status": "success", "data": attachmentList } );
+      return res.status( 200 ).json( { "status": "success", "data": attachmentList } );
+    } catch ( error ) {
+      console.log( "Error Exception:", error );
+      return res.status( 403 ).json( { "status": "error", "message": "Có lỗi xảy ra!" } );
+    }
   }
 };
