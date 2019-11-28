@@ -33,6 +33,15 @@ $row-bg: #f4f2f1;
             border-color: #e4e4e4;
           }
         }
+        .desc {
+          textarea {
+            &:focus, &:active, &:visited {
+              box-shadow: none;
+              outline: 0;
+              border-color: #e4e4e4;
+            }
+          }
+        }
         .post {
           .item {
             border: 1px solid #444;
