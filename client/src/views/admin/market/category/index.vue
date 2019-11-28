@@ -5,29 +5,42 @@
       <div class="create mb_3">
         <h3>Tao danh muc moi</h3>
         <!-- create -->
-        <form action class="card card_body" v-if="isCreateCategory === true">
+        <form action class="card card_body" v-if="isUpdateCategory === false">
           <div class="form_group">
             <label for class>Tên danh mục</label>
             <input
               type="text"
               class="form_control"
               placeholder="Nhập tên danh mục"
-              v-model="nameCategory"
+              v-model="category.name"
             />
           </div>
-          <div class="form_group">
-            <label for class>Lựa chọn danh mục cha</label>
-            <div class="multi">
-              <multiselect
-                label="name"
-                placeholder="Chọn danh mục cha"
-                :options="categories"
-                v-model="parent"
-                :value="parent.name"
-              />
+          <div class="d_flex align_items_center justify_content_between">
+            <div class="form_group w_50">
+              <label for class>Lựa chọn danh mục cha</label>
+              <div class="multi">
+                <multiselect
+                  label="name"
+                  placeholder="Chọn danh mục cha"
+                  :options="categories"
+                  v-model="category.parent"
+                  @input="selectCategoryParent"
+                />
+              </div>
+            </div>
+            <div class="form_group w_50 ml_3">
+              <label for class>Loại danh mục</label>
+              <div class="">
+                <select v-model="category.typeMarket" class="form_control">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="btn btn_success" @click="create">Tao moi</div>
+          <div class="bottom">
+            <label class="btn btn_success" @click="create">Tao moi</label>
+          </div>
         </form>
         <!-- update -->
         <form action class="card card_body" v-if="isUpdateCategory === true">
@@ -40,19 +53,40 @@
               v-model="categoryUpdate.name"
             />
           </div>
-          <div class="form_group">
-            <label for class>Lựa chọn danh mục cha</label>
-            <div class="multi">
-              <multiselect
-                label="name"
-                placeholder="Chọn danh mục cha ..."
-                :options="categories"
-                :value="nameParent"
-                @input="updateParentCategory"
-              />
+          <div class="d_flex align_items_center justify_content_between">
+            <div class="form_group w_50">
+              <label for class>Lựa chọn danh mục cha</label>
+              <div class="multi">
+                <multiselect
+                  label="name"
+                  placeholder="Chọn danh mục cha ..."
+                  :options="categories"
+                  :value="nameParent"
+                  @input="updateParentCategory"
+                />
+              </div>
+            </div>
+            <div class="form_group w_50 ml_3">
+              <label class>Loại danh mục</label>
+              <div class="">
+                <select
+                  v-model="categoryUpdate.typeMarket"
+                  class="form_control"
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="btn btn_success" @click="updateCategory">Update</div>
+          <div class="bottom">
+            <label class="btn btn_success" @click="updateCategory"
+              >Update</label
+            >
+            <label class="btn btn_danger ml_3" @click="cancelCategory"
+              >Hủy</label
+            >
+          </div>
         </form>
       </div>
       <!-- End: create -->
@@ -109,7 +143,7 @@
   </div>
 </template>
 
-<script src="./index.script"></script>
+<script src="./index.script.js"></script>
 
 <style lang="scss" scoped>
 @import "./index.style.scss";

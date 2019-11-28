@@ -18,30 +18,31 @@
         </div>
       </router-link>
     </div>
-    <ul class="sidebar--menu">
+    <ul class="sidebar--menu" v-if="roles && roles !== 'Admin'">
       <router-link
-        v-if="roles && roles !== 'Admin'"
         class="menu--item d_flex align_items_center"
         tag="li"
         active-class="active"
         exact
-        :to="{ name: 'manage_product' }"
+        v-for="(menu, index) in menusCoborator"
+        :key="index"
+        :to="{ name: menu.to }"
       >
         <a href="#">
           <icon-base
-            icon-name="icon-account"
-            width="24"
-            height="24"
-            viewBox="0 0 26 26"
+            :icon-name="menu.icon.iconName"
+            :width="menu.icon.width"
+            :height="menu.icon.height"
+            :viewBox="menu.icon.viewBox"
           >
-            <icon-account />
+            <component :is="menu.icon.tagName" />
           </icon-base>
-          <span class="ml_2">Quản lý market</span>
+          <span class="ml_2">{{ menu.text }}</span>
         </a>
       </router-link>
-
+    </ul>
+    <ul class="sidebar--menu" v-else>
       <router-link
-        v-else
         class="menu--item d_flex align_items_center"
         tag="li"
         active-class="active"

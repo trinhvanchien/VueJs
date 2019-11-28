@@ -34,11 +34,18 @@ $row-bg: #f4f2f1;
           }
         }
         .post {
-          max-height: 350px;
-          overflow-y: auto;
-          overflow-x: hidden;
-          border: 1px solid #e4e4e4;
-          border-radius: .625rem;
+          .item {
+            border: 1px solid #444;
+            border-radius: 0.25rem;
+            .danger {
+              border-color: #ff0000;
+              color: #ff0000;
+            }
+          }
+        }
+        .danger {
+          border-color: #ff0000;
+          color: #ff0000;
         }
       }
       .footer {

@@ -11,7 +11,7 @@
           >
             <icon-logo-icon />
           </icon-base>
-          <div class="ml_1">Zinbee © 2019</div>
+          <div class="ml_1">Hoot © 2019</div>
         </div>
         <div class="language d_flex align_items_center">
           <div class="text">Tiếng Việt</div>

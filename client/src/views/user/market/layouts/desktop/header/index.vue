@@ -20,7 +20,7 @@
                 >
                   <icon-logo-icon />
                 </icon-base>
-                <div class="center--support ml_2">Zinbee Store</div>
+                <div class="center--support ml_2">Hoot Store</div>
               </div>
             </router-link>
           </div>

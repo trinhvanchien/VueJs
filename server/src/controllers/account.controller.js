@@ -407,7 +407,7 @@ module.exports = {
       {
         "from": process.env.MAIL_USERNAME,
         "to": req.body.email,
-        "subject": "Yêu cầu đặt lại mật khẩu Tài khoản Zinbee của bạn",
+        "subject": "Yêu cầu đặt lại mật khẩu Tài khoản Hoot của bạn",
         "html": writeForgotPassword( linkReset )
       },
       ( err ) => {

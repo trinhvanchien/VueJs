@@ -35,10 +35,10 @@
               <li><span class="mr_5">Ngân hàng:</span> Vietcombank</li>
               <li><span class="mr_5">Chi nhánh:</span> Tây Hồ - Hà Nội</li>
               <li>
-                Thông tin chuyển khoản với nội dung: "Email đăng ký Zinbee của
+                Thông tin chuyển khoản với nội dung: "Email đăng ký Hoot của
                 bạn"
               </li>
-              <li>Zinbee sẽ nâng cấp cho bạn ngay lập tức</li>
+              <li>Hoot sẽ nâng cấp cho bạn ngay lập tức</li>
             </ul>
           </div>
         </div>
