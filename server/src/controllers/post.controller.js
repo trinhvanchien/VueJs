@@ -148,7 +148,7 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
-    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() ), resKeywordSync,
+    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).lean() ), resKeywordSync,
       keywordExist = ( content ) => {
         return userInfo.keywordSearch.some( function( el ) {
           return convertUnicode( el.content.toLowerCase() ) === content;
