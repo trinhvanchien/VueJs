@@ -130,9 +130,7 @@ const actions = {
     await commit("setVariableControl", payload);
   },
   setTypePost: ({ commit }, payload) => {
-    commit("statusSearchProducts", "loading");
     commit("setTypeProductMarket", payload);
-    commit("statusSearchProducts", "success");
   }
 };
 

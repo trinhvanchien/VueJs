@@ -28,11 +28,21 @@
               </div>
             </div>
           </div>
-          <!-- START: SELECT CATEGORY FOR SCHEDULE -->
-          <div class="select-category">
-            <div class="font_weight_bold mt_2">
-              Chọn danh mục sử dụng trong chiến dịch
+          <!-- START: DESCRIPTION FOR SCHEDULE -->
+          <div class="desc mt_2">
+            <div class="font_weight_bold mb_2">
+              <span>Mô tả cho chiến dịch</span>
             </div>
+            <div class="detail">
+              <textarea
+                v-model="campaign.description"
+                class="form_control"
+              ></textarea>
+            </div>
+          </div>
+          <!-- END : DESCRIPTION FOR SCHEDULE -->
+          <!-- START: SELECT CATEGORY FOR SCHEDULE -->
+          <div class="select-category mt_2">
             <div class="post mb_3">
               <div>
                 <p class="font_weight_bold mb_2">Danh mục đăng buổi sáng:</p>

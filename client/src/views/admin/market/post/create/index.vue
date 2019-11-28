@@ -256,13 +256,6 @@
         >
           Lưu
         </button>
-        <div
-          v-if="this.$store.getters.variableControl === 2"
-          class="d_flex align_items_center"
-        >
-          <button class="btn btn_info mr_3">Cập nhật</button>
-          <button class="btn btn_info">Lưu vào market</button>
-        </div>
       </div>
     </div>
   </div>
@@ -291,14 +284,6 @@ export default {
   },
   computed: {
     categories() {
-      // let arrCategoriesChildren = [];
-      // const categories = this.$store.getters.allCategory;
-      // categories.map(item => {
-      //   if (item.level === 1) {
-      //     arrCategoriesChildren.push(item);
-      //   }
-      // });
-      // return arrCategoriesChildren;
       return this.$store.getters.allCategory;
     },
     convertCategoryPost() {
@@ -400,6 +385,19 @@ export default {
         await this.$store.dispatch("createProduct", this.product);
       } else {
         this.postMarket.typeMarket = 0;
+        // Validate
+        if (!this.postMarket.title || this.postMarket.title === "") {
+          this.inputValidateError.postTitle = true;
+          return;
+        }
+        if (!this.product._category || this.product._category === "") {
+          this.inputValidateError.productCategory = true;
+          return;
+        }
+        if (!this.postMarket.content || this.postMarket.content === "") {
+          this.inputValidateError.postContent = true;
+          return;
+        }
         await this.$store.dispatch("createMarketPost", this.postMarket);
       }
       // reset post

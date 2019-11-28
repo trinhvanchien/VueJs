@@ -7,6 +7,7 @@ const state = {
   campaignDetail: {
     title: "",
     totalDay: 7,
+    description: "",
     postCategory: {
       morning: "",
       night: ""
@@ -121,6 +122,7 @@ const actions = {
     await commit("setCampaignDefault", {
       title: "",
       totalDay: 7,
+      description: "",
       postCategory: {
         morning: "",
         night: ""
