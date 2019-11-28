@@ -34,7 +34,10 @@
               <span>Mô tả cho chiến dịch</span>
             </div>
             <div class="detail">
-              <textarea v-model="campaign.description" class="form_control"></textarea>
+              <textarea
+                v-model="campaign.description"
+                class="form_control"
+              ></textarea>
             </div>
           </div>
           <!-- END : DESCRIPTION FOR SCHEDULE -->
