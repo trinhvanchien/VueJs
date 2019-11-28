@@ -64,7 +64,7 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", await PostServer.findByIdAndUpdate( serverInfo._id, { "$set": req.body }, { "new": true } ) ) );
   },
   "getServerOnline": async ( req, res ) => {
-    const serverInfo = await PostServer.find( { "status": true, "server": req.body.server } );
+    const serverInfo = await PostServer.find( {} );
 
     res.status( 200 ).json( jsonResponse( "success", serverInfo ) );
   }
