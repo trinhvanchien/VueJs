@@ -7,13 +7,13 @@
 const router = require( "express-promise-router" )();
 const CampaignDefaultRoute = require( "../../controllers/campaignDefault.controller" );
 const auth = require( "../../helpers/middleware/authenticate.middleware" );
-const permission = require( "../../helpers/middleware/permission.middleware" );
+const collaborator = require( "../../helpers/middleware/collaborator.middleware" );
 
 router
   .route( "/" )
   .get( auth, CampaignDefaultRoute.index )
-  .post( auth, permission, CampaignDefaultRoute.create )
-  .patch( auth, permission, CampaignDefaultRoute.update )
-  .delete( auth, permission, CampaignDefaultRoute.delete );
+  .post( auth, collaborator, CampaignDefaultRoute.create )
+  .patch( auth, collaborator, CampaignDefaultRoute.update )
+  .delete( auth, collaborator, CampaignDefaultRoute.delete );
 router.route( "/duplicate" ).post( auth, CampaignDefaultRoute.duplicate );
 module.exports = router;

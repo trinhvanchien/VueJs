@@ -249,11 +249,7 @@
       </div>
       <!-- END: SHOW CONTENT CATEGORY DEFAULT -->
       <div class="d_flex align_items_center">
-        <button
-          v-if="this.$store.getters.variableControl === 0"
-          class="btn btn_info mr_3"
-          @click="createPost"
-        >
+        <button class="btn btn_info mr_3" @click="createPost">
           Lưu
         </button>
       </div>
