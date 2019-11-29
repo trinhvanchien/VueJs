@@ -51,7 +51,7 @@
           <div class="w--100">
             <!-- Start: Main Header -->
             <div class="main--header">
-              <div class="d_none d_md_block title mb_3">Zinbee xin chào</div>
+              <div class="d_none d_md_block title mb_3">Hoot xin chào</div>
               <div class="desc">
                 &rdquo;Khách hàng sẽ quên những điều bạn làm. Nhưng họ sẽ không
                 bao giờ quên những cảm nhận mà bạn mang đến cho họ.&rdquo;

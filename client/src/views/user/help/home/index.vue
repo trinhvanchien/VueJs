@@ -79,7 +79,7 @@
               <div class="title">Trò chuyện</div>
               <div class="content mt_2">
                 Tìm câu trả lời về cách gửi và nhận tin nhắn trên hệ thống
-                Zinbee.
+                Hoot.
               </div>
             </div>
           </div>

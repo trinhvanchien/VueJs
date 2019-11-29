@@ -54,7 +54,7 @@ export default {
     }
   },
   async created() {
-    // if (window.location.hostname === "zinbee.vn") {
+    // if (window.location.hostname === "hoot.vn") {
     //   return false;
     // } else {
     //   // Request to server which get info of agency

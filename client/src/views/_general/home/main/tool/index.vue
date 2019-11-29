@@ -154,7 +154,7 @@
           </div>
         </div>
         <div class="c_lg_6 c_md_12 right position_relative">
-          <!-- <div class="info position_absolute">ZinBee</div> -->
+          <!-- <div class="info position_absolute">Hoot</div> -->
           <!-- <img :src="imageTool2" alt> -->
           <div
             class="marketing--section-image"
