@@ -78,8 +78,7 @@
               <div class="topic--name mt_2">GIỚI THIỆU</div>
               <div class="title">Trò chuyện</div>
               <div class="content mt_2">
-                Tìm câu trả lời về cách gửi và nhận tin nhắn trên hệ thống
-                Hoot.
+                Tìm câu trả lời về cách gửi và nhận tin nhắn trên hệ thống Hoot.
               </div>
             </div>
           </div>

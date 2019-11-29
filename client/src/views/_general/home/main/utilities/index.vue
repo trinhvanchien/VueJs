@@ -145,9 +145,8 @@
         <div class="automation items mb_4">
           <div class="title--why">Tự động hóa</div>
           <div class="desc mb_2">
-            Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của Hoot,
-            mọi thứ chỉ cần setup và Hoot sẽ thay bạn thực hiện bất kể ngày
-            hay đêm
+            Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của Hoot, mọi
+            thứ chỉ cần setup và Hoot sẽ thay bạn thực hiện bất kể ngày hay đêm
           </div>
 
           <div
