@@ -1,13 +1,11 @@
 <template>
-  <div class="block text_center d_flex align_items_center justify_content_center">
+  <div
+    class="block text_center d_flex align_items_center justify_content_center"
+  >
     <span>Coming soon !</span>
   </div>
 </template>
 <script>
-export default {
-  
-}
+export default {};
 </script>
-<style lang="scss" scoped>
-  
-</style>
+<style lang="scss" scoped></style>
