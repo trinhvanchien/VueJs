@@ -3,7 +3,7 @@
     <div class="section--title-content text_center ct">
       <h3 class="title">BẢNG GIÁ DỊCH VỤ</h3>
       <h4 class="desc">
-        Zinbee cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của khách
+        Hoot cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của khách
         hàng.
       </h4>
     </div>

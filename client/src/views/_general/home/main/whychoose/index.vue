@@ -1,7 +1,7 @@
 <template>
   <section id="why--chose" class="why--choose position_relative">
     <div class="section--title-content">
-      <h3 class="title">Ai có thể sử dụng zinbee ?</h3>
+      <h3 class="title">Ai có thể sử dụng hoot ?</h3>
     </div>
 
     <div class="marketing--section px_4 ct mb_5">
@@ -59,7 +59,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../index.style";
-// why choose zinbee
+// why choose hoot
 .why--choose {
   padding: 6.25rem 0;
   background: #f7f7f7;

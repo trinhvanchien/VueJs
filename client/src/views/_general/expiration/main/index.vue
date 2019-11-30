@@ -22,7 +22,7 @@
         </div>
         <div class="r m_0">
           <div class="c_lg_6 c_md_12 mb_md_3 mb_3 c">
-            <img src="@/assets/images/home/giahan.png" alt="Banner ZinBee" />
+            <img src="@/assets/images/home/giahan.png" alt="Banner hoot" />
           </div>
           <div class="c_lg_6 c_md_12 mb_md_3 pl_md_3 pl_0">
             <p>

@@ -19,7 +19,7 @@
             </icon-base>
           </div>
           <div class="font--13">
-            Zinbee luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
+            Hoot luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
             nhiều thời gian hơn bên gia đình và người thân.
           </div>
         </div>
@@ -35,7 +35,7 @@
             <li>
               Email:
               <!-- <span v-if="agencyInfo" v-text="agencyInfo.email"></span> -->
-              <span>Cskh@Zinbee.Vn</span>
+              <span>Cskh@hoot.Vn</span>
             </li>
           </ul>
         </div>
@@ -128,7 +128,7 @@
     </div>
     <div class="copy">
       <div class="ct m_auto d_flex align_items_center content--copy">
-        <div class="title">Copyright © 2019 zinbee.vn</div>
+        <div class="title">Copyright © 2019 hoot.vn</div>
         <div class="ml_auto d_flex contact">
           <!-- <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>

@@ -16,7 +16,7 @@
             <icon-logo-black />
           </icon-base> -->
           <icon-base
-            icon-name="ZinBee"
+            icon-name="hoot"
             width="132.92"
             height="49.73"
             viewBox="0 0 250.446 93.703"
