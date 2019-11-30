@@ -184,6 +184,22 @@ module.exports = {
       }
     }
 
+    dataResponse = dataResponse.map( ( element ) => {
+      return {
+        "_id": element._id,
+        "content": element.content,
+        "like": element.reaction,
+        "share": element.share,
+        "feedId": element.feedId,
+        "attachments": element.downloadedImage.map( ( image ) => {
+          return {
+            "link": `${process.env.APP_URL}:${process.env.PORT_BASE}/${image}`,
+            "typeAttachment": 1
+          };
+        } )
+      };
+    } );
+
     return res
       .status( 200 )
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
