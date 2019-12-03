@@ -10,7 +10,7 @@
         >
           <div class="title--section">Ý kiến của khách hàng</div>
           <div class="desc">
-            Những phản hồi tích cực của khách hàng đã sử dụng Zinbee
+            Những phản hồi tích cực của khách hàng đã sử dụng Hoot
           </div>
         </div>
         <!-- Satrt: Slider -->
@@ -32,8 +32,8 @@
                 </div>
                 <div class="desc">
                   Tôi đã tiết kiệm được rất nhiều thời gian kể từ khi sử dụng
-                  Zinbee, tôi không phải lo nghĩ lúc nào cũng phải ngồi đăng
-                  bài, kết bạn,... thật sự tuyệt vời.
+                  Hoot, tôi không phải lo nghĩ lúc nào cũng phải ngồi đăng bài,
+                  kết bạn,... thật sự tuyệt vời.
                 </div>
               </div>
             </transition>
@@ -53,8 +53,8 @@
                 </div>
                 <div class="desc">
                   Trước kia lúc nào tôi cũng phải vội vàng sắp xếp thời gian để
-                  đăng bài, tương tác, lên từng page, group, từ khi có Zinbee,
-                  mọi thứ thật đơn giản.
+                  đăng bài, tương tác, lên từng page, group, từ khi có Hoot, mọi
+                  thứ thật đơn giản.
                 </div>
               </div>
             </transition>
@@ -74,8 +74,8 @@
                 </div>
                 <div class="desc">
                   Hiệu quả công việc của công ty tôi tăng lên rõ rệt từ khi sử
-                  dụng Zinbee, cám ơn Zinbee rất nhiều, tôi chắc chắn sẽ sử dụng
-                  Zinbee cho tất cả các đại lý của tôi.
+                  dụng Hoot, cám ơn Hoot rất nhiều, tôi chắc chắn sẽ sử dụng
+                  Hoot cho tất cả các đại lý của tôi.
                 </div>
               </div>
             </transition>

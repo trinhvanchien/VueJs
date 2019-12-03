@@ -7,17 +7,17 @@
 const router = require( "express-promise-router" )();
 const CategoryDefaultController = require( "../../controllers/categorydefault.controller" );
 const auth = require( "../../helpers/middleware/authenticate.middleware" );
-const permission = require( "../../helpers/middleware/permission.middleware" );
+const collaborator = require( "../../helpers/middleware/collaborator.middleware" );
 
 router
   .route( "/" )
   .get( auth, CategoryDefaultController.index )
-  .post( auth, permission, CategoryDefaultController.create )
-  .patch( auth, permission, CategoryDefaultController.update )
-  .delete( auth, permission, CategoryDefaultController.delete );
+  .post( auth, collaborator, CategoryDefaultController.create )
+  .patch( auth, collaborator, CategoryDefaultController.update )
+  .delete( auth, collaborator, CategoryDefaultController.delete );
 
 router
   .route( "/:categoryId/post/:postId" )
-  .post( auth, permission, CategoryDefaultController.createPostByCategory )
-  .delete( auth, permission, CategoryDefaultController.removePostByCategory );
+  .post( auth, collaborator, CategoryDefaultController.createPostByCategory )
+  .delete( auth, collaborator, CategoryDefaultController.removePostByCategory );
 module.exports = router;

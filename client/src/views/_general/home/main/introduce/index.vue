@@ -1,7 +1,7 @@
 <template>
   <section class="introduce text_center ct">
     <div class="section--title-content">
-      <h3 class="title">ZINBEE GIÚP BẠN ĐƯỢC NHỮNG GÌ</h3>
+      <h3 class="title">HOOT GIÚP BẠN ĐƯỢC NHỮNG GÌ</h3>
       <h4 class="desc">
         TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ NHÂN
         TRÊN FACEBOOK VÀI THAO TÁC
@@ -23,7 +23,7 @@
           <div class="title">CUNG CẤP KHO NỘI DUNG</div>
         </div>
         <div class="desc">
-          Zinbee sẽ cung cấp cho bạn các nội dung hot, nổi bật, nhiều lượt tương
+          Hoot sẽ cung cấp cho bạn các nội dung hot, nổi bật, nhiều lượt tương
           tác nhất trên facebook
         </div>
       </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="title">TỰ ĐỘNG HÓA</div>
         <div class="desc">
-          Zinbee sẽ giúp bạn tự động hoá chăm sóc tài khoản, tự động tương tác
+          Hoot sẽ giúp bạn tự động hoá chăm sóc tài khoản, tự động tương tác
           trên facebook.
         </div>
       </div>

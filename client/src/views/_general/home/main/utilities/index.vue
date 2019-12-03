@@ -1,7 +1,7 @@
 <template>
   <section id="utilities" class="utilities ct">
     <div class="section--title-content mb_0">
-      <h3 class="title">Tại sao nên chọn ZinBee ?</h3>
+      <h3 class="title">Tại sao nên chọn Hoot ?</h3>
     </div>
     <div class="d_none d_md_block">
       <div class="content--options position_relative pt_4">
@@ -11,8 +11,8 @@
               <div class="left text">
                 <div class="title--why">Giao diện thân thiện</div>
                 <div class="desc">
-                  Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng
-                  một hệ thống tiện lợi nhất cho người dùng
+                  Đội ngũ Hoot không ngừng cải tiến, nâng cấp nhằm xây dựng một
+                  hệ thống tiện lợi nhất cho người dùng
                 </div>
               </div>
               <div
@@ -46,8 +46,8 @@
                 <div class="title--why">Tự động hóa</div>
                 <div class="desc">
                   Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của
-                  Zinbee, mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực hiện
-                  bất kể ngày hay đêm
+                  Hoot, mọi thứ chỉ cần setup và Hoot sẽ thay bạn thực hiện bất
+                  kể ngày hay đêm
                 </div>
               </div>
               <div
@@ -64,7 +64,7 @@
                 <div class="title--why">Rất nhiều tính năng khác</div>
                 <div class="desc">
                   Hàng chục tính năng khác luôn được update liên tục, đem tới
-                  những tiện ích tối ưu nhất cho khách hàng của Zinbee
+                  những tiện ích tối ưu nhất cho khách hàng của Hoot
                 </div>
               </div>
               <div
@@ -117,7 +117,7 @@
         <div class="items display mb_4">
           <div class="title--why">Giao diện thân thiện</div>
           <div class="desc mb_2">
-            Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng một hệ
+            Đội ngũ Hoot không ngừng cải tiến, nâng cấp nhằm xây dựng một hệ
             thống tiện lợi nhất cho người dùng
           </div>
           <div
@@ -145,9 +145,8 @@
         <div class="automation items mb_4">
           <div class="title--why">Tự động hóa</div>
           <div class="desc mb_2">
-            Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của Zinbee,
-            mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực hiện bất kể ngày
-            hay đêm
+            Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của Hoot, mọi
+            thứ chỉ cần setup và Hoot sẽ thay bạn thực hiện bất kể ngày hay đêm
           </div>
 
           <div
@@ -162,7 +161,7 @@
           <div class="title--why">Rất nhiều tính năng khác</div>
           <div class="desc mb_2">
             Hàng chục tính năng khác luôn được update liên tục, đem tới những
-            tiện ích tối ưu nhất cho khách hàng của Zinbee
+            tiện ích tối ưu nhất cho khách hàng của Hoot
           </div>
           <div
             class="right order"

@@ -41,7 +41,7 @@ module.exports = {
 
     // Check catch
     if ( body.name === "" || body.name === undefined ) {
-      return res.status( 403 ).json( { "status": "fail", "data": { "name": "Tiêu đề blog không được bỏ trống!" } } );
+      return res.status( 403 ).json( { "status": "fail", "data": { "name": "Tiêu đề danh mục không được bỏ trống!" } } );
     }
 
     // set default level category parent
@@ -50,6 +50,7 @@ module.exports = {
     // set value default category
     body._creator = req.uid;
     body.parent = body.parent !== undefined && body.parent !== "" ? body.parent : "";
+    body.typeMarket = body.typeMarket !== undefined && body.typeMarket !== "" ? body.typeMarket : null;
 
     // check if category is not parent
     if ( body.parent !== undefined && body.parent !== "" ) {
@@ -75,7 +76,7 @@ module.exports = {
 
     // check catch
     if ( body.name === "" || body.name === undefined ) {
-      return res.status( 403 ).json( { "status": "fail", "data": { "name": "Tiêu đề blog không được bỏ trống!" } } );
+      return res.status( 403 ).json( { "status": "fail", "data": { "name": "Tiêu đề danh mục không được bỏ trống!" } } );
     } else if ( !categoryInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Danh mục này không tồn tại!" } );
     }
@@ -84,6 +85,7 @@ module.exports = {
     body._editor = req.uid;
     body.level = 0;
     body.parent = body.parent !== undefined && body.parent !== "" ? body.parent : "";
+    body.typeMarket = body.typeMarket !== undefined && body.typeMarket !== "" ? body.typeMarket : null;
 
     // check logic when update parent category
     if ( body.parent ) {

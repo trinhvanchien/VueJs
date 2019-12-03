@@ -51,7 +51,7 @@
           <div class="w--100">
             <!-- Start: Main Header-->
             <div class="main--header">
-              <div class="d_none d_md_block title mb_3">Đến với Zinbee</div>
+              <div class="d_none d_md_block title mb_3">Đến với Hoot</div>
               <div class="desc">
                 Công cụ hỗ trợ marketing, bán hàng online siêu hiệu quả, giúp
                 bạn tiết kiệm thời gian và chi phí.

@@ -8,16 +8,16 @@ const router = require( "express-promise-router" )();
 
 const PhotoLibraryCategoryController = require( "../../controllers/photolibrarycategory.controller" );
 const auth = require( "../../helpers/middleware/authenticate.middleware" );
-const permission = require( "../../helpers/middleware/permission.middleware" );
+const collaborator = require( "../../helpers/middleware/collaborator.middleware" );
 
 router
   .route( "/" )
   .get( auth, PhotoLibraryCategoryController.index )
-  .post( auth, permission, PhotoLibraryCategoryController.create )
-  .patch( auth, permission, PhotoLibraryCategoryController.update )
-  .delete( auth, permission, PhotoLibraryCategoryController.delete );
+  .post( auth, collaborator, PhotoLibraryCategoryController.create )
+  .patch( auth, collaborator, PhotoLibraryCategoryController.update )
+  .delete( auth, collaborator, PhotoLibraryCategoryController.delete );
 
-router.route( "/:id" ).get( auth, PhotoLibraryCategoryController.getPhotoLibraryByUser );
-router.route( "/:id/bz" ).get( auth, permission, PhotoLibraryCategoryController.getPhotoLibrary );
+router.route( "/:id" ).get( auth, collaborator, PhotoLibraryCategoryController.getPhotoLibraryByUser );
+router.route( "/:id/bz" ).get( auth, collaborator, PhotoLibraryCategoryController.getPhotoLibrary );
 
 module.exports = router;

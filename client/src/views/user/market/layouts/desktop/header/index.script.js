@@ -25,7 +25,12 @@ export default {
       return this.$store.getters.accountsFB;
     },
     allMarketCategoriesTree() {
-      return this.$store.getters.allMarketCategoriesTree;
+      let list, count;
+      count = this.$store.getters.allMarketCategoriesTree;
+      list = count.filter(item => {
+        if (item.typeMarket !== "0") return item;
+      });
+      return list;
     },
     currentParentMarketCategory() {
       return this.$store.getters.currentParentMarketCategory;

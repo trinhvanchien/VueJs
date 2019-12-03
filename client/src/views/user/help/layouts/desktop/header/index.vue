@@ -56,7 +56,7 @@
             </div>
             <router-link to="/">
               <div class="text">
-                Quay lại Zinbee
+                Quay lại Hoot
               </div>
             </router-link>
           </div>

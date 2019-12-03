@@ -7,12 +7,26 @@ const mongoose = require( "mongoose" ),
     "title": String,
     "description": String,
     "totalDay": Number,
-    "postList": [
-      {
+    "postCategory": {
+      "morning": {
         "type": Schema.Types.ObjectId,
-        "ref": "MarketProductPost"
+        "ref": "PostCategory"
+      },
+      "night": {
+        "type": Schema.Types.ObjectId,
+        "ref": "PostCategory"
       }
-    ],
+    },
+    "mix": {
+      "open": {
+        "type": Schema.Types.ObjectId,
+        "ref": "PostCategory"
+      },
+      "close": {
+        "type": Schema.Types.ObjectId,
+        "ref": "PostCategory"
+      }
+    },
     "_editor": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
