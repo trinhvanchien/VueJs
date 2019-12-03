@@ -6,11 +6,11 @@
         <!-- Start: Logo Xl Screen -->
         <icon-base
           class="d_none d_xl_block"
-          width="72"
-          height="36"
+          width="80"
+          height="40"
           viewBox="0 0 664 301"
         >
-          <hoot-logo-black />
+          <hoot-logo-white />
         </icon-base>
         <!-- End: Logo Xl Screen -->
         <!-- Start: Logo Large Screen -->
@@ -20,18 +20,17 @@
           height="36"
           viewBox="0 0 664 301"
         >
-          <hoot-logo-black />
+          <hoot-logo-white />
         </icon-base>
         <!-- End: Logo Large Screen -->
       </div>
       <div class="wrapper--logo d_md_none text_center">
         <icon-base
-          icon-name="ZinBee"
-          width="160"
-          height="78.65"
-          viewBox="0 0 250.446 93.703"
+          width="96"
+          height="48"
+          viewBox="0 0 664 301"
         >
-          <icon-logo />
+          <hoot-logo-white />
         </icon-base>
       </div>
       <!-- End: Logo -->
