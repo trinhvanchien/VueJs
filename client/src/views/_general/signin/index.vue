@@ -25,11 +25,7 @@
         <!-- End: Logo Large Screen -->
       </div>
       <div class="wrapper--logo d_md_none text_center">
-        <icon-base
-          width="96"
-          height="48"
-          viewBox="0 0 664 301"
-        >
+        <icon-base width="96" height="48" viewBox="0 0 664 301">
           <hoot-logo-white />
         </icon-base>
       </div>

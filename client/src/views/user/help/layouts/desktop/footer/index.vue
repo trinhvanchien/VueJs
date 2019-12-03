@@ -2,16 +2,11 @@
   <div class="ct wrap--footer">
     <div class="m_0 text_center content">
       <div class="d_inline_flex">
-        <div class="copyright d_flex align_items_center mr_3">
-          <icon-base
-            icon-name="logo"
-            width="20"
-            height="20"
-            viewBox="0 0 220 220"
-          >
-            <icon-logo-icon />
+        <div class="copyright d_flex align_items_start mr_3">
+          <icon-base width="40" height="20" viewBox="0 0 664 301">
+            <hoot-logo-black />
           </icon-base>
-          <div class="ml_1">Hoot © 2019</div>
+          <div class="ml_1">© Copyright 2019</div>
         </div>
         <div class="language d_flex align_items_center">
           <div class="text">Tiếng Việt</div>
