@@ -6,23 +6,21 @@
         <!-- Start: Logo Xl Screen -->
         <icon-base
           class="d_none d_xl_block"
-          icon-name="ZinBee"
-          width="120"
-          height="49.73"
-          viewBox="0 0 250.446 93.703"
+          width="72"
+          height="36"
+          viewBox="0 0 664 301"
         >
-          <icon-logo></icon-logo>
+          <hoot-logo-black />
         </icon-base>
         <!-- End: Logo Xl Screen -->
         <!-- Start: Logo Large Screen -->
         <icon-base
           class="d_none d_md_block d_xl_none"
-          icon-name="ZinBee"
-          width="100"
-          height="49.73"
-          viewBox="0 0 250.446 93.703"
+          width="72"
+          height="36"
+          viewBox="0 0 664 301"
         >
-          <icon-logo></icon-logo>
+          <hoot-logo-black />
         </icon-base>
         <!-- End: Logo Large Screen -->
       </div>

@@ -70,8 +70,8 @@ export default {
   .paginate--button {
     border: 1px solid transparent;
     &:hover {
-      border-color: #ffb94a;
-      color: #ffb94a;
+      border-color: #ed1c24;
+      color: #ed1c24;
     }
   }
   .paginate--page {
@@ -80,8 +80,8 @@ export default {
     color: #666666;
     &.current,
     &:hover {
-      background-color: #ffb94a;
-      border-color: #ffb94a;
+      background-color: #ed1c24;
+      border-color: #ed1c24;
       color: #fff;
     }
   }
@@ -96,8 +96,8 @@ export default {
   .paginate--button {
     border: 1px solid transparent;
     &:hover {
-      border-color: #ffb94a;
-      color: #ffb94a;
+      border-color: #ed1c24;
+      color: #ed1c24;
     }
   }
   .paginate--page {
@@ -106,8 +106,8 @@ export default {
     color: #ccc;
     &.current,
     &:hover {
-      background-color: #ffb94a;
-      border-color: #ffb94a;
+      background-color: #ed1c24;
+      border-color: #ed1c24;
       color: #fff;
     }
   }

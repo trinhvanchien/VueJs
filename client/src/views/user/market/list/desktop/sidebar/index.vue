@@ -68,7 +68,7 @@ export default {
   &:hover {
     padding-left: 5px;
     color: #fff;
-    background: #ffb94a;
+    background: #ed1c24;
   }
 }
 </style>

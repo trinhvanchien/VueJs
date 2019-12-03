@@ -141,6 +141,21 @@ Vue.component("IconLogoText", () => import("@/components/icons/IconLogoText"));
 Vue.component("IconYoutubeCirle", () =>
   import("@/components/icons/IconYoutubeCirle")
 );
+
+// Global Logo
+Vue.component("HootLogoBlack", () =>
+  import("@/components/icons/logo/HootLogoBlack")
+);
+Vue.component("HootLogoIconBlack", () =>
+  import("@/components/icons/logo/HootLogoIconBlack")
+);
+Vue.component("HootLogoIconWhite", () =>
+  import("@/components/icons/logo/HootLogoIconWhite")
+);
+Vue.component("HootLogoWhite", () =>
+  import("@/components/icons/logo/HootLogoWhite")
+);
+
 // Global Component
 Vue.component("VuePerfectScrollbar", () => import("vue-perfect-scrollbar"));
 Vue.component("VueQuillEditor", () => import("vue-quill-editor"));

@@ -104,13 +104,13 @@ export default {
     color: #fff;
     .right {
       padding: 0.5rem 1.5rem;
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       border-radius: 0.625rem;
-      border: 1px solid #ffb94a;
+      border: 1px solid #ed1c24;
       transition: all 0.4s ease;
       cursor: pointer;
       &:hover {
-        background-color: #ff9e4a;
+        background-color: #c31920;
       }
     }
     .left {

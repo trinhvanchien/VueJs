@@ -109,7 +109,7 @@ export default {
     border-right: 1px solid #f0f0f0;
   }
   &--icon {
-    background-color: #ffb94a;
+    background-color: #ed1c24;
     border-radius: 50%;
     height: 48px;
     width: 48px;

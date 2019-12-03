@@ -68,10 +68,10 @@
               }
             }
             &:focus-within {
-              border-bottom: 2px solid #FFB94A;
+              border-bottom: 2px solid #ed1c24;
               .form--control {
                 .desc {
-                  color: #FFB94A;
+                  color: #ed1c24;
                   font-weight: 600;
                 }
               }
@@ -139,7 +139,7 @@
                 }
               }
               .icon--check {
-                color: #FFB94A;
+                color: #ed1c24;
               }
               .icon--eye {
                 color: #999;
@@ -181,15 +181,15 @@
             transition: all 0.4s ease;
             width: 120px;
             &:hover {
-              box-shadow: 0 0 4px rgba(255, 158, 74, 0.4);
+              box-shadow: 0 0 4px rgba(237, 28, 36, 0.4);
             }
           }
           .btn--orange {
-            background-color: #ffb94a;
+            background-color: #ed1c24;
             color: #fff;
             &:hover,
             &:focus {
-              background-color: #ff9e4a;
+              background-color: #c31920;
             }
           }
           .btn--white {
@@ -198,7 +198,7 @@
             text-decoration: none;
             &:hover,
             &:focus {
-              color: #ff9e4a;
+              color: #c31920;
             }
           }
         }

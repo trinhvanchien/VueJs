@@ -17,7 +17,7 @@ export default {
 <style scoped lang="scss">
 .navigation {
   .create {
-    background-color: #ffb94a;
+    background-color: #ed1c24;
     border-radius: 0.5rem;
     color: #fff;
     cursor: pointer;
@@ -29,7 +29,7 @@ export default {
     padding: 0 0.75rem;
     transition: all 0.4s ease;
     &:hover {
-      background-color: #ff9e4a;
+      background-color: #c31920;
     }
   }
 }

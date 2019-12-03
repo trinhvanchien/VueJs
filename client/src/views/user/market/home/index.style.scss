@@ -1,5 +1,5 @@
 .search {
-  background-color: #ffb94a;
+  background-color: #ed1c24;
   background-image:url("https://assets.shopfront.envato-static.com/assets/images/bg-page-section-light.png");
   color: white;
   .form--search {
@@ -80,8 +80,8 @@
     .uncheck {}
     .check {
       svg {
-        fill: #ffb94a;
-        color: #ffb94a;
+        fill: #ed1c24;
+        color: #ed1c24;
       }
     }
   }
@@ -98,7 +98,7 @@
     font-weight: 700;
     transition: all .4s ease;
     &:hover {
-      color: #FFB94A;
+      color: #ed1c24;
     }
   }
   .editor {
@@ -149,7 +149,7 @@
       font-size: .875rem;
       font-weight: 600;
       &:hover, &:focus {
-        background-color: #ffb94a;
+        background-color: #ed1c24;
         color: #fff;
         transition: all .75s  ease;
       }
@@ -157,7 +157,7 @@
     .icon {
       padding: 0 .625rem;
       &:hover, &:focus {
-        background-color: #ffb94a;
+        background-color: #ed1c24;
         transition: all .75s  ease;
       }
       svg {
@@ -189,9 +189,9 @@
       font-size: 2rem;
     }
     .signup {
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       color: #ffffff;
-      border: 1px solid #ffb94a;
+      border: 1px solid #ed1c24;
       border-radius: .625rem;
       cursor: pointer;
       padding: .625rem 1.5rem;

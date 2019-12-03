@@ -234,7 +234,7 @@ $size: (
       .checkbox {
         border-color: #e4e4e4;
         &:hover {
-          background-color: #ffb94a
+          background-color: #ed1c24
         }
         &:checked {
           &:before {
@@ -267,9 +267,9 @@ $size: (
             border-bottom-color: #e4e4e4;
           }
           &:checked {
-            background-color: #ffb94a;
-            border-right-color: #ffb94a;
-            border-bottom-color: #ffb94a;
+            background-color: #ed1c24;
+            border-right-color: #ed1c24;
+            border-bottom-color: #ed1c24;
             &:before {
               border-right-color: #fff;
               border-bottom-color: #fff;
@@ -278,24 +278,24 @@ $size: (
         }
         .user--edit {
           .btn--edit {
-            color: #ffb94a;
-            border-color: #ffb94a;
+            color: #ed1c24;
+            border-color: #ed1c24;
             &:hover {
-              background-color: #ffb94a;
+              background-color: #ed1c24;
               color: #fff;
               svg {
                 stroke: #fff;
               }
             }
             svg {
-              stroke: #ffb94a;
+              stroke: #ed1c24;
             }
           }
         }
         .avatar--content {
           border-color: #f7f7f7;
           &.avatar--default {
-            background-color: #ffb94a;
+            background-color: #ed1c24;
             color: #fff;
           }
         }
@@ -328,7 +328,7 @@ $size: (
       .checkbox {
         border-color: #444;
         &:hover {
-          background-color: #ffb94a
+          background-color: #ed1c24
         }
         &:checked {
           &:before {
@@ -367,9 +367,9 @@ $size: (
             border-bottom-color: #444;
           }
           &:checked {
-            background-color: #ffb94a;
-            border-right-color: #ffb94a;
-            border-bottom-color: #ffb94a;
+            background-color: #ed1c24;
+            border-right-color: #ed1c24;
+            border-bottom-color: #ed1c24;
             &:before {
               border-right-color: #fff;
               border-bottom-color: #fff;
@@ -378,17 +378,17 @@ $size: (
         }
         .user--edit {
           .btn--edit {
-            color: #ffb94a;
-            border-color: #ffb94a;
+            color: #ed1c24;
+            border-color: #ed1c24;
             &:hover {
-              background-color: #ffb94a;
+              background-color: #ed1c24;
               color: #fff;
               svg {
                 stroke: #fff;
               }
             }
             svg {
-              stroke: #ffb94a;
+              stroke: #ed1c24;
             }
           }
         }
@@ -396,7 +396,7 @@ $size: (
           border-color: #2f3136;
           &.avatar--default {
             background-color: #2f3136;
-            color: #ffb94a;
+            color: #ed1c24;
           }
         }
         .user--name {
