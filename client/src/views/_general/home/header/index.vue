@@ -7,24 +7,22 @@
       <nav class="navbar navbar-default header-area affix-top ct">
         <div class="d_flex align_items_center header">
           <!--Start: Logo -->
-          <router-link class="logo mr_auto d_none d_md_block" to="/">
-            <icon-base
-              icon-name="ZinBee"
-              width="100"
-              height="49.73"
-              viewBox="0 0 250.446 93.703"
-            >
-              <icon-logo />
+          <router-link
+            class="logo mr_auto d_none d_md_block"
+            to="/"
+            :class="changeBackgroundHeader === 2 ? 'active--logo' : ''"
+          >
+            <icon-base width="72" height="36" viewBox="0 0 664 301">
+              <hoot-logo-black />
             </icon-base>
           </router-link>
-          <router-link class="logo mr_auto d_block d_md_none" to="/">
-            <icon-base
-              icon-name="ZinBee"
-              width="60"
-              height="50"
-              viewBox="0 0 100 100"
-            >
-              <icon-logo-short />
+          <router-link
+            class="logo mr_auto d_block d_md_none"
+            to="/"
+            :class="changeBackgroundHeader === 2 ? 'active--logo' : ''"
+          >
+            <icon-base width="48" height="28" viewBox="0 0 417 301">
+              <hoot-logo-icon-black />
             </icon-base>
           </router-link>
           <!--Start: Logo -->
@@ -110,8 +108,8 @@
                 <li class="items--header" @click="goToSignUp">
                   <a href="#">Đăng ký</a>
                 </li>
-                <li class="items--header">
-                  <a href="javascript:void(0);">Cửa hàng nội dung</a>
+                <li class="items--header" @click="goToMarket">
+                  <a href="#">Cửa hàng nội dung</a>
                 </li>
               </ul>
             </transition>
@@ -176,8 +174,9 @@ export default {
       this.closeMenu();
     },
     goToMarket() {
-      this.menu = false;
-      this.$router.push({ name: "market_home" });
+      const route = this.$router.resolve({ name: "market_home" });
+
+      window.open(route.href, "_blank");
     },
     goToSignIn() {
       // const routeSignIn = this.$router.resolve({ name: "user_signin" });
