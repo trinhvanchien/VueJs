@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       // Why choose
-      srcSimpleInterface: require("@/assets/images/home/undraw_empty_cart_co35.svg"),
+      srcSimpleInterface: require("@/assets/images/home/undraw_business_shop_qw5t.svg"),
       srcAutomatic: require("@/assets/images/home/undraw_coming_home_52ir.svg"),
       srcExamlePost: require("@/assets/images/home/undraw_team_page_pgpr.svg")
     };

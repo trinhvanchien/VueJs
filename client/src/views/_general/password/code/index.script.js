@@ -6,10 +6,10 @@ export default {
   props: [ "email" ],
   methods: {
     gotoEmail() {
-      const emaiType = StringFunction.findSubString( this.email, "@", "." );
+      const emailType = StringFunction.findSubString( this.email, "@", "." );
       let routeData = "https://mail.google.com";
 
-      if ( emaiType === "yahoo" ) {
+      if ( emailType === "yahoo" ) {
         routeData = "https://mail.yahoo.com";
       }
 
