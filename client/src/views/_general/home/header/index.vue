@@ -7,21 +7,21 @@
       <nav class="navbar navbar-default header-area affix-top ct">
         <div class="d_flex align_items_center header">
           <!--Start: Logo -->
-          <router-link class="logo mr_auto d_none d_md_block" to="/" :class="changeBackgroundHeader === 2 ? 'active--logo' : ''">
-            <icon-base
-              width="72"
-              height="36"
-              viewBox="0 0 664 301"
-            >
+          <router-link
+            class="logo mr_auto d_none d_md_block"
+            to="/"
+            :class="changeBackgroundHeader === 2 ? 'active--logo' : ''"
+          >
+            <icon-base width="72" height="36" viewBox="0 0 664 301">
               <hoot-logo-black />
             </icon-base>
           </router-link>
-          <router-link class="logo mr_auto d_block d_md_none" to="/" :class="changeBackgroundHeader === 2 ? 'active--logo' : ''">
-            <icon-base
-              width="48"
-              height="28"
-              viewBox="0 0 417 301"
-            >
+          <router-link
+            class="logo mr_auto d_block d_md_none"
+            to="/"
+            :class="changeBackgroundHeader === 2 ? 'active--logo' : ''"
+          >
+            <icon-base width="48" height="28" viewBox="0 0 417 301">
               <hoot-logo-icon-black />
             </icon-base>
           </router-link>

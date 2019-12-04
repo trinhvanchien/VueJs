@@ -93,7 +93,7 @@ export default {
     box-shadow: 5px 8.66px 20px 0px rgba(68, 84, 255, 0.078);
     padding: 0.8125rem 0;
     position: relative;
-    transition: all .03s ease;
+    transition: all 0.03s ease;
     overflow: hidden;
     text-align: center;
     width: 14.0625rem;
