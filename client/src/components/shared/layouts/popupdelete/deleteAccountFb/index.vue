@@ -123,7 +123,7 @@ export default {
     font-size: 14px;
     .btn--modal {
       border-radius: 10px;
-      border: 1px solid #ffb94a;
+      border: 1px solid #ed1c24;
       cursor: pointer;
       font-weight: 700;
       height: 40px;
@@ -134,7 +134,7 @@ export default {
     }
     .btn-add {
       border: 0;
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       color: #ffffff;
       &:hover,
       &:focus,
@@ -144,7 +144,7 @@ export default {
     }
     .btn-skip {
       background-color: transparent;
-      color: #ffb94a;
+      color: #ed1c24;
     }
   }
 }

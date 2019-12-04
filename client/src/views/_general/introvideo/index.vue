@@ -33,7 +33,7 @@ export default {};
       line-height: 1.33;
     }
     .desc {
-      color: #ffb94a;
+      color: #ed1c24;
       font-style: italic;
     }
   }

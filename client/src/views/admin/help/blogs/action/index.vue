@@ -257,7 +257,7 @@ export default {
       span {
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        background-color: #ffb94a;
+        background-color: #ed1c24;
       }
     }
   }

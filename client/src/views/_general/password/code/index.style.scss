@@ -39,7 +39,7 @@
             &:active,
             &:hover,
             &:focus {
-              border-color: #ffb94a;
+              border-color: #ed1c24;
               box-shadow: none;
               outline: 0;
             }
@@ -62,7 +62,7 @@
     }
     .card--footer {
       .btn--submit {
-        background-color: #ffb94a;
+        background-color: #ed1c24;
         border-radius: 0.625rem;
         color: #fff;
         cursor: pointer;
@@ -70,11 +70,11 @@
         padding: 0.5rem 0.75rem;
         transition: all 0.4s ease;
         &:hover {
-          background-color: #ff9e4a;
+          background-color: #c31920;
         }
       }
       .link--custom {
-        color: #ffb94a;
+        color: #ed1c24;
         font-size: 0.875rem;
         text-transform: uppercase;
       }

@@ -45,10 +45,10 @@
             }
           }
           &:focus-within {
-            border-bottom: 2px solid #FFB94A;
+            border-bottom: 2px solid #ed1c24;
             .form--control {
               .desc {
-                color: #FFB94A;
+                color: #ed1c24;
                 font-weight: 600;
               }
             }
@@ -116,7 +116,7 @@
               }
             }
             .icon--check {
-              color: #FFB94A;
+              color: #ed1c24;
             }
             .icon--eye {
               color: #999;
@@ -144,7 +144,7 @@
     }
     .card--footer {
       .btn--submit {
-        background-color: #FFB94A;
+        background-color: #ed1c24;
         border: 0;
         border-radius: 0.625rem;
         color: #fff;
@@ -155,11 +155,11 @@
         transition: all 0.4s ease;
         width: 100%;
         &:hover {
-          background-color: #FF9E4A;
+          background-color: #c31920;
         }
       }
       .link--custom {
-        color: #FFB94A;
+        color: #ed1c24;
         font-size: 0.875rem;
         text-transform: uppercase;
       }

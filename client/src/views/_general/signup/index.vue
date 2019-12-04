@@ -5,35 +5,28 @@
       <div class="wrapper--logo position_absolute">
         <!-- Start: Logo Xl Screen -->
         <icon-base
-          class="d_none d_xxl_block"
-          icon-name="ZinBee"
-          width="120"
-          height="49.73"
-          viewBox="0 0 250.446 93.703"
+          class="d_none d_xl_block"
+          width="80"
+          height="40"
+          viewBox="0 0 664 301"
         >
-          <icon-logo></icon-logo>
+          <hoot-logo-white />
         </icon-base>
         <!-- End: Logo Xl Screen -->
         <!-- Start: Logo Large Screen -->
         <icon-base
-          class="d_none d_md_block d_xxl_none"
-          icon-name="ZinBee"
-          width="100"
-          height="49.73"
-          viewBox="0 0 250.446 93.703"
+          class="d_none d_md_block d_xl_none"
+          width="72"
+          height="36"
+          viewBox="0 0 664 301"
         >
-          <icon-logo></icon-logo>
+          <hoot-logo-white />
         </icon-base>
         <!-- End: Logo Large Screen -->
       </div>
       <div class="wrapper--logo d_md_none text_center mt_5">
-        <icon-base
-          icon-name="ZinBee"
-          width="160"
-          height="78.65"
-          viewBox="0 0 250.446 93.703"
-        >
-          <icon-logo />
+        <icon-base width="96" height="48" viewBox="0 0 664 301">
+          <hoot-logo-white />
         </icon-base>
       </div>
       <!-- End: Logo -->

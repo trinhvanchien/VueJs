@@ -127,7 +127,7 @@ export default {
       &:visited,
       &:active {
         background-color: #e4e4e4;
-        color: #ffb94a;
+        color: #ed1c24;
         transition: all 0.5s ease;
       }
     }

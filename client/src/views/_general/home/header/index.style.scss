@@ -36,7 +36,7 @@
         border: 1px solid #666;
         border-radius: 1rem;
       }
-      &.active {        
+      &.active {
         color: #f8b448;
       }
     }
@@ -92,7 +92,7 @@
         transition: 0.4s;
         &:hover {
           color: #fff;
-          background: #FF9E4A;
+          background: #c31920;
         }
       }
     }
@@ -157,7 +157,7 @@
   transform: translateX(100%);
 }
 
-//  RESPONSIVE 
+//  RESPONSIVE
 
 @media screen and (max-width: 980px) {
   .wrapper--header {

@@ -187,8 +187,8 @@
 .component--form-button {
   height: 40px;
   /*width: 22%;*/
-  background-color: #ffb94a;
-  border: 1px solid #ffb94a;
+  background-color: #ed1c24;
+  border: 1px solid #ed1c24;
   border-radius: 3px;
   color: #ffffff;
   cursor: pointer;

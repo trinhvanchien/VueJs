@@ -75,8 +75,8 @@ export default {
         .btn-contact {
           padding: 0.5rem 0.75rem;
           border-radius: 10px;
-          background-color: #ffb94a;
-          border: 1px solid #ffb94a;
+          background-color: #ed1c24;
+          border: 1px solid #ed1c24;
           font-weight: 600;
           color: #fff;
           transition: all 0.4s ease;
@@ -84,7 +84,7 @@ export default {
           outline: none;
 
           &:hover {
-            background-color: #ff9e4a;
+            background-color: #c31920;
           }
         }
 

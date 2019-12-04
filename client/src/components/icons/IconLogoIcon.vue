@@ -1,6 +1,6 @@
 <template>
   <g>
-    <rect width="180" height="180" rx="30" style="fill:#ffb94a" />
+    <rect width="180" height="180" rx="30" style="fill:#ed1c24" />
     <path
       d="M80.21,35.71q-.13,3.8-.23,7.52c33.27,3.34,54.86,20.71,65.06,52.53l7.28-1.88C144.27,60.36,113.31,36.29,80.21,35.71Z"
       style="fill:#fff;fill-rule:evenodd"

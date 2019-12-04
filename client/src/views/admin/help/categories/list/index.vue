@@ -57,7 +57,7 @@ export default {
       font-size: 0.875rem;
     }
     .btn--create {
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       border-radius: 0.625rem;
       color: #fff;
       font-weight: 600;
@@ -65,7 +65,7 @@ export default {
       text-decoration: none;
       transition: all 0.4s ease;
       &:hover {
-        background-color: #ff9e4a;
+        background-color: #c31920;
       }
     }
   }

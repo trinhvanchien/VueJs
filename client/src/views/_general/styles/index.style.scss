@@ -58,7 +58,7 @@
       transition: all 0.4s ease;
       width: 100%;
       &:focus {
-        border-color: #ffb94a;
+        border-color: #ed1c24;
       }
     }
     ::placeholder {
@@ -139,8 +139,8 @@
   .form--action {
     margin: 1rem 0 1.25rem 0;
     .btn--submit {
-      background-color: #ffb94a;
-      border: 1px solid #ffb94a;
+      background-color: #ed1c24;
+      border: 1px solid #ed1c24;
       border-radius: .625rem;
       box-shadow: none;
       color: #f7f7f7;
@@ -152,7 +152,7 @@
       width: 100%;
       &:hover {
         background-color: #fff;
-        color: #ffb94a;
+        color: #ed1c24;
       }
     }
     &.action--register {

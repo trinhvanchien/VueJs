@@ -7,13 +7,8 @@
     <div class="sidebar--logo d_inline_block text_center">
       <router-link to="/">
         <div class="sidebar--logo-icon">
-          <icon-base
-            icon-name="ZinBee"
-            width="132.92"
-            height="49.73"
-            viewBox="0 0 250.446 93.703"
-          >
-            <icon-logo />
+          <icon-base width="80" height="40" viewBox="0 0 664 301">
+            <hoot-logo-black />
           </icon-base>
         </div>
       </router-link>

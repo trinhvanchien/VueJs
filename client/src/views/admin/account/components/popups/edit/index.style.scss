@@ -35,9 +35,9 @@
         }
       }
       &.btn-done {
-        color: #ffb94a;
+        color: #ed1c24;
         &:hover {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
       }
     }
@@ -75,7 +75,7 @@
     }
     &.avatar--default {
       background-color: #f7f7f7;
-      color: #ffb94a;
+      color: #ed1c24;
       font-size: 32px;
       font-weight: 600;
       span {
@@ -95,7 +95,7 @@
 .edit--status {
   .edit--desc {
     svg {
-      color: #ffb94a;
+      color: #ed1c24;
     }
   }
   .status--radio {
@@ -136,8 +136,8 @@
       }
       &:checked {
         + label {
-          background-color: #ffb94a;
-          border-color: #ffb94a !important;
+          background-color: #ed1c24;
+          border-color: #ed1c24 !important;
           &::after {
             background-color: #ffffff;
             border-color: #fff !important;
