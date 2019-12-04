@@ -1,3 +1,6 @@
+$color: #282828;
+$colorLogo: rgb(237, 28, 36);
+$colorHover: #c31920;
 .wrapper--footer {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -34,7 +37,7 @@
     .title--footer {
       font-weight: 500;
       font-size: 1.4rem;
-      color: #fdb849;
+      color: $colorLogo;
       padding-bottom: 2rem;
     }
     ul {

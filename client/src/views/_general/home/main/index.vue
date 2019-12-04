@@ -38,15 +38,6 @@
 
 <script src="./index.script.js"></script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "./index.style";
-// .owl-stage-outer .owl-stage .owl-item {
-//   max-width: 470px !important;
-// }
-// .owl-theme .owl-nav {
-//   display: none;
-// }
-// .owl-theme .owl-dots {
-//   display: none;
-// }
 </style>

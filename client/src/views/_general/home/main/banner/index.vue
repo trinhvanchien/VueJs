@@ -86,28 +86,28 @@ export default {
     font-weight: 600;
     font-size: 1.15rem;
     color: #fff;
-    background-color: #f8b448;
+    background-color: $colorLogo;
     text-transform: uppercase;
     border-radius: 27px;
-    border: 2px solid #f8b448;
+    border: 2px solid $colorLogo;
     box-shadow: 5px 8.66px 20px 0px rgba(68, 84, 255, 0.078);
     padding: 0.8125rem 0;
     position: relative;
-    transition: all 400ms linear 0s;
+    transition: all .03s ease;
     overflow: hidden;
     text-align: center;
     width: 14.0625rem;
     cursor: pointer;
     &:hover {
       color: #fff;
-      background: #585a88;
-      border-color: #585a88;
+      background: $colorHover;
+      border-color: $colorHover;
     }
   }
   .goto--market {
     background-color: transparent;
-    color: #f8b448;
-    border: 1.5px solid #f8b448;
+    color: $colorLogo;
+    border: 1.5px solid $colorLogo;
   }
   .left {
     flex: 1;

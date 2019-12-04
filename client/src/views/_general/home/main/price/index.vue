@@ -696,12 +696,12 @@
           margin: 0 auto;
           color: #fff;
           text-transform: uppercase;
-          padding: 0.3rem;
-          background: #f8b448;
+          padding: 0.4rem 0 0.3rem;
+          background: $colorLogo;
           border-radius: 25px;
           transition: 0.4s;
           &:hover {
-            background: #4b4c78;
+            background: $colorHover;
           }
         }
       }
@@ -757,12 +757,12 @@
         text-align: center;
         border-radius: 40px;
         font-size: 20px;
-        background: #f8b448;
+        background: $colorLogo;
         color: #fff;
         font-weight: 600;
         transition: 0.4s;
         &:hover {
-          background: #4b4c78;
+          background: $colorHover;
         }
       }
     }
@@ -792,7 +792,7 @@
           text-transform: uppercase;
           letter-spacing: 2.1px;
           padding: 0.5rem 0.3rem;
-          background: #f8b448;
+          background: $colorLogo;
           border-radius: 25px;
           transition: 0.4s;
         }

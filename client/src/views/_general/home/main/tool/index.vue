@@ -265,7 +265,7 @@ export default {
     }
   }
   .title--content {
-    background: #f8b448;
+    background: $colorLogo;
     color: #fff;
     padding: 1.25rem 0.9375rem;
     font-size: 1.375rem;
