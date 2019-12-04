@@ -1,13 +1,8 @@
 <template>
   <div class="session">
     <div class="logo text_center mb_0 mb_sm_2">
-      <icon-base
-        icon-name="ZinBee"
-        width="100"
-        height="49.73"
-        viewBox="0 0 250.446 93.703"
-      >
-        <icon-logo></icon-logo>
+      <icon-base width="72" height="36" viewBox="0 0 664 301">
+        <hoot-logo-white />
       </icon-base>
     </div>
     <!-- Start: Card -->

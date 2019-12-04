@@ -69,10 +69,10 @@
               }
             }
             &:focus-within {
-              border-bottom: 2px solid #4f619b;
+              border-bottom: 2px solid #f7f7f7;
               .form--control {
                 .desc {
-                  color: #4f619b;
+                  color: #f7f7f7;
                   font-weight: 600;
                 }
               }
@@ -144,7 +144,7 @@
                 }
               }
               .icon--check {
-                color: #4f619b;
+                color: #00c853;
               }
               .icon--eye {
                 color: #999;
