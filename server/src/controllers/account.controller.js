@@ -262,7 +262,7 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${userInfo.email} đăng nhập thành công!`,
-      "domain": process.env.APP_ENV === "production" ? `${serverContainUser.info.domain}/#/` : `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/#/`
+      "domain": process.env.APP_ENV === "production" ? `${serverContainUser.info.domain}/` : `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/`
     } ) );
   },
   "signUp": async ( req, res ) => {
@@ -323,7 +323,7 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,
-      "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/#/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
+      "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/`
     } ) );
   },
   "signUpAccountBackup": async ( objectData ) => {
@@ -389,7 +389,7 @@ module.exports = {
 
     // Generate link to reset by email
     // eslint-disable-next-line one-var
-    let linkReset = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/#/` : `${process.env.APP_URL}:8080/#/`;
+    let linkReset = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/` : `${process.env.APP_URL}:8080/`;
 
     linkReset += `reset-password/final?authorization=${cryptoRandomString( { "length": 50, "type": "url-safe" } )}&timestamp=${cryptoRandomString( { "length": 10, "characters": "1234567890" } )}&serverToken=${serverContainUser.info.domain}&token=${signToken( userInfo )}&__a=1`;
 
