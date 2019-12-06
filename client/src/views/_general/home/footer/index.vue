@@ -42,7 +42,9 @@
         <div class="c_lg_3 mb_3">
           <div class="title--footer">Chính Sách</div>
           <ul>
-            <li>Chính sách bảo mật</li>
+            <router-link to="/policy" target="_blank">
+              <li>Chính sách bảo mật</li>
+            </router-link>
             <li>Điều kiện</li>
             <li>Quảng cáo</li>
           </ul>
