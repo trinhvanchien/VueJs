@@ -1,5 +1,5 @@
 <template>
-  <form class="session">
+  <form v-on:submit.prevent class="session">
     <div class="logo text_center mb_0 mb_sm_2">
       <icon-base width="72" height="36" viewBox="0 0 664 301">
         <hoot-logo-white />
