@@ -6,37 +6,83 @@
           <transition name="slide-fade">
             <div class="items display" v-if="currentIndexInfo === 0">
               <div class="mb_2">Giới thiệu phiên bản mới của Hoot</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/GZfCQT1uovI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/GZfCQT1uovI"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="content items" v-if="currentIndexInfo === 1">
-              <div class="mb_2">Hướng dẫn kết nối facebook với tài khoản Hoot</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/Ngc_0Nlhv7g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="mb_2">
+                Hướng dẫn kết nối facebook với tài khoản Hoot
+              </div>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/Ngc_0Nlhv7g"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="automation items" v-if="currentIndexInfo === 2">
               <div class="mb_2">Hướng dẫn tổng quan về thư viện bài viết</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/w7lExs_TYFE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/w7lExs_TYFE"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="function items" v-if="currentIndexInfo === 3">
-              <div class="mb_2">Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Hoot</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/zpaW6j0yjRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="mb_2">
+                Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Hoot
+              </div>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/zpaW6j0yjRA"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="function items" v-if="currentIndexInfo === 4">
               <div class="mb_2">Hướng dẫn tổng quan về chiến dịch đăng bài</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/fY4z8_WpgN8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/fY4z8_WpgN8"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
           <transition name="slide-fade">
             <div class="function items" v-if="currentIndexInfo === 5">
               <div class="mb_2">Hướng dẫn tổng quan về hẹn giờ đăng bài</div>
-              <iframe :style="widthDefault" height="500" src="https://www.youtube.com/embed/QioItiofNlY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                :style="widthDefault"
+                height="500"
+                src="https://www.youtube.com/embed/QioItiofNlY"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
           </transition>
         </div>
