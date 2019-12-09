@@ -55,9 +55,9 @@
                 <li
                   class="items--header try ml_2"
                   v-if="changeBackgroundHeader === 2"
-                  @click="goToSignUp"
+                  @click="goToMarket"
                 >
-                  Trải nghiệm ngay
+                  Cửa hàng nội dung
                 </li>
               </ul>
             </nav>

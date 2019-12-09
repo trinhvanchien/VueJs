@@ -240,7 +240,7 @@
               <div class="mt_3">
                 <a
                   class="text--forgot"
-                  :href="{ name: 'help' }"
+                  :href="routerHelp"
                   target="_blank"
                 >
                   Bạn gặp sự cố khi đăng nhập?

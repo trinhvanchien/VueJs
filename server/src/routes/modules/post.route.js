@@ -50,5 +50,6 @@ router.route( "/search" ).post( auth, PostController.search );
 router.route( "/search-live" ).post( PostController.searchLive );
 router.route( "/duplicate" ).post( auth, PostController.duplicate );
 router.route( "/duplicate/folder" ).post( auth, PostController.duplicateFolder );
+router.route( "/exam" ).post( auth, PostController.showPost );
 
 module.exports = router;

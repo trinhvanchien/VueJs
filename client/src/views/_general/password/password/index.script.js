@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable global-require */
+import PopupAlert from "./popup";
 export default {
+  components: {
+    PopupAlert
+  },
   data() {
     return {
       errorText: {
@@ -9,6 +13,7 @@ export default {
       },
       isShowPassword: false,
       isShowConfirmPassword: false,
+      isShowPopupAlert: false,
       reset: {
         password: "",
         confirmPassword: ""
@@ -31,6 +36,9 @@ export default {
     },
     code(){
       return this.$store.getters.code;
+    },
+    status() {
+      return this.$store.getters.authStatus;
     }
   },
   methods: {
@@ -65,6 +73,10 @@ export default {
       this.validateErrorText = "";
 
       await this.$store.dispatch( "getNewPassword", dataSender );
+      this.isShowPopupAlert = true;
+    },
+    gotoSignIn() {
+      this.isShowPopupAlert = false;
       this.$router.push({name: "user_signin"});
     }
   },

@@ -2,6 +2,9 @@
 import AppAlert from "@/components/shared/layouts/alert";
 
 export default {
+  components: {
+    AppAlert
+  },
   data() {
     return {
       email: "",
@@ -36,10 +39,7 @@ export default {
       if ( this.$store.getters.authStatus === "error" ) {
         return;
       }
-      this.$router.push( { name: "check_code", params: { email: this.email } } );
+      await this.$router.push( { name: "check_code", params: { email: this.email } } );
     }
-  },
-  components: {
-    AppAlert
   }
 };
