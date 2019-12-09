@@ -350,7 +350,7 @@ module.exports = {
     let data = {
         "categoryPost": {
           "_id": findCategoryDefault._id.toString(),
-          "title": `${findCategoryDefault.title} Copy`,
+          "title": `${findCategoryDefault.title} - ${userInfo.name}`,
           "_account": req.uid
         },
         "postList": resData,
@@ -380,7 +380,7 @@ module.exports = {
         };
       } ) ),
       data = {
-        "title": `${findPost.title} Copy`,
+        "title": findPost.title,
         "content": findPost.content,
         "attachments": attachments,
         "_account": req.uid
@@ -393,5 +393,27 @@ module.exports = {
     }
 
     res.status( 200 ).json( jsonResponse( "success", resPostSync.data.data ) );
+  },
+  "showPost": async ( req, res ) => {
+    let dataResponse, categoryExample;
+
+    dataResponse = await MarketProductPost.find( { "_id": req.query._postId } ).lean();
+    categoryExample = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).select( "_id title" ).lean();
+    
+    if ( !dataResponse ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại, vui lòng xem lại" } );
+    }
+    if ( !categoryExample ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Danh mục mẫu không tồn tại" } );
+    }
+
+    const postDetail = {
+      "title": dataResponse[ 0 ].title,
+      "attachments": dataResponse[ 0 ].photos,
+      "content": dataResponse[ 0 ].content,
+      "_categories": categoryExample
+    };
+
+    res.status( 200 ).json( jsonResponse( "success", postDetail ) );
   }
 };

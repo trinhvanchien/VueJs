@@ -32,7 +32,8 @@ export default {
       user: {
         email: "",
         password: ""
-      }
+      },
+      routerHelp: "https://www.hoot.vn/help"
     };
   },
   computed: {

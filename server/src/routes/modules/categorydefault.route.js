@@ -18,6 +18,6 @@ router
 
 router
   .route( "/:categoryId/post/:postId" )
-  .post( auth, collaborator, CategoryDefaultController.createPostByCategory )
-  .delete( auth, collaborator, CategoryDefaultController.removePostByCategory );
+  .post( auth, CategoryDefaultController.createPostByCategory )
+  .delete( auth, CategoryDefaultController.removePostByCategory );
 module.exports = router;

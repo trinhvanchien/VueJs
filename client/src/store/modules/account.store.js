@@ -428,6 +428,7 @@ const actions = {
    */
   getInfoByEmail: async ({ commit }, payload) => {
     try {
+      commit("auth_request");
       const sendEmail = {
         email: payload
       };

@@ -15,11 +15,11 @@
           100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK CHỈ VỚI VÀI THAO TÁC
         </div>
         <div class="d_flex action">
-          <div class="register mr_3" @click="goToSignIn">
-            ĐĂNG NHẬP
+          <div class="register mr_3" @click="goToSignUp">
+            ĐĂNG KÝ
           </div>
-          <div class="goto--market" @click="goToMarket">
-            CỬA HÀNG NỘI DUNG
+          <div class="goto--market" @click="goToSignIn">
+            ĐĂNG NHẬP
           </div>
         </div>
       </div>
@@ -44,13 +44,13 @@ export default {
     };
   },
   methods: {
-    goToMarket() {
-      const route = this.$router.resolve({ name: "market_home" });
+    goToSignIn() {
+      const route = this.$router.resolve({ name: "user_signin" });
 
       window.open(route.href, "_blank");
     },
-    goToSignIn() {
-      const routeSignUp = this.$router.resolve({ name: "user_signin" });
+    goToSignUp() {
+      const routeSignUp = this.$router.resolve({ name: "user_signup" });
 
       window.open(routeSignUp.href, "_blank");
     }
