@@ -7,7 +7,7 @@
           <a href="https://www.facebook.com/zinbeeauto/" target="_blank">
             <icon-base
               class="facebook"
-              icon-name="Zinbee.vn"
+              icon-name="hoot.vn"
               width="30"
               height="30"
               viewBox="0 0 105 105"

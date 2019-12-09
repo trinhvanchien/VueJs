@@ -41,7 +41,7 @@ module.exports = {
 
     let newAgency = new Agency( req.body );
 
-    newAgency.linkAffiliate = `${process.env.APP_URL }/#/a/${ newAgency._id.toString()}`;
+    newAgency.linkAffiliate = `${process.env.APP_URL }/a/${ newAgency._id.toString()}`;
     await newAgency.save();
     await Account.findByIdAndUpdate( { "_id": req.body._account }, { "$set": { "_role": findRole._id } }, { "new": true } );
 

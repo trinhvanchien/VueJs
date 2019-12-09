@@ -72,19 +72,19 @@
       <div class="link--group">
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Trợ giúp</a
         >
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Bảo mật</a
         >
         <a
           class="link--group-item"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Điều khoản</a
         >
