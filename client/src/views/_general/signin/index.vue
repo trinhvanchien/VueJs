@@ -238,11 +238,7 @@
               </div>
               <!-- End: Btn Group-->
               <div class="mt_3">
-                <a
-                  class="text--forgot"
-                  :href="routerHelp"
-                  target="_blank"
-                >
+                <a class="text--forgot" :href="routerHelp" target="_blank">
                   Bạn gặp sự cố khi đăng nhập?
                 </a>
               </div>

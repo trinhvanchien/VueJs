@@ -1,11 +1,13 @@
 <template>
   <div class="modal--wrapper">
     <div class="modal--dialog d_flex justify_content_center align_items_center">
-      <div class="modal--content d_flex justify_content_center align_items_center">
+      <div
+        class="modal--content d_flex justify_content_center align_items_center"
+      >
         <div class="modal--body">
           <div class="content d_flex align_items_center">
             <!-- START: LOADING WHEN SYSTEM CHANGE PASSWORD -->
-            <div class="loading--block mt_4 mb_4" v-show="status ===  'loading'">
+            <div class="loading--block mt_4 mb_4" v-show="status === 'loading'">
               <div class="mx_auto">
                 <div class="loading--bar position_relative mx_auto">
                   <div class="percent position_absolute"></div>
@@ -17,7 +19,7 @@
             </div>
             <!-- END: LOADING WHEN SYSTEM CHANGE PASSWORD -->
             <!-- START: SUCCESS WHEN SYSTEM CHANGED PASSWORD -->
-            <div class="success text_center" v-show="status ===  'success'">
+            <div class="success text_center" v-show="status === 'success'">
               <icon-base
                 class="icon--user mr_1"
                 width="100"
@@ -50,7 +52,7 @@ export default {
   methods: {
     gotoSignIn() {
       this.$emit("closePopup", false);
-      this.$router.push({name: "user_signin"});
+      this.$router.push({ name: "user_signin" });
     }
   }
 };

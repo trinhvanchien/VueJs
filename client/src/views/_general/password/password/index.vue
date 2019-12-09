@@ -202,9 +202,12 @@
     </div>
     <!-- End: Card -->
     <!-- START: ALERT WHEN SYSTEM CHANGE PASSWORD -->
-    <div class="content d_flex align_items_center justify_content_center" v-else>
+    <div
+      class="content d_flex align_items_center justify_content_center"
+      v-else
+    >
       <!-- START: LOADING WHEN SYSTEM CHANGE PASSWORD -->
-      <div class="loading--block mt_4 mb_4" v-show="status ===  'loading'">
+      <div class="loading--block mt_4 mb_4" v-show="status === 'loading'">
         <div class="mx_auto">
           <div class="loading--bar position_relative mx_auto">
             <div class="percent position_absolute"></div>
@@ -216,7 +219,7 @@
       </div>
       <!-- END: LOADING WHEN SYSTEM CHANGE PASSWORD -->
       <!-- START: SUCCESS WHEN SYSTEM CHANGED PASSWORD -->
-      <div class="success text_center" v-show="status ===  'success'">
+      <div class="success text_center" v-show="status === 'success'">
         <icon-base
           class="icon--user mr_1"
           width="100"
