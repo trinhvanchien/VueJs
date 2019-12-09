@@ -17,7 +17,7 @@ router
   .patch( auth, collaborator, PhotoLibraryCategoryController.update )
   .delete( auth, collaborator, PhotoLibraryCategoryController.delete );
 
-router.route( "/:id" ).get( auth, collaborator, PhotoLibraryCategoryController.getPhotoLibraryByUser );
-router.route( "/:id/bz" ).get( auth, collaborator, PhotoLibraryCategoryController.getPhotoLibrary );
+router.route( "/:id" ).get( auth, PhotoLibraryCategoryController.getPhotoLibraryByUser );
+router.route( "/:id/bz" ).get( auth, PhotoLibraryCategoryController.getPhotoLibrary );
 
 module.exports = router;
