@@ -419,7 +419,7 @@
                 <!-- Start: Btn Group-->
                 <div class="btn--group d_md_flex mt_4">
                   <button type="submit" class="btn--control btn--orange mr_3">
-                    Đăng kí
+                    Đăng ký
                   </button>
                   <router-link
                     class="btn--control btn--white mt_3 mt_md_0"
