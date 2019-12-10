@@ -9,7 +9,12 @@
       <div class="r m_0">
         <div class="c_lg_3 mb_3">
           <div class="title--footer logo">
-            <icon-base width="72" height="36" viewBox="0 0 664 301">
+            <icon-base
+              width="72"
+              icon-name="Logo Hoot"
+              height="36"
+              viewBox="0 0 664 301"
+            >
               <hoot-logo-black />
             </icon-base>
           </div>

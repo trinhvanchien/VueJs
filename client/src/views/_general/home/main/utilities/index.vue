@@ -316,8 +316,12 @@ export default {
       width: 15px;
       border-radius: 50%;
       background: #ccc;
+      transition: all ease 0.3s;
       &.active {
-        background: #f8b448;
+        background: $colorLogo;
+      }
+      &:hover {
+        background: $colorLogo;
       }
     }
   }
@@ -332,10 +336,10 @@ export default {
       cursor: pointer;
       // background: #ccc;
       border-radius: 50%;
-      color: #f8b448;
+      color: $colorLogo;
       transition: 0.4s;
       &:hover {
-        background: #f8b448;
+        background: $colorHover;
         color: #fff;
       }
     }
