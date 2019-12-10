@@ -12,7 +12,12 @@
             to="/"
             :class="changeBackgroundHeader === 2 ? 'active--logo' : ''"
           >
-            <icon-base width="72" icon-name="Logo Hoot" height="36" viewBox="0 0 664 301">
+            <icon-base
+              width="72"
+              icon-name="Logo Hoot"
+              height="36"
+              viewBox="0 0 664 301"
+            >
               <hoot-logo-black />
             </icon-base>
           </router-link>
@@ -21,7 +26,12 @@
             to="/"
             :class="changeBackgroundHeader === 2 ? 'active--logo' : ''"
           >
-            <icon-base width="48" icon-name="Logo Hoot" height="28" viewBox="0 0 417 301">
+            <icon-base
+              width="48"
+              icon-name="Logo Hoot"
+              height="28"
+              viewBox="0 0 417 301"
+            >
               <hoot-logo-icon-black />
             </icon-base>
           </router-link>
