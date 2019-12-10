@@ -39,6 +39,9 @@ $colorHover: #c31920;
       font-size: 1.4rem;
       color: $colorLogo;
       padding-bottom: 2rem;
+      &.logo{
+        color: #282828;
+      }
     }
     ul {
       font-size: 1rem;

@@ -238,7 +238,7 @@
                   tag="div"
                   to="/signup"
                 >
-                  Đăng kí
+                  Đăng ký
                 </router-link>
               </div>
               <!-- End: Btn Group-->
