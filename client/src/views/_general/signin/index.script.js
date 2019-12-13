@@ -54,7 +54,7 @@ export default {
       // Validate before request
       if (this.user.email === "") {
         this.loginError = true;
-        this.loginErrorText = "Bạn chưa nhập địa chỉ email!";
+        this.loginErrorText = "Vui lòng nhập email hoặc số điện thoại!";
         return;
       } else if (this.user.password === "") {
         this.loginError = true;
