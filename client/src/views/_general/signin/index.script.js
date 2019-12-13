@@ -91,24 +91,24 @@ export default {
     }
   },
   watch: {
-    "user.email"( value ) {
-      const regexEmail = new RegExp(
-        '^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
-      );
+    // "user.email"( value ) {
+    //   const regexEmail = new RegExp(
+    //     '^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
+    //   );
 
-      this.errorText.email = "Email không khả dụng cho định dạng!";
-      this.statusClassError.email = true;
-      this.statusClassPassed.email = false;
-      if ( regexEmail.test( value.toLowerCase() ) ) {
-        this.errorText.email = "";
-        this.statusClassError.email = false;
-        this.statusClassPassed.email = true;
-      } else if ( value.length === 0 ) {
-        this.errorText.email = "";
-        this.statusClassError.email = false;
-        this.statusClassPassed.email = false;
-      }
-    },
+    //   this.errorText.email = "Email không khả dụng cho định dạng!";
+    //   this.statusClassError.email = true;
+    //   this.statusClassPassed.email = false;
+    //   if ( regexEmail.test( value.toLowerCase() ) ) {
+    //     this.errorText.email = "";
+    //     this.statusClassError.email = false;
+    //     this.statusClassPassed.email = true;
+    //   } else if ( value.length === 0 ) {
+    //     this.errorText.email = "";
+    //     this.statusClassError.email = false;
+    //     this.statusClassPassed.email = false;
+    //   }
+    // },
     "user.password"( value ) {
       this.errorText.password = "Mật khẩu nằm trong khoảng 6-20 kí tự!";
       this.statusClassError.password = true;

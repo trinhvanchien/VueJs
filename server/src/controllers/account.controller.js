@@ -244,10 +244,14 @@ module.exports = {
     res.status( 201 ).json( jsonResponse( "success", null ) );
   },
   "signIn": async ( req, res ) => {
-    const { email } = req.body,
-      userInfo = await Account.findOne( { "email": email.toString().toLowerCase() } ),
-      memberRole = await Role.findOne( { "_id": userInfo._role } ),
-      serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
+    const { email } = req.body;
+    let userInfo = await Account.findOne( { "email": email.toString().toLowerCase() } );
+
+    if ( !userInfo ) {
+      userInfo = await Account.findOne( { "phone": email.toString().toLowerCase() } );
+    }
+    const memberRole = await Role.findOne( { "_id": userInfo._role } );
+    const serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
 
     let cookie;
 
