@@ -40,6 +40,9 @@ module.exports = {
 
 
     let newAgency = new Agency( req.body );
+    let agencyUrl = process.env.APP_ENV === "production" ? `${process.env.APP_URL}` : `${process.env.APP_URL}:8080`;
+
+    newAgency.linkAffiliate = `${ agencyUrl }/a/${ newAgency._id.toString()}`;
 
     newAgency.linkAffiliate = `${process.env.APP_URL }/#/a/${ newAgency._id.toString()}`;
     await newAgency.save();
