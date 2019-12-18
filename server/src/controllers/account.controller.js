@@ -292,7 +292,7 @@ module.exports = {
       password,
       "status": 1,
       "expireDate": new Date().setDate( new Date().getDate() + 3 ),
-      "_role": memberRole._id
+      "_role": memberRole.id
     } );
 
     // Sync with nested server
@@ -305,12 +305,12 @@ module.exports = {
     await newUser.save();
 
     // Push account to server
-    optimalServer.userAmount.push( newUser._id );
+    optimalServer.userAmount.push( newUser.id );
     optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
     optimalServer.save();
 
     // Assign cookie to headers
-    cookie = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${memberRole.level};`;
+    cookie = `sid=${signToken( newUser )}; uid=${newUser.id}; cfr=${memberRole.level};`;
     res.set( "Cookie", cookie );
 
     // check browser user have link and cookie affiliate
@@ -320,7 +320,7 @@ module.exports = {
 
       if ( findAgency ) {
         findAgency.customer.total += 1;
-        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 1 } );
+        findAgency.customer.listOfUser.push( { "user": newUser.id, "typeUser": 1 } );
         await findAgency.save();
       }
     }

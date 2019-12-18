@@ -40,8 +40,11 @@ module.exports = {
 
 
     let newAgency = new Agency( req.body );
+    // Is the app in deployment mode?(running on real server) If "production" then yes.
+    let agencyUrl = process.env.APP_ENV === "production" ? `${process.env.APP_URL}` : `${process.env.APP_URL}:8080`;
 
-    newAgency.linkAffiliate = `${process.env.APP_URL }/a/${ newAgency._id.toString()}`;
+    newAgency.linkAffiliate = `${ agencyUrl }/#/a/${ newAgency._id.toString()}`;
+
     await newAgency.save();
     await Account.findByIdAndUpdate( { "_id": req.body._account }, { "$set": { "_role": findRole._id } }, { "new": true } );
 
@@ -144,8 +147,7 @@ module.exports = {
   "expireUserByAgency": async ( req, res ) => {
     const findAgency = await Agency.findOne( { "_account": req.uid } ),
       findAccount = await Account.findOne( { "_id": req.query._account } ).select( "-password" ).lean(),
-      vpsContainServer = await Server.findOne( { "userAmount": findAccount._id } ).select( "info" ).lean(),
-      { expireDate } = req.body;
+      vpsContainServer = await Server.findOne( { "userAmount": findAccount._id } ).select( "info" ).lean();
 
     if ( !findAccount ) {
       return res.status( 404 ).json( { "status": "fail", "_account": "Người dùng không tồn tại!" } );
@@ -156,13 +158,24 @@ module.exports = {
     }
     // handle date agency
     // eslint-disable-next-line one-var
-    const dateNowExpire = new Date( findAccount.expireDate.toString() ),
-      dateNewExpire = new Date( req.body.expireDate ),
-      oneMonth = 30 * 24 * 60 * 60 * 1000; // days*hours*minutes*seconds*milliseconds
+    const oldExpireDate = new Date( findAccount.expireDate.toString() );
+    let newExpireDate = new Date( req.body.expireDate );
+    const oneMonth = 30 * 24 * 60 * 60 * 1000; // days*hours*minutes*seconds*milliseconds
+    const today = new Date();
 
-    findAgency.expire.usedTime = ( findAgency.expire.usedTime + Math.floor( Math.abs( ( dateNowExpire.getTime() - dateNewExpire.getTime() ) / ( oneMonth ) ) ) ).toFixed( 2 );
-    findAgency.expire.leftTime = ( findAgency.expire.leftTime - Math.floor( Math.abs( ( dateNowExpire.getTime() - dateNewExpire.getTime() ) / ( oneMonth ) ) ) ).toFixed( 2 );
+    if ( newExpireDate < today ) {
+      newExpireDate = today;
+    }
+    const totalTime = findAgency.expire.usedTime + findAgency.expire.leftTime;
+ 
 
+    let timeDifference = Math.floor( ( newExpireDate.getTime() - oldExpireDate.getTime() ) / ( oneMonth ) );
+    
+    findAgency.expire.leftTime = findAgency.expire.leftTime - timeDifference;
+    if ( findAgency.expire.leftTime > totalTime ) {
+      findAgency.expire.leftTime = totalTime;
+    }
+    findAgency.expire.usedTime = totalTime - findAgency.expire.leftTime;
     // Check agency use expire date
     if ( findAgency.expire.leftTime <= 0 ) {
       return res.status( 405 ).json( { "status": "error", "message": "Đại lý đã dùng hết số giờ gia hạn!  " } );
@@ -170,7 +183,7 @@ module.exports = {
 
     await findAgency.save();
     // Update expire date
-    let data = await Account.findByIdAndUpdate( req.query._account, { "$set": { "status": 1, "expireDate": expireDate, "maxAccountFb": 2 } }, { "new": true } ).select( "-password" ),
+    let data = await Account.findByIdAndUpdate( req.query._account, { "$set": { "status": 1, "expireDate": newExpireDate, "maxAccountFb": 2 } }, { "new": true } ).select( "-password" ),
       resUserSync = await activeAccountSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/active`, { "id": req.query._account, "expireDate": req.body.expireDate, "maxAccountFb": 2 }, req.headers.authorization );
 
     if ( resUserSync.data.status !== "success" ) {
