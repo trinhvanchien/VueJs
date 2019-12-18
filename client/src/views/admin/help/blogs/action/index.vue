@@ -168,9 +168,7 @@ export default {
       },
       slug:
         process.env.VUE_APP_ENV === "local"
-          ? `${process.env.VUE_APP_ROOT +
-              ":" +
-              process.env.VUE_APP_PORT}/help/`
+          ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/help/`
           : `${process.env.VUE_APP_ROOT}/help/`
     };
   },

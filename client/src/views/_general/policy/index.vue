@@ -339,16 +339,16 @@
             </dd>
             <dt>12. Data Transfer</dt>
             <dd>
-              Hoot.vn is based in the Vietnam. Personal Information that
-              we collect may be transferred to, and stored at, any of our
+              Hoot.vn is based in the Vietnam. Personal Information that we
+              collect may be transferred to, and stored at, any of our
               affiliates, partners or service providers which may be inside or
-              outside of Vietnam. By submitting your personal data, you
-              agree to such transfers. Your Personal Information may be
-              transferred to countries that do not have the same data protection
-              laws as the country in which you initially provided the
-              information. When we transfer or disclose your Personal
-              Information to other countries, we will protect that information
-              as described in this Privacy Policy.
+              outside of Vietnam. By submitting your personal data, you agree to
+              such transfers. Your Personal Information may be transferred to
+              countries that do not have the same data protection laws as the
+              country in which you initially provided the information. When we
+              transfer or disclose your Personal Information to other countries,
+              we will protect that information as described in this Privacy
+              Policy.
             </dd>
             <dt>13. Our Policy Towards Children</dt>
             <dd>
@@ -372,19 +372,19 @@
             </dd>
             <dd>
               If you are a registered user of the Site, you may access and
-              update or correct the information you provided to us by e-mailing us at
-              cskh@hoot.vn. Please note that while any changes you make will
-              be reflected in active user databases within a reasonable period
-              of time, we may retain all information you submit for backups,
-              archiving, prevention of fraud and abuse, analytics, satisfaction
-              of legal obligations, or where we otherwise reasonably believe
-              that we have a legitimate reason to do so. To avoid any
-              misunderstanding, in the event the user requests that all Personal
-              Information be deleted, then Hoot.vn shall proceed in accordance
-              with such request in reasonable time. Please be aware that once
-              you have deleted your account or any Personal Information within
-              your account, Hoot.vn will no longer hold that Personal
-              Information and will thus be unable to restore it.
+              update or correct the information you provided to us by e-mailing
+              us at cskh@hoot.vn. Please note that while any changes you make
+              will be reflected in active user databases within a reasonable
+              period of time, we may retain all information you submit for
+              backups, archiving, prevention of fraud and abuse, analytics,
+              satisfaction of legal obligations, or where we otherwise
+              reasonably believe that we have a legitimate reason to do so. To
+              avoid any misunderstanding, in the event the user requests that
+              all Personal Information be deleted, then Hoot.vn shall proceed in
+              accordance with such request in reasonable time. Please be aware
+              that once you have deleted your account or any Personal
+              Information within your account, Hoot.vn will no longer hold that
+              Personal Information and will thus be unable to restore it.
             </dd>
             <dd>
               You should be aware that Hoot.vn acts as a conduit between our
@@ -441,9 +441,9 @@ p {
   margin-bottom: 1em;
 }
 
-.site-content{
+.site-content {
   background: #2f3136;
-  color: #ffffff
+  color: #ffffff;
 }
 
 .max-width {
@@ -451,13 +451,13 @@ p {
   box-sizing: border-box;
   margin: auto;
   padding: 20px;
-  text-align:center;
+  text-align: center;
 }
 
 .heading__tertiary {
   color: #ff232c;
-  margin:auto;
-  vertical-align:middle;
+  margin: auto;
+  vertical-align: middle;
   font-size: 26px;
 }
 
@@ -468,7 +468,6 @@ p {
   text-align: center;
   font-weight: 700;
 }
-
 
 .content-section {
   padding-bottom: 40px;
@@ -495,5 +494,4 @@ dd {
 dd:last-child {
   margin-bottom: 0;
 }
-
 </style>

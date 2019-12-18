@@ -68,7 +68,7 @@
               v-if="this.$store.getters.authError === '401'"
               class="alert--error position_relative mt_3"
             >
-             Thông tin đăng nhập không chính xác!
+              Thông tin đăng nhập không chính xác!
             </div>
             <div
               v-if="this.$store.getters.authError === '405'"
@@ -96,7 +96,7 @@
                     </icon-base>
                   </div>
                   <div class="form--control mr_2">
-                    <div class="desc">Email hoặc điện thoại </div>
+                    <div class="desc">Email hoặc điện thoại</div>
                     <input
                       type="text"
                       class="form--input"
