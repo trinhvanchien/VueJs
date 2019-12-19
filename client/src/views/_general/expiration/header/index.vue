@@ -7,7 +7,12 @@
         <div
           class="logo d_flex align_items_center justify_content_center mb_3 mr_auto"
         >
-          <icon-base width="72" height="36" viewBox="0 0 664 301" icon-name="Hoot logo">
+          <icon-base
+            width="72"
+            height="36"
+            viewBox="0 0 664 301"
+            icon-name="Hoot logo"
+          >
             <hoot-logo-black />
           </icon-base>
         </div>

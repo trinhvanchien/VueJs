@@ -90,9 +90,7 @@
               </icon-base>
             </div>-->
             <div class="icon">
-              <a
-                href="javascript: void(0)"
-              >
+              <a href="javascript: void(0)">
                 <icon-base
                   class="youtube"
                   icon-name="youtube"
