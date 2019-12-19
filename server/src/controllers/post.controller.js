@@ -306,7 +306,6 @@ module.exports = {
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   },
   "duplicateFolder": async ( req, res ) => {
-    console.log( req.query );
     const findCategoryDefault = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).populate( { "path": "postList", "select": "_id title photos content " } ).lean(),
       userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
