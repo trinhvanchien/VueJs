@@ -15,9 +15,7 @@
             <li class="month">1 THÁNG</li>
             <li class="money">2.800.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -28,9 +26,7 @@
             <li class="month">6 THÁNG</li>
             <li class="money">16.199.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -41,9 +37,7 @@
             <li class="month">1 NĂM</li>
             <li class="money">28.799.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -54,9 +48,7 @@
             <li class="month">DOANH NGHIỆP</li>
             <li class="money">Liên hệ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -281,7 +273,7 @@
         <a
           class="btn--live-chat"
           target="_blank"
-          href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+          href="https://www.facebook.com/hootvietnam/"
           >LIÊN HỆ NGAY BÂY GIỜ</a
         >
       </div>
@@ -295,9 +287,7 @@
             <li class="month">1 THÁNG</li>
             <li class="money">2.800.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -384,9 +374,7 @@
             <li class="month">6 THÁNG</li>
             <li class="money">16.199.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -473,9 +461,7 @@
             <li class="month">1 NĂM</li>
             <li class="money">28.799.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -562,9 +548,7 @@
             <li class="month mb_2">DOANH NGHIỆP</li>
             <!-- <li class="money">2.800.000đ</li> -->
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -648,7 +632,7 @@
         <a
           class="btn--live-chat"
           target="_blank"
-          href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+          href="https://www.facebook.com/hootvietnam/"
           >LIÊN HỆ NGAY BÂY GIỜ</a
         >
       </div>

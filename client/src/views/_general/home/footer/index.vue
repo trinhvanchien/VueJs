@@ -35,7 +35,7 @@
             <li>
               Email:
               <!-- <span v-if="agencyInfo" v-text="agencyInfo.email"></span> -->
-              <span>Cskh@hoot.Vn</span>
+              <span>hoot@massocorp.com</span>
             </li>
           </ul>
         </div>
@@ -72,7 +72,7 @@
           </div>
           <div class="list--contact d_flex mt_4">
             <div class="icon">
-              <a href="https://www.facebook.com/zinbeeauto/" target="_blank">
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank">
                 <icon-base
                   class="facebook"
                   icon-name="facebook"
@@ -97,10 +97,7 @@
               </icon-base>
             </div>-->
             <div class="icon">
-              <a
-                href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
-                target="_blank"
-              >
+              <a href="javascript: void(0)">
                 <icon-base
                   class="youtube"
                   icon-name="youtube"
@@ -140,7 +137,7 @@
             <a
               class="btn--live-chat"
               target="_blank"
-              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              href="https://www.facebook.com/hootvietnam/"
               >Liên hệ hỗ trợ</a
             >
           </div>

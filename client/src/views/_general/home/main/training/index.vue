@@ -55,10 +55,10 @@ export default {
     return {
       // Slider Training
       imageTraining: [
-        require("@/assets/images/home/training2.jpg"),
-        require("@/assets/images/home/training1.jpg"),
-        require("@/assets/images/home/training3.jpg"),
-        require("@/assets/images/home/training4.jpg")
+        require("@/assets/images/home/trainning-hoot-1.jpg"),
+        require("@/assets/images/home/trainning-hoot-2.jpg"),
+        require("@/assets/images/home/trainning-hoot-3.jpg"),
+        require("@/assets/images/home/trainning-hoot-1.jpg")
       ]
     };
   },

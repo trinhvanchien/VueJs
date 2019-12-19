@@ -13,12 +13,12 @@
             <router-link tag="div" :to="{ name: 'market_home' }">
               <div class="logo d_flex align_items_center">
                 <icon-base
-                  icon-name="ZinBee"
-                  width="40px"
-                  height="40px"
-                  viewBox="0 0 200 200"
+                  width="72"
+                  height="36"
+                  viewBox="0 0 664 301"
+                  icon-name="Hoot logo"
                 >
-                  <icon-logo-icon />
+                  <hoot-logo-white />
                 </icon-base>
                 <div class="center--support ml_2">Hoot Store</div>
               </div>
@@ -44,7 +44,7 @@
           <!-- End: Redirect to help -->
 
           <!-- Start: More Options -->
-          <div class="more--options position_relative pr_2">
+          <div class="more--options position_relative pr_2 d_none">
             <div @click="showOptionsMoreDropdown" class="more mt_2">
               <icon-base
                 class="icon--application"
