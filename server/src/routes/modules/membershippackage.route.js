@@ -20,4 +20,7 @@ router
 router.route( "/:id" ).post( PackageController.isExist );
 router.route( "/:id/member" ).post( auth, permission, PackageController.addMember );
 
+// router user add members to package
+router.route( "/:id/many" ).post( auth, permission, PackageController.addMemberToPackage );
+
 module.exports = router;
