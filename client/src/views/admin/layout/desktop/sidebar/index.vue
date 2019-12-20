@@ -13,7 +13,7 @@
         </div>
       </router-link>
     </div>
-    <ul class="sidebar--menu" v-if="roles && roles !== 'Admin'">
+    <ul class="sidebar--menu" v-if="roles && roles === 'Collaborator'">
       <router-link
         class="menu--item d_flex align_items_center"
         tag="li"
