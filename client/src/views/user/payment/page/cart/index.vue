@@ -187,7 +187,10 @@ export default {
         }
       }
       &--info {
-        &-account, &-post, &-schedules, &-slot {
+        &-account,
+        &-post,
+        &-schedules,
+        &-slot {
           small {
             font-size: 14px;
           }
@@ -203,7 +206,8 @@ export default {
       }
     }
   }
-  .title, .info {
+  .title,
+  .info {
     span {
       font-size: 18px;
       text-transform: uppercase;
