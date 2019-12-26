@@ -45,4 +45,7 @@ router.use( "/agency", require( "./modules/agency/agency.route" ) );
 router.use( "/code", auth, permission, require( "./modules/code.route" ) );
 router.use( "/statistic", auth, permission, require( "./modules/statistics.route" ) );
 
+// Payment Route
+router.use( "/payment", auth, require( "./modules/payment.route" ) );
+
 module.exports = router;

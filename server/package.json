@@ -270,10 +270,7 @@
         2,
         "none"
       ],
-      "quote-props": [
-        2,
-        "always"
-      ],
+      "quote-props": 0,
       "quotes": [
         2,
         "double",
@@ -287,10 +284,7 @@
         2,
         "always"
       ],
-      "space-in-parens": [
-        2,
-        "always"
-      ],
+      "space-in-parens": 0,
       "space-infix-ops": 2,
       "keyword-spacing": 2,
       "space-unary-ops": [
@@ -330,6 +324,9 @@
     }
   },
   "dependencies": {
+    "dateformat": "^3.0.3",
+    "qs": "^6.9.1",
+    "sha256": "^0.2.0",
     "sharp": "^0.23.1"
   }
 }
