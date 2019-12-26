@@ -30,6 +30,10 @@ import helpGeneralRouter from "./modules/user/help";
  * Router for Market
  */
 import marketRouter from "./modules/user/market";
+/**
+ * Router for Market
+ */
+import PaymentRouter from "./modules/user/payment";
 
 Vue.use(Router);
 
@@ -62,6 +66,10 @@ export default new Router({
     /**
      * Router for Market
      */
-    marketRouter
+    marketRouter,
+    /**
+     * Router for Payment
+     */
+    PaymentRouter
   ]
 });
