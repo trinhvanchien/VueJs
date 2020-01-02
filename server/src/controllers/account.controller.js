@@ -13,6 +13,7 @@ const Server = require( "../models/Server.model" );
 const Code = require( "../models/Code.model" );
 const MembershipPackage = require( "../models/MembershipPackage.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
+const { signUpSuccess } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
 const cryptoRandomString = require( "crypto-random-string" );
@@ -20,8 +21,8 @@ const jsonResponse = require( "../configs/response" );
 
 const { findSubString } = require( "../helpers/utils/functions/string" );
 const { decodeToken, signToken } = require( "../configs/jwt" );
-const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
-  mail = require( "nodemailer" );
+const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" );
+const mail = require( "nodemailer" );
 
 module.exports = {
   "changePasswordSync": async ( req, res ) => {
@@ -269,13 +270,12 @@ module.exports = {
       "domain": process.env.APP_ENV === "production" ? `${serverContainUser.info.domain}/` : `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/`
     } ) );
   },
-  "signUp": async ( req, res ) => {
-    const { name, email, phone, password, presenter, region } = req.body,
+  "signUp": async ( req, res, next ) => {
+    let { name, email, phone, password, presenter, region } = req.body,
       isEmailExist = await Account.findOne( { email } ),
       isPhoneExist = await Account.findOne( { phone } ),
       memberRole = await Role.findOne( { "level": "Member" } ),
       optimalServer = await Server.findOne( { region, "status": 1 } ).sort( { "slot": -1 } );
-
     let cookie, newUser, resSyncNestedServer, isEnvironment;
 
     if ( isEmailExist ) {
@@ -283,6 +283,27 @@ module.exports = {
     } else if ( isPhoneExist ) {
       return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại trên hệ thống!" } );
     }
+
+    //#region Regex check
+    const phoneRegex = /^(0)+(\d{9})$/g;
+    if ( phoneRegex.test(phone) === false ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại phải có 10 chữ số và phải bắt đầu bằng số 0." } )
+    }
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\])|(([\w\-]+\.)+[a-zA-Z]{2,}))$/g;
+    if ( emailRegex.test(email) === false ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Địa chỉ email không hợp lệ!" } );
+    }
+
+    const nameRegex = /^([^0-9\!\@\#\$\%\^\&\*\(\)\+\=\`\~\{\}\[\]\:\"\;\'\\\<\>\,\.\?\/\t]+)$/g;
+    name = name.trim();
+    if ( name.length > 50 || name.length < 6 ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Tên không được ngắn hơn 6 ký tự hoặc dài hơn 50 ký tự!" } );
+    }
+    if ( nameRegex.test(name) === false ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Tên không được chứa các ký tự đặc biệt!" } ); 
+    }
+    //#endregion
 
     newUser = await new Account( {
       name,
@@ -324,6 +345,32 @@ module.exports = {
         await findAgency.save();
       }
     }
+
+    //#region Gửi email thông báo đăng ký thành công
+    let url = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/signIn` : `${process.env.APP_URL}:8080/signIn`;;
+    let transporter = await mail.createTransport( {
+      "service": "Gmail",
+      "auth": {
+        "user": process.env.MAIL_USERNAME,
+        "pass": process.env.MAIL_PASSWORD
+      }
+    } );
+
+    // Setup template email
+    await transporter.sendMail(
+      {
+        "from": process.env.MAIL_USERNAME,
+        "to": req.body.email,
+        "subject": "Đăng ký tài khoản mới thành công",
+        "html": signUpSuccess( url )
+      },
+      ( err ) => {
+        if ( err ) {
+          return next( err );
+        }
+      }
+    );
+    //#endregion
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,
