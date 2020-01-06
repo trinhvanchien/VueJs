@@ -16,6 +16,7 @@ const { writeForgotPassword } = require( "../databases/templates/email" );
 const { signUpSuccess } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
+const ping = require( "ping" );
 const cryptoRandomString = require( "crypto-random-string" );
 const jsonResponse = require( "../configs/response" );
 
@@ -302,6 +303,14 @@ module.exports = {
     }
     if ( nameRegex.test(name) === false ) {
       return res.status( 403 ).json( { "status": "error", "message": "Tên không được chứa các ký tự đặc biệt!" } ); 
+    }
+    //#endregion
+
+    //#region Check email validation
+    let domain = email.split("@").pop();
+    const pingResult = await ping.promise.probe(domain);
+    if ( pingResult.alive === false ) {
+      return res.status(403).json({ status: "error", message: "Tên miền của email server không có thực!" });
     }
     //#endregion
 
