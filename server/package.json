@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "nodemon -r dotenv/config index.js",
+    "debug": "node --inspect index.js",
     "lint": "./node_modules/.bin/eslint src/**/*.js",
     "lint:fix": "./node_modules/.bin/eslint src/**/*.js --fix",
     "cwd": "/server"
@@ -325,6 +326,7 @@
   },
   "dependencies": {
     "dateformat": "^3.0.3",
+    "ping": "^0.2.2",
     "qs": "^6.9.1",
     "sha256": "^0.2.0",
     "sharp": "^0.23.1"
