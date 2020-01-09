@@ -19,6 +19,7 @@
         >
           <div
             class="package px_3 py_4"
+            :class="item.name === 'Free' ? 'dis' : ''"
             v-for="(item, index) in listMembershipPackage"
             :key="index"
           >
@@ -65,7 +66,11 @@
             v-for="(exp, comp) in listExpire"
             :key="comp"
           >
-            <label :for="exp.name" class="radio--custom">
+            <label
+              :for="exp.name"
+              class="radio--custom"
+              @click="showPricePackage(exp)"
+            >
               <input type="radio" :id="exp.name" name="expire" />
               <span class="ml_2">{{ exp.title }}</span>
             </label>
@@ -80,16 +85,16 @@
             class="box d_flex align_items_center justify_content_between mb_1"
           >
             <span>Tạm tính</span>
-            <span>600.000 đ</span>
+            <span>{{ price }} đ</span>
           </div>
           <div
             class="box d_flex align_items_center justify_content_between mb_3"
           >
             <span>Thành tiền</span>
-            <span class="box--total">600.000 đ</span>
+            <span class="box--total">{{ price }} đ</span>
           </div>
           <div class="send">
-            <button>Tiến hành thanh toán</button>
+            <button @click="handleRedirect">Tiến hành thanh toán</button>
           </div>
         </div>
       </div>
@@ -107,6 +112,7 @@ export default {
   data() {
     return {
       value: 10,
+      price: 0,
       imgCart: require("@/assets/images/add_to_cart.svg"),
       listMembershipPackage: [
         {
@@ -160,6 +166,14 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    handleRedirect() {
+      this.$router.push({ name: "payment_method" });
+    },
+    showPricePackage(val) {
+      this.price = val.price;
+    }
   }
 };
 </script>
@@ -174,9 +188,10 @@ export default {
   }
   .wrap {
     .package {
-      width: 32%;
+      background-color: #fff;
       border: 1px solid #444950;
       border-radius: 0.5rem;
+      width: 32%;
       &--name {
         label {
           text-transform: uppercase;
@@ -201,9 +216,13 @@ export default {
           }
         }
       }
-      &.active {
-        border-color: #f96666;
-      }
+    }
+    .active {
+      border-color: #f96666;
+    }
+    .dis {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
   }
   .title,

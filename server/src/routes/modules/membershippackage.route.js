@@ -22,5 +22,7 @@ router.route( "/:id/member" ).post( auth, permission, PackageController.addMembe
 
 // router user add members to package
 router.route( "/:id/many" ).post( auth, permission, PackageController.addMemberToPackage );
+// router add price for old package
+router.route( "/:id/price" ).post( auth, permission, PackageController.addPriceByPackage );
 
 module.exports = router;
