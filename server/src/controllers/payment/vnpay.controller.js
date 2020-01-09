@@ -5,6 +5,8 @@
 /* eslint-disable no-var */
 /* eslint-disable computed-property-spacing */
 
+const PaymentReceipt = require('../../models/PaymentReceipt.model');
+
 const sortObject = (o) => {
   var sorted = {},
     key, a = [];
@@ -30,7 +32,6 @@ const createPaymentUrl = async (req, res) => {
     req.socket.remoteAddress ||
     req.connection.socket.remoteAddress;
 
-  console.log('[MESSAGE]: createPaymentUrl -> ipAddr', ipAddr);
   var dateFormat = require('dateformat');
 
 
@@ -74,6 +75,20 @@ const createPaymentUrl = async (req, res) => {
   }
 
   vnp_Params = sortObject(vnp_Params);
+  
+
+  const paymentReceipt = new PaymentReceipt({
+    _account: req.uid,
+    membershipPackage: req.body.membershipPackage,
+    monthsPurchase: req.body.monthsPurchase,
+    method: "vnpay",
+    vnpayTransaction: vnp_Params
+  });
+
+  console.log('[MESSAGE]: createPaymentUrl -> paymentReceipt', paymentReceipt);
+
+  await paymentReceipt.save();
+
 
   var querystring = require('qs');
   var signData = secretKey + querystring.stringify(vnp_Params, { encode: false });
@@ -84,7 +99,6 @@ const createPaymentUrl = async (req, res) => {
 
   vnp_Params.vnp_SecureHashType = 'SHA256';
   vnp_Params.vnp_SecureHash = secureHash;
-  console.log('[MESSAGE]: createPaymentUrl -> vnp_Params', vnp_Params);
   vnpUrl += `?${ querystring.stringify(vnp_Params, { encode: true })}`;
 
   // Neu muon dung Redirect thi dong dong ben duoi
@@ -142,15 +156,31 @@ const vpnIpn = async (req, res) => {
 
   var checkSum = sha256(signData);
 
-  if (secureHash === checkSum) {
-    var orderId = vnp_Params.vnp_TxnRef;
-    var rspCode = vnp_Params.vnp_ResponseCode;
-    // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
+  var orderId = vnp_Params.vnp_TxnRef;
+  var rspCode = vnp_Params.vnp_ResponseCode;
+  // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-    res.status(200).json({ RspCode: '00', Message: 'success' });
-  } else {
-    res.status(200).json({ RspCode: '97', Message: 'Fail checksum' });
+  const vnpayTransaction = await PaymentReceipt.findOne({ 'vnpayTransaction.vnp_TxnRef': orderId });
+
+  if (!vnpayTransaction) {
+    res.status(200).json({ RspCode: '91', Message: 'Transaction not found!' });
   }
+
+  if (vnpayTransaction && rspCode === '00') {
+    await PaymentReceipt.updateOne({ _id: vnpayTransaction._id }, { isPurchased: true });
+  }
+
+  res.status(200).json({ RspCode: '00', Message: 'success' });
+
+  // if (secureHash === checkSum) {
+  //   var orderId = vnp_Params.vnp_TxnRef;
+  //   var rspCode = vnp_Params.vnp_ResponseCode;
+  //   // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
+
+  //   res.status(200).json({ RspCode: '00', Message: 'success' });
+  // } else {
+  //   res.status(200).json({ RspCode: '97', Message: 'Fail checksum' });
+  // }
 };
 
 
