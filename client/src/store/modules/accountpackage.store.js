@@ -135,6 +135,24 @@ const actions = {
         post: 1,
         campaign: 1,
         slot: 1
+      },
+      price: {
+        one: {
+          original: 0,
+          promotional: 0
+        },
+        three: {
+          original: 0,
+          promotional: 0
+        },
+        six: {
+          original: 0,
+          promotional: 0
+        },
+        twelve: {
+          original: 0,
+          promotional: 0
+        }
       }
     });
   }

@@ -96,6 +96,12 @@ module.exports = {
 
     res.status( 200 ).json( { "status": "success", "data": await MembershipPackage.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) } );
   },
+  /**
+   * @description: Sử dụng hàm để thêm thành viên vào gói tài khoản, hàm này chỉ sử dụng chạy trên postman và chỉ sử dụng 1 lần đối với các thành viên cũ sử dụng trước đó.
+   * @param req là ID của gói cần để add thành viên
+   * @param res trả về thông báo thành công hoặc thất bại
+   * @returns {Promise<void>}
+   */
   "addMemberToPackage": async ( req, res ) => {
     try {
       let accounts, exist, packageInfo, listAccount;
@@ -119,6 +125,33 @@ module.exports = {
       await MembershipPackage.findByIdAndUpdate( req.params.id, { "$set": packageInfo }, { "new": true } );
 
       res.status( 200 ).json( { "status": "success", "message": "Lấy dữ liệu thành công ..." } );
+    } catch ( e ) {
+      console.log( e );
+      res.status( 200 ).json( { "status": "error", "message": "Xảy ra lỗi trong quá trình xử lý dữ liệu" } );
+    }
+  },
+  /**
+   * @description Hàm này được sử dụng để thêm thuộc tính giá cho những gói tài khoản tạo trước đó. Hàm chỉ sử dụng 1 lần.
+   * @param req là id của gói được tạo trước đó cần thêm giá vào gói
+   * @param res trả về thông báo thành công hoặc thất bại
+   * @returns {Promise<void>}
+   */
+  "addPriceByPackage": async ( req, res ) => {
+    try {
+      let packageInfo;
+      
+      packageInfo = await MembershipPackage.findOne( { "_id": req.params.id } ).lean();
+      
+      packageInfo.price = {
+        "one": { "original": 0, "promotional": 0 },
+        "three": { "original": 0, "promotional": 0 },
+        "six": { "original": 0, "promotional": 0 },
+        "twelve": { "original": 0, "promotional": 0 }
+      };
+
+      await MembershipPackage.findByIdAndUpdate( req.params.id, { "$set": packageInfo }, { "new": true } );
+
+      res.status( 200 ).json( { "status": "success", "message": "Thêm giá cho gói tài khoản thành công" } );
     } catch ( e ) {
       console.log( e );
       res.status( 200 ).json( { "status": "error", "message": "Xảy ra lỗi trong quá trình xử lý dữ liệu" } );

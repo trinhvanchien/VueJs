@@ -1,10 +1,12 @@
 <template>
   <div class="content--header-help">
     <div class="ct">
-      <div class="r mx_0 mb_3">
+      <div
+        class="d_flex align_items_center justify_content_between p_2 mx_0 mb_3"
+      >
         <!-- Start header logo help   -->
-        <div class="c_md_3">
-          <div class="logo d_flex align_items_end pb_4">
+        <div class="">
+          <div class="logo d_flex align_items_end" @click="goToHomePage">
             <icon-base width="72" height="36" viewBox="0 0 664 301">
               <hoot-logo-white />
             </icon-base>
@@ -12,9 +14,9 @@
         </div>
         <!-- End header logo help -->
         <!-- Start search help -->
-        <div class="c_md_6">
+        <div class="wrap">
           <div class="wrap--search">
-            <div class="search">
+            <div class="search d_flex align_items_center position_relative">
               <icon-base
                 icon-name="search"
                 width="26"
@@ -33,23 +35,27 @@
         </div>
         <!-- End search help   -->
         <!-- Start back facebook   -->
-        <div class="c_md_3 d_flex align_items_center">
-          <div class="content--back">
-            <div class="icon">
-              <icon-base
-                icon-name="back"
-                width="25"
-                height="22"
-                viewBox="0 0 25 25"
-              >
-                <icon-logout />
-              </icon-base>
+        <div class="d_flex align_items_center">
+          <div class="user d_flex align_items_center" v-if="userMember.name">
+            <div class="user--name">
+              <small class="mr_1">Xin chào :</small>
+              <span>{{ userMember.name }}</span>
             </div>
-            <router-link to="/">
-              <div class="text">
-                Quay lại Hoot
+            <div class="user--image ml_2">
+              <div
+                class="user--image-av av bg"
+                v-if="userMember.imageAvatar"
+                :style="{
+                  backgroundImage: 'url(' + userMember.imageAvatar + ')'
+                }"
+              ></div>
+              <div
+                v-else
+                class="user--image-default av bg d_flex align_items_center justify_content_center"
+              >
+                <span>{{ userMember.name | getFirstLetter }}</span>
               </div>
-            </router-link>
+            </div>
           </div>
         </div>
         <!-- End back facebook   -->
@@ -59,15 +65,37 @@
 </template>
 
 <script>
+import CookieFunction from "@/utils/functions/cookie";
 export default {
   data() {
     return {
       keyword: ""
     };
   },
+  computed: {
+    userMember() {
+      return this.$store.getters.userInfoMember;
+    }
+  },
+  created() {
+    const uid = CookieFunction.getCookie("uid");
+    if (uid) {
+      this.$store.dispatch("getUserInfoMember", uid);
+    } else {
+      return;
+    }
+  },
   methods: {
-    goToHelpHome() {
-      this.$router.push({ name: "help" });
+    goToHomePage() {
+      this.$router.push({ name: "homepage" });
+    }
+  },
+  filters: {
+    getFirstLetter(string) {
+      if (string === undefined) {
+        return;
+      }
+      return string.charAt(0).toUpperCase();
     }
   }
 };
