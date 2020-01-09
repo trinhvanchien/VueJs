@@ -66,7 +66,11 @@
             v-for="(exp, comp) in listExpire"
             :key="comp"
           >
-            <label :for="exp.name" class="radio--custom" @click="showPricePackage(exp)">
+            <label
+              :for="exp.name"
+              class="radio--custom"
+              @click="showPricePackage(exp)"
+            >
               <input type="radio" :id="exp.name" name="expire" />
               <span class="ml_2">{{ exp.title }}</span>
             </label>
@@ -165,7 +169,7 @@ export default {
   },
   methods: {
     handleRedirect() {
-      this.$router.push( { name: "payment_method" } );
+      this.$router.push({ name: "payment_method" });
     },
     showPricePackage(val) {
       this.price = val.price;

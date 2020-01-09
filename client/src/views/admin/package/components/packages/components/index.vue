@@ -49,8 +49,12 @@
               <!--START: PRICE PACKAGE BY MONTH-->
               <div class="price">
                 <div class="desc py_2">
-                  <span class="font_weight_bold text_uppercase">Giá bán theo tháng</span>
-                  <small class="ml_2">( các trường giá trị dưới đây là bắt buộc )</small>
+                  <span class="font_weight_bold text_uppercase"
+                    >Giá bán theo tháng</span
+                  >
+                  <small class="ml_2"
+                    >( các trường giá trị dưới đây là bắt buộc )</small
+                  >
                 </div>
                 <div class="item">
                   <div class="title mb_1">

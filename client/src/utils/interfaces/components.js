@@ -39,7 +39,9 @@ Vue.component("IconCheckActive", () =>
   import("@/components/icons/IconCheckActive")
 );
 Vue.component("IconCopy", () => import("@/components/icons/IconCopy"));
-Vue.component("IconCreditCard", () => import("@/components/icons/IconCreditCard"));
+Vue.component("IconCreditCard", () =>
+  import("@/components/icons/IconCreditCard")
+);
 
 Vue.component("IconDelete", () => import("@/components/icons/IconDelete"));
 Vue.component("IconDownload", () => import("@/components/icons/IconDownload"));
