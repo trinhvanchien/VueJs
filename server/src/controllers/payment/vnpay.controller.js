@@ -5,20 +5,21 @@
 /* eslint-disable no-var */
 /* eslint-disable computed-property-spacing */
 
-const PaymentReceipt = require('../../models/PaymentReceipt.model');
+const PaymentReceipt = require("../../models/PaymentReceipt.model");
 
 const sortObject = (o) => {
   var sorted = {},
-    key, a = [];
-  
+    key,
+    a = [];
+
   for (key in o) {
     if (o.hasOwnProperty(key)) {
       a.push(key);
     }
   }
-  
+
   a.sort();
-  
+
   for (key = 0; key < a.length; key++) {
     sorted[a[key]] = o[a[key]];
   }
@@ -26,14 +27,14 @@ const sortObject = (o) => {
 };
 
 const createPaymentUrl = async (req, res) => {
-  console.log('[MESSAGE]: createPaymentUrl -> req', req.body);
-  var ipAddr = req.headers['x-forwarded-for'] ||
+  console.log("[MESSAGE]: createPaymentUrl -> req", req.body);
+  var ipAddr =
+    req.headers["x-forwarded-for"] ||
     req.connection.remoteAddress ||
     req.socket.remoteAddress ||
     req.connection.socket.remoteAddress;
 
-  var dateFormat = require('dateformat');
-
+  var dateFormat = require("dateformat");
 
   var tmnCode = process.env.VNP_TMNCODE;
   var secretKey = process.env.VNP_HASHSECRET;
@@ -42,8 +43,8 @@ const createPaymentUrl = async (req, res) => {
 
   var date = new Date();
 
-  var createDate = dateFormat(date, 'yyyymmddHHmmss');
-  var orderId = dateFormat(date, 'HHmmss');
+  var createDate = dateFormat(date, "yyyymmddHHmmss");
+  var orderId = dateFormat(date, "HHmmss");
   var amount = req.body.amount;
   var bankCode = req.body.bankCode;
 
@@ -51,14 +52,14 @@ const createPaymentUrl = async (req, res) => {
   var orderType = req.body.orderType;
   var locale = req.body.language;
 
-  if (locale === null || locale === '') {
-    locale = 'vn';
+  if (locale === null || locale === "") {
+    locale = "vn";
   }
-  var currCode = 'VND';
+  var currCode = "VND";
   var vnp_Params = {};
 
-  vnp_Params.vnp_Version = '2';
-  vnp_Params.vnp_Command = 'pay';
+  vnp_Params.vnp_Version = "2";
+  vnp_Params.vnp_Command = "pay";
   vnp_Params.vnp_TmnCode = tmnCode;
   // vnp_Params['vnp_Merchant'] = ''
   vnp_Params.vnp_Locale = locale;
@@ -70,12 +71,23 @@ const createPaymentUrl = async (req, res) => {
   vnp_Params.vnp_ReturnUrl = returnUrl;
   vnp_Params.vnp_IpAddr = ipAddr;
   vnp_Params.vnp_CreateDate = createDate;
-  if (bankCode !== null && bankCode !== '') {
+  if (bankCode !== null && bankCode !== "") {
     vnp_Params.vnp_BankCode = bankCode;
   }
 
   vnp_Params = sortObject(vnp_Params);
-  
+
+  var querystring = require("qs");
+  var signData =
+    secretKey + querystring.stringify(vnp_Params, { encode: false });
+
+  var sha256 = require("sha256");
+
+  var secureHash = sha256(signData);
+
+  vnp_Params.vnp_SecureHashType = "SHA256";
+  vnp_Params.vnp_SecureHash = secureHash;
+  vnpUrl += `?${querystring.stringify(vnp_Params, { encode: true })}`;
 
   const paymentReceipt = new PaymentReceipt({
     _account: req.uid,
@@ -85,24 +97,12 @@ const createPaymentUrl = async (req, res) => {
     vnpayTransaction: vnp_Params
   });
 
-  console.log('[MESSAGE]: createPaymentUrl -> paymentReceipt', paymentReceipt);
+  console.log("[MESSAGE]: createPaymentUrl -> paymentReceipt", paymentReceipt);
 
   await paymentReceipt.save();
 
-
-  var querystring = require('qs');
-  var signData = secretKey + querystring.stringify(vnp_Params, { encode: false });
-
-  var sha256 = require('sha256');
-
-  var secureHash = sha256(signData);
-
-  vnp_Params.vnp_SecureHashType = 'SHA256';
-  vnp_Params.vnp_SecureHash = secureHash;
-  vnpUrl += `?${ querystring.stringify(vnp_Params, { encode: true })}`;
-
   // Neu muon dung Redirect thi dong dong ben duoi
-  res.status(200).json({ code: '00', data: vnpUrl });
+  res.status(200).json({ code: "00", data: vnpUrl });
   // Neu muon dung Redirect thi mo dong ben duoi va dong dong ben tren
   // res.redirect(vnpUrl)
 };
@@ -117,72 +117,94 @@ const vnpayReturn = async (req, res) => {
 
   vnp_Params = sortObject(vnp_Params);
 
-  var config = require('config');
-  var tmnCode = config.get('vnp_TmnCode');
-  var secretKey = config.get('vnp_HashSecret');
+  var config = require("config");
+  var tmnCode = config.get("vnp_TmnCode");
+  var secretKey = config.get("vnp_HashSecret");
 
-  var querystring = require('qs');
-  var signData = secretKey + querystring.stringify(vnp_Params, { encode: false });
+  var querystring = require("qs");
+  var signData =
+    secretKey + querystring.stringify(vnp_Params, { encode: false });
 
-  var sha256 = require('sha256');
+  var sha256 = require("sha256");
 
   var checkSum = sha256(signData);
 
   if (secureHash === checkSum) {
     // Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
 
-    res.render('success', { code: vnp_Params.vnp_ResponseCode });
+    res.render("success", { code: vnp_Params.vnp_ResponseCode });
   } else {
-    res.render('success', { code: '97' });
+    res.render("success", { code: "97" });
   }
 };
 
 const vpnIpn = async (req, res) => {
-  var vnp_Params = req.query;
+  try {
+    var vnp_Params = req.query;
 
-  console.log('[MESSAGE]: vpnIpn -> vnp_Params', vnp_Params);
-  var secureHash = vnp_Params.vnp_SecureHash;
+    console.log("[MESSAGE]: vpnIpn -> vnp_Params", vnp_Params);
+    var secureHash = vnp_Params.vnp_SecureHash;
 
-  delete vnp_Params.vnp_SecureHash;
-  delete vnp_Params.vnp_SecureHashType;
+    delete vnp_Params.vnp_SecureHash;
+    delete vnp_Params.vnp_SecureHashType;
 
-  vnp_Params = sortObject(vnp_Params);
+    vnp_Params = sortObject(vnp_Params);
 
-  var secretKey = process.env.VNP_HASHSECRET;
-  var querystring = require('qs');
-  var signData = secretKey + querystring.stringify(vnp_Params, { encode: false });
+    var secretKey = process.env.VNP_HASHSECRET;
+    var querystring = require("qs");
+    var signData =
+      secretKey + querystring.stringify(vnp_Params, { encode: false });
+
+    var sha256 = require("sha256");
+
+    var checkSum = sha256(signData);
+
+
+    // if (secureHash === checkSum) {
+    const orderId = vnp_Params.vnp_TxnRef;
+    const rspCode = vnp_Params.vnp_ResponseCode;
+    const vnpayTransaction = await PaymentReceipt.findOneAndUpdate(
+      { "vnpayTransaction.vnp_TxnRef": orderId },
+      {
+        "vnpayTransaction.vnp_BankCode": vnp_Params.vnp_BankCode,
+        "vnpayTransaction.vnp_BankTranNo": vnp_Params.vnp_BankTranNo,
+        "vnpayTransaction.vnp_CardType": vnp_Params.vnp_CardType,
+        "vnpayTransaction.vnp_PayDate": vnp_Params.vnp_PayDate,
+        "vnpayTransaction.vnp_TransactionNo": vnp_Params.vnp_TransactionNo,
+        "vnpayTransaction.vnp_ResponseCode": rspCode
+      }
+    );
+      // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
+
+    if (!vnpayTransaction) {
+      return res
+        .status(200)
+        .json({ RspCode: "91", Message: "Transaction not found!" });
+    }
+
+    if (vnpayTransaction && (vnpayTransaction.vnp_Amount !== vnp_Params.vnp_Amount)) {
+      return res
+        .status(200)
+        .json({ RspCode: "07", Message: "Ammount is not correct!" });
+    }
+
+
+    if (vnpayTransaction && rspCode === "00") {
+      await PaymentReceipt.updateOne(
+        { _id: vnpayTransaction._id },
+        { isPurchased: true }
+      );
+      return res.status(200).json({ RspCode: "00", Message: "success" });
+    }
+    // }
     
-  var sha256 = require('sha256');
+    return res.status(200).json({ RspCode: "97", Message: "Fail checksum" });
 
-  var checkSum = sha256(signData);
-
-  var orderId = vnp_Params.vnp_TxnRef;
-  var rspCode = vnp_Params.vnp_ResponseCode;
-  // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
-
-  const vnpayTransaction = await PaymentReceipt.findOne({ 'vnpayTransaction.vnp_TxnRef': orderId });
-
-  if (!vnpayTransaction) {
-    res.status(200).json({ RspCode: '91', Message: 'Transaction not found!' });
+  } catch (error) {
+    console.log("[ERROR]:", error);
+    return res.status(200).json({ RspCode: "99", Message: "Error Exception" });
   }
-
-  if (vnpayTransaction && rspCode === '00') {
-    await PaymentReceipt.updateOne({ _id: vnpayTransaction._id }, { isPurchased: true });
-  }
-
-  res.status(200).json({ RspCode: '00', Message: 'success' });
-
-  // if (secureHash === checkSum) {
-  //   var orderId = vnp_Params.vnp_TxnRef;
-  //   var rspCode = vnp_Params.vnp_ResponseCode;
-  //   // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
-
-  //   res.status(200).json({ RspCode: '00', Message: 'success' });
-  // } else {
-  //   res.status(200).json({ RspCode: '97', Message: 'Fail checksum' });
-  // }
 };
-
 
 module.exports = {
   createPaymentUrl,

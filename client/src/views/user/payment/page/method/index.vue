@@ -94,41 +94,15 @@
             <div class="mb_4">
               <span class="text_uppercase">Thông tin hóa đơn</span>
             </div>
-            <div class="form_group">
-              <label>Tên</label>
-              <input type="text" placeholder="Nhập tên" class="form_control" />
-            </div>
-            <div class="form_group">
-              <label>Số điện thoại</label>
-              <input
-                type="text"
-                placeholder="Nhập số điện thoại"
-                class="form_control"
-              />
-            </div>
-            <div class="form_group">
-              <label>Email đăng ký</label>
-              <input
-                type="text"
-                placeholder="Nhập email"
-                class="form_control"
-              />
-            </div>
             <div class="d_flex align_items_center">
-              <div class="form_group w-50 mr_2">
-                <label>Hóa đơn</label>
-                <input
-                  type="text"
-                  placeholder="Gia hạn tài khoản"
-                  class="form_control"
-                />
-              </div>
-              <div class="form_group w-50">
+              <div class="form_group w-100">
                 <label>Số tiền</label>
                 <input
+                  :value="amount"
                   type="text"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập số tiền"
                   class="form_control"
+                  disabled
                 />
               </div>
             </div>
@@ -136,23 +110,31 @@
               <div class="form_group w-50 mr_2">
                 <label>Tên gói</label>
                 <input
+                  :value="membershipPackage"
                   type="text"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập tên gói"
                   class="form_control"
+                  disabled
                 />
               </div>
               <div class="form_group w-50">
                 <label>Thời hạn sử dụng</label>
                 <input
+                  :value="monthsPurchase"
                   type="text"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập số thời gian sử dụng"
                   class="form_control"
+                  disabled
                 />
               </div>
             </div>
             <div class="form_group">
               <label>Nội dung thanh toán</label>
-              <textarea class="form_control"></textarea>
+              <textarea
+                :value="orderDescription"
+                class="form_control"
+                disabled
+              ></textarea>
             </div>
             <div class="info--pay">
               <button @click="handlePayment">Thanh toán</button>
@@ -168,19 +150,40 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      amount: 100000,
+      membershipPackage: "VIP1",
+      monthsPurchase: 12,
+      orderDescription: "Thanh toan don hang thoi gian: 2020-01-08 23:01:46"
+    };
   },
   computed: {
     status() {
       return this.$store.getters.method;
+    },
+    vnpayUrl() {
+      return this.$store.getters.vnpayUrl;
     }
   },
   methods: {
     changeMethodPayment(val) {
       this.$store.dispatch("changeMethod", val);
     },
-    handlePayment() {
-      this.$router.push({ name: "payment_success" });
+    async handlePayment() {
+      const paymentInfo = {
+        amount: this.amount,
+        membershipPackage: this.membershipPackage,
+        monthsPurchase: this.monthsPurchase,
+        orderDescription: this.orderDescription,
+        bankCode: null,
+        language: "vn",
+        orderType: 130005
+      };
+      await this.$store.dispatch("createVnpayPaymentUrl", paymentInfo);
+      if (this.vnpayUrl) {
+        window.location.href = this.vnpayUrl;
+      }
+      // this.$router.push({ name: "payment_success" });
     }
   }
 };
@@ -188,6 +191,9 @@ export default {
 
 <style lang="scss" scoped>
 .content {
+  .w-100 {
+    width: 100%;
+  }
   .w-50 {
     width: 50%;
   }

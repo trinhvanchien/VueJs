@@ -32,7 +32,15 @@ PaymentReceiptSchema = new Schema( {
     vnp_Amount: Number,
     vnp_ReturnUrl: String,
     vnp_IpAddr: String,
-    vnp_CreateDate: String
+    vnp_CreateDate: String,
+    vnp_SecureHashType: String,
+    vnp_SecureHash: String,
+    vnp_BankCode: String,
+    vnp_BankTranNo: String,
+    vnp_CardType: String,
+    vnp_PayDate: String,
+    vnp_TransactionNo: String,
+    vnp_ResponseCode: String
   }
   
 } );
