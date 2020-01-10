@@ -24,7 +24,7 @@ const sortObject = (o) => {
 };
 
 const createPaymentUrl = async (req, res) => {
-  console.log('[MESSAGE]: createPaymentUrl -> req', req.body);
+  console.log('[MESSAGE]: createPaymentUrl -> req111122', req.body);
   var ipAddr = req.headers['x-forwarded-for'] ||
     req.connection.remoteAddress ||
     req.socket.remoteAddress ||
@@ -49,6 +49,7 @@ const createPaymentUrl = async (req, res) => {
   var orderInfo = req.body.orderDescription;
   var orderType = req.body.orderType;
   var locale = req.body.language;
+
 
   if (locale === null || locale === '') {
     locale = 'vn';
@@ -80,7 +81,7 @@ const createPaymentUrl = async (req, res) => {
 
   var sha256 = require('sha256');
 
-  var secureHash = sha256(signData);
+  var secureHash = sha256(signData); 
 
   vnp_Params.vnp_SecureHashType = 'SHA256';
   vnp_Params.vnp_SecureHash = secureHash;
