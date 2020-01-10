@@ -39,6 +39,10 @@ Vue.component("IconCheckActive", () =>
   import("@/components/icons/IconCheckActive")
 );
 Vue.component("IconCopy", () => import("@/components/icons/IconCopy"));
+Vue.component("IconCreditCard", () =>
+  import("@/components/icons/IconCreditCard")
+);
+
 Vue.component("IconDelete", () => import("@/components/icons/IconDelete"));
 Vue.component("IconDownload", () => import("@/components/icons/IconDownload"));
 Vue.component("IconEye", () => import("@/components/icons/IconEye"));
@@ -112,6 +116,7 @@ Vue.component("IconSelectHeart", () =>
   import("@/components/icons/IconSelectHeart")
 );
 Vue.component("IconSuccess", () => import("@/components/icons/IconSuccess"));
+Vue.component("IconError", () => import("@/components/icons/IconError"));
 Vue.component("IconSupport", () => import("@/components/icons/IconSupport"));
 Vue.component("IconSortDown", () => import("@/components/icons/IconSortDown"));
 Vue.component("IconSmile", () => import("@/components/icons/IconSmile"));

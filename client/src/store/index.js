@@ -22,6 +22,8 @@ import CategoryMarket from "./modules/market/category.store";
 import MarketPostStore from "./modules/market/marketpost.store";
 import ProductMarket from "./modules/market/product.store";
 import ListProduct from "./modules/market/list.store";
+// Payment
+import PaymentStories from "./modules/user/payment";
 
 //Agency
 import PackageStore from "./modules/package.store";
@@ -52,6 +54,8 @@ export default new Vuex.Store({
     MarketPostStore,
     ProductMarket,
     ListProduct,
+    // Payment
+    PaymentStories,
     //Agency
     PackageStore,
     AgencyStore,

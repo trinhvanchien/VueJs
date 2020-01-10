@@ -19,6 +19,56 @@ const mongoose = require( "mongoose" ),
         "default": 1
       }
     },
+    "price": {
+      "one": {
+        // giá gốc
+        "original": {
+          "type": Number,
+          "default": 0
+        },
+        // giá khuyến mãi
+        "promotional": {
+          "type": Number,
+          "default": 0
+        }
+      },
+      "three": {
+        // giá gốc
+        "original": {
+          "type": Number,
+          "default": 0
+        },
+        // giá khuyến mãi
+        "promotional": {
+          "type": Number,
+          "default": 0
+        }
+      },
+      "six": {
+        // giá gốc
+        "original": {
+          "type": Number,
+          "default": 0
+        },
+        // giá khuyến mãi
+        "promotional": {
+          "type": Number,
+          "default": 0
+        }
+      },
+      "twelve": {
+        // giá gốc
+        "original": {
+          "type": Number,
+          "default": 0
+        },
+        // giá khuyến mãi
+        "promotional": {
+          "type": Number,
+          "default": 0
+        }
+      }
+    },
     "totalMembership": {
       "type": Number,
       "default": 0
