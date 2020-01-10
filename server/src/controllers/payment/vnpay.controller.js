@@ -191,7 +191,7 @@ const vpnIpn = async (req, res) => {
 
       if (vnpayTransaction && rspCode === "00") {
         await PaymentReceipt.updateOne(
-          { _id: vnpayTransaction._id },
+          { "vnpayTransaction.vnp_TxnRef": orderId },
           { isPurchased: true }
         );
         return res.status(200).json({ RspCode: "00", Message: "success" });
