@@ -160,43 +160,43 @@ const vpnIpn = async (req, res) => {
     var checkSum = sha256(signData);
 
 
-    // if (secureHash === checkSum) {
-    const orderId = vnp_Params.vnp_TxnRef;
-    const rspCode = vnp_Params.vnp_ResponseCode;
-    const vnpayTransaction = await PaymentReceipt.findOneAndUpdate(
-      { "vnpayTransaction.vnp_TxnRef": orderId },
-      {
-        "vnpayTransaction.vnp_BankCode": vnp_Params.vnp_BankCode,
-        "vnpayTransaction.vnp_BankTranNo": vnp_Params.vnp_BankTranNo,
-        "vnpayTransaction.vnp_CardType": vnp_Params.vnp_CardType,
-        "vnpayTransaction.vnp_PayDate": vnp_Params.vnp_PayDate,
-        "vnpayTransaction.vnp_TransactionNo": vnp_Params.vnp_TransactionNo,
-        "vnpayTransaction.vnp_ResponseCode": rspCode
-      }
-    );
+    if (secureHash === checkSum) {
+      const orderId = vnp_Params.vnp_TxnRef;
+      const rspCode = vnp_Params.vnp_ResponseCode;
+      const vnpayTransaction = await PaymentReceipt.findOneAndUpdate(
+        { "vnpayTransaction.vnp_TxnRef": orderId },
+        {
+          "vnpayTransaction.vnp_BankCode": vnp_Params.vnp_BankCode,
+          "vnpayTransaction.vnp_BankTranNo": vnp_Params.vnp_BankTranNo,
+          "vnpayTransaction.vnp_CardType": vnp_Params.vnp_CardType,
+          "vnpayTransaction.vnp_PayDate": vnp_Params.vnp_PayDate,
+          "vnpayTransaction.vnp_TransactionNo": vnp_Params.vnp_TransactionNo,
+          "vnpayTransaction.vnp_ResponseCode": rspCode
+        }
+      );
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-    if (!vnpayTransaction) {
-      return res
-        .status(200)
-        .json({ RspCode: "91", Message: "Transaction not found!" });
-    }
+      if (!vnpayTransaction) {
+        return res
+          .status(200)
+          .json({ RspCode: "91", Message: "Transaction not found!" });
+      }
 
-    if (vnpayTransaction && (vnpayTransaction.vnp_Amount !== vnp_Params.vnp_Amount)) {
-      return res
-        .status(200)
-        .json({ RspCode: "07", Message: "Ammount is not correct!" });
-    }
+      if (vnpayTransaction && (vnpayTransaction.vnp_Amount !== vnp_Params.vnp_Amount)) {
+        return res
+          .status(200)
+          .json({ RspCode: "07", Message: "Ammount is not correct!" });
+      }
 
 
-    if (vnpayTransaction && rspCode === "00") {
-      await PaymentReceipt.updateOne(
-        { _id: vnpayTransaction._id },
-        { isPurchased: true }
-      );
-      return res.status(200).json({ RspCode: "00", Message: "success" });
+      if (vnpayTransaction && rspCode === "00") {
+        await PaymentReceipt.updateOne(
+          { _id: vnpayTransaction._id },
+          { isPurchased: true }
+        );
+        return res.status(200).json({ RspCode: "00", Message: "success" });
+      }
     }
-    // }
     
     return res.status(200).json({ RspCode: "97", Message: "Fail checksum" });
 
