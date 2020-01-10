@@ -182,13 +182,6 @@ const vpnIpn = async (req, res) => {
           .json({ RspCode: "91", Message: "Transaction not found!" });
       }
 
-      if (vnpayTransaction && (vnpayTransaction.vnp_Amount !== vnp_Params.vnp_Amount)) {
-        return res
-          .status(200)
-          .json({ RspCode: "07", Message: "Ammount is not correct!" });
-      }
-
-
       if (vnpayTransaction && rspCode === "00") {
         await PaymentReceipt.updateOne(
           { "vnpayTransaction.vnp_TxnRef": orderId },
