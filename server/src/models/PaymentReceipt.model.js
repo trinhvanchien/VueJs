@@ -13,8 +13,9 @@ PaymentReceiptSchema = new Schema( {
     enum: [ "vnpay", "bankTransfer" ]
   },
   isPurchased: {
-    type: Boolean,
-    default: false
+    type: String,
+    enum: [ "pending", "success", "fail" ],
+    default: "pending"
   },
   created_at: {
     type: Date,

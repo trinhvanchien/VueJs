@@ -159,11 +159,27 @@ const vpnIpn = async (req, res) => {
 
     var checkSum = sha256(signData);
 
+    const orderId = vnp_Params.vnp_TxnRef;
+    const rspCode = vnp_Params.vnp_ResponseCode;
+    const amount = vnp_Params.vnp_Amount;
+
+    console.log('rspCode',rspCode);
+
+    let returnContent = {
+      RspCode: "",
+      Message: "",
+    }
+
+    if (rspCode=="24"){
+      returnContent = {"RspCode":"00","Message":"Confirm Success"};
+      console.log('[MESSAGE]: returnContent', returnContent)
+      return res
+        .status(200)
+        .json(returnContent);
+    }
 
     if (secureHash === checkSum) {
-      const orderId = vnp_Params.vnp_TxnRef;
-      const rspCode = vnp_Params.vnp_ResponseCode;
-      const vnpayTransaction = await PaymentReceipt.findOneAndUpdate(
+      const transaction = await PaymentReceipt.findOneAndUpdate(
         { "vnpayTransaction.vnp_TxnRef": orderId },
         {
           "vnpayTransaction.vnp_BankCode": vnp_Params.vnp_BankCode,
@@ -176,26 +192,55 @@ const vpnIpn = async (req, res) => {
       );
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-      if (!vnpayTransaction) {
+      if (transaction && (transaction.vnpayTransaction.vnp_Amount != amount)){
+        returnContent = { RspCode: "04", Message: "Invalid amount" };
+        console.log('[MESSAGE]: returnContent', returnContent)
+        return res
+        .status(200)
+        .json(returnContent);
+      }
+
+      if (transaction) {
+        if (transaction.isPurchased === "pending"){
+          if (rspCode === "00"){
+            await PaymentReceipt.updateOne(
+              { "vnpayTransaction.vnp_TxnRef": orderId },
+              { isPurchased: "success" }
+            );
+          } else {
+            await PaymentReceipt.updateOne(
+              { "vnpayTransaction.vnp_TxnRef": orderId },
+              { isPurchased: "fail" }
+            );
+          } 
+          returnContent = { RspCode: "00", Message: "Confirm Success" };
+          console.log('[MESSAGE]: returnContent', returnContent)
+          return res.status(200).json(returnContent);
+        } else {
+          returnContent = { RspCode: "02", Message: "Order already confirmed" };
+          console.log('[MESSAGE]: returnContent', returnContent)
+          return res.status(200).json(returnContent);
+        }
+
+      } else {
+        returnContent = { RspCode: "01", Message: "Order not found" };
+      console.log('[MESSAGE]: returnContent', returnContent)
+        
         return res
           .status(200)
-          .json({ RspCode: "91", Message: "Transaction not found!" });
+          .json(returnContent);
       }
-
-      if (vnpayTransaction && rspCode === "00") {
-        await PaymentReceipt.updateOne(
-          { "vnpayTransaction.vnp_TxnRef": orderId },
-          { isPurchased: true }
-        );
-        return res.status(200).json({ RspCode: "00", Message: "success" });
-      }
+    } else {
+      returnContent = { RspCode: "97", Message: "Fail checksum" };
+      console.log('[MESSAGE]: returnContent', returnContent)
+      return res.status(200).json(returnContent);
     }
     
-    return res.status(200).json({ RspCode: "97", Message: "Fail checksum" });
-
   } catch (error) {
     console.log("[ERROR]:", error);
-    return res.status(200).json({ RspCode: "99", Message: "Error Exception" });
+    returnContent = { RspCode: "99", Message: "Unknow error" };
+    console.log('[MESSAGE]: returnContent', returnContent)
+    return res.status(200).json(returnContent);
   }
 };
 
