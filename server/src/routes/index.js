@@ -45,7 +45,8 @@ router.use( "/agency", require( "./modules/agency/agency.route" ) );
 router.use( "/code", auth, permission, require( "./modules/code.route" ) );
 router.use( "/statistic", auth, permission, require( "./modules/statistics.route" ) );
 
-// Payment Route
-router.use( "/payment", require( "./modules/payment.route" ) );
+// Spin router
+router.use( "/spin-theme", auth, permission, require( "./modules/spinTheme.route" ) );
+router.use( "/spin-word", auth, permission, require( "./modules/spinWord.route" ) );
 
 module.exports = router;

@@ -227,6 +227,22 @@ const generalRouter = {
           component: require("@/views/admin/album/components/gallery").default
         }
       ]
+    },
+    {
+      path: "key",
+      component: () => import("@/views/admin/KeyWord"),
+      children: [
+        {
+          path: "theme",
+          name: "key_theme",
+          component: () => import("@/views/admin/KeyWord/page/Theme")
+        },
+        {
+          path: "word",
+          name: "key_word",
+          component: () => import("@/views/admin/KeyWord/page/Word")
+        }
+      ]
     }
   ]
 };

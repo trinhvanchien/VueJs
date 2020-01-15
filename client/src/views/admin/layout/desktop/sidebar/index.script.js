@@ -113,6 +113,17 @@ export default {
             viewBox: "0 0 26 26"
           },
           to: "agency_list"
+        },
+        {
+          text: "Quản lý từ khóa",
+          icon: {
+            iconName: "manage-key",
+            tagName: "icon-post",
+            width: 20,
+            height: 20,
+            viewBox: "0 0 540 540"
+          },
+          to: "key_theme"
         }
       ],
       menusCoborator: [
