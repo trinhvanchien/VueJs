@@ -1,0 +1,125 @@
+.post--data {
+  font-size: 0.875rem;
+  .col {
+    &:hover {
+      .sort {
+        padding: .25rem .5rem;
+        svg {
+          opacity: 1;
+        }
+      }
+    }
+    .active {
+      padding: .25rem .5rem !important;
+      svg {
+        opacity: 1 !important;
+      }
+    }
+    .sort {
+      border-radius: .5rem;
+      cursor: pointer;
+      padding: .25rem 0;
+      transition: all .4s ease;
+      svg {
+        opacity: 0;
+        stroke-width: .5;
+        stroke: #444;
+        transform: scale(1);
+        transition: all .4s ease;
+        vertical-align: middle;
+      }
+      .descending {
+        transform: rotate(180deg) scale(1);
+        margin-top: -5px;
+      }
+    }
+  }
+  .col--checkbox {
+    height: 20px;
+    width: calc(20px + 1rem);
+  }
+  .col--name {
+    width: 40%;
+    &-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .col--category {
+    width: 35%;
+    &-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .col--image {
+    width: calc(237px + 3rem);
+  }
+  .col--action {
+    width: 25%;
+    svg {
+      color: #999;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      &:hover {
+        color: #ed1c24;
+      }
+    }
+  }
+  .data--empty {
+    color: #999999;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .item--header {
+    background-color: #ffffff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #666666;
+    height: 48px;
+  }
+  .item--body {
+    min-height: 48px;
+    &:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    &:nth-child(2n) {
+      background-color: #f8f8f8;
+    }
+    &:nth-child(2n + 1) {
+      background-color: #F5F5F5;
+    }
+  }
+  .image--wrap {
+    border-radius: 5px;
+    overflow: hidden;
+    width: 40px;
+    &:before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+    &-more,
+    img {
+      position: absolute;
+      width: 100%;
+    }
+    img {
+      height: auto;
+      left: 50%;
+      max-width: none;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &-more {
+      background-color: #e4e4e4;
+      color: #999999;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+  }
+}

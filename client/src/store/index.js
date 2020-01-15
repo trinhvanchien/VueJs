@@ -15,6 +15,8 @@ import MemberShipPackage from "./modules/accountpackage.store";
 import AlbumStore from "./modules/album.store";
 import PhotoLibraryStore from "./modules/photolibrary.store";
 import StatisticsStore from "./modules/statistics.store";
+import SpinStore from "./modules/spin.store";
+import SpinWordStore from "./modules/SpinWord.store";
 
 // Market
 import HomepageMarket from "./modules/market/homepage.store";
@@ -48,6 +50,8 @@ export default new Vuex.Store({
     AlbumStore,
     PhotoLibraryStore,
     StatisticsStore,
+    SpinStore,
+    SpinWordStore,
     // Market
     HomepageMarket,
     CategoryMarket,
