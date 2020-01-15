@@ -52,10 +52,8 @@ export default {
     closePopup() {
       this.$emit("closePopup", false);
     },
-    createNewTheme() {
-    },
-    updateTheme() {
-    }
+    createNewTheme() {},
+    updateTheme() {}
   }
 };
 </script>
