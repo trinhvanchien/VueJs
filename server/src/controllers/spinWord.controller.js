@@ -74,18 +74,22 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": null } );
   },
   "getWordByKey": async( req, res ) => {
-    let wordInfo, dataResponse;
+    let wordInfo, dataResponse, keySearch;
 
     wordInfo = await SpinWord.findOne( { "_id": req.body._id } ).populate( { "path": "theme", "select": "_id name description" } ).lean();
-    dataResponse = await SpinWord.find( { "key": req.body.key } ).populate( { "path": "theme", "select": "_id name description" } ).lean();
-    
-    console.log( wordInfo );
-    console.log( dataResponse );
+
+    // change key to lowercase
+    keySearch = req.body.key.toLowerCase();
+    dataResponse = await SpinWord.find( { "key": keySearch } ).populate( { "path": "theme", "select": "_id name description" } ).lean();
     
     if ( !wordInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Tên từ khóa không tồn tại" } );
     }
-
+    
+    if ( !dataResponse ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Không tìm thấy từ đồng nghĩa nào tương thích" } );
+    }
+    
     if ( dataResponse ) {
       return res.status( 201 ).json( jsonResponse( "success", dataResponse ) );
     }
