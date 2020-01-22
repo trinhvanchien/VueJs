@@ -3,9 +3,12 @@
     <div class="col col--name px_2">
       <span class="sort">{{ item.name }}</span>
     </div>
+    <div class="col col--key px_2">
+      <span class="sort">{{ item.key }}</span>
+    </div>
     <div class="col col--category px_2">
-      <span v-for="(theme, index) in item.theme" :key="index">
-        {{ theme.name + "," }}
+      <span>
+        {{ item.theme[0].name }}
       </span>
     </div>
     <div class="col col--action px_2 text_center">

@@ -21,10 +21,10 @@
               </div>
             </div>
             <div class="form_group">
-              <label
-                >Giá trị chung
-                <small>( các từ cùng nghĩa có chung giá trị )</small></label
-              >
+              <label>
+                Giá trị chung
+                <small>( các từ cùng nghĩa có chung giá trị )</small>
+              </label>
               <input
                 type="text"
                 class="form_control"
@@ -66,11 +66,33 @@
         </div>
       </div>
       <div class="c_lg_7 c_md_12 c_sm_12 c_xs_12">
+        <div class="search--bar--div">
+          <span class="search--icon">
+            <icon-base
+              icon-name="Tìm kiếm"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+            >
+              <icon-input-search />
+            </icon-base>
+          </span>
+          <input
+            class="search--input"
+            type="text"
+            placeholder="Tìm kiếm"
+            v-model="search"
+            @keydown.enter="updateSearch"
+          />
+        </div>
         <div class="theme--content">
           <div class="post--data">
             <div class="item--header d_flex align_items_center px_3 py_2">
               <div class="col col--name px_2">
                 <span class="sort">Tên từ khóa</span>
+              </div>
+              <div class="col col--key px_2">
+                <span class="sort">Giá trị</span>
               </div>
               <div class="col col--category px_2">Chủ đề</div>
               <div class="col col--action px_2">Hành động</div>
@@ -153,6 +175,11 @@ export default {
     "word.theme"(val) {
       if (val.length > 0) {
         this.isShowAlertTheme = false;
+      }
+    },
+    search(val) {
+      // eslint-disable-next-line no-empty
+      if (val.length === 0) {
       }
     }
   },
