@@ -143,10 +143,10 @@ module.exports = {
       packageInfo = await MembershipPackage.findOne( { "_id": req.params.id } ).lean();
       
       packageInfo.price = {
-        "one": { "original": 0, "promotional": 0 },
-        "three": { "original": 0, "promotional": 0 },
-        "six": { "original": 0, "promotional": 0 },
-        "twelve": { "original": 0, "promotional": 0 }
+        "one": { "title": 1, "original": 0, "promotional": 0 },
+        "three": { "title": 3, "original": 0, "promotional": 0 },
+        "six": { "title": 6, "original": 0, "promotional": 0 },
+        "twelve": { "title": 12, "original": 0, "promotional": 0 }
       };
 
       await MembershipPackage.findByIdAndUpdate( req.params.id, { "$set": packageInfo }, { "new": true } );

@@ -1,5 +1,5 @@
 <template>
-  <form class="session">
+  <form v-on:submit.prevent class="session">
     <div class="logo text_center mb_0 mb_sm_2">
       <icon-base width="72" height="36" viewBox="0 0 664 301">
         <hoot-logo-white />
@@ -243,19 +243,19 @@
       <div class="link--group">
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Trợ giúp</a
         >
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Bảo mật</a
         >
         <a
           class="link--group-item"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Điều khoản</a
         >

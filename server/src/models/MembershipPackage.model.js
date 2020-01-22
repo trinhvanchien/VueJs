@@ -22,6 +22,10 @@ const mongoose = require( "mongoose" ),
     "price": {
       "one": {
         // giá gốc
+        "title": {
+          "type": Number,
+          "default": 1
+        },
         "original": {
           "type": Number,
           "default": 0
@@ -33,6 +37,10 @@ const mongoose = require( "mongoose" ),
         }
       },
       "three": {
+        "title": {
+          "type": Number,
+          "default": 3
+        },
         // giá gốc
         "original": {
           "type": Number,
@@ -45,6 +53,10 @@ const mongoose = require( "mongoose" ),
         }
       },
       "six": {
+        "title": {
+          "type": Number,
+          "default": 6
+        },
         // giá gốc
         "original": {
           "type": Number,
@@ -57,6 +69,10 @@ const mongoose = require( "mongoose" ),
         }
       },
       "twelve": {
+        "title": {
+          "type": Number,
+          "default": 12
+        },
         // giá gốc
         "original": {
           "type": Number,

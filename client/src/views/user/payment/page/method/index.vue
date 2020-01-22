@@ -3,6 +3,12 @@
     <div class="title mb_4">
       <span class="text_uppercase font_weight_bold">Thanh toán</span>
     </div>
+    <div class="notification p_3 mb_3">
+      <span
+        >Cảnh báo: Đơn hàng của bạn đang được xử lý vui lòng không tải lại trang
+        !</span
+      >
+    </div>
     <div class="main">
       <div class="title mb_3">
         <span class="text_uppercase font_weight_bold"
@@ -94,41 +100,15 @@
             <div class="mb_4">
               <span class="text_uppercase">Thông tin hóa đơn</span>
             </div>
-            <div class="form_group">
-              <label>Tên</label>
-              <input type="text" placeholder="Nhập tên" class="form_control" />
-            </div>
-            <div class="form_group">
-              <label>Số điện thoại</label>
-              <input
-                type="text"
-                placeholder="Nhập số điện thoại"
-                class="form_control"
-              />
-            </div>
-            <div class="form_group">
-              <label>Email đăng ký</label>
-              <input
-                type="text"
-                placeholder="Nhập email"
-                class="form_control"
-              />
-            </div>
             <div class="d_flex align_items_center">
-              <div class="form_group w-50 mr_2">
-                <label>Hóa đơn</label>
-                <input
-                  type="text"
-                  placeholder="Gia hạn tài khoản"
-                  class="form_control"
-                />
-              </div>
-              <div class="form_group w-50">
+              <div class="form_group w-100">
                 <label>Số tiền</label>
                 <input
+                  :value="info.amount"
                   type="text"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập số tiền"
                   class="form_control"
+                  disabled
                 />
               </div>
             </div>
@@ -136,23 +116,31 @@
               <div class="form_group w-50 mr_2">
                 <label>Tên gói</label>
                 <input
+                  :value="info.membershipPackage"
                   type="text"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập tên gói"
                   class="form_control"
+                  disabled
                 />
               </div>
               <div class="form_group w-50">
-                <label>Thời hạn sử dụng</label>
+                <label>Thời gian gia hạn <small>( tháng )</small></label>
                 <input
+                  :value="info.monthsPurchase"
                   type="text"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập số thời gian sử dụng"
                   class="form_control"
+                  disabled
                 />
               </div>
             </div>
             <div class="form_group">
               <label>Nội dung thanh toán</label>
-              <textarea class="form_control"></textarea>
+              <textarea
+                :value="info.orderDescription"
+                class="form_control"
+                disabled
+              ></textarea>
             </div>
             <div class="info--pay">
               <button @click="handlePayment">Thanh toán</button>
@@ -168,26 +156,61 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      amount: 100000,
+      membershipPackage: "VIP1",
+      monthsPurchase: 12,
+      orderDescription: "Thanh toan don hang thoi gian: 2020-01-08 23:01:46"
+    };
   },
   computed: {
     status() {
       return this.$store.getters.method;
+    },
+    vnpayUrl() {
+      return this.$store.getters.vnpayUrl;
+    },
+    info() {
+      return this.$store.getters.infoBill;
     }
   },
   methods: {
     changeMethodPayment(val) {
       this.$store.dispatch("changeMethod", val);
     },
-    handlePayment() {
-      this.$router.push({ name: "payment_success" });
+    async handlePayment() {
+      const paymentInfo = {
+        amount: this.info.amount,
+        membershipPackage: this.info.membershipPackage,
+        monthsPurchase: this.info.monthsPurchase,
+        orderDescription: this.info.orderDescription,
+        bankCode: null,
+        language: "vn",
+        orderType: 130005
+      };
+      await this.$store.dispatch("createVnpayPaymentUrl", paymentInfo);
+      if (this.vnpayUrl) {
+        window.location.href = this.vnpayUrl;
+      }
+      // TODO: function handle get result from router vnpay
+      // this.$router.push({ name: "payment_success" });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.notification {
+  background-color: #fff;
+  border: 1px solid #f96666;
+  border-radius: 0.5rem;
+  color: #f96666;
+  font-size: 0.875rem;
+}
 .content {
+  .w-100 {
+    width: 100%;
+  }
   .w-50 {
     width: 50%;
   }

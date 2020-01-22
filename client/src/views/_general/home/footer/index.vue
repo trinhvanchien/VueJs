@@ -7,15 +7,27 @@
   >
     <div class="content ct">
       <div class="r m_0">
-        <div class="c_lg_3 mb_3">
+        <div class="c_lg_3">
           <div class="title--footer logo">
-            <icon-base width="72" height="36" viewBox="0 0 664 301">
+            <icon-base
+              width="72"
+              icon-name="Logo Hoot"
+              height="36"
+              viewBox="0 0 664 301"
+            >
               <hoot-logo-black />
             </icon-base>
           </div>
-          <div class="font--13">
+          <!-- <div class="font--13 mb_3">
             Hoot luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
             nhiều thời gian hơn bên gia đình và người thân.
+          </div> -->
+          <div class="font--13 mb_3">
+            CÔNG TY TNHH CÔNG NGHỆ VÀ DỊCH VỤ MASSO VIỆT NAM
+          </div>
+          <div class="font--13">
+            Địa chỉ: Số 653, Ngõ 7, Đường Hồ Tùng Mậu, Tổ 17, Phường Cầu Diễn,
+            Quận Nam Từ Liêm, Thành phố Hà Nội
           </div>
         </div>
         <div class="c_lg_3 mb_3">
@@ -37,7 +49,9 @@
         <div class="c_lg_3 mb_3">
           <div class="title--footer">Chính Sách</div>
           <ul>
-            <li>Chính sách bảo mật</li>
+            <router-link to="/policy" target="_blank">
+              <li>Chính sách bảo mật</li>
+            </router-link>
             <li>Điều kiện</li>
             <li>Quảng cáo</li>
           </ul>

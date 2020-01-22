@@ -19,6 +19,7 @@ import redirectRouter from "./modules/user/_general/redirect";
 import changePasswordRouter from "./modules/user/_general/password";
 import expirationRouter from "./modules/user/_general/expiration";
 import affiliateRouter from "./modules/user/_general/affiliate";
+import policyRouter from "./modules/user/_general/policy";
 
 /**
  * Router for Help
@@ -37,6 +38,7 @@ import PaymentRouter from "./modules/user/payment";
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     /**
@@ -56,6 +58,7 @@ export default new Router({
     changePasswordRouter,
     expirationRouter,
     affiliateRouter,
+    policyRouter,
     /**
      * Router for Help
      */
