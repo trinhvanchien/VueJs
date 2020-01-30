@@ -14,80 +14,164 @@
     </div>
     <div class="r">
       <div class="c_lg_9 c_md_12">
-        <div
-          class="wrap d_flex align_items_center justify_content_between mb_3"
-        >
+        <div class="wrap d_flex justify_content_between mb_3 text_center">
           <div
             class="package px_3 py_4"
-            :class="item.name === 'Free' ? 'dis' : ''"
             v-for="(item, index) in packages"
             :key="index"
-            @click.stop="choosePackage(item)"
           >
-            <div class="package--name">
-              <input type="radio" name="name" :id="item.name" />
-              <label class="ml_2" :for="item.name">{{ item.name }}</label>
+            <div
+              class="package--name d_flex align_items_center flex_column mb_3"
+            >
+              <!--START: ICON FOR PACKAGE FREE-->
+              <div v-if="item.name.toLowerCase() === 'free'">
+                <icon-base
+                  icon-name="remove"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 60 60"
+                >
+                  <icon-diamond />
+                </icon-base>
+              </div>
+              <!--END: ICON FOR PACKAGE FREE-->
+              <!--START: ICON FOR PACKAGE PRO-->
+              <div v-else-if="item.name.toLowerCase() === 'pro'">
+                <icon-base
+                  icon-name="remove"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 60 60"
+                >
+                  <icon-diamond />
+                </icon-base>
+                <icon-base
+                  icon-name="remove"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 60 60"
+                >
+                  <icon-diamond />
+                </icon-base>
+                <icon-base
+                  icon-name="remove"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 60 60"
+                >
+                  <icon-diamond />
+                </icon-base>
+              </div>
+              <!--END: ICON FOR PACKAGE PRO-->
+              <!--START: ICON FOR PACKAGE PAGE CARE-->
+              <div v-else>
+                <icon-base
+                  icon-name="remove"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 60 60"
+                >
+                  <icon-diamond />
+                </icon-base>
+                <icon-base
+                  icon-name="remove"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 60 60"
+                >
+                  <icon-diamond />
+                </icon-base>
+              </div>
+              <!--END: ICON FOR PACKAGE PAGE CARE-->
+              <input type="radio" hidden name="name" :id="item.name" />
+              <label class="mt_2" :for="item.name">{{ item.name }}</label>
             </div>
-            <div class="package--info">
-              <div class="package--info-account">
-                <small>Đăng trên trang cá nhân</small>
+            <div class="package--info px_3">
+              <div class="package--info-account package--inline">
+                <!-- TODO: giới hạn tài khoản facebook sử dụng -->
+                <span v-if="item.name.toLowerCase() !== 'pro'">1 </span>
+                <span v-else>2 </span>
+                <small>tài khoản</small>
               </div>
-              <div class="package--info-post">
-                <small>Số bài đăng trong ngày</small>
-                <span>{{ item.limit.post }}</span>
+              <div class="package--info-post package--inline">
+                <span>{{ item.limit.post }} </span>
+                <small>bài đăng / ngày</small>
               </div>
-              <div class="package--info-schedules">
+              <div
+                class="package--info-schedules package--inline"
+                v-if="item.name.toLowerCase() !== 'free'"
+              >
                 <small>Page không giới han</small>
-                <!--<span>{{ item.limit.campaign }}</span>-->
               </div>
-              <div class="package--info-slot">
-                <small>Giới hạn sự kiện</small>
-                <span>{{ item.limit.slot }}</span>
+              <div
+                class="package--info-schedules package--inline"
+                v-if="item.name.toLowerCase() !== 'free'"
+              >
+                <small>Group không giới han</small>
               </div>
-              <div class="package--info-slot">
-                <small>Tìm nội dung hot</small>
+              <div
+                class="package--info-schedules package--inline"
+                v-if="item.name.toLowerCase() === 'pro'"
+              >
+                <small>Hoot university</small>
               </div>
-              <div class="package--info-slot">
-                <small>Tự động tìm nội dung</small>
-              </div>
-              <div class="package--info-slot">
-                <small>Tự động đăng bài</small>
+              <div
+                class="package--info-schedules package--inline"
+                v-if="item.name.toLowerCase() === 'pro'"
+              >
+                <small>Hỗ trợ 24/7</small>
               </div>
             </div>
-            <div class="package--price">
-              <div class="package--price-original">
-                <span>Giá chỉ từ</span>
+            <div class="package--price px_3 mb_3">
+              <div class="package--price-original py_3">
                 <span
-                  class="number ml_4"
+                  class="number"
                   :class="
                     item.price.one.promotional &&
                     item.price.one.promotional !== 0
-                      ? 'align'
+                      ? ''
                       : ''
                   "
                   >{{ item.price.one.original }}</span
                 >
+                <span> đ /tháng</span>
               </div>
               <div
-                class="package--price-promotional"
+                class="package--price-promotional d_none"
                 :class="
                   item.price.one.promotional && item.price.one.promotional !== 0
                     ? ''
                     : 'opa'
                 "
               >
-                <span>Giá khuyến mãi</span>
-                <span class="number ml_4">{{
-                  item.price.one.promotional
-                }}</span>
+                <span class="number">{{ item.price.one.promotional }}</span>
+                <span> đ /tháng</span>
               </div>
+            </div>
+            <div class="package--action">
+              <button
+                v-if="item.name.toLowerCase() === 'free'"
+                @click="upgradePackage"
+              >
+                Nâng cấp
+              </button>
+              <button v-else @click="choosePackage(item)">Gia hạn</button>
             </div>
           </div>
         </div>
-        <!-- START: MORE OPTION -->
-        <div class="" v-if="packageSelected.length > 0">
-          <div class="title mb_3">
-            <span>Lựa chọn thanh toán</span>
+        <!-- START: UPGRADE PACKAGE -->
+        <div v-if="isShowUpgradePackage === true">
+          <div class="package--upgrade py_3 px_2">
+            Bạn đang sử dụng gói miễn phí của hệ thống, vui lòng chọn gói nâng cấp để sử dụng được những tính năng khác và đầy đủ hơn.
+          </div>
+        </div>
+        <!-- END: UPGRADE PACKAGE -->
+        <!-- START: OPTION -->
+        <div v-if="packageSelected.length > 0">
+          <!-- START: SELECT FOR MONTH -->
+          <div class="title d_flex align_items_center mb_3">
+            <span class="mr_2">Lựa chọn thanh toán</span>
+            <small>( gói {{ packageInfo.name }} )</small>
           </div>
           <div class="option d_flex align_items_center justify_content_between">
             <div
@@ -105,8 +189,9 @@
               </label>
             </div>
           </div>
-          <!-- START: MORE OPTION -->
-          <div class="more mt_3">
+          <!-- START: SELECT FOR MONTH -->
+          <!-- START: BUY POST -->
+          <div class="more mt_3 mb_3">
             <div class="title mb_3">
               <span>mua thêm</span>
             </div>
@@ -130,11 +215,11 @@
               </div>
             </div>
           </div>
-          <!-- END: MORE OPTION -->
+          <!-- END: BUY POST -->
         </div>
         <!-- END: MORE OPTION -->
       </div>
-      <!-- START: PRICE -->
+      <!-- START: PRICE ORDER -->
       <div class="c_lg_3 c_md_12">
         <div class="wrap">
           <div class="box mb_1">
@@ -163,306 +248,12 @@
           </div>
         </div>
       </div>
-      <!-- END: PRICE -->
+      <!-- END: PRICE ORDER -->
     </div>
     <!-- END: WHEN CART HAVE PRODUCT -->
   </div>
 </template>
-<script>
-import EmptyComponent from "./empty";
-export default {
-  components: {
-    EmptyComponent
-  },
-  data() {
-    return {
-      value: 10,
-      price: 0,
-      number: 0,
-      money: 0,
-      monthsPurchase: null,
-      descBill: null,
-      imgCart: require("@/assets/images/add_to_cart.svg"),
-      packageSelected: [],
-      packageInfo: null,
-      isShowAlert: false
-    };
-  },
-  computed: {
-    packages() {
-      return this.$store.getters.membershipPackages;
-    },
-    userMember() {
-      return this.$store.getters.userInfoMember;
-    }
-  },
-  created() {
-    this.$store.dispatch("getMemberShipPackage");
-  },
-  watch: {
-    price(val) {
-      if (val !== 0) {
-        this.isShowAlert = false;
-      }
-    },
-    money(val) {
-      if (val !== 0) {
-        this.isShowAlert = false;
-      }
-    }
-  },
-  methods: {
-    choosePackage(val) {
-      this.packageInfo = val;
-      this.handlePackagePrice(val.price);
-    },
-    handlePackagePrice(val) {
-      const arr = Object.keys(val).map(i => val[i]);
-      this.packageSelected = arr;
-    },
-    handleRedirect() {
-      let dataSender;
-      if (Number(this.price + this.money) === 0) {
-        this.isShowAlert = true;
-        return;
-      } else {
-        dataSender = {
-          amount: Number(this.price + this.money),
-          membershipPackage: this.packageInfo.name,
-          monthsPurchase: this.monthsPurchase,
-          orderDescription: this.descBill
-        };
-        this.$store.dispatch("setInfoPayment", dataSender);
-        this.$router.push({ name: "payment_method" });
-      }
-    },
-    showPricePackage(val) {
-      let a, b, date;
-      this.price = val.original;
-      this.monthsPurchase = val.title;
-      a = this.userMember.expireDate;
-      date = Number(this.monthsPurchase * 30);
-      b = this.calculateTime(new Date(a), date);
-      this.descBill = `Thanh toan don hang thoi gian: ${b}`;
-    },
-    reductionPost() {
-      if (this.number === 0) {
-        return;
-      } else {
-        this.number = this.number - 10;
-        this.money = this.number * 300000;
-      }
-    },
-    increasePost() {
-      this.number = this.number + 10;
-      this.money = this.number * 300000;
-    },
-    calculateTime(a, b) {
-      a.setDate(a.getDate() + b);
-      return this.formatDate(a);
-    },
-    formatDate(d) {
-      const dateTime = new Date(d),
-        date = String(dateTime.getDate()).padStart(2, "0"),
-        month = String(dateTime.getMonth() + 1).padStart(2, "0"),
-        year = dateTime.getFullYear(),
-        hours = String(dateTime.getHours()).padStart(2, "0"),
-        mins = String(dateTime.getMinutes()).padStart(2, "0"),
-        seconds = String(dateTime.getSeconds()).padStart(2, "0");
-
-      return `${year}-${month}-${date} ${hours}:${mins}:${seconds}`;
-    }
-  }
-};
-</script>
+<script src="./index.script.js"></script>
 <style lang="scss" scoped>
-.cart {
-  .notification {
-    background-color: #fff;
-    border: 1px solid #f96666;
-    border-radius: 0.5rem;
-    color: #f96666;
-    font-size: 0.875rem;
-  }
-  .wrap {
-    .package {
-      background-color: #fff;
-      border: 1px solid #444950;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      width: 32%;
-      &--name {
-        label {
-          text-transform: uppercase;
-          font-size: 18px;
-          font-weight: 600;
-          color: #f96666;
-          cursor: pointer;
-        }
-      }
-      &--info {
-        &-account,
-        &-post,
-        &-schedules,
-        &-slot {
-          small {
-            font-size: 14px;
-          }
-          span {
-            font-weight: 600;
-            color: #f96666;
-            margin-left: 8px;
-          }
-        }
-      }
-      &--price {
-        .opa {
-          opacity: 0;
-        }
-        span.number {
-          color: #f96666;
-          font-size: 25px;
-          font-weight: 700;
-        }
-        span.align {
-          text-decoration: line-through #ed1c24;
-        }
-      }
-    }
-    .active {
-      border-color: #f96666;
-    }
-    .dis {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
-  }
-  .title,
-  .info {
-    span {
-      font-size: 18px;
-      text-transform: uppercase;
-    }
-  }
-  .option {
-    .radio--custom {
-      span {
-        cursor: pointer;
-      }
-      input[type="radio"] {
-        background-color: #666;
-        border-radius: 50%;
-        border: 0;
-        cursor: pointer;
-        height: 16px;
-        padding: 0;
-        outline: none;
-        transition: all 0.4s ease;
-        vertical-align: middle;
-        width: 16px;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        &:hover {
-          background-color: #f96666;
-        }
-        &:checked {
-          background-color: #f96666;
-          &:before {
-            background-color: #fff;
-            border-radius: 50%;
-            content: "";
-            display: block;
-            height: 6px;
-            left: 5px;
-            position: relative;
-            top: 5px;
-            width: 6px;
-          }
-        }
-      }
-    }
-  }
-  .more {
-    &--item {
-      .desc {
-      }
-      .amount {
-        button {
-          background-color: #f96666;
-          border: none;
-          border-radius: 0.5rem;
-          color: #fff;
-          cursor: pointer;
-          font-size: 20px;
-          height: 38px;
-          line-height: 38px;
-          width: 40px;
-          &:hover,
-          &:focus,
-          &:active,
-          &:visited {
-            box-shadow: none;
-            outline: 0;
-          }
-        }
-        input {
-          background-color: #fff;
-          border-radius: 0.5rem;
-          border: 1px solid #444;
-          height: 38px;
-          line-height: 38px;
-          width: 70px;
-        }
-      }
-    }
-  }
-  .box {
-    background-color: #fff;
-    border-radius: 0.25rem;
-    padding: 17px 20px 20px 19px;
-    &--total {
-      color: #f96666;
-      font-size: 22px;
-      font-weight: 500;
-    }
-    &--title {
-      font-size: 0.875rem;
-    }
-    &--price {
-      font-weight: 600;
-    }
-  }
-  .text--error {
-    background-color: #ff0515;
-    border-radius: 0.25rem;
-    color: #fff;
-    font-size: 0.75rem;
-  }
-  .send {
-    .disabled {
-      cursor: not-allowed;
-    }
-    .cur {
-      cursor: pointer;
-    }
-    button {
-      background-color: #f96666;
-      border: none;
-      border-radius: 0.25rem;
-      color: #fff;
-      padding: 0.5rem;
-      width: 100%;
-      text-align: center;
-      &:hover,
-      &:focus,
-      &:active,
-      &:visited {
-        background-color: #ff0515;
-        box-shadow: none;
-        outline: 0;
-        transition: all 0.5s ease;
-      }
-    }
-  }
-}
+@import "./index.style";
 </style>
