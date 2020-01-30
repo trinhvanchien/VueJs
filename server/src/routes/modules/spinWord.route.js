@@ -20,4 +20,7 @@ router
 // router get word by key
 router.route( "/key" ).post( auth, SpinWordController.getWordByKey );
 
+/** Spin content */
+router.route( "/spin" ).post(auth, SpinWordController.spin);
+
 module.exports = router;

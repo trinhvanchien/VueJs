@@ -6,12 +6,10 @@ const mongoose = require( "mongoose" ),
   SpinWordSchema = new Schema( {
     "name": String,
     "key": String,
-    "theme": [
-      {
-        "type": Schema.Types.ObjectId,
-        "ref": "SpinTheme"
-      }
-    ],
+    "theme": {
+      "type": Schema.Types.ObjectId,
+      "ref": "SpinTheme"
+    },
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
@@ -22,6 +20,8 @@ const mongoose = require( "mongoose" ),
     },
     "updatedAt": Date
   } );
+
+SpinWordSchema.index({ name: 1, key: 1 });
 
 SpinWordSchema.pre( "save", function( next ) {
   this.updatedAt = Date.now();
