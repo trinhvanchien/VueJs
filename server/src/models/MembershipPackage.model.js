@@ -5,6 +5,10 @@ const mongoose = require( "mongoose" ),
 
   MembershipPackageSchema = new Schema( {
     "name": String,
+    "maxAccountFb": { // nếu thêm có thể gây xung đột với max account của tài khoản khi tạo ( mặc định là 2 ).
+      "type": Number,
+      "default": 1
+    },
     "limit": {
       "post": {
         "type": Number,
