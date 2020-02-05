@@ -12,7 +12,7 @@ const collaborator = require( "../../helpers/middleware/collaborator.middleware"
 
 router
   .route( "/" )
-  .get( auth, collaborator, SpinThemeController.index )
+  .get( auth, SpinThemeController.index )
   .post( auth, collaborator, SpinThemeController.create )
   .patch( auth, collaborator, SpinThemeController.update )
   .delete( auth, collaborator, SpinThemeController.delete );

@@ -138,8 +138,11 @@ module.exports = {
       return res.status(201).json(jsonResponse("success", dataResponse));
     }
   },
+  /**
+   * Request cần phải chứa nội dung (text) và chủ đề (theme) trong body. Khi gửi văn bản cần spin phải kèm theo 1 chủ đề.
+   */
   spin: async (req, res) => {
-    // console.log("[MESSAGE]: ", req.body.text);
+    console.log("[MESSAGE]: req", req.body);
     
     const commonTheme = await SpinTheme.findOne({ name: "Chung" });
     const customTheme = await SpinTheme.findOne({ name: req.body.theme });
@@ -156,7 +159,15 @@ module.exports = {
     return res.status(201).json(jsonResponse("success", text));
   }
 };
-// eslint-disable-next-line no-unused-vars
+/**
+ * Hàm chính để spin content.
+ * Luồng sẽ chạy như sau:
+ * - Duyệt từng từ một trong filter.
+ * - Nếu match từ trong đoạn văn bản mẫu, thì thay thế bằng một từ đồng nghĩa bất kỳ.
+ * - Trả lại văn bản đã thay đổi.
+ * @param {*} dict filter dùng cho chủ đề cần spin
+ * @param {*} text đoạn văn bản cần spin
+ */
 const wordRevolver = (dict, text) => {
   const sentenceStopRegex = /[\.\!\?]/;
 
