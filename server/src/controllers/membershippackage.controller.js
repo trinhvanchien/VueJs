@@ -11,18 +11,12 @@ const Account = require( "../models/Account.model" );
 
 module.exports = {
   "addMember": async ( req, res ) => {
-    let { member } = req.body,
-      currentPackageInfo = await MembershipPackage.findOne( { "_id": req.params.id } ),
-      packageInfo = await MembershipPackage.findOne( { "members": member } );
+    const { id } = req.params;
+    const { member } = req.body;
+    const currentPackageInfo = await MembershipPackage.findOne( { "_id": id } );
 
-    if ( packageInfo ) {
-      packageInfo.members.pull( member );
-      await packageInfo.save();
-    }
-    currentPackageInfo.members.push( member );
-    await currentPackageInfo.save();
-
-    res.status( 200 ).json( { "status": "success", "data": currentPackageInfo } );
+    await Account.updateOne({ _id: member }, { membershipPackage: currentPackageInfo.codeId });
+    res.status( 200 ).json( { "status": "success", "data": "Thêm thành công" } );
   },
   "create": async ( req, res ) => {
     // Handle creator
@@ -52,17 +46,73 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": null } );
   },
   "index": async ( req, res ) => {
-    let dataResponse = null;
 
-    if ( req.query._id ) {
-      dataResponse = await MembershipPackage.findOne( { "_id": req.query._id } ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
-    } else if ( req.query.member ) {
-      dataResponse = await MembershipPackage.findOne( { "members": req.query.member } ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
-    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await MembershipPackage.find( {} ).populate( { "path": "members", "select": "name email phone" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).lean();
+    try {
+      if (req.query.codeId || req.query._id) {
+        const { _id } = req.query;
+        let { codeId } = req.query;
+        let allAccountInPackage = null;
+        let packageDetail = null;
+
+        if (codeId) {
+          packageDetail = await MembershipPackage.findOne({ codeId: codeId }).lean();
+        }
+
+        if (_id) {
+          packageDetail = await MembershipPackage.findOne({ _id: _id }).lean();
+          codeId = packageDetail.codeId;
+        }
+
+
+        allAccountInPackage = await Account.find({
+          membershipPackage: codeId
+        }).select("_id name email phone").lean();
+
+        if (codeId === "free") {
+          allAccountInPackage = await Account.find({ $or: [ {
+            membershipPackage: codeId
+          },
+          {
+            membershipPackage: undefined
+          }
+          ] }).select("_id name email phone").lean();
+        }
+
+
+        result = { ...packageDetail, members: allAccountInPackage };
+
+        return res
+          .status(200)
+          .json({ status: "success", data: result });
+
+      }
+      if (req.query.member) {
+        const dataResponse = await MembershipPackage.findOne({
+          members: req.query.member
+        }).select("codeId name price maxAccountFb limit");
+
+        return res
+          .status(200)
+          .json({ status: "success", data: dataResponse });
+      }
+
+      if (
+        Object.entries(req.query).length === 0 && req.query.constructor === Object
+      ) {
+        const dataResponse = await MembershipPackage.find({})
+          .populate({ path: "members", select: "name email phone" })
+          .populate({ path: "_creator", select: "_id name" })
+          .populate({ path: "_editor", select: "_id name" })
+          .lean();
+
+        return res
+          .status(200)
+          .json({ status: "success", data: dataResponse });
+      }
+    } catch (error) {
+      console.log("[MESSAGE]: error", error);
+      res.status(400).json({ status: "success", message: "Có lỗi xảy ra!" });
     }
-
-    res.status( 200 ).json( { "status": "success", "data": dataResponse } );
 
   },
   "isExist": async ( req, res ) => {
@@ -117,14 +167,12 @@ module.exports = {
       const users = listAccount.filter( ( x ) => !exist.includes( x ) ),
         newUser = exist.concat( users );
 
-      // const arr = new Set( newUser );
-      // packageInfo.members = Array.from( arr );
       
       packageInfo.members = [ ...new Set( newUser ) ];
 
       await MembershipPackage.findByIdAndUpdate( req.params.id, { "$set": packageInfo }, { "new": true } );
 
-      res.status( 200 ).json( { "status": "success", "message": "Lấy dữ liệu thành công ..." } );
+      res.status( 200 ).json( { "status": "success", "message": "Thêm tài khoản vào gói thành công!" } );
     } catch ( e ) {
       console.log( e );
       res.status( 200 ).json( { "status": "error", "message": "Xảy ra lỗi trong quá trình xử lý dữ liệu" } );

@@ -4,6 +4,7 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   MembershipPackageSchema = new Schema( {
+    "codeId": String,
     "name": String,
     "maxAccountFb": { // nếu thêm có thể gây xung đột với max account của tài khoản khi tạo ( mặc định là 2 ).
       "type": Number,
@@ -93,10 +94,6 @@ const mongoose = require( "mongoose" ),
       "type": Number,
       "default": 0
     },
-    "members": [ {
-      "type": Schema.Types.ObjectId,
-      "ref": "Account"
-    } ],
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"

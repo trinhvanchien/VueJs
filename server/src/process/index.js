@@ -1,53 +1,69 @@
 // Require module process
-require( "./socket" );
+require("./socket");
 
-const Role = require( "../models/Role.model" );
-const Help = require( "../models/help/Help.model" );
-const Product = require( "../models/market/Product.model" );
-const MarketPost = require( "../models/market/products/post.model" );
+const Role = require("../models/Role.model");
+const Help = require("../models/help/Help.model");
+const Product = require("../models/market/Product.model");
+const MarketPost = require("../models/market/products/post.model");
+const MembershipPackage = require("../models/MembershipPackage.model");
 
-( async () => {
-  const foundHelp = await Help.find( { "name": "help_homepage" } ),
-    foundRole = await Role.find( {} ),
-    collaboratorsInfo = await Role.findOne( { "level": "Collaborator" } ),
-    agency = await Role.findOne( { "level": "Agency" } );
+(async () => {
+  const foundHelp = await Help.find({ name: "help_homepage" }),
+    foundRole = await Role.find({}),
+    collaboratorsInfo = await Role.findOne({ level: "Collaborator" }),
+    agency = await Role.findOne({ level: "Agency" });
 
   // Check Role First Time Server running
-  if ( foundRole.length === undefined || foundRole.length === 0 ) {
+  if (foundRole.length === undefined || foundRole.length === 0) {
     const arr = [
-      { "level": "SuperAdmin" },
-      { "level": "Admin" },
-      { "level": "Member" }
+      { level: "SuperAdmin" },
+      { level: "Admin" },
+      { level: "Member" }
     ];
 
-    await Role.insertMany( arr );
-    console.log( "Create role successfully!" );
+    await Role.insertMany(arr);
+    console.log("Create role successfully!");
   }
 
   // Check Collaborators exists right way?
-  if ( !collaboratorsInfo ) {
-    const newRole = new Role( { "level": "Collaborator" } );
+  if (!collaboratorsInfo) {
+    const newRole = new Role({ level: "Collaborator" });
 
     await newRole.save();
   }
 
   // Check agency exists right way?
-  if ( !agency ) {
-    const newRole = new Role( { "level": "Agency" } );
+  if (!agency) {
+    const newRole = new Role({ level: "Agency" });
 
     await newRole.save();
   }
 
   // Check Help First Time Server running
-  if ( foundHelp.length === undefined || foundHelp.length === 0 ) {
-    const defaultHelp = await new Help( { "name": "help_homepage" } );
+  if (foundHelp.length === undefined || foundHelp.length === 0) {
+    const defaultHelp = new Help({ name: "help_homepage" });
 
     await defaultHelp.save();
   }
 
-  let foundProduct = await Product.find( {} );
+  let foundProduct = await Product.find({});
 
-  await Promise.all( foundProduct.map( async ( product ) => {
-    await MarketPost.findByIdAndUpdate( { "_id": product.content }, { "$set": { "assign": true } }, { "new": true } );
-  } ) );
-} )();
+  await Promise.all(
+    foundProduct.map(async (product) => {
+      await MarketPost.findByIdAndUpdate(
+        { _id: product.content },
+        { $set: { assign: true } },
+        { new: true }
+      );
+    })
+  );
+
+  const membershipPackageQuery = await MembershipPackage.findOne({});
+
+  if (!membershipPackageQuery) {
+    await new MembershipPackage({
+      codeId: "free",
+      name: "Miễn phí"
+    }).save();
+  }
+})();
