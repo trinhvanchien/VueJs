@@ -1,0 +1,226 @@
+.cart {
+  .notification {
+    background-color: #fff;
+    border: 1px solid #f96666;
+    border-radius: 0.5rem;
+    color: #f96666;
+    font-size: 0.875rem;
+  }
+  .wrap {
+    .package {
+      background-color: #fff;
+      border: 1px solid #444950;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      width: 32%;
+      &--name {
+        label {
+          text-transform: uppercase;
+          font-size: 18px;
+          font-weight: 600;
+          color: #f96666;
+          cursor: pointer;
+        }
+      }
+      &--advance {
+        width: 40%;
+        border: 1px solid #ff0000;
+      }
+      &--info {
+        &-account,
+        &-post,
+        &-schedules,
+        &-slot {
+          small {
+            font-size: 14px;
+          }
+          span {
+            font-weight: 600;
+            color: #696060;
+          }
+        }
+      }
+      &--inline {
+        border-top: 1px solid #e4d3d3;
+        padding: 0.35rem;
+      }
+      &--price {
+        &-original, &-promotional {
+          border-top: 1px solid #e4d3d3;
+        }
+        .opa {
+          opacity: 0;
+        }
+        span.number {
+          color: #f96666;
+          font-size: 25px;
+          font-weight: 700;
+        }
+        span.align {
+          text-decoration: line-through #ed1c24;
+        }
+      }
+      &--action {
+        button {
+          background-color: #f96666;
+          border: none;
+          border-radius: 1.5rem;
+          color: #fff;
+          cursor: pointer;
+          padding: 0.35rem 1.5rem;
+          text-align: center;
+          &:hover,
+          &:focus,
+          &:active,
+          &:visited {
+            background-color: #ff0515;
+            box-shadow: none;
+            outline: 0;
+            transition: all 0.5s ease;
+          }
+        }
+      }
+    }
+    .active {
+      border-color: #f96666;
+    }
+    .dis {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+  .package--upgrade {
+    background-color: #fff;
+    border: 1px solid #f96666;
+    border-radius: 0.5rem;
+    color: #f96666;
+    font-size: 15px;
+  }
+  .title,
+  .info {
+    span {
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+  }
+  .option {
+    .radio--custom {
+      span {
+        cursor: pointer;
+      }
+      input[type="radio"] {
+        background-color: #666;
+        border-radius: 50%;
+        border: 0;
+        cursor: pointer;
+        height: 16px;
+        padding: 0;
+        outline: none;
+        transition: all 0.4s ease;
+        vertical-align: middle;
+        width: 16px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        &:hover {
+          background-color: #f96666;
+        }
+        &:checked {
+          background-color: #f96666;
+          &:before {
+            background-color: #fff;
+            border-radius: 50%;
+            content: "";
+            display: block;
+            height: 6px;
+            left: 5px;
+            position: relative;
+            top: 5px;
+            width: 6px;
+          }
+        }
+      }
+    }
+  }
+  .more {
+    &--item {
+      .desc {
+      }
+      .amount {
+        button {
+          background-color: #f96666;
+          border: none;
+          border-radius: 0.5rem;
+          color: #fff;
+          cursor: pointer;
+          font-size: 20px;
+          height: 38px;
+          line-height: 38px;
+          width: 40px;
+          &:hover,
+          &:focus,
+          &:active,
+          &:visited {
+            box-shadow: none;
+            outline: 0;
+          }
+        }
+        input {
+          background-color: #fff;
+          border-radius: 0.5rem;
+          border: 1px solid #444;
+          height: 38px;
+          line-height: 38px;
+          width: 70px;
+        }
+      }
+    }
+  }
+  .box {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 17px 20px 20px 19px;
+    &--total {
+      color: #f96666;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    &--title {
+      font-size: 0.875rem;
+    }
+    &--price {
+      font-weight: 600;
+    }
+  }
+  .text--error {
+    background-color: #ff0515;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 0.75rem;
+  }
+  .send {
+    .disabled {
+      cursor: not-allowed;
+    }
+    .cur {
+      cursor: pointer;
+    }
+    button {
+      background-color: #f96666;
+      border: none;
+      border-radius: 0.25rem;
+      color: #fff;
+      padding: 0.5rem;
+      width: 100%;
+      text-align: center;
+      &:hover,
+      &:focus,
+      &:active,
+      &:visited {
+        background-color: #ff0515;
+        box-shadow: none;
+        outline: 0;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+}

@@ -2,11 +2,18 @@ import VnpayServices from "@/services/modules/user/payment/vnpay.services";
 
 const state = {
   method: 0,
-  vnpayUrl: null
+  vnpayUrl: null,
+  infoBill: {
+    amount: "",
+    membershipPackage: "",
+    monthsPurchase: "",
+    orderDescription: ""
+  }
 };
 const getters = {
   method: state => state.method,
-  vnpayUrl: state => state.vnpayUrl
+  vnpayUrl: state => state.vnpayUrl,
+  infoBill: state => state.infoBill
 };
 const mutations = {
   setMethod: (state, payload) => {
@@ -14,6 +21,9 @@ const mutations = {
   },
   setVnpayUrl: (state, payload) => {
     state.vnpayUrl = payload;
+  },
+  setInfoPayment: (state, payload) => {
+    state.infoBill = payload;
   }
 };
 const actions = {
@@ -25,6 +35,9 @@ const actions = {
       payload
     );
     commit("setVnpayUrl", createPaymentUrlRequest.data.data);
+  },
+  setInfoPayment: ({ commit }, payload) => {
+    commit("setInfoPayment", payload);
   }
 };
 

@@ -3,6 +3,12 @@
     <div class="title mb_4">
       <span class="text_uppercase font_weight_bold">Thanh toán</span>
     </div>
+    <div class="notification p_3 mb_3">
+      <span
+        >Cảnh báo: Đơn hàng của bạn đang được xử lý vui lòng không tải lại trang
+        !</span
+      >
+    </div>
     <div class="main">
       <div class="title mb_3">
         <span class="text_uppercase font_weight_bold"
@@ -98,7 +104,7 @@
               <div class="form_group w-100">
                 <label>Số tiền</label>
                 <input
-                  :value="amount"
+                  :value="info.amount"
                   type="text"
                   placeholder="Nhập số tiền"
                   class="form_control"
@@ -110,7 +116,7 @@
               <div class="form_group w-50 mr_2">
                 <label>Tên gói</label>
                 <input
-                  :value="membershipPackage"
+                  :value="info.membershipPackage"
                   type="text"
                   placeholder="Nhập tên gói"
                   class="form_control"
@@ -118,9 +124,9 @@
                 />
               </div>
               <div class="form_group w-50">
-                <label>Thời hạn sử dụng</label>
+                <label>Thời gian gia hạn <small>( tháng )</small></label>
                 <input
-                  :value="monthsPurchase"
+                  :value="info.monthsPurchase"
                   type="text"
                   placeholder="Nhập số thời gian sử dụng"
                   class="form_control"
@@ -131,7 +137,7 @@
             <div class="form_group">
               <label>Nội dung thanh toán</label>
               <textarea
-                :value="orderDescription"
+                :value="info.orderDescription"
                 class="form_control"
                 disabled
               ></textarea>
@@ -163,6 +169,9 @@ export default {
     },
     vnpayUrl() {
       return this.$store.getters.vnpayUrl;
+    },
+    info() {
+      return this.$store.getters.infoBill;
     }
   },
   methods: {
@@ -171,10 +180,10 @@ export default {
     },
     async handlePayment() {
       const paymentInfo = {
-        amount: this.amount,
-        membershipPackage: this.membershipPackage,
-        monthsPurchase: this.monthsPurchase,
-        orderDescription: this.orderDescription,
+        amount: this.info.amount,
+        membershipPackage: this.info.membershipPackage,
+        monthsPurchase: this.info.monthsPurchase,
+        orderDescription: this.info.orderDescription,
         bankCode: null,
         language: "vn",
         orderType: 130005
@@ -183,6 +192,7 @@ export default {
       if (this.vnpayUrl) {
         window.location.href = this.vnpayUrl;
       }
+      // TODO: function handle get result from router vnpay
       // this.$router.push({ name: "payment_success" });
     }
   }
@@ -190,6 +200,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.notification {
+  background-color: #fff;
+  border: 1px solid #f96666;
+  border-radius: 0.5rem;
+  color: #f96666;
+  font-size: 0.875rem;
+}
 .content {
   .w-100 {
     width: 100%;

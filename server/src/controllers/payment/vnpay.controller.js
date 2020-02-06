@@ -83,7 +83,7 @@ const createPaymentUrl = async (req, res) => {
 
   var sha256 = require("sha256");
 
-  var secureHash = sha256(signData); 
+  var secureHash = sha256(signData);
 
   vnp_Params.vnp_SecureHashType = "SHA256";
   vnp_Params.vnp_SecureHash = secureHash;
@@ -163,16 +163,16 @@ const vpnIpn = async (req, res) => {
     const rspCode = vnp_Params.vnp_ResponseCode;
     const amount = vnp_Params.vnp_Amount;
 
-    console.log('rspCode',rspCode);
+    console.log('rspCode', rspCode);
 
     let returnContent = {
       RspCode: "",
-      Message: "",
-    }
+      Message: ""
+    };
 
-    if (rspCode=="24"){
-      returnContent = {"RspCode":"00","Message":"Confirm Success"};
-      console.log('[MESSAGE]: returnContent', returnContent)
+    if (rspCode == "24") {
+      returnContent = { "RspCode": "00", "Message": "Confirm Success" };
+      console.log('[MESSAGE]: returnContent', returnContent);
       return res
         .status(200)
         .json(returnContent);
@@ -192,54 +192,55 @@ const vpnIpn = async (req, res) => {
       );
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-      if (transaction && (transaction.vnpayTransaction.vnp_Amount != amount)){
+      if (transaction && (transaction.vnpayTransaction.vnp_Amount != amount)) {
         returnContent = { RspCode: "04", Message: "Invalid amount" };
-        console.log('[MESSAGE]: returnContent', returnContent)
+        console.log('[MESSAGE]: returnContent', returnContent);
         return res
-        .status(200)
-        .json(returnContent);
+          .status(200)
+          .json(returnContent);
       }
 
       if (transaction) {
-        if (transaction.isPurchased === "pending"){
-          if (rspCode === "00"){
+        if (transaction.isPurchased === "pending") {
+          if (rspCode === "00") {
             await PaymentReceipt.updateOne(
               { "vnpayTransaction.vnp_TxnRef": orderId },
               { isPurchased: "success" }
             );
+            // TODO: function update expire for user
           } else {
             await PaymentReceipt.updateOne(
               { "vnpayTransaction.vnp_TxnRef": orderId },
               { isPurchased: "fail" }
             );
-          } 
+          }
           returnContent = { RspCode: "00", Message: "Confirm Success" };
-          console.log('[MESSAGE]: returnContent', returnContent)
-          return res.status(200).json(returnContent);
-        } else {
-          returnContent = { RspCode: "02", Message: "Order already confirmed" };
-          console.log('[MESSAGE]: returnContent', returnContent)
+          console.log('[MESSAGE]: returnContent', returnContent);
           return res.status(200).json(returnContent);
         }
-
-      } else {
-        returnContent = { RspCode: "01", Message: "Order not found" };
-      console.log('[MESSAGE]: returnContent', returnContent)
+        returnContent = { RspCode: "02", Message: "Order already confirmed" };
+        console.log('[MESSAGE]: returnContent', returnContent);
+        return res.status(200).json(returnContent);
         
-        return res
-          .status(200)
-          .json(returnContent);
+
       }
-    } else {
-      returnContent = { RspCode: "97", Message: "Fail checksum" };
-      console.log('[MESSAGE]: returnContent', returnContent)
-      return res.status(200).json(returnContent);
+      returnContent = { RspCode: "01", Message: "Order not found" };
+      console.log('[MESSAGE]: returnContent', returnContent);
+        
+      return res
+        .status(200)
+        .json(returnContent);
+      
     }
+    returnContent = { RspCode: "97", Message: "Fail checksum" };
+    console.log('[MESSAGE]: returnContent', returnContent);
+    return res.status(200).json(returnContent);
+    
     
   } catch (error) {
     console.log("[ERROR]:", error);
     returnContent = { RspCode: "99", Message: "Unknow error" };
-    console.log('[MESSAGE]: returnContent', returnContent)
+    console.log('[MESSAGE]: returnContent', returnContent);
     return res.status(200).json(returnContent);
   }
 };
