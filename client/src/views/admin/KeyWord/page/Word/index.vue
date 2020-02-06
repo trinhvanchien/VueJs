@@ -172,7 +172,7 @@ export default {
       }
     },
     "word.theme"(val) {
-      if (val.length > 0) {
+      if (val !== null) {
         this.isShowAlertTheme = false;
       }
     },
@@ -190,7 +190,7 @@ export default {
       } else if (this.word.key === "") {
         this.isShowAlertKey = true;
         return;
-      } else if (this.word.theme.length === 0) {
+      } else if (this.word.theme === null) {
         this.isShowAlertTheme = true;
         return;
       } else {
@@ -199,6 +199,8 @@ export default {
       }
     },
     handleSelectTheme(val) {
+      // eslint-disable-next-line no-console
+      console.log("[MESSAGE]: handleSelectTheme -> val", val);
       this.word.theme = val;
     },
     handleDelete(val) {
@@ -212,7 +214,7 @@ export default {
       } else if (this.word.key === "") {
         this.isShowAlertKey = true;
         return;
-      } else if (this.word.theme.length === 0) {
+      } else if (this.word.theme === null) {
         this.isShowAlertTheme = true;
         return;
       } else {

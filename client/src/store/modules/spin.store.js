@@ -1,10 +1,7 @@
 import SpinThemeServices from "@/services/modules/spinTheme.services";
 
 const state = {
-  theme: {
-    name: "",
-    description: ""
-  },
+  theme: null,
   themes: [],
   spinStatus: ""
 };

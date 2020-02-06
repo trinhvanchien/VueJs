@@ -40,9 +40,7 @@ const actions = {
       let results;
       commit("word_request");
       if (payload.theme) {
-        payload.theme = payload.theme.map(item => {
-          return item._id;
-        });
+        payload.theme = payload.theme._id;
       }
       await SpinWordServices.create(payload);
       results = await SpinWordServices.index();
@@ -101,9 +99,7 @@ const actions = {
       let results;
       commit("word_request");
       if (payload.theme) {
-        payload.theme = payload.theme.map(item => {
-          return item._id;
-        });
+        payload.theme = payload.theme_id;
       }
       await SpinWordServices.update(payload._id, payload);
       results = await SpinWordServices.index();
