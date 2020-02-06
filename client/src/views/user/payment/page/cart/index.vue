@@ -162,7 +162,8 @@
         <!-- START: UPGRADE PACKAGE -->
         <div v-if="isShowUpgradePackage === true">
           <div class="package--upgrade py_3 px_2">
-            Bạn đang sử dụng gói miễn phí của hệ thống, vui lòng chọn gói nâng cấp để sử dụng được những tính năng khác và đầy đủ hơn.
+            Bạn đang sử dụng gói miễn phí của hệ thống, vui lòng chọn gói nâng
+            cấp để sử dụng được những tính năng khác và đầy đủ hơn.
           </div>
         </div>
         <!-- END: UPGRADE PACKAGE -->
