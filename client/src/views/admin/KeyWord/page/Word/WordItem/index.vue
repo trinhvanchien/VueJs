@@ -8,7 +8,7 @@
     </div>
     <div class="col col--category px_2">
       <span>
-        {{ item.theme[0].name }}
+        {{ item.theme.name }}
       </span>
     </div>
     <div class="col col--action px_2 text_center">

@@ -39,7 +39,6 @@
               <label>Chọn chủ đề</label>
               <div class="theme--body-cate">
                 <multiselect
-                  multiple
                   label="name"
                   placeholder="Chọn danh mục đăng bài..."
                   :options="spin"
