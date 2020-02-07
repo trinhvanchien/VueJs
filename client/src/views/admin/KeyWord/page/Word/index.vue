@@ -144,7 +144,7 @@ export default {
   },
   computed: {
     spin() {
-      return this.$store.getters.themes;
+      return this.$store.getters.themeList;
     },
     word() {
       return this.$store.getters.word;
@@ -154,7 +154,7 @@ export default {
     }
   },
   created() {
-    const spin = this.$store.getters.themes;
+    const spin = this.$store.getters.themeList;
     if (spin.length === 0) {
       this.$store.dispatch("getAllSpinTheme");
     }

@@ -4,7 +4,7 @@
       <div class="c_lg_5 c_md_12 c_sm_12 c_xs_12">
         <div class="theme--top p_3">
           <div class="theme--title text_center text_uppercase py_3">
-            <span v-if="theme._id">Cập nhật chủ đề</span>
+            <span v-if="currentTheme._id">Cập nhật chủ đề</span>
             <span v-else>Tạo mới chủ đề</span>
           </div>
           <div class="theme--body">
@@ -14,7 +14,7 @@
                 type="text"
                 class="form_control"
                 placeholder="Nhập tên chủ đề"
-                v-model="theme.name"
+                v-model="currentTheme.name"
               />
               <div class="text--error mt_3" v-if="isShowAlert === true">
                 <span>Tên chủ đề không được bỏ trống</span>
@@ -24,7 +24,7 @@
               <label>Mô tả về chủ đề</label>
               <textarea
                 class="form_control"
-                v-model="theme.description"
+                v-model="currentTheme.description"
               ></textarea>
             </div>
           </div>
@@ -34,7 +34,7 @@
             <button class="btn--cancel" @click="resetSpinTheme">Hủy</button>
             <button
               class="btn--submit"
-              v-if="theme._id"
+              v-if="currentTheme._id"
               @click="updateSpinTheme"
             >
               Cập nhật
@@ -57,13 +57,13 @@
             </div>
             <div
               class="item--body data--empty d_flex align_items_center justify_content_center px_3 py_2"
-              v-if="spin.length === 0"
+              v-if="themeList.length === 0"
             >
               Không có dữ liệu.
             </div>
             <theme-item
               v-else
-              v-for="(item, index) in spin"
+              v-for="(item, index) in themeList"
               :key="index"
               :theme="item"
               @deleteTheme="handleDelete($event)"
@@ -100,18 +100,18 @@ export default {
     };
   },
   computed: {
-    spin() {
-      return this.$store.getters.themes;
+    currentTheme(){
+      return this.$store.getters.currentTheme;
     },
-    theme() {
-      return this.$store.getters.theme;
+    themeList() {
+      return this.$store.getters.themeList;
     }
   },
   created() {
     this.$store.dispatch("getAllSpinTheme");
   },
   watch: {
-    "theme.name"(val) {
+    "currentTheme.name"(val) {
       if (val !== "") {
         this.isShowAlert = false;
       }
@@ -119,11 +119,11 @@ export default {
   },
   methods: {
     async createSpinTheme() {
-      if (this.theme.name === "") {
+      if (this.currentTheme.name === "") {
         this.isShowAlert = true;
         return;
       } else {
-        await this.$store.dispatch("createNewSpinTheme", this.theme);
+        await this.$store.dispatch("createNewSpinTheme", this.currentTheme);
         await this.$store.dispatch("setThemeDefault");
       }
     },
@@ -132,11 +132,11 @@ export default {
       this.themeSelected = theme;
     },
     async updateSpinTheme() {
-      if (this.theme.name === "") {
+      if (this.currentTheme.name === "") {
         this.isShowAlert = true;
         return;
       } else {
-        await this.$store.dispatch("updateSpinTheme", this.theme);
+        await this.$store.dispatch("updateSpinTheme", this.currentTheme);
         await this.$store.dispatch("setThemeDefault");
       }
     },

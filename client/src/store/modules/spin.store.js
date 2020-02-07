@@ -1,13 +1,13 @@
 import SpinThemeServices from "@/services/modules/spinTheme.services";
 
 const state = {
-  theme: null,
-  themes: [],
+  currentTheme: {},
+  themeList: [],
   spinStatus: ""
 };
 const getters = {
-  theme: state => state.theme,
-  themes: state => state.themes,
+  currentTheme: state => state.currentTheme,
+  themeList: state => state.themeList,
   spinStatus: state => state.spinStatus
 };
 const mutations = {
@@ -21,24 +21,24 @@ const mutations = {
     state.spinStatus = "error";
   },
   setDeleteTheme: (state, payload) => {
-    state.themes = payload;
+    state.themeList = payload;
   },
   setTheme: (state, payload) => {
-    state.theme = payload;
+    state.currentTheme = payload;
   },
   setThemes: (state, payload) => {
-    state.themes = payload;
+    state.themeList = payload;
   },
   setUpdateSpinTheme: (state, payload) => {
     let position;
-    position = state.themes
+    position = state.themeList
       .map((item, index) => {
         if (item._id == payload._id) {
           return index;
         }
       })
       .filter(item => item !== undefined);
-    state.themes[position] = payload;
+    state.themeList[position] = payload;
   }
 };
 const actions = {
@@ -86,7 +86,7 @@ const actions = {
     try {
       let spin;
       commit("spin_request");
-      spin = state.themes
+      spin = state.themeList
         .map(item => {
           if (item._id !== payload) {
             return item;
