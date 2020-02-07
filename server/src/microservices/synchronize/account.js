@@ -37,5 +37,12 @@ module.exports = {
         "Authorization": headers
       }
     } );
+  },
+  "updateUserSync": ( url, data, headers ) => {
+    return request( {
+      "method": "patch",
+      "url": `${url}/api/v1/users/sync/user`,
+      "data": data
+    } );
   }
 };

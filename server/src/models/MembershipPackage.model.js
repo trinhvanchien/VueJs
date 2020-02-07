@@ -10,6 +10,9 @@ const mongoose = require( "mongoose" ),
       "type": Number,
       "default": 1
     },
+    "permission": {
+      "type": [ String ]
+    },
     "limit": {
       "post": {
         "type": Number,

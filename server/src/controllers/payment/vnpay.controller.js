@@ -6,6 +6,10 @@
 /* eslint-disable computed-property-spacing */
 
 const PaymentReceipt = require("../../models/PaymentReceipt.model");
+const Account = require("../../models/Account.model");
+const MembershipPackage = require("../../models/MembershipPackage.model");
+const Server = require("../../models/Server.model");
+const { updateUserSync } = require("../../microservices/synchronize/account");
 
 const sortObject = (o) => {
   var sorted = {},
@@ -163,19 +167,88 @@ const vpnIpn = async (req, res) => {
     const rspCode = vnp_Params.vnp_ResponseCode;
     const amount = vnp_Params.vnp_Amount;
 
-    console.log('rspCode', rspCode);
+    console.log("rspCode", rspCode);
 
     let returnContent = {
       RspCode: "",
       Message: ""
     };
 
+    if (process.env.APP_MOCK === "enabled") {
+      const transaction = await PaymentReceipt.findOne({
+        "vnpayTransaction.vnp_TxnRef": orderId
+      });
+
+      const userAccount = await Account.findOne({
+        _id: transaction._account
+      }).select("expireDate maxAccountFb membershipPackage");
+
+      const membershipPackage = await MembershipPackage.findOne({
+        codeId: transaction.membershipPackage
+      });
+
+      if (transaction) {
+        await PaymentReceipt.updateOne(
+          { "vnpayTransaction.vnp_TxnRef": orderId },
+          { isPurchased: "success" }
+        );
+
+        let infoToUpdate = {
+          status: true,
+          maxAccountFb: membershipPackage.membershipPackage,
+          membershipPackage: transaction.membershipPackage,
+          expireDate: new Date(userAccount.expireDate).setMonth(
+            new Date(userAccount.expireDate).getMonth() +
+              transaction.monthsPurchase
+          )
+        };
+
+        await Account.updateOne(
+          {
+            _id: transaction._account
+          },
+          infoToUpdate
+        );
+
+
+        const syncData = {
+          id: transaction._account,
+          info: infoToUpdate
+        };
+
+        const vpsContainServer = await Server.findOne({
+          userAmount: userAccount._id
+        })
+          .select("info")
+          .lean();
+
+        try {
+
+          await updateUserSync(
+            `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
+            syncData
+          );
+    
+        } catch (error) {
+          console.log("[ERROR]:", error.response.data);
+          returnContent = { RspCode: "99", Message: "Unknow error" };
+          console.log("[MESSAGE]: returnContent", returnContent);
+          return res.status(200).json(returnContent);
+        }
+
+        returnContent = { RspCode: "00", Message: "Confirm Success" };
+        console.log("[MESSAGE]: returnContent", returnContent);
+        return res.status(200).json(returnContent);
+      }
+      returnContent = { RspCode: "01", Message: "Order not found" };
+      console.log("[MESSAGE]: returnContent", returnContent);
+      return res.status(200).json(returnContent);
+    }
+
     if (rspCode == "24") {
-      returnContent = { "RspCode": "00", "Message": "Confirm Success" };
-      console.log('[MESSAGE]: returnContent', returnContent);
-      return res
-        .status(200)
-        .json(returnContent);
+      returnContent = { RspCode: "00", Message: "Confirm Success" };
+      console.log("[MESSAGE]: returnContent", returnContent);
+      return res.status(200).json(returnContent);
     }
 
     if (secureHash === checkSum) {
@@ -190,24 +263,74 @@ const vpnIpn = async (req, res) => {
           "vnpayTransaction.vnp_ResponseCode": rspCode
         }
       );
+
+      const userAccount = await Account.findOne({
+        _id: transaction._account
+      }).select("expireDate maxAccountFb membershipPackage");
+
+      const membershipPackage = await MembershipPackage.findOne({
+        codeId: transaction.membershipPackage
+      });
+
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-      if (transaction && (transaction.vnpayTransaction.vnp_Amount != amount)) {
+      if (transaction && transaction.vnpayTransaction.vnp_Amount != amount) {
         returnContent = { RspCode: "04", Message: "Invalid amount" };
-        console.log('[MESSAGE]: returnContent', returnContent);
-        return res
-          .status(200)
-          .json(returnContent);
+        console.log("[MESSAGE]: returnContent", returnContent);
+        return res.status(200).json(returnContent);
       }
 
       if (transaction) {
         if (transaction.isPurchased === "pending") {
+          
           if (rspCode === "00") {
             await PaymentReceipt.updateOne(
               { "vnpayTransaction.vnp_TxnRef": orderId },
               { isPurchased: "success" }
             );
             // TODO: function update expire for user
+            let infoToUpdate = {
+              status: true,
+              maxAccountFb: membershipPackage.membershipPackage,
+              membershipPackage: transaction.membershipPackage,
+              expireDate: new Date(userAccount.expireDate).setMonth(
+                new Date(userAccount.expireDate).getMonth() +
+              transaction.monthsPurchase
+              )
+            };
+
+            await Account.updateOne(
+              {
+                _id: transaction._account
+              },
+              infoToUpdate
+            );
+
+            const syncData = {
+              id: transaction._account,
+              info: infoToUpdate
+            };
+
+            const vpsContainServer = await Server.findOne({
+              userAmount: userAccount._id
+            })
+              .select("info")
+              .lean();
+
+            try {
+
+              await updateUserSync(
+                `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
+                syncData
+              );
+    
+            } catch (error) {
+              console.log("[ERROR]:", error.response.data);
+              returnContent = { RspCode: "99", Message: "Unknow error" };
+              console.log("[MESSAGE]: returnContent", returnContent);
+              return res.status(200).json(returnContent);
+            }
+
           } else {
             await PaymentReceipt.updateOne(
               { "vnpayTransaction.vnp_TxnRef": orderId },
@@ -215,32 +338,25 @@ const vpnIpn = async (req, res) => {
             );
           }
           returnContent = { RspCode: "00", Message: "Confirm Success" };
-          console.log('[MESSAGE]: returnContent', returnContent);
+          console.log("[MESSAGE]: returnContent", returnContent);
           return res.status(200).json(returnContent);
         }
         returnContent = { RspCode: "02", Message: "Order already confirmed" };
-        console.log('[MESSAGE]: returnContent', returnContent);
+        console.log("[MESSAGE]: returnContent", returnContent);
         return res.status(200).json(returnContent);
-        
-
       }
       returnContent = { RspCode: "01", Message: "Order not found" };
-      console.log('[MESSAGE]: returnContent', returnContent);
-        
-      return res
-        .status(200)
-        .json(returnContent);
-      
+      console.log("[MESSAGE]: returnContent", returnContent);
+
+      return res.status(200).json(returnContent);
     }
     returnContent = { RspCode: "97", Message: "Fail checksum" };
-    console.log('[MESSAGE]: returnContent', returnContent);
+    console.log("[MESSAGE]: returnContent", returnContent);
     return res.status(200).json(returnContent);
-    
-    
   } catch (error) {
     console.log("[ERROR]:", error);
     returnContent = { RspCode: "99", Message: "Unknow error" };
-    console.log('[MESSAGE]: returnContent', returnContent);
+    console.log("[MESSAGE]: returnContent", returnContent);
     return res.status(200).json(returnContent);
   }
 };
