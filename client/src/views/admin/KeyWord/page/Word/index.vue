@@ -39,7 +39,6 @@
               <label>Chọn chủ đề</label>
               <div class="theme--body-cate">
                 <multiselect
-                  multiple
                   label="name"
                   placeholder="Chọn danh mục đăng bài..."
                   :options="spin"
@@ -145,7 +144,7 @@ export default {
   },
   computed: {
     spin() {
-      return this.$store.getters.themes;
+      return this.$store.getters.themeList;
     },
     word() {
       return this.$store.getters.word;
@@ -155,7 +154,7 @@ export default {
     }
   },
   created() {
-    const spin = this.$store.getters.themes;
+    const spin = this.$store.getters.themeList;
     if (spin.length === 0) {
       this.$store.dispatch("getAllSpinTheme");
     }
@@ -173,7 +172,7 @@ export default {
       }
     },
     "word.theme"(val) {
-      if (val.length > 0) {
+      if (val !== null) {
         this.isShowAlertTheme = false;
       }
     },
@@ -191,7 +190,7 @@ export default {
       } else if (this.word.key === "") {
         this.isShowAlertKey = true;
         return;
-      } else if (this.word.theme.length === 0) {
+      } else if (this.word.theme === null) {
         this.isShowAlertTheme = true;
         return;
       } else {
@@ -200,6 +199,8 @@ export default {
       }
     },
     handleSelectTheme(val) {
+      // eslint-disable-next-line no-console
+      console.log("[MESSAGE]: handleSelectTheme -> val", val);
       this.word.theme = val;
     },
     handleDelete(val) {
@@ -213,7 +214,7 @@ export default {
       } else if (this.word.key === "") {
         this.isShowAlertKey = true;
         return;
-      } else if (this.word.theme.length === 0) {
+      } else if (this.word.theme === null) {
         this.isShowAlertTheme = true;
         return;
       } else {

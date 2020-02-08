@@ -10,10 +10,9 @@
  * date to: ___
  * team: BE-RHP
  */
-const SpinWord = require( "../models/SpinWord.model" );
-const SpinTheme = require( "../models/SpinTheme.model" );
-const jsonResponse = require( "../configs/response" );
-
+const SpinWord = require("../models/SpinWord.model");
+const SpinTheme = require("../models/SpinTheme.model");
+const jsonResponse = require("../configs/response");
 
 module.exports = {
   create: async (req, res) => {
@@ -21,12 +20,10 @@ module.exports = {
 
     // check validate
     if (req.body.name === "") {
-      return res
-        .status(403)
-        .json({
-          status: "fail",
-          data: { title: "Tên chủ đề không được bỏ trống!" }
-        });
+      return res.status(403).json({
+        status: "fail",
+        data: { title: "Tên từ khoá không được bỏ trống!" }
+      });
     }
 
     // handle crete mongo
@@ -47,12 +44,14 @@ module.exports = {
     if (req.query._id) {
       dataResponse = await SpinWord.findOne({ _id: req.query._id })
         .populate({ path: "theme", select: "_id name description" })
+        .sort({ createdAt: "desc" })
         .lean();
     } else if (
       Object.entries(req.query).length === 0 && req.query.constructor === Object
     ) {
       dataResponse = await SpinWord.find({})
         .populate({ path: "theme", select: "_id name description" })
+        .sort({ createdAt: "desc" })
         .lean();
     }
 
@@ -61,12 +60,10 @@ module.exports = {
   update: async (req, res) => {
     // Check validator
     if (req.body.title === "") {
-      return res
-        .status(403)
-        .json({
-          status: "fail",
-          data: { title: "Tên chủ đề không được bỏ trống!" }
-        });
+      return res.status(403).json({
+        status: "fail",
+        data: { title: "Tên chủ đề không được bỏ trống!" }
+      });
     }
 
     const findSpinWord = await SpinWord.findOne({ _id: req.query._id });
@@ -94,12 +91,10 @@ module.exports = {
   delete: async (req, res) => {
     // Check if don't use query
     if (req.query._id === undefined || req.query._id.length === 0) {
-      return res
-        .status(403)
-        .json({
-          status: "fail",
-          _id: "Vui lòng cung cấp query ID để xác thực chủ đề muốn xóa!"
-        });
+      return res.status(403).json({
+        status: "fail",
+        _id: "Vui lòng cung cấp query ID để xác thực chủ đề muốn xóa!"
+      });
     }
 
     const spinWordInfo = await SpinWord.findOne({ _id: req.query._id });
@@ -138,14 +133,19 @@ module.exports = {
       return res.status(201).json(jsonResponse("success", dataResponse));
     }
   },
+  /**
+   * Request cần phải chứa nội dung (text) và chủ đề (theme) trong body. Khi gửi văn bản cần spin phải kèm theo 1 chủ đề.
+   */
   spin: async (req, res) => {
-    // console.log("[MESSAGE]: ", req.body.text);
-    
+    console.log("[MESSAGE]: req", req.body);
+
     const commonTheme = await SpinTheme.findOne({ name: "Chung" });
     const customTheme = await SpinTheme.findOne({ name: req.body.theme });
 
     const commonFilter = await SpinWord.find({ theme: commonTheme._id }).lean();
-    const categoryFilter = await SpinWord.find({ theme: customTheme._id }).lean();
+    const categoryFilter = await SpinWord.find({
+      theme: customTheme._id
+    }).lean();
     let text = req.body.text;
     if (text === null || text === "") {
       return res.status(403).json({ status: "error", message: "Văn bản rỗng" });
@@ -156,7 +156,15 @@ module.exports = {
     return res.status(201).json(jsonResponse("success", text));
   }
 };
-// eslint-disable-next-line no-unused-vars
+/**
+ * Hàm chính để spin content.
+ * Luồng sẽ chạy như sau:
+ * - Duyệt từng từ một trong filter.
+ * - Nếu match từ trong đoạn văn bản mẫu, thì thay thế bằng một từ đồng nghĩa bất kỳ.
+ * - Trả lại văn bản đã thay đổi.
+ * @param {*} dict filter dùng cho chủ đề cần spin
+ * @param {*} text đoạn văn bản cần spin
+ */
 const wordRevolver = (dict, text) => {
   const sentenceStopRegex = /[\.\!\?]/;
 
