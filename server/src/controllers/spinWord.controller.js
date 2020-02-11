@@ -139,10 +139,20 @@ module.exports = {
   spin: async (req, res) => {
     console.log("[MESSAGE]: req", req.body);
 
-    // const commonTheme = await SpinTheme.findOne({ name: "Chung" });
+    let commonTheme = await SpinTheme.findOne({ name: "Chung" });
     const customTheme = await SpinTheme.findOne({ name: req.body.theme });
 
-    // const commonFilter = await SpinWord.find({ theme: commonTheme._id }).lean();
+    if (!commonTheme) {
+      console.log("[MESSAGE]: Common theme not found. Now creating a new one...");
+      let newSpinTheme = await new SpinTheme({
+        "name": "Chung",
+        "description": "Các từ khoá có chủ đề chung"
+      });
+      await newSpinTheme.save();
+      commonTheme = await SpinTheme.findOne({ name: "Chung" });
+    }
+
+    const commonFilter = await SpinWord.find({ theme: commonTheme._id }).lean();
     const categoryFilter = await SpinWord.find({
       theme: customTheme._id
     }).lean();
@@ -150,7 +160,7 @@ module.exports = {
     if (text === null || text === "") {
       return res.status(403).json({ status: "error", message: "Văn bản rỗng" });
     }
-    // text = wordRevolver(commonFilter, text);
+    text = wordRevolver(commonFilter, text);
     text = wordRevolver(categoryFilter, text);
 
     return res.status(201).json(jsonResponse("success", text));
