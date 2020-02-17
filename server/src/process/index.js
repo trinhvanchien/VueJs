@@ -5,6 +5,7 @@ const Role = require( "../models/Role.model" );
 const Help = require( "../models/help/Help.model" );
 const Product = require( "../models/market/Product.model" );
 const MarketPost = require( "../models/market/products/post.model" );
+const MembershipPackage = require("../models/MembershipPackage.model");
 
 ( async () => {
   const foundHelp = await Help.find( { "name": "help_homepage" } ),
@@ -47,7 +48,23 @@ const MarketPost = require( "../models/market/products/post.model" );
 
   let foundProduct = await Product.find( {} );
 
-  await Promise.all( foundProduct.map( async ( product ) => {
-    await MarketPost.findByIdAndUpdate( { "_id": product.content }, { "$set": { "assign": true } }, { "new": true } );
-  } ) );
-} )();
+  await Promise.all(
+    foundProduct.map(async (product) => {
+      await MarketPost.findByIdAndUpdate(
+        { _id: product.content },
+        { $set: { assign: true } },
+        { new: true }
+      );
+    })
+  );
+
+  const membershipPackageQuery = await MembershipPackage.findOne({});
+
+  if (!membershipPackageQuery) {
+    await new MembershipPackage({
+      codeId: "free",
+      name: "Miễn phí",
+      permission: [ "post_page" ]
+    }).save();
+  }
+})();

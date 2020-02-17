@@ -20,8 +20,7 @@ const mongoose = require("mongoose"),
     code: String,
     membershipPackage: {
       type: String,
-      default: "free",
-      ref: "membershipPackage"
+      default: "free"
     },
     expireDate: Date,
     keywords: Array,
