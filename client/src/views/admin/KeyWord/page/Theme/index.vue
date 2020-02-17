@@ -100,7 +100,7 @@ export default {
     };
   },
   computed: {
-    currentTheme(){
+    currentTheme() {
       return this.$store.getters.currentTheme;
     },
     themeList() {
