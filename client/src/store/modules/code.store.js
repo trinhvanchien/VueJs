@@ -28,9 +28,10 @@ const mutations = {
 };
 const actions = {
   createCode: async ({ commit }, payload) => {
-    CodeServices.createCode(payload);
-    const result = await CodeServices.getAllCode();
-    commit("setAllCode", result.data.data);
+    let results;
+    await CodeServices.createCode(payload);
+    results = await CodeServices.getAllCode();
+    commit("setAllCode", results.data.data);
   },
   deleteCode: async ({ commit }, payload) => {
     const code = state.allCode.filter(item => item._id !== payload._id);

@@ -7,8 +7,8 @@
       <div class="price--original">
         <del class="number">200.000 VNĐ</del>
       </div>
-      <div class="price--promotion">
-        <span class="number">200.000 VNĐ</span>
+      <div class="price--promotional">
+        <span class="number">{{ item.price.one.promotional }}</span>
       </div>
     </div>
     <div class="package--action">
@@ -154,7 +154,7 @@ export default {
 .price {
   &--original {
   }
-  &--promotion {
+  &--promotional {
     padding: 0.2rem 0;
     color: #f96666;
     font-size: 25px;
