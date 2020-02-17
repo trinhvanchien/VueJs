@@ -41,7 +41,7 @@
     font-size: 14px;
     .btn--modal {
       border-radius: 10px;
-      border: 1px solid #ffb94a;
+      border: 1px solid #ed1c24;
       cursor: pointer;
       font-weight: 700;
       height: 40px;
@@ -52,7 +52,7 @@
     }
     .btn-add {
       border: 0;
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       color: #ffffff;
       &:hover, &:focus, &:active {
         background-color: #f2ad3f;
@@ -60,7 +60,7 @@
     }
     .btn-skip {
       background-color: transparent;
-      color: #ffb94a;
+      color: #ed1c24;
     }
   }
 

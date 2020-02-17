@@ -45,4 +45,11 @@ router.use( "/agency", require( "./modules/agency/agency.route" ) );
 router.use( "/code", auth, permission, require( "./modules/code.route" ) );
 router.use( "/statistic", auth, permission, require( "./modules/statistics.route" ) );
 
+// Spin router
+router.use( "/spin-theme", auth, require( "./modules/spinTheme.route" ) );
+router.use( "/spin-word", auth, require( "./modules/spinWord.route" ) );
+
+// Payment Route
+router.use( "/payment", require( "./modules/payment.route" ) );
+
 module.exports = router;

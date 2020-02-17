@@ -19,7 +19,7 @@
         transition: all 0.4s ease;
         width: 100%;
         &:focus {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
         &::placeholder {
           color: #ccc
@@ -81,8 +81,8 @@
       top: 0;
       transition: all 0.4s ease;
       &:hover {
-        border: 1px solid #ffb94a;
-        color: #ffb94a;
+        border: 1px solid #ed1c24;
+        color: #ed1c24;
       }
     }
     .block--bg {

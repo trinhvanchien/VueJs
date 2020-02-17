@@ -68,7 +68,7 @@
           transition: all 0.5s ease;
 
           &:hover {
-            background-color: #ff9e4a;
+            background-color: #c31920;
             color: #fff;
           }
         }
@@ -126,7 +126,7 @@
         }
         &:active,
         &:focus {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
       }
     }
@@ -141,7 +141,7 @@
 }
 
 
-// RESPONSIVE 
+// RESPONSIVE
 @media screen and (max-width: 980px) and (min-width: 768px) {
   .modal--wrapper {
     .modal--dialog {

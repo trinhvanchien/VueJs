@@ -165,7 +165,7 @@ export default {
       });
       return [
         {
-          name: "SL đăng kí",
+          name: "SL đăng ký",
           data: arr
         }
       ];

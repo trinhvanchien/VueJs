@@ -1,5 +1,5 @@
 $default-color: #73879c;
-$primary-color: #ffb94a;
+$primary-color: #ed1c24;
 
 .mx-datepicker {
   position: relative;
@@ -64,7 +64,7 @@ $primary-color: #ffb94a;
   }
   &:focus {
     outline: none;
-    border: 1px solid #FFB94A;
+    border: 1px solid #ed1c24;
   }
   &::-ms-clear {
     display: none;
@@ -171,8 +171,8 @@ $primary-color: #ffb94a;
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #73879c;
   &:hover {
-    color: #ffb94a;
-    border-color: #ffb94a;
+    color: #ed1c24;
+    border-color: #ed1c24;
   }
 }
 

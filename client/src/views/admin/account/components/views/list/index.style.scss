@@ -17,9 +17,9 @@
     }
     &:checked {
       border: 0;
-      border-right: solid 1px #ffb94a;
-      border-bottom: solid 1px #ffb94a;
-      background-color: #ffb94a;
+      border-right: solid 1px #ed1c24;
+      border-bottom: solid 1px #ed1c24;
+      background-color: #ed1c24;
       &:before {
         border-right: solid 2px #fff;
         border-bottom: solid 2px #fff;
@@ -75,8 +75,8 @@
       cursor: pointer;
       transition: all 0.4s ease;
       &:hover {
-        border-color: #ffb94a;
-        color: #ffb94a;
+        border-color: #ed1c24;
+        color: #ed1c24;
       }
     }
   }

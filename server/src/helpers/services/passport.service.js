@@ -41,10 +41,16 @@ passport.use(
     },
     async ( email, password, done ) => {
       try {
-        // Find the user given the email
-        const user = await Account.findOne( { email } );
-        // If not, handle it
 
+        // const userEmail =
+        let user = await Account.findOne( { "email": email.toString().toLowerCase() } );
+        
+        
+        if ( user === null ) {
+          user = await Account.findOne( { "phone": email } );
+        }
+        // If not, handle it
+        
         if ( !user ) {
           return done( null, false );
         }

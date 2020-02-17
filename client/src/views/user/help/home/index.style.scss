@@ -1,5 +1,5 @@
 .top {
-  background-color: rgba(255, 185, 74, 0.1);
+  background-color: rgba(237, 28, 36, 0.1);
 }
 .left {
   .blog {
@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     a {
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       border-radius: 1rem;
       color: #fff;
       cursor: pointer;
@@ -118,7 +118,7 @@
     color: $color-dark;
     transition: all .4s ease;
     &:hover{
-      background: #FF9E4A;
+      background: #c31920;
     }
     svg{
       transform: rotate(-180deg);

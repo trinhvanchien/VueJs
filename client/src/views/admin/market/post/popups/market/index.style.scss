@@ -55,8 +55,8 @@
         margin-top: 1.5rem;
 
         .btn--submit {
-          background-color: #ffb94a;
-          border: 1px solid #ffb94a;
+          background-color: #ed1c24;
+          border: 1px solid #ed1c24;
           border-radius: .625rem;
           color: #fff;
           cursor: pointer;
@@ -65,7 +65,7 @@
           padding: 0.5rem 0.75rem;
           transition: all 0.4s ease;
           &:hover {
-            background-color: #ff9e4a;
+            background-color: #c31920;
           }
         }
         .btn--skip {
@@ -111,7 +111,7 @@
           transition: all 0.4s ease;
           width: 100%;
           &:focus {
-            border-color: #ffb94a;
+            border-color: #ed1c24;
           }
           &::placeholder {
             color: #ccc
@@ -196,7 +196,7 @@
         }
         &:active,
         &:focus {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
       }
     }

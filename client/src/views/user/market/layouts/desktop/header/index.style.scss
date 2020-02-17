@@ -79,7 +79,7 @@
           &:hover{
             border: 1px solid #e5e5e5;
             cursor: pointer;
-            // background: #ffb94a;
+            // background: #ed1c24;
             // color: #fff;
           }
           &.instagram, &.zalo, &.zin-chat{
@@ -103,12 +103,12 @@
   }
   .center--support{
     font-weight: bold;
-    color: #FFB94A;
+    color: #ed1c24;
   }
 }
 
 .signin {
-  border: 1px solid #ffb94a;
+  border: 1px solid #ed1c24;
   border-radius: .5rem;
   background-color: transparent;
   cursor: pointer;
@@ -337,8 +337,8 @@
         border: 1.5px solid #f7f7f7;
         &.avatar--default {
           background-color: #fafafa;
-          border: 1.5px solid #ffb94a;
-          color: #ffb94a;
+          border: 1.5px solid #ed1c24;
+          color: #ed1c24;
         }
       }
       .dropdown--menu {
@@ -346,7 +346,7 @@
         box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
         color: #3e5569;
         .bg-orange {
-          background-color: #ffb94a;
+          background-color: #ed1c24;
         }
         .dropdown--divider {
           border-top: 1px solid #f8f9fa;
@@ -425,8 +425,8 @@
         border: 1.5px solid #f7f7f7;
         &.avatar--default {
           background-color: rgba(39, 41, 44, .4);
-          border: 1.5px solid #ffb94a;
-          color: #ffb94a;
+          border: 1.5px solid #ed1c24;
+          color: #ed1c24;
         }
       }
       .dropdown--menu {
@@ -434,7 +434,7 @@
         box-shadow: 1px 1px 15px rgba(255, 255, 255, 0.1);
         color: #3e5569;
         .bg-orange {
-          background-color: #ffb94a;
+          background-color: #ed1c24;
           .avatar--wrap {
             &.avatar--default {
               background-color: #f7f7f7;

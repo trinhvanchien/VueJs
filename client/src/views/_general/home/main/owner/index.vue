@@ -13,7 +13,7 @@
     <a
       class="btn--live-chat"
       target="_blank"
-      href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+      href="https://www.facebook.com/hootvietnam/"
       >LIÊN HỆ NGAY BÂY GIỜ</a
     >
   </section>
@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$colorLogo: rgb(237, 28, 36);
+$colorHover: #c31920;
 // owner
 .owner {
   background-attachment: fixed;
@@ -59,13 +61,13 @@ export default {
     text-align: center;
     border-radius: 40px;
     font-size: 20px;
-    background: #f8b448;
+    background: $colorLogo;
     color: #fff;
     font-weight: 600;
     -webkit-transition: 0.4s;
     transition: 0.4s;
     &:hover {
-      background: #4b4c78;
+      background: $colorHover;
     }
   }
 }

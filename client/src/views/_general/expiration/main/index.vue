@@ -22,7 +22,7 @@
         </div>
         <div class="r m_0">
           <div class="c_lg_6 c_md_12 mb_md_3 mb_3 c">
-            <img src="@/assets/images/home/giahan.png" alt="Banner ZinBee" />
+            <img src="@/assets/images/home/giahan.png" alt="Banner hoot" />
           </div>
           <div class="c_lg_6 c_md_12 mb_md_3 pl_md_3 pl_0">
             <p>
@@ -30,15 +30,15 @@
               tài khoản:
             </p>
             <ul class="info--transfer">
-              <li><span class="pr_5 mr_5">STK:</span> 0991 0000 43720</li>
-              <li><span class="pr_5 mr_5">Tên:</span> Nguyễn Văn Trường</li>
-              <li><span class="mr_5">Ngân hàng:</span> Vietcombank</li>
-              <li><span class="mr_5">Chi nhánh:</span> Tây Hồ - Hà Nội</li>
+              <li><span class="pr_5 mr_5">STK:</span> 19033047647025</li>
+              <li><span class="pr_5 mr_5">Tên:</span> Trần Quốc Toản</li>
+              <li><span class="mr_5">Ngân hàng:</span> Techcombank</li>
+              <li><span class="mr_5">Chi nhánh:</span> Hà Nội</li>
               <li>
-                Thông tin chuyển khoản với nội dung: "Email đăng ký Zinbee của
+                Thông tin chuyển khoản với nội dung: "Email đăng ký Hoot của
                 bạn"
               </li>
-              <li>Zinbee sẽ nâng cấp cho bạn ngay lập tức</li>
+              <li>Hoot sẽ nâng cấp cho bạn ngay lập tức</li>
             </ul>
           </div>
         </div>

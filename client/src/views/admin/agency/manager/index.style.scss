@@ -70,7 +70,7 @@
       cursor: pointer;
       transition: all 0.4s ease;
       &:hover {
-        color: #ffb94a;
+        color: #ed1c24;
       }
     }
   }
@@ -134,8 +134,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     &:checked {
-      background-color: #ffb94a;
-      border: solid 1px #ffb94a;
+      background-color: #ed1c24;
+      border: solid 1px #ed1c24;
 
       &:before {
         border-bottom: 2px solid #fff;

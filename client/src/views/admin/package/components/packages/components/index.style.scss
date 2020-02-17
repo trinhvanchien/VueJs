@@ -21,11 +21,34 @@
       max-height: calc( 100vh - 10% );
       width: 40vw;
       .body {
+        .scroll {
+          max-height: 70vh;
+          overflow-x: hidden;
+          overflow-y: scroll;
+        }
         input {
           &:hover, &:focus, &:active, &:visited {
             box-shadow: none;
             outline: 0;
             border-color: #e4e4e4;
+          }
+        }
+        .price {
+          .title {
+            span {
+              font-size: 14px;
+              font-weight: 700;
+              text-transform: uppercase;
+            }
+          }
+          .form_group {
+            margin-bottom: 0;
+            label {
+              font-size: 0.875rem;
+            }
+          }
+          .w_50 {
+            width: 50%;
           }
         }
       }

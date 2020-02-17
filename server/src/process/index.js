@@ -1,5 +1,5 @@
 // Require module process
-require( "./scrape" );
+require( "./socket" );
 
 const Role = require( "../models/Role.model" );
 const Help = require( "../models/help/Help.model" );

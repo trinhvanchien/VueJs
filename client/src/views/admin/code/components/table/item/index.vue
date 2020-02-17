@@ -95,7 +95,7 @@ export default {
       cursor: pointer;
     }
     .icon--edit:hover {
-      color: #ffb94a;
+      color: #ed1c24;
       cursor: pointer;
     }
   }

@@ -3,7 +3,7 @@
     <div class="section--title-content text_center ct">
       <h3 class="title">BẢNG GIÁ DỊCH VỤ</h3>
       <h4 class="desc">
-        Zinbee cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của khách
+        Hoot cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của khách
         hàng.
       </h4>
     </div>
@@ -15,9 +15,7 @@
             <li class="month">1 THÁNG</li>
             <li class="money">2.800.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -28,9 +26,7 @@
             <li class="month">6 THÁNG</li>
             <li class="money">16.199.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -41,9 +37,7 @@
             <li class="month">1 NĂM</li>
             <li class="money">28.799.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -54,9 +48,7 @@
             <li class="month">DOANH NGHIỆP</li>
             <li class="money">Liên hệ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -281,7 +273,7 @@
         <a
           class="btn--live-chat"
           target="_blank"
-          href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+          href="https://www.facebook.com/hootvietnam/"
           >LIÊN HỆ NGAY BÂY GIỜ</a
         >
       </div>
@@ -295,9 +287,7 @@
             <li class="month">1 THÁNG</li>
             <li class="money">2.800.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -384,9 +374,7 @@
             <li class="month">6 THÁNG</li>
             <li class="money">16.199.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -473,9 +461,7 @@
             <li class="month">1 NĂM</li>
             <li class="money">28.799.000đ</li>
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -562,9 +548,7 @@
             <li class="month mb_2">DOANH NGHIỆP</li>
             <!-- <li class="money">2.800.000đ</li> -->
             <li class="register">
-              <a
-                href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                target="_blank"
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
                 >Liên hệ</a
               >
             </li>
@@ -648,7 +632,7 @@
         <a
           class="btn--live-chat"
           target="_blank"
-          href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+          href="https://www.facebook.com/hootvietnam/"
           >LIÊN HỆ NGAY BÂY GIỜ</a
         >
       </div>
@@ -696,12 +680,12 @@
           margin: 0 auto;
           color: #fff;
           text-transform: uppercase;
-          padding: 0.3rem;
-          background: #f8b448;
+          padding: 0.4rem 0 0.3rem;
+          background: $colorLogo;
           border-radius: 25px;
           transition: 0.4s;
           &:hover {
-            background: #4b4c78;
+            background: $colorHover;
           }
         }
       }
@@ -757,12 +741,12 @@
         text-align: center;
         border-radius: 40px;
         font-size: 20px;
-        background: #f8b448;
+        background: $colorLogo;
         color: #fff;
         font-weight: 600;
         transition: 0.4s;
         &:hover {
-          background: #4b4c78;
+          background: $colorHover;
         }
       }
     }
@@ -792,7 +776,7 @@
           text-transform: uppercase;
           letter-spacing: 2.1px;
           padding: 0.5rem 0.3rem;
-          background: #f8b448;
+          background: $colorLogo;
           border-radius: 25px;
           transition: 0.4s;
         }

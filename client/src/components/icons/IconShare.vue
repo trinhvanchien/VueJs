@@ -7,7 +7,7 @@
       cy="10"
       r="10"
       transform="translate(266 723)"
-      fill="#ffb94a"
+      fill="#ed1c24"
     />
     <g
       id="Mask_Group_30"

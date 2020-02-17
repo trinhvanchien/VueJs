@@ -6,34 +6,27 @@
         <!-- Start: Logo Xl Screen -->
         <icon-base
           class="d_none d_xl_block"
-          icon-name="ZinBee"
-          width="120"
-          height="49.73"
-          viewBox="0 0 250.446 93.703"
+          width="80"
+          height="40"
+          viewBox="0 0 664 301"
         >
-          <icon-logo></icon-logo>
+          <hoot-logo-white />
         </icon-base>
         <!-- End: Logo Xl Screen -->
         <!-- Start: Logo Large Screen -->
         <icon-base
           class="d_none d_md_block d_xl_none"
-          icon-name="ZinBee"
-          width="100"
-          height="49.73"
-          viewBox="0 0 250.446 93.703"
+          width="72"
+          height="36"
+          viewBox="0 0 664 301"
         >
-          <icon-logo></icon-logo>
+          <hoot-logo-white />
         </icon-base>
         <!-- End: Logo Large Screen -->
       </div>
       <div class="wrapper--logo d_md_none text_center">
-        <icon-base
-          icon-name="ZinBee"
-          width="160"
-          height="78.65"
-          viewBox="0 0 250.446 93.703"
-        >
-          <icon-logo />
+        <icon-base width="96" height="48" viewBox="0 0 664 301">
+          <hoot-logo-white />
         </icon-base>
       </div>
       <!-- End: Logo -->
@@ -51,7 +44,7 @@
           <div class="w--100">
             <!-- Start: Main Header -->
             <div class="main--header">
-              <div class="d_none d_md_block title mb_3">Zinbee xin chào</div>
+              <div class="d_none d_md_block title mb_3">Hoot xin chào</div>
               <div class="desc">
                 &rdquo;Khách hàng sẽ quên những điều bạn làm. Nhưng họ sẽ không
                 bao giờ quên những cảm nhận mà bạn mang đến cho họ.&rdquo;
@@ -75,7 +68,7 @@
               v-if="this.$store.getters.authError === '401'"
               class="alert--error position_relative mt_3"
             >
-              Tài khoản email hoặc mật khẩu không đúng!
+              Thông tin đăng nhập không chính xác!
             </div>
             <div
               v-if="this.$store.getters.authError === '405'"
@@ -103,7 +96,7 @@
                     </icon-base>
                   </div>
                   <div class="form--control mr_2">
-                    <div class="desc">Email</div>
+                    <div class="desc">Email hoặc điện thoại</div>
                     <input
                       type="text"
                       class="form--input"
@@ -240,16 +233,12 @@
                   tag="div"
                   to="/signup"
                 >
-                  Đăng kí
+                  Đăng ký
                 </router-link>
               </div>
               <!-- End: Btn Group-->
               <div class="mt_3">
-                <a
-                  class="text--forgot"
-                  :href="{ name: 'help' }"
-                  target="_blank"
-                >
+                <a class="text--forgot" :href="routerHelp" target="_blank">
                   Bạn gặp sự cố khi đăng nhập?
                 </a>
               </div>

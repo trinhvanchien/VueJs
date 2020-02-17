@@ -54,7 +54,7 @@ export default {
 
 <style scoped lang="scss">
 .btn--search {
-  background-color: #ffb94a;
+  background-color: #ed1c24;
   border-radius: 0 0.625rem 0.625rem 0;
   cursor: pointer;
   font-size: 0.875rem;

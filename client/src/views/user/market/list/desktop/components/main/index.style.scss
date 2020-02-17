@@ -58,7 +58,7 @@
                   font-size: 1.0625rem;
                   text-overflow: ellipsis;
                   &:hover {
-                    color: #FFB94A;
+                    color: #ed1c24;
                   }
                 }
                 .editor {
@@ -122,10 +122,10 @@
                 width: 100%;
                 &.btn_outline_info {
                   border-radius: .375rem;
-                  border-color: #FFB94A;
-                  color: #FFB94A;
+                  border-color: #ed1c24;
+                  color: #ed1c24;
                   &:hover, &:focus {
-                    background-color: #FFB94A;
+                    background-color: #ed1c24;
                     color: #fff;
                   }
                 }

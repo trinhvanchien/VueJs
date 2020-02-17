@@ -47,7 +47,7 @@ export default {
     }
   }
   .active {
-    color: #ffb94a !important;
+    color: #ed1c24 !important;
   }
 }
 </style>

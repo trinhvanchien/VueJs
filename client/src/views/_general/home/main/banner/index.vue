@@ -15,11 +15,11 @@
           100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK CHỈ VỚI VÀI THAO TÁC
         </div>
         <div class="d_flex action">
-          <div class="register mr_3" @click="goToSignIn">
-            ĐĂNG NHẬP
+          <div class="register mr_3" @click="goToSignUp">
+            ĐĂNG KÝ
           </div>
-          <div class="goto--market" @click="goToMarket">
-            CỬA HÀNG NỘI DUNG
+          <div class="goto--market" @click="goToSignIn">
+            ĐĂNG NHẬP
           </div>
         </div>
       </div>
@@ -44,13 +44,13 @@ export default {
     };
   },
   methods: {
-    goToMarket() {
-      const route = this.$router.resolve({ name: "market_home" });
+    goToSignIn() {
+      const route = this.$router.resolve({ name: "user_signin" });
 
       window.open(route.href, "_blank");
     },
-    goToSignIn() {
-      const routeSignUp = this.$router.resolve({ name: "user_signin" });
+    goToSignUp() {
+      const routeSignUp = this.$router.resolve({ name: "user_signup" });
 
       window.open(routeSignUp.href, "_blank");
     }
@@ -86,28 +86,28 @@ export default {
     font-weight: 600;
     font-size: 1.15rem;
     color: #fff;
-    background-color: #f8b448;
+    background-color: $colorLogo;
     text-transform: uppercase;
     border-radius: 27px;
-    border: 2px solid #f8b448;
+    border: 2px solid $colorLogo;
     box-shadow: 5px 8.66px 20px 0px rgba(68, 84, 255, 0.078);
     padding: 0.8125rem 0;
     position: relative;
-    transition: all 400ms linear 0s;
+    transition: all 0.03s ease;
     overflow: hidden;
     text-align: center;
     width: 14.0625rem;
     cursor: pointer;
     &:hover {
       color: #fff;
-      background: #585a88;
-      border-color: #585a88;
+      background: $colorHover;
+      border-color: $colorHover;
     }
   }
   .goto--market {
     background-color: transparent;
-    color: #f8b448;
-    border: 1.5px solid #f8b448;
+    color: $colorLogo;
+    border: 1.5px solid $colorLogo;
   }
   .left {
     flex: 1;

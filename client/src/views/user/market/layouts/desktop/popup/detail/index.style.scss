@@ -95,10 +95,10 @@
                 font-weight: 600;
                 &.btn_outline_info {
                   border-radius: .375rem;
-                  border-color: #FFB94A;
-                  color: #FFB94A;
+                  border-color: #ed1c24;
+                  color: #ed1c24;
                   &:hover, &:focus {
-                    background-color: #FFB94A;
+                    background-color: #ed1c24;
                     color: #fff;
                   }
                 }
@@ -177,7 +177,7 @@
         }
         &:active,
         &:focus {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
       }
     }

@@ -168,10 +168,8 @@ export default {
       },
       slug:
         process.env.VUE_APP_ENV === "local"
-          ? `${process.env.VUE_APP_ROOT +
-              ":" +
-              process.env.VUE_APP_PORT}/#/help/`
-          : `${process.env.VUE_APP_ROOT}/#/help/`
+          ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/help/`
+          : `${process.env.VUE_APP_ROOT}/help/`
     };
   },
   computed: {
@@ -257,7 +255,7 @@ export default {
       span {
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        background-color: #ffb94a;
+        background-color: #ed1c24;
       }
     }
   }

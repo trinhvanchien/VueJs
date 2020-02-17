@@ -7,20 +7,27 @@
   >
     <div class="content ct">
       <div class="r m_0">
-        <div class="c_lg_3 mb_3">
+        <div class="c_lg_3">
           <div class="title--footer logo">
             <icon-base
-              icon-name="ZinBee"
-              width="100"
-              height="49.73"
-              viewBox="0 0 250.446 93.703"
+              width="72"
+              icon-name="Logo Hoot"
+              height="36"
+              viewBox="0 0 664 301"
             >
-              <icon-logo />
+              <hoot-logo-black />
             </icon-base>
           </div>
-          <div class="font--13">
-            Zinbee luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
+          <!-- <div class="font--13 mb_3">
+            Hoot luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
             nhiều thời gian hơn bên gia đình và người thân.
+          </div> -->
+          <div class="font--13 mb_3">
+            CÔNG TY TNHH CÔNG NGHỆ VÀ DỊCH VỤ MASSO VIỆT NAM
+          </div>
+          <div class="font--13">
+            Địa chỉ: Số 653, Ngõ 7, Đường Hồ Tùng Mậu, Tổ 17, Phường Cầu Diễn,
+            Quận Nam Từ Liêm, Thành phố Hà Nội
           </div>
         </div>
         <div class="c_lg_3 mb_3">
@@ -35,14 +42,16 @@
             <li>
               Email:
               <!-- <span v-if="agencyInfo" v-text="agencyInfo.email"></span> -->
-              <span>Cskh@Zinbee.Vn</span>
+              <span>hoot@massocorp.com</span>
             </li>
           </ul>
         </div>
         <div class="c_lg_3 mb_3">
           <div class="title--footer">Chính Sách</div>
           <ul>
-            <li>Chính sách bảo mật</li>
+            <router-link to="/policy" target="_blank">
+              <li>Chính sách bảo mật</li>
+            </router-link>
             <li>Điều kiện</li>
             <li>Quảng cáo</li>
           </ul>
@@ -70,7 +79,7 @@
           </div>
           <div class="list--contact d_flex mt_4">
             <div class="icon">
-              <a href="https://www.facebook.com/zinbeeauto/" target="_blank">
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank">
                 <icon-base
                   class="facebook"
                   icon-name="facebook"
@@ -95,10 +104,7 @@
               </icon-base>
             </div>-->
             <div class="icon">
-              <a
-                href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
-                target="_blank"
-              >
+              <a href="javascript: void(0)">
                 <icon-base
                   class="youtube"
                   icon-name="youtube"
@@ -128,7 +134,7 @@
     </div>
     <div class="copy">
       <div class="ct m_auto d_flex align_items_center content--copy">
-        <div class="title">Copyright © 2019 zinbee.vn</div>
+        <div class="title">Copyright © 2019 hoot.vn</div>
         <div class="ml_auto d_flex contact">
           <!-- <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>
@@ -138,7 +144,7 @@
             <a
               class="btn--live-chat"
               target="_blank"
-              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              href="https://www.facebook.com/hootvietnam/"
               >Liên hệ hỗ trợ</a
             >
           </div>

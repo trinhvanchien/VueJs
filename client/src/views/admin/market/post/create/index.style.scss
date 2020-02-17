@@ -27,7 +27,7 @@
         transition: all 0.4s ease;
         width: 100%;
         &:focus {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
         &::placeholder {
           color: #ccc
@@ -46,6 +46,37 @@
         }
       }
     }
+    .radio--custom {
+      input[type="radio"] {
+        background-color: #666;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 18px;
+        outline: none;
+        transition: all .4s ease;
+        vertical-align: middle;
+        width: 18px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        &:hover {
+          background-color: #999999;
+        }
+        &:checked {
+          background-color: #666;
+          &:before {
+            background-color: #ccc;
+            border-radius: 50%;
+            content: "";
+            display: block;
+            height: 6px;
+            left: 6px;
+            position: relative;
+            top: 6px;
+            width: 6px;
+          }
+        }
+      }
+    }
     .icon--remove {
       cursor: pointer;
       top: 40%;
@@ -58,6 +89,9 @@
       &:hover{
         cursor: pointer;
       }
+    }
+    .input--error {
+      border: 1px solid #f96666 !important;
     }
   }
 }
@@ -102,8 +136,8 @@
       top: 0;
       transition: all 0.4s ease;
       &:hover {
-        border: 1px solid #ffb94a;
-        color: #ffb94a;
+        border: 1px solid #ed1c24;
+        color: #ed1c24;
       }
     }
     .block--bg {

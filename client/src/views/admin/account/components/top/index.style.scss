@@ -1,9 +1,9 @@
 .top {
   .top--search {
     .btn--active {
-      border: 1px solid #ffb94a;
+      border: 1px solid #ed1c24;
       border-radius: .625rem;
-      color: #ffb94a;
+      color: #ed1c24;
       font-size: .875rem;
       font-weight: 600;
       height: 40px;
@@ -11,7 +11,7 @@
       padding: 0 .75rem;
       transition: all .4s ease;
       &:hover {
-        background-color: #ffb94a;
+        background-color: #ed1c24;
         color: #fff;
       }
     }
@@ -113,7 +113,7 @@
     .option {
       &:hover {
         color: #fff;
-        background-color: #ffb94a;
+        background-color: #ed1c24;
       }
     }
   }
@@ -121,7 +121,7 @@
   .top--layout {
     color: #aaa;
     svg {
-      color: #ffb94a;
+      color: #ed1c24;
     }
   }
 }
@@ -163,7 +163,7 @@
     .option {
       &:hover {
         color: #fff;
-        background-color: #ffb94a;
+        background-color: #ed1c24;
       }
     }
   }
@@ -171,7 +171,7 @@
   .top--layout {
     color: #aaa;
     svg {
-      color: #ffb94a;
+      color: #ed1c24;
     }
   }
 }

@@ -1,17 +1,12 @@
 <template>
-  <form class="session">
+  <form v-on:submit.prevent class="session">
     <div class="logo text_center mb_0 mb_sm_2">
-      <icon-base
-        icon-name="ZinBee"
-        width="100"
-        height="49.73"
-        viewBox="0 0 250.446 93.703"
-      >
-        <icon-logo></icon-logo>
+      <icon-base width="72" height="36" viewBox="0 0 664 301">
+        <hoot-logo-white />
       </icon-base>
     </div>
     <!-- Start: Card -->
-    <div class="card px_5 py_4 text_center">
+    <div class="card px_5 py_4 text_center" v-if="isShowPopupAlert === false">
       <!-- Start: Header -->
       <div class="card--header mt_4 mb_3">
         <icon-base width="100" height="100" viewBox="0 0 280 280">
@@ -23,8 +18,8 @@
       <div class="card--body">
         <div class="title mt_2">Đặt lại mật khẩu</div>
         <div class="desc my_3">
-          Nhập email tài khoản Zinbee của bạn, chúng tôi sẽ gửi đường dẫn đặt
-          lại mật khẩu thông qua email.
+          Nhập email tài khoản Hoot của bạn, chúng tôi sẽ gửi đường dẫn đặt lại
+          mật khẩu thông qua email.
         </div>
         <!-- Start: Alert -->
         <div
@@ -206,24 +201,61 @@
       <!-- End: Footer -->
     </div>
     <!-- End: Card -->
+    <!-- START: ALERT WHEN SYSTEM CHANGE PASSWORD -->
+    <div
+      class="content d_flex align_items_center justify_content_center"
+      v-else
+    >
+      <!-- START: LOADING WHEN SYSTEM CHANGE PASSWORD -->
+      <div class="loading--block mt_4 mb_4" v-show="status === 'loading'">
+        <div class="mx_auto">
+          <div class="loading--bar position_relative mx_auto">
+            <div class="percent position_absolute"></div>
+          </div>
+        </div>
+        <div class="desc text_center mt_2">
+          Vui lòng chờ, đang thay đổi mật khẩu của bạn ...
+        </div>
+      </div>
+      <!-- END: LOADING WHEN SYSTEM CHANGE PASSWORD -->
+      <!-- START: SUCCESS WHEN SYSTEM CHANGED PASSWORD -->
+      <div class="success text_center" v-show="status === 'success'">
+        <icon-base
+          class="icon--user mr_1"
+          width="100"
+          height="100"
+          viewBox="0 0 52 52"
+          icon-name="Thành công"
+        >
+          <icon-success />
+        </icon-base>
+        <div class="py_3 title">Mật khẩu của bạn đã được thay đổi</div>
+
+        <button class="btn--submit mt_3" @click="gotoSignIn">
+          ĐI TỚI TRANG ĐĂNG NHẬP
+        </button>
+      </div>
+      <!-- END: SUCCESS WHEN SYSTEM CHANGED PASSWORD -->
+    </div>
+    <!-- END: ALERT WHEN SYSTEM CHANGE PASSWORD -->
     <!-- Start: Footer -->
     <div class="footer d_flex justify_content_center mt_2">
       <div class="link--group">
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Trợ giúp</a
         >
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Bảo mật</a
         >
         <a
           class="link--group-item"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Điều khoản</a
         >

@@ -2,6 +2,7 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   PostServerSchema = new Schema( {
+    "session_id": String,
     "name": String,
     "server": String,
     "status": Boolean,

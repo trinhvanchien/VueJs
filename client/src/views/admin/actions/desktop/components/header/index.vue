@@ -191,7 +191,7 @@ export default {
       color: #444;
       &--item {
         &:hover {
-          background-color: #ffb94a;
+          background-color: #ed1c24;
           color: #fff;
         }
       }
@@ -209,7 +209,7 @@ export default {
       color: #f7f7f7;
       &--item {
         &:hover {
-          background-color: #ffb94a;
+          background-color: #ed1c24;
           color: #fff;
         }
       }

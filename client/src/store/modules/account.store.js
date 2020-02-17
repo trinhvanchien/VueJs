@@ -392,11 +392,11 @@ const actions = {
    * @param commit
    * @returns {Promise<void>}
    */
-  getUserInfoMember: async ({ commit }) => {
+  getUserInfoMember: async ({ commit }, payload) => {
+    let results;
     commit("auth_request");
-    // const dataSender = CookieFunction.getCookie("uid");
-    const rsUserInfoMember = await AccountServices.getUserMember();
-    commit("setUserMember", rsUserInfoMember.data.data);
+    results = await AccountServices.getUserMember(payload);
+    commit("setUserMember", results.data.data);
     commit("auth_success");
   },
   /**
@@ -428,6 +428,7 @@ const actions = {
    */
   getInfoByEmail: async ({ commit }, payload) => {
     try {
+      commit("auth_request");
       const sendEmail = {
         email: payload
       };

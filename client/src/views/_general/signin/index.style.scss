@@ -1,5 +1,6 @@
 .wrapper {
-  background-color: rgba(255, 248, 230, 0.7);
+  background-color: #2f3136;
+  color: #f7f7f7;
   min-height: 100vh;
   .container {
     width: 100%;
@@ -44,7 +45,7 @@
       .main--body {
         .form--group {
           .form--card {
-            background-color: #fff;
+            background-color: #272a2c;
             border-bottom: 2px solid transparent;
             padding: 0.75rem 0;
             transition: all 0.4s ease;
@@ -55,23 +56,23 @@
               border-radius: 0 0 0.5rem 0.5rem;
             }
             &:hover {
-              background-color: #f7f7f7;
+              background-color: #272a2c;
               .form--control {
                 .form--input {
                   &:-webkit-autofill,
                   &:-webkit-autofill:hover,
                   &:-webkit-autofill:focus,
                   &:-webkit-autofill:active {
-                    -webkit-box-shadow: 0 0 0 30px #F7F7F7 inset !important;
+                    -webkit-box-shadow: 0 0 0 30px #272a2c inset !important;
                   }
                 }
               }
             }
             &:focus-within {
-              border-bottom: 2px solid #FFB94A;
+              border-bottom: 2px solid #f7f7f7;
               .form--control {
                 .desc {
-                  color: #FFB94A;
+                  color: #f7f7f7;
                   font-weight: 600;
                 }
               }
@@ -104,16 +105,18 @@
               }
             }
             .form--control {
+              background-color: transparent;
               flex: 1;
               .desc {
-                color: #999;
+                color: #ccc;
                 font-size: 0.875rem;
                 transition: all 0.4s ease;
               }
               .form--input {
-                background-color: transparent !important;
+                background-color: #272a2c;
                 border: 0;
-                color: #444;
+                color: #f7f7f7;
+                font-size: 0.875rem;
                 outline: 0;
                 transition: all 0.4s ease;
                 width: 100%;
@@ -121,17 +124,19 @@
                 &:-webkit-autofill:hover,
                 &:-webkit-autofill:focus,
                 &:-webkit-autofill:active {
-                  -webkit-box-shadow: 0 0 0 30px white inset !important;
+                  -webkit-text-fill-color: #f7f7f7;
+                  -webkit-box-shadow: 0 0 0 30px #272a2c inset;
+                  transition: background-color 5000s ease-in-out 0s;
                 }
                 &::placeholder {
-                  color: #ccc;
+                  color: #666;
                   font-size: 0.875rem;
                 }
               }
             }
             .form--validate {
               .icon--attention {
-                color: #ff3333;
+                color: #f96666;
                 &:hover {
                   &~.tooltip--error {
                     display: block;
@@ -139,7 +144,7 @@
                 }
               }
               .icon--check {
-                color: #FFB94A;
+                color: #00c853;
               }
               .icon--eye {
                 color: #999;
@@ -181,24 +186,24 @@
             transition: all 0.4s ease;
             width: 120px;
             &:hover {
-              box-shadow: 0 0 4px rgba(255, 158, 74, 0.4);
+              box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
             }
           }
           .btn--orange {
-            background-color: #ffb94a;
+            background-color: #ed1c24;
             color: #fff;
             &:hover,
             &:focus {
-              background-color: #ff9e4a;
+              background-color: #c31920;
             }
           }
           .btn--white {
-            background-color: #fff;
-            color: #666;
+            background-color: #272a2c;
+            color: #f7f7f7;
             text-decoration: none;
             &:hover,
             &:focus {
-              color: #ff9e4a;
+              color: #f7f7f7;
             }
           }
         }

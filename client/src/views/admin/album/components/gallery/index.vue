@@ -121,12 +121,12 @@ export default {
       &:focus,
       &:visited,
       &:active {
-        color: #ffb94a;
+        color: #ed1c24;
       }
     }
     .right {
       label {
-        background-color: #ffb94a;
+        background-color: #ed1c24;
         border-radius: 0.5rem;
         cursor: pointer;
         color: #fff;
@@ -138,7 +138,7 @@ export default {
   }
   .grid {
     .item {
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       border: 1px solid #e4e4e4;
       border-radius: 0.25rem;
       float: left;

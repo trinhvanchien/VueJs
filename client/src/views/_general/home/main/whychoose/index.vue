@@ -1,7 +1,7 @@
 <template>
   <section id="why--chose" class="why--choose position_relative">
     <div class="section--title-content">
-      <h3 class="title">Ai có thể sử dụng zinbee ?</h3>
+      <h3 class="title">Ai có thể sử dụng hoot ?</h3>
     </div>
 
     <div class="marketing--section px_4 ct mb_5">
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       // Why choose
-      srcSimpleInterface: require("@/assets/images/home/undraw_empty_cart_co35.svg"),
+      srcSimpleInterface: require("@/assets/images/home/undraw_business_shop_qw5t.svg"),
       srcAutomatic: require("@/assets/images/home/undraw_coming_home_52ir.svg"),
       srcExamlePost: require("@/assets/images/home/undraw_team_page_pgpr.svg")
     };
@@ -59,7 +59,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../index.style";
-// why choose zinbee
+// why choose hoot
 .why--choose {
   padding: 6.25rem 0;
   background: #f7f7f7;

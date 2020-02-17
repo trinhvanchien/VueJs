@@ -79,11 +79,11 @@
           <div class="imkt--social-button">
             <ul class="d_flex pl_0 mb_0">
               <li>
-                <a href="https://www.facebook.com/zinbeeauto/" target="_blank">
+                <a href="https://www.facebook.com/hootvietnam/" target="_blank">
                   <div class="mr_2">
                     <icon-base
                       class="mt_1"
-                      icon-name="Facebook ZinBee"
+                      icon-name="Facebook Hoot"
                       width="30"
                       height="30"
                       viewBox="0 0 115 115"
@@ -94,10 +94,7 @@
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
-                  target="_blank"
-                >
+                <a href="javascript: void(0)">
                   <div class="">
                     <icon-base
                       class="mt_1"
@@ -120,14 +117,14 @@
       <div class="d_inline_flex">
         <div class="copyright d_flex align_items_center mr_3">
           <icon-base
-            icon-name="logo"
             width="20"
             height="20"
-            viewBox="0 0 220 220"
+            viewBox="0 0 417 301"
+            icon-name="Hoot logo"
           >
-            <icon-logo-icon />
+            <hoot-logo-icon-black />
           </icon-base>
-          <div class="ml_1">Zinbee © 2019</div>
+          <div class="ml_1">Hoot © 2019</div>
         </div>
         <div class="language d_flex align_items_center">
           <div class="text">Tiếng Việt</div>
@@ -187,8 +184,8 @@
 .component--form-button {
   height: 40px;
   /*width: 22%;*/
-  background-color: #ffb94a;
-  border: 1px solid #ffb94a;
+  background-color: #ed1c24;
+  border: 1px solid #ed1c24;
   border-radius: 3px;
   color: #ffffff;
   cursor: pointer;

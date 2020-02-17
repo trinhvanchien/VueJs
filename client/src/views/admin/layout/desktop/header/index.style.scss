@@ -4,8 +4,8 @@
       cursor: pointer;
     }
     .header--button {
-      background-color: #ffb94a;
-      border: solid 1px #ffb94a;
+      background-color: #ed1c24;
+      border: solid 1px #ed1c24;
       border-radius: 0.5rem;
       color: #fff;
       cursor: pointer;
@@ -16,7 +16,7 @@
       padding: 0 .75rem;
       transition: all 0.4s ease;
       &:hover {
-        background-color: #FF9E4A;
+        background-color: #c31920;
       }
     }
   }
@@ -241,8 +241,8 @@
         border: 1.5px solid #f7f7f7;
         &.avatar--default {
           background-color: #fafafa;
-          border: 1.5px solid #ffb94a;
-          color: #ffb94a;
+          border: 1.5px solid #ed1c24;
+          color: #ed1c24;
         }
       }
       .dropdown--menu {
@@ -250,7 +250,7 @@
         box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
         color: #3e5569;
         .bg-orange {
-          background-color: #ffb94a;
+          background-color: #ed1c24;
         }
         .dropdown--divider {
           border-top: 1px solid #f8f9fa;
@@ -299,8 +299,8 @@
         border: 1.5px solid #f7f7f7;
         &.avatar--default {
           background-color: rgba(39, 41, 44, .4);
-          border: 1.5px solid #ffb94a;
-          color: #ffb94a;
+          border: 1.5px solid #ed1c24;
+          color: #ed1c24;
         }
       }
       .dropdown--menu {
@@ -308,7 +308,7 @@
         box-shadow: 1px 1px 15px rgba(255, 255, 255, 0.1);
         color: #3e5569;
         .bg-orange {
-          background-color: #ffb94a;
+          background-color: #ed1c24;
           .avatar--wrap {
             &.avatar--default {
               background-color: #f7f7f7;

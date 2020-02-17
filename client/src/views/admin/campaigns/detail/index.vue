@@ -16,24 +16,18 @@
         />
       </div>
       <h3 class="py_3">Danh sách bài viết trong {{ campaign.title }}</h3>
-      <div class="table-container" role="table" aria-label="Destinations">
-        <div class="flex-table header" role="rowgroup">
-          <div class="flex-row first" role="columnheader">Tiêu đề</div>
-          <div class="flex-row content" role="columnheader">Nội dung</div>
-          <div class="flex-row action" role="columnheader">Hành động</div>
+      <div>
+        <p>Tên chiến dịch mẫu: {{ campaign.title }}</p>
+        <p>Số ngày sử dụng : {{ campaign.totalDay }}</p>
+        <div v-if="campaign.postCategory">
+          <p>
+            Danh mục đăng buổi sáng: {{ campaign.postCategory.morning.title }}
+          </p>
+          <p>Danh mục đăng buổi tối: {{ campaign.postCategory.night.title }}</p>
         </div>
-        <div
-          v-if="campaign.postList && campaign.postList.length === 0"
-          class="d_flex align_items_center justify_content_center no--post py_3"
-        >
-          Chưa có bài viết nào
-        </div>
-        <div
-          v-else
-          v-for="(post, index) in campaign.postList"
-          :key="`p-${index}`"
-        >
-          <item-cate :post="post" />
+        <div v-if="campaign.mix">
+          <p>Danh mục mở bài: {{ campaign.mix.open.title }}</p>
+          <p>Danh mục kết bài: {{ campaign.mix.close.title }}</p>
         </div>
       </div>
     </div>
@@ -42,11 +36,7 @@
 </template>
 
 <script>
-import ItemCate from "./components/itemcate";
 export default {
-  components: {
-    ItemCate
-  },
   data() {
     return {
       isShowResultDefault: true

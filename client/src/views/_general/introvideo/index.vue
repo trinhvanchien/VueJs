@@ -5,7 +5,7 @@
     <div class="video--desc m_auto text_left">
       <div>
         <h3 class="m_0">Bán hàng Online ...</h3>
-        <p class="pl_5">siêu hiệu quả , thảnh thơi cùng Zinbee</p>
+        <p class="pl_5">siêu hiệu quả , thảnh thơi cùng Hoot</p>
       </div>
       <div class="desc pl_3">
         " Khách hàng sẽ quên những điều bạn làm. Nhưng họ sẽ không bao giờ quên
@@ -33,7 +33,7 @@ export default {};
       line-height: 1.33;
     }
     .desc {
-      color: #ffb94a;
+      color: #ed1c24;
       font-style: italic;
     }
   }

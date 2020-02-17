@@ -18,7 +18,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  background-color: rgba(255, 248, 230, 0.7);
+  background-color: #2f3136;
   height: 100vh;
   &--content {
     height: 100%;
@@ -29,7 +29,7 @@ export default {
 @media screen and (max-width: 576px) {
   .wrapper {
     &--content {
-      background-color: #fff;
+      background-color: #272a2c;
     }
   }
 }

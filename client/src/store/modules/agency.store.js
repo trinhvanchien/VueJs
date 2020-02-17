@@ -3,6 +3,7 @@ import AgencyServices from "@/services/modules/agency.services";
 const state = {
   agency: {
     _account: {
+      email: "",
       name: "",
       _id: ""
     },
@@ -123,6 +124,7 @@ const actions = {
   setAgencyDefault: async ({ commit }) => {
     await commit("setAgencyDefault", {
       _account: {
+        email: "",
         name: "",
         _id: ""
       },

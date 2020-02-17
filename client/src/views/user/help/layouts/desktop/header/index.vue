@@ -4,14 +4,9 @@
       <div class="r mx_0 mb_3">
         <!-- Start header logo help   -->
         <div class="c_md_3">
-          <div class="logo d_flex align_items_center">
-            <icon-base
-              icon-name="logo"
-              width="40px"
-              height="40px"
-              viewBox="0 0 200 200"
-            >
-              <icon-logo-icon-white />
+          <div class="logo d_flex align_items_end">
+            <icon-base width="72" height="36" viewBox="0 0 664 301">
+              <hoot-logo-white />
             </icon-base>
             <div class="center--support ml_2" @click="goToHelpHome">
               Trung tâm trợ giúp
@@ -56,7 +51,7 @@
             </div>
             <router-link to="/">
               <div class="text">
-                Quay lại Zinbee
+                Quay lại Hoot
               </div>
             </router-link>
           </div>
@@ -75,7 +70,7 @@
             <!-- Start: Menu Items Loop -->
             <li
               class="menu--help-item flex_fill"
-              v-for="(category, index) in allHelpCategories.slice(0, 5)"
+              v-for="(category, index) in allHelpCategories.slice(0, 4)"
               :key="index"
             >
               {{ category.title }}

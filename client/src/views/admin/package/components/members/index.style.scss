@@ -1,4 +1,4 @@
-$table-header: #ffb94a;
+$table-header: #ed1c24;
 $table-header-border: #fff6f4;
 $table-border: #d9d9d9;
 $row-bg: #ccc6;
@@ -25,7 +25,7 @@ $row-color-hover: #fff;
 }
 
 .information {
-  background-color: #ffb94a;
+  background-color: #ed1c24;
   border-radius: .5rem;
   color: #fff;
   label {
@@ -49,7 +49,7 @@ $row-color-hover: #fff;
     border-radius: .5rem;
     padding: .5rem .875rem;
     &:hover, &:active, &:visited, &:focus {
-      background-color: #ffb94a;
+      background-color: #ed1c24;
       color: #fff;
       transition: all .3s ease;
     }
@@ -58,7 +58,7 @@ $row-color-hover: #fff;
 
 .info {
   .default {
-    background-color: #ffb94a;
+    background-color: #ed1c24;
   }
   .size {
     width: 50px;

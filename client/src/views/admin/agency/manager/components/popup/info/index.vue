@@ -8,7 +8,7 @@
             <div class="font_weight_bold">Chọn đại lý</div>
             <div class="agency--select">
               <multiselect
-                label="name"
+                label="email"
                 v-model="agency._account"
                 :options="users"
                 @input="selectAgency"

@@ -5,11 +5,11 @@
         <div class="slide--image">
           <transition name="slide-fade">
             <div class="items display" v-if="currentIndexInfo === 0">
-              <div class="mb_2">Giới thiệu phiên bản mới của Zinbee</div>
+              <div class="mb_2">Giới thiệu phiên bản mới của Hoot</div>
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/dgOyLfhlgos"
+                src="https://www.youtube.com/embed/GZfCQT1uovI"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -19,12 +19,12 @@
           <transition name="slide-fade">
             <div class="content items" v-if="currentIndexInfo === 1">
               <div class="mb_2">
-                Hướng dẫn kết nối facebook với tài khoản Zinbee
+                Hướng dẫn kết nối facebook với tài khoản Hoot
               </div>
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/FEnUaAghtqo"
+                src="https://www.youtube.com/embed/Ngc_0Nlhv7g"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -37,7 +37,7 @@
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/Bbo6txouMc0"
+                src="https://www.youtube.com/embed/w7lExs_TYFE"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -47,12 +47,12 @@
           <transition name="slide-fade">
             <div class="function items" v-if="currentIndexInfo === 3">
               <div class="mb_2">
-                Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Zinbee
+                Hướng dẫn tích hợp Profile, Fanpage, Group trên tài khoản Hoot
               </div>
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/Ku5sFPqTIWQ"
+                src="https://www.youtube.com/embed/zpaW6j0yjRA"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -65,7 +65,7 @@
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/_qstuWBI2V8"
+                src="https://www.youtube.com/embed/fY4z8_WpgN8"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -78,7 +78,7 @@
               <iframe
                 :style="widthDefault"
                 height="500"
-                src="https://www.youtube.com/embed/39ZR5wdgSPY"
+                src="https://www.youtube.com/embed/QioItiofNlY"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen

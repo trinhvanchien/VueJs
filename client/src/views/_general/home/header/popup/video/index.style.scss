@@ -49,8 +49,8 @@
         font-size: .875rem;
 
         .btn--submit {
-          background-color: #ffb94a;
-          border: 1px solid #ffb94a;
+          background-color: #ed1c24;
+          border: 1px solid #ed1c24;
           border-radius: .625rem;
           color: #fff;
           cursor: pointer;
@@ -60,7 +60,7 @@
           transition: all 0.4s ease;
 
           &:hover {
-            background-color: #ff9e4a;
+            background-color: #c31920;
           }
         }
 
@@ -132,7 +132,7 @@
         }
         &:active,
         &:focus {
-          border-color: #ffb94a;
+          border-color: #ed1c24;
         }
       }
     }
@@ -147,7 +147,7 @@
 }
 
 
-// RESPONSIVE 
+// RESPONSIVE
 @media screen and (max-width: 980px) and (min-width: 768px) {
   .modal--wrapper {
     .modal--dialog {

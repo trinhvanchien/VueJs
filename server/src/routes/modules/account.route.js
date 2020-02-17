@@ -27,6 +27,6 @@ router.route( "/info/reset-password" ).get( AccountController.getUserInfoLostPas
 router.route( "/reset-password" ).post( AccountController.resetPassword );
 router.route( "/create-password" ).post( AccountController.createNewPassword );// final reset password
 
-router.route( "/info" ).get( auth, AccountController.getUserInfo );
+router.route( "/info" ).get( AccountController.getUserInfo );
 
 module.exports = router;

@@ -24,6 +24,7 @@ const Server = require( "../models/Server.model" );
 const jsonResponse = require( "../configs/response" );
 const dictionary = require( "../configs/dictionaries" ),
   convertUnicode = require( "../helpers/utils/unicode.util" ),
+  shuffleArray = require( "../helpers/utils/shuffleArray.util" ),
   { syncPostFolderExample, syncFolderExample, syncKeyWordSearch } = require( "../microservices/synchronize/post" );
 
 
@@ -147,7 +148,7 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
-    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() ), resKeywordSync,
+    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).lean() ), resKeywordSync,
       keywordExist = ( content ) => {
         return userInfo.keywordSearch.some( function( el ) {
           return convertUnicode( el.content.toLowerCase() ) === content;
@@ -163,6 +164,12 @@ module.exports = {
       }
     }
 
+    // Shuffle results
+    if ( data.length > req.query._size ) {
+      data = shuffleArray( data );
+    }
+
+
     if ( req.query._size && req.query._page ) {
       dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
     } else if ( req.query._size ) {
@@ -176,6 +183,22 @@ module.exports = {
         page = Math.floor( data.length / req.query._size ) + 1;
       }
     }
+
+    dataResponse = dataResponse.map( ( element ) => {
+      return {
+        "_id": element._id,
+        "content": element.content,
+        "like": element.reaction,
+        "share": element.share,
+        "feedId": element.feedId,
+        "attachments": element.downloadedImage.map( ( image ) => {
+          return {
+            "link": `${process.env.APP_URL}:${process.env.PORT_BASE}/${image}`,
+            "typeAttachment": 1
+          };
+        } )
+      };
+    } );
 
     return res
       .status( 200 )
@@ -327,7 +350,7 @@ module.exports = {
     let data = {
         "categoryPost": {
           "_id": findCategoryDefault._id.toString(),
-          "title": `${findCategoryDefault.title} Copy`,
+          "title": `${findCategoryDefault.title} - ${userInfo.name}`,
           "_account": req.uid
         },
         "postList": resData,
@@ -357,7 +380,7 @@ module.exports = {
         };
       } ) ),
       data = {
-        "title": `${findPost.title} Copy`,
+        "title": findPost.title,
         "content": findPost.content,
         "attachments": attachments,
         "_account": req.uid
@@ -370,5 +393,27 @@ module.exports = {
     }
 
     res.status( 200 ).json( jsonResponse( "success", resPostSync.data.data ) );
+  },
+  "showPost": async ( req, res ) => {
+    let dataResponse, categoryExample;
+
+    dataResponse = await MarketProductPost.find( { "_id": req.query._postId } ).lean();
+    categoryExample = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).select( "_id title" ).lean();
+    
+    if ( !dataResponse ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại, vui lòng xem lại" } );
+    }
+    if ( !categoryExample ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Danh mục mẫu không tồn tại" } );
+    }
+
+    const postDetail = {
+      "title": dataResponse[ 0 ].title,
+      "attachments": dataResponse[ 0 ].photos,
+      "content": dataResponse[ 0 ].content,
+      "_categories": categoryExample
+    };
+
+    res.status( 200 ).json( jsonResponse( "success", postDetail ) );
   }
 };

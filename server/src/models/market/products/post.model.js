@@ -14,7 +14,11 @@ const mongoose = require( "mongoose" ),
       "type": Date,
       "default": Date.now()
     },
-    "updatedAt": Date
+    "updatedAt": Date,
+    "typeMarket": {
+      "type": String,
+      "default": null // null : product category, 0: category default
+    }
   } );
 
 MarketProductPostSchema.index( {

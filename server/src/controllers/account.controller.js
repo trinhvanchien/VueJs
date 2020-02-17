@@ -13,15 +13,17 @@ const Server = require( "../models/Server.model" );
 const Code = require( "../models/Code.model" );
 const MembershipPackage = require( "../models/MembershipPackage.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
+const { signUpSuccess } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
+const ping = require( "ping" );
 const cryptoRandomString = require( "crypto-random-string" );
 const jsonResponse = require( "../configs/response" );
 
 const { findSubString } = require( "../helpers/utils/functions/string" );
 const { decodeToken, signToken } = require( "../configs/jwt" );
-const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
-  mail = require( "nodemailer" );
+const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" );
+const mail = require( "nodemailer" );
 
 module.exports = {
   "changePasswordSync": async ( req, res ) => {
@@ -79,10 +81,10 @@ module.exports = {
 
     if ( req.query._id ) {
       data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
-      return res.status( 200 ).json( jsonResponse( "success", data ) );
     }
-    data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
-    res.status( 200 ).json( jsonResponse( "success", data ) );
+    return res.status( 200 ).json( jsonResponse( "success", data ) );
+    // data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
+    // res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "index": async ( req, res ) => {
     let dataResponse = null;
@@ -244,10 +246,14 @@ module.exports = {
     res.status( 201 ).json( jsonResponse( "success", null ) );
   },
   "signIn": async ( req, res ) => {
-    const { email } = req.body,
-      userInfo = await Account.findOne( { "email": email.toString().toLowerCase() } ),
-      memberRole = await Role.findOne( { "_id": userInfo._role } ),
-      serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
+    const { email } = req.body;
+    let userInfo = await Account.findOne( { "email": email.toString().toLowerCase() } );
+
+    if ( !userInfo ) {
+      userInfo = await Account.findOne( { "phone": email.toString().toLowerCase() } );
+    }
+    const memberRole = await Role.findOne( { "_id": userInfo._role } );
+    const serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
 
     let cookie;
 
@@ -262,16 +268,15 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${userInfo.email} đăng nhập thành công!`,
-      "domain": process.env.APP_ENV === "production" ? `${serverContainUser.info.domain}/#/` : `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/#/`
+      "domain": process.env.APP_ENV === "production" ? `${serverContainUser.info.domain}/` : `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/`
     } ) );
   },
-  "signUp": async ( req, res ) => {
-    const { name, email, phone, password, presenter, region } = req.body,
+  "signUp": async ( req, res, next ) => {
+    let { name, email, phone, password, presenter, region } = req.body,
       isEmailExist = await Account.findOne( { email } ),
       isPhoneExist = await Account.findOne( { phone } ),
       memberRole = await Role.findOne( { "level": "Member" } ),
       optimalServer = await Server.findOne( { region, "status": 1 } ).sort( { "slot": -1 } );
-
     let cookie, newUser, resSyncNestedServer, isEnvironment;
 
     if ( isEmailExist ) {
@@ -279,6 +284,35 @@ module.exports = {
     } else if ( isPhoneExist ) {
       return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại trên hệ thống!" } );
     }
+
+    //#region Regex check
+    const phoneRegex = /^(0)+(\d{9})$/g;
+    if ( phoneRegex.test(phone) === false ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại phải có 10 chữ số và phải bắt đầu bằng số 0." } )
+    }
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\])|(([\w\-]+\.)+[a-zA-Z]{2,}))$/g;
+    if ( emailRegex.test(email) === false ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Địa chỉ email không hợp lệ!" } );
+    }
+
+    const nameRegex = /^([^0-9\!\@\#\$\%\^\&\*\(\)\+\=\`\~\{\}\[\]\:\"\;\'\\\<\>\,\.\?\/\t]+)$/g;
+    name = name.trim();
+    if ( name.length > 50 || name.length < 6 ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Tên không được ngắn hơn 6 ký tự hoặc dài hơn 50 ký tự!" } );
+    }
+    if ( nameRegex.test(name) === false ) {
+      return res.status( 403 ).json( { "status": "error", "message": "Tên không được chứa các ký tự đặc biệt!" } ); 
+    }
+    //#endregion
+
+    //#region Check email validation
+    let domain = email.split("@").pop();
+    const pingResult = await ping.promise.probe(domain);
+    if ( pingResult.alive === false ) {
+      return res.status(403).json({ status: "error", message: "Tên miền của email server không có thực!" });
+    }
+    //#endregion
 
     newUser = await new Account( {
       name,
@@ -288,7 +322,7 @@ module.exports = {
       password,
       "status": 1,
       "expireDate": new Date().setDate( new Date().getDate() + 3 ),
-      "_role": memberRole._id
+      "_role": memberRole.id
     } );
 
     // Sync with nested server
@@ -301,12 +335,12 @@ module.exports = {
     await newUser.save();
 
     // Push account to server
-    optimalServer.userAmount.push( newUser._id );
+    optimalServer.userAmount.push( newUser.id );
     optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
     optimalServer.save();
 
     // Assign cookie to headers
-    cookie = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${memberRole.level};`;
+    cookie = `sid=${signToken( newUser )}; uid=${newUser.id}; cfr=${memberRole.level};`;
     res.set( "Cookie", cookie );
 
     // check browser user have link and cookie affiliate
@@ -316,14 +350,40 @@ module.exports = {
 
       if ( findAgency ) {
         findAgency.customer.total += 1;
-        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 1 } );
+        findAgency.customer.listOfUser.push( { "user": newUser.id, "typeUser": 1 } );
         await findAgency.save();
       }
     }
 
+    //#region Gửi email thông báo đăng ký thành công
+    let url = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/signIn` : `${process.env.APP_URL}:8080/signIn`;;
+    let transporter = await mail.createTransport( {
+      "service": "Gmail",
+      "auth": {
+        "user": process.env.MAIL_USERNAME,
+        "pass": process.env.MAIL_PASSWORD
+      }
+    } );
+
+    // Setup template email
+    await transporter.sendMail(
+      {
+        "from": process.env.MAIL_USERNAME,
+        "to": req.body.email,
+        "subject": "Đăng ký tài khoản mới thành công",
+        "html": signUpSuccess( url )
+      },
+      ( err ) => {
+        if ( err ) {
+          return next( err );
+        }
+      }
+    );
+    //#endregion
+
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,
-      "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/#/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
+      "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/`
     } ) );
   },
   "signUpAccountBackup": async ( objectData ) => {
@@ -389,7 +449,7 @@ module.exports = {
 
     // Generate link to reset by email
     // eslint-disable-next-line one-var
-    let linkReset = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/#/` : `${process.env.APP_URL}:8080/#/`;
+    let linkReset = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/` : `${process.env.APP_URL}:8080/`;
 
     linkReset += `reset-password/final?authorization=${cryptoRandomString( { "length": 50, "type": "url-safe" } )}&timestamp=${cryptoRandomString( { "length": 10, "characters": "1234567890" } )}&serverToken=${serverContainUser.info.domain}&token=${signToken( userInfo )}&__a=1`;
 
@@ -407,7 +467,7 @@ module.exports = {
       {
         "from": process.env.MAIL_USERNAME,
         "to": req.body.email,
-        "subject": "Yêu cầu đặt lại mật khẩu Tài khoản Zinbee của bạn",
+        "subject": "Yêu cầu đặt lại mật khẩu Tài khoản Hoot của bạn",
         "html": writeForgotPassword( linkReset )
       },
       ( err ) => {

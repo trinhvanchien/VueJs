@@ -42,8 +42,8 @@ export default {
   getUserById(id) {
     return Api().get(`users?_id=${id}`);
   },
-  getUserMember() {
-    return Api().get("users/info");
+  getUserMember(id) {
+    return Api().get(`users/info?_id=${id}`);
   },
   getRole() {
     return Api().get("roles");

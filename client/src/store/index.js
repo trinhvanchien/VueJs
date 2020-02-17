@@ -15,6 +15,8 @@ import MemberShipPackage from "./modules/accountpackage.store";
 import AlbumStore from "./modules/album.store";
 import PhotoLibraryStore from "./modules/photolibrary.store";
 import StatisticsStore from "./modules/statistics.store";
+import SpinStore from "./modules/spin.store";
+import SpinWordStore from "./modules/SpinWord.store";
 
 // Market
 import HomepageMarket from "./modules/market/homepage.store";
@@ -22,6 +24,8 @@ import CategoryMarket from "./modules/market/category.store";
 import MarketPostStore from "./modules/market/marketpost.store";
 import ProductMarket from "./modules/market/product.store";
 import ListProduct from "./modules/market/list.store";
+// Payment
+import PaymentStories from "./modules/user/payment";
 
 //Agency
 import PackageStore from "./modules/package.store";
@@ -46,12 +50,16 @@ export default new Vuex.Store({
     AlbumStore,
     PhotoLibraryStore,
     StatisticsStore,
+    SpinStore,
+    SpinWordStore,
     // Market
     HomepageMarket,
     CategoryMarket,
     MarketPostStore,
     ProductMarket,
     ListProduct,
+    // Payment
+    PaymentStories,
     //Agency
     PackageStore,
     AgencyStore,

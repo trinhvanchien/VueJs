@@ -25,12 +25,12 @@
       .item--content {
         // margin-top: 45%;
         .icon--add {
-          color: #FFB94A;
+          color: #ed1c24;
         }
         p {
           margin-top: 20px;
           font-size: 15px;
-          color: #FFB94A;
+          color: #ed1c24;
         }
       }
       &:hover {
@@ -97,8 +97,8 @@
           }
           .btn--update {
             margin-top: 10px;
-            color: #ffb94a;
-            border: 1px solid #ffb94a;
+            color: #ed1c24;
+            border: 1px solid #ed1c24;
             border-radius: 10px;
             font-size: 15px;
             padding: 8px 15px;
@@ -198,15 +198,15 @@
     .btn-add {
       padding: .5rem .75rem;
       border-radius: 10px;
-      background-color: #ffb94a;
-      border: 1px solid #ffb94a;
+      background-color: #ed1c24;
+      border: 1px solid #ed1c24;
       font-weight: 600;
       color: #fff;
       transition: all 0.4s ease;
       cursor: pointer;
       outline: none;
       &:hover {
-        background-color: #FF9E4A;
+        background-color: #c31920;
       }
     }
     .btn-skip {
@@ -312,10 +312,10 @@
 .main[data-theme="light"] {
   .addItem {
     svg {
-      fill: #FFB94A;
+      fill: #ed1c24;
     }
     p {
-      color: #FFB94A;
+      color: #ed1c24;
     }
   }
   .card {
@@ -331,7 +331,7 @@
   }
   .item--content {
     p {
-      color: #FFB94A;
+      color: #ed1c24;
     }
   }
   .item {
@@ -339,8 +339,8 @@
       color: #000;
     }
     .btn--connect {
-      color: #FFB94A;
-      border: 1px solid #FFB94A;
+      color: #ed1c24;
+      border: 1px solid #ed1c24;
     }
     .btn--disconnect {
       color: #666666;
@@ -353,7 +353,7 @@
 .main[data-theme="dark"] {
   .addItem {
     p {
-      color: #FFB94A;
+      color: #ed1c24;
     }
   }
   .card {
@@ -368,7 +368,7 @@
   }
   .item--content {
     p {
-      color: #FFB94A;
+      color: #ed1c24;
     }
   }
   .item {
@@ -377,8 +377,8 @@
       font-weight: 700;
     }
     .btn--connect {
-      color: #FFB94A;
-      border: 1px solid #FFB94A;
+      color: #ed1c24;
+      border: 1px solid #ed1c24;
     }
     .btn--disconnect {
       color: #CCCCCC !important;

@@ -1,13 +1,8 @@
 <template>
   <div class="session">
     <div class="logo text_center mb_0 mb_sm_2">
-      <icon-base
-        icon-name="ZinBee"
-        width="100"
-        height="49.73"
-        viewBox="0 0 250.446 93.703"
-      >
-        <icon-logo></icon-logo>
+      <icon-base width="72" height="36" viewBox="0 0 664 301">
+        <hoot-logo-white />
       </icon-base>
     </div>
     <!-- Start: Card -->
@@ -42,19 +37,19 @@
       <div class="link--group">
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Trợ giúp</a
         >
         <a
           class="link--group-item mr_3"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Bảo mật</a
         >
         <a
           class="link--group-item"
-          href="https://www.zinbee.vn/#/help"
+          href="https://www.hoot.vn/help"
           target="_blank"
           >Điều khoản</a
         >

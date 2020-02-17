@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$table-header: #ffb94a;
+$table-header: #ed1c24;
 $table-header-border: #fff6f4;
 $table-border: #d9d9d9;
 $row-bg: #f4f2f1;

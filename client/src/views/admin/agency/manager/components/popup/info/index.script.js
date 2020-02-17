@@ -45,6 +45,7 @@ export default {
       this.agency.status = val.target.checked;
     },
     selectAgency(val) {
+      this.agency._account.email = val.email;
       this.agency._account.name = val.name;
       this.agency._account._id = val._id;
     },

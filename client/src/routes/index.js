@@ -6,6 +6,7 @@ import Router from "vue-router";
  */
 import adminGeneralRouter from "./modules/admin";
 import signinRouterAdmin from "./modules/admin/signin";
+import signUpRouterAdmin from "./modules/admin/signup";
 
 /**
  * Router for System Member
@@ -18,6 +19,7 @@ import redirectRouter from "./modules/user/_general/redirect";
 import changePasswordRouter from "./modules/user/_general/password";
 import expirationRouter from "./modules/user/_general/expiration";
 import affiliateRouter from "./modules/user/_general/affiliate";
+import policyRouter from "./modules/user/_general/policy";
 
 /**
  * Router for Help
@@ -28,10 +30,15 @@ import helpGeneralRouter from "./modules/user/help";
  * Router for Market
  */
 import marketRouter from "./modules/user/market";
+/**
+ * Router for Market
+ */
+import PaymentRouter from "./modules/user/payment";
 
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     /**
@@ -39,6 +46,7 @@ export default new Router({
      */
     adminGeneralRouter,
     signinRouterAdmin,
+    signUpRouterAdmin,
     /**
      * Router for System Member
      */
@@ -50,6 +58,7 @@ export default new Router({
     changePasswordRouter,
     expirationRouter,
     affiliateRouter,
+    policyRouter,
     /**
      * Router for Help
      */
@@ -57,6 +66,10 @@ export default new Router({
     /**
      * Router for Market
      */
-    marketRouter
+    marketRouter,
+    /**
+     * Router for Payment
+     */
+    PaymentRouter
   ]
 });

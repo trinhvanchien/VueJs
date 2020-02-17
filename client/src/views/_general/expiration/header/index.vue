@@ -7,21 +7,13 @@
         <div
           class="logo d_flex align_items_center justify_content_center mb_3 mr_auto"
         >
-          <!-- <icon-base
-            class="icon--logo"
-            width="100"
-            height="37.41"
-            viewBox="0 0 939.92 351.67"
-          >
-            <icon-logo-black />
-          </icon-base> -->
           <icon-base
-            icon-name="ZinBee"
-            width="132.92"
-            height="49.73"
-            viewBox="0 0 250.446 93.703"
+            width="72"
+            height="36"
+            viewBox="0 0 664 301"
+            icon-name="Hoot logo"
           >
-            <icon-logo />
+            <hoot-logo-black />
           </icon-base>
         </div>
         <!-- Start: Logo -->
