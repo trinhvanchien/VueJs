@@ -137,6 +137,8 @@ module.exports = {
    * Request cần phải chứa nội dung (text) và chủ đề (theme) trong body. Khi gửi văn bản cần spin phải kèm theo 1 chủ đề.
    */
   spin: async (req, res) => {
+    console.log("[MESSAGE]: req", req.body);
+
     const commonTheme = await SpinTheme.findOne({ name: "Chung" });
     const customTheme = await SpinTheme.findOne({ name: req.body.theme });
 

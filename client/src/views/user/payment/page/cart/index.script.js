@@ -81,12 +81,12 @@ export default {
         return;
       } else {
         this.number = this.number - 10;
-        this.money = this.number * 30000;
+        this.money = this.number * 1000;
       }
     },
     increasePost() {
       this.number = this.number + 10;
-      this.money = this.number * 30000;
+      this.money = this.number * 1000;
     },
     calculateTime(a, b) {
       a.setDate(a.getDate() + b);
