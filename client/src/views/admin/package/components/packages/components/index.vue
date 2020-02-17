@@ -12,7 +12,25 @@
                   v-model="membership.name"
                   type="text"
                   class="form_control"
-                  placeholder="Nhập tên thư mục"
+                  placeholder="Nhập tên gói"
+                />
+              </div>
+              <div class="form_group">
+                <label class="">Mã gói</label>
+                <input
+                  v-model="membership.codeId"
+                  type="text"
+                  class="form_control"
+                  placeholder="Nhập mã gói"
+                />
+              </div>
+              <div class="form_group">
+                <label class="">Phân quyền</label>
+                <input
+                  v-model="membership.permission"
+                  type="text"
+                  class="form_control"
+                  placeholder="Nhập phân quyền"
                 />
               </div>
 
@@ -218,9 +236,27 @@ export default {
       this.close();
     },
     async updateMemberShipPackage() {
+      this.membership.permission = this.transformPermissionList(
+        this.membership.permission
+      );
       await this.$store.dispatch("updateMemberShipPackage", this.membership);
       await this.$emit("changeButton", true);
       this.close();
+    },
+    transformPermissionList(permissionList) {
+      if (typeof permissionList === "object") {
+        return permissionList;
+      }
+      if (typeof permissionList === "string") {
+        let transformedPermissionList = permissionList;
+        const isMultiplePermission = permissionList.includes(",");
+        if (isMultiplePermission) {
+          transformedPermissionList = permissionList.split(",");
+          return transformedPermissionList;
+        } else {
+          return [transformedPermissionList];
+        }
+      }
     }
   }
 };

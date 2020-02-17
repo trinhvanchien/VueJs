@@ -63,7 +63,8 @@ const MembershipPackage = require("../models/MembershipPackage.model");
   if (!membershipPackageQuery) {
     await new MembershipPackage({
       codeId: "free",
-      name: "Miễn phí"
+      name: "Miễn phí",
+      permission: [ "post_page" ]
     }).save();
   }
 })();

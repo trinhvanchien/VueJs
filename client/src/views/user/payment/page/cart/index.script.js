@@ -1,10 +1,16 @@
 import EmptyComponent from "./empty";
+import MembershipPackage from "./package";
+import PurchasePost from "./purchasepost";
+
 export default {
   components: {
-    EmptyComponent
+    EmptyComponent,
+    MembershipPackage,
+    PurchasePost
   },
   data() {
     return {
+      membershipPackage: [{}],
       value: 10,
       price: 0,
       number: 0,
