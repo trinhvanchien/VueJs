@@ -41,9 +41,9 @@
                 <multiselect
                   label="name"
                   placeholder="Chọn danh mục đăng bài..."
-                  :options="spin"
+                  :options="themeList"
                   v-model="word.theme"
-                  @input="handleSelectTheme"
+                  @input="handleSelectTheme($event)"
                 />
               </div>
               <div class="text--error mt_2" v-if="isShowAlertTheme === true">
@@ -60,6 +60,9 @@
             </button>
             <button class="btn--submit" v-else @click="createNewWord">
               Thêm mới
+            </button>
+            <button class="btn--submit" @click="importFromFilePopup">
+              Thêm từ file
             </button>
           </div>
         </div>
@@ -80,7 +83,6 @@
             class="search--input"
             type="text"
             placeholder="Tìm kiếm"
-            v-model="search"
             @keydown.enter="updateSearch"
           />
         </div>
@@ -122,16 +124,26 @@
       />
     </transition>
     <!-- POPUP: DELETE WORD -->
+    <!-- POPUP: IMPORT WORD FROM FILE -->
+    <transition name="popup">
+      <import-word
+        v-if="isShowImportFromFile === true"
+        @closePopup="isShowImportFromFile = $event"
+      />
+    </transition>
+    <!-- POPUP: IMPORT WORD FROM FILE END -->
   </div>
 </template>
 
 <script>
 import WordItem from "./WordItem";
 import DeleteWord from "../../popup/Word/WordDelete";
+import ImportWord from "../../popup/Word/WordImport";
 export default {
   components: {
     DeleteWord,
-    WordItem
+    WordItem,
+    ImportWord
   },
   data() {
     return {
@@ -139,11 +151,12 @@ export default {
       isShowAlertKey: false,
       isShowAlertTheme: false,
       isShowDeleteWord: false,
+      isShowImportFromFile: false,
       wordSelected: []
     };
   },
   computed: {
-    spin() {
+    themeList() {
       return this.$store.getters.themeList;
     },
     word() {
@@ -154,8 +167,8 @@ export default {
     }
   },
   created() {
-    const spin = this.$store.getters.themeList;
-    if (spin.length === 0) {
+    const themeList = this.$store.getters.themeList;
+    if (themeList.length === 0) {
       this.$store.dispatch("getAllSpinTheme");
     }
     this.$store.dispatch("getAllWords");
@@ -176,9 +189,11 @@ export default {
         this.isShowAlertTheme = false;
       }
     },
-    search(val) {
+    updateSearch(val) {
       // eslint-disable-next-line no-empty
       if (val.length === 0) {
+        // eslint-disable-next-line no-console
+        console.log(val);
       }
     }
   },
@@ -199,8 +214,6 @@ export default {
       }
     },
     handleSelectTheme(val) {
-      // eslint-disable-next-line no-console
-      console.log("[MESSAGE]: handleSelectTheme -> val", val);
       this.word.theme = val;
     },
     handleDelete(val) {
@@ -224,6 +237,9 @@ export default {
     },
     resetWord() {
       this.$store.dispatch("setWordDefault");
+    },
+    importFromFilePopup() {
+      this.isShowImportFromFile = true;
     }
   }
 };

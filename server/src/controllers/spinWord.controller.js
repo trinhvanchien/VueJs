@@ -13,6 +13,10 @@
 const SpinWord = require("../models/SpinWord.model");
 const SpinTheme = require("../models/SpinTheme.model");
 const jsonResponse = require("../configs/response");
+/**
+ * Thư viện tách cụm từ từ trong câu
+ */
+const Chunking = require("vntk").chunking();
 
 module.exports = {
   create: async (req, res) => {
@@ -137,70 +141,50 @@ module.exports = {
    * Request cần phải chứa nội dung (text) và chủ đề (theme) trong body. Khi gửi văn bản cần spin phải kèm theo 1 chủ đề.
    */
   spin: async (req, res) => {
-    console.log("[MESSAGE]: req", req.body);
+    // console.log("[MESSAGE]: req", req.body.text);
+    let sentence = req.body.text.normalize();
 
-    let commonTheme = await SpinTheme.findOne({ name: "Chung" });
-    const customTheme = await SpinTheme.findOne({ name: req.body.theme });
+    let chunked = Chunking.tag(sentence);
+    let wordTokens = [];
 
-    if (!commonTheme) {
-      console.log("[MESSAGE]: Common theme not found. Now creating a new one...");
-      let newSpinTheme = await new SpinTheme({
-        "name": "Chung",
-        "description": "Các từ khoá có chủ đề chung"
-      });
-      await newSpinTheme.save();
-      commonTheme = await SpinTheme.findOne({ name: "Chung" });
-    }
-
-    const commonFilter = await SpinWord.find({ theme: commonTheme._id }).lean();
-    const categoryFilter = await SpinWord.find({
+    chunked.forEach(item => {
+      if (item[ 0 ]) {
+        wordTokens.push(item[ 0 ]);
+      }
+    });
+    console.log(wordTokens);
+    const customTheme = await SpinTheme.findById(req.body.theme);
+    const customThemeFilter = await SpinWord.find({
       theme: customTheme._id
     }).lean();
-    let text = req.body.text;
-    if (text === null || text === "") {
-      return res.status(403).json({ status: "error", message: "Văn bản rỗng" });
-    }
-    text = wordRevolver(commonFilter, text);
-    text = wordRevolver(categoryFilter, text);
 
-    return res.status(201).json(jsonResponse("success", text));
-  }
-};
-/**
- * Hàm chính để spin content.
- * Luồng sẽ chạy như sau:
- * - Duyệt từng từ một trong filter.
- * - Nếu match từ trong đoạn văn bản mẫu, thì thay thế bằng một từ đồng nghĩa bất kỳ.
- * - Trả lại văn bản đã thay đổi.
- * @param {*} dict filter dùng cho chủ đề cần spin
- * @param {*} text đoạn văn bản cần spin
- */
-const wordRevolver = (dict, text) => {
-  const sentenceStopRegex = /[\.\!\?]/;
-
-  dict.forEach(keyword => {
-    let regex = new RegExp(`(${keyword.key})`, "gi");
-    if (regex.test(text) === true) {
-      let textArr = text.split(regex);
-      let synonyms = dict.filter(item => item.key === keyword.key);
-      for (let i = 0; i < textArr.length - 1; i++) {
-        if (textArr[ i ].toUpperCase() === keyword.key.toUpperCase()) {
-          let random = Math.floor(Math.random() * synonyms.length);
-          textArr[ i ] = synonyms[ random ].name;
-
-          let lastIndex = textArr[ i - 1 ].trim();
-          if (
-            i > 0 && sentenceStopRegex.test(lastIndex[ lastIndex.length - 1 ])
-          ) {
-            textArr[ i ] = textArr[ i ].replace(
-              textArr[ i ][ 0 ],
-              textArr[ i ][ 0 ].toUpperCase()
-            );
+    for (let i = 0; i < wordTokens.length; i++) {
+      let keyword = await customThemeFilter.find(
+        filterItem =>
+          wordTokens[ i ].toLowerCase === filterItem.name.toLowerCase()
+      );
+      if (!keyword) {
+        if (wordTokens[ i + 1 ]) {
+          keyword = await customThemeFilter.find(
+            filterItem => (`${wordTokens[ i ]} ${wordTokens[ i + 1 ]}`).toLowerCase() === filterItem.name.toLowerCase()
+          );
+          if (!keyword) {
+            if (wordTokens[ i + 2 ]) {
+              keyword = await customThemeFilter.find(filterItem => (`${wordTokens[ i ]} ${wordTokens[ i + 1 ]} ${wordTokens[ i + 2 ]}`).toLowerCase() === filterItem.name.toLowerCase());
+            }
           }
         }
       }
-      text = textArr.join("");
+      if (keyword) {
+        let synonyms = customThemeFilter.filter(
+          filterItem => keyword.key === filterItem.key
+        );
+        let random = Math.floor(Math.random() * synonyms.length);
+        let regex = new RegExp(`(${keyword.name})`, "gi");
+        sentence = sentence.replace(regex, synonyms[ random ].name);
+      }
     }
-  });
-  return text;
+
+    return res.status(201).json(jsonResponse("success", sentence));
+  }
 };
