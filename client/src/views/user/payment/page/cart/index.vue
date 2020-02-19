@@ -16,10 +16,17 @@
       <div class="c_lg_12 c_md_12">
         <div class="subscription">
           <div class="subscription--buttons">
-            <button class="button--month">1 Tháng</button>
-            <button class="button--month">3 Tháng</button>
-            <button class="button--month">6 Tháng</button>
-            <button class="button--month">12 Tháng</button>
+            <button
+              class="button--month"
+              :class="{
+                active: selectedMonthSubscription.value === month.value
+              }"
+              v-for="month in monthsSubscription"
+              :key="month.value"
+              @click="chooseMonthSubscription(month)"
+            >
+              {{ month.value }} Tháng
+            </button>
           </div>
         </div>
       </div>
@@ -31,10 +38,11 @@
             v-for="(item, index) in packages"
             :item="item"
             :key="index"
+            :selectedMonthSubscription="selectedMonthSubscription"
           />
         </div>
         <!-- START: UPGRADE PACKAGE -->
-        <div v-if="isShowUpgradePackage === true">
+        <div>
           <div class="package--upgrade py_3 px_2">
             Bạn đang sử dụng gói miễn phí của hệ thống, vui lòng chọn gói nâng
             cấp để sử dụng được những tính năng khác và đầy đủ hơn.
@@ -49,7 +57,7 @@
     </div>
     <div class="r">
       <div class="c_lg_12 c_md_12">
-        <purchase-post />
+        <!-- <purchase-post /> -->
       </div>
     </div>
   </div>

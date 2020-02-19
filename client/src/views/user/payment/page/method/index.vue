@@ -181,8 +181,11 @@ export default {
     async handlePayment() {
       const paymentInfo = {
         amount: this.info.amount,
-        membershipPackage: this.info.membershipPackage,
-        monthsPurchase: this.info.monthsPurchase,
+        purchaseInfo: {
+          type: "subscription",
+          membershipPackage: this.info.membershipPackageId,
+          monthsPurchase: this.info.monthsPurchase
+        },
         orderDescription: this.info.orderDescription,
         bankCode: null,
         language: "vn",

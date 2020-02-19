@@ -16,7 +16,7 @@
             <div class="mt_2">Thanh toán hóa đơn thành công</div>
           </div>
           <div class="info--bill">
-            <div class="info--user mb_3">
+            <!-- <div class="info--user mb_3">
               <div class="mb_3">
                 <span class="text_uppercase font_weight_bold"
                   >Thông tin tài khoản trên hệ thống</span
@@ -52,7 +52,7 @@
                 <span>Hạn sử dụng</span>
                 <span class="show">12/12/2020</span>
               </div>
-            </div>
+            </div> -->
             <div class="info--more">
               <div class="mb_3">
                 <span class="text_uppercase font_weight_bold"
@@ -237,7 +237,7 @@ export default {
 
 <style lang="scss" scoped>
 .info {
-  width: 40%;
+  width: 65%;
   &--success {
     color: #00c853;
     svg {
