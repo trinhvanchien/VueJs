@@ -139,7 +139,8 @@ export default {
       isShowAlertKey: false,
       isShowAlertTheme: false,
       isShowDeleteWord: false,
-      wordSelected: []
+      wordSelected: [],
+      search: ""
     };
   },
   computed: {
@@ -224,6 +225,10 @@ export default {
     },
     resetWord() {
       this.$store.dispatch("setWordDefault");
+    },
+    updateSearch() {
+      let resutls;
+      return resutls;
     }
   }
 };
