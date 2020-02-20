@@ -4,7 +4,7 @@
       <div class="counter">
         <div class="counter--description">
           <span
-            >Số bài đăng sử dụng trong 24 giờ
+            >Số bài đăng sử dụng trong 1 ngày
             <small>( Tối thiểu 10 bài )</small>
           </span>
         </div>

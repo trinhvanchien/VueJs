@@ -2,7 +2,7 @@ import VnpayServices from "@/services/modules/user/payment/vnpay.services";
 import AccountPackageServices from "@/services/modules/accountpackage.services";
 
 const state = {
-  method: 0,
+  method: 1,
   vnpayUrl: null,
   infoBill: {
     amount: "",
