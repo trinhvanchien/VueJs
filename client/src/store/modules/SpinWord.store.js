@@ -8,13 +8,17 @@ const state = {
   },
   words: [],
   wordStatus: "",
-  selectedTheme: ""
+  selectedTheme: "",
+  currentPage: 0,
+  totalPages: 0
 };
 const getters = {
   word: state => state.word,
   words: state => state.words,
   wordStatus: state => state.wordStatus,
-  selectedTheme: state => state.selectedTheme
+  selectedTheme: state => state.selectedTheme,
+  currentPage: state => state.currentPage,
+  totalPages: state => state.totalPages
 };
 const mutations = {
   word_request: state => {

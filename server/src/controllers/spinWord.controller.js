@@ -56,6 +56,7 @@ module.exports = {
       dataResponse = await SpinWord.find({})
         .populate({ path: "theme", select: "_id name description" })
         .sort({ createdAt: "desc" })
+        .limit(20)
         .lean();
     }
 

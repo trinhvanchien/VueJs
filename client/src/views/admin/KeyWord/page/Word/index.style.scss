@@ -225,6 +225,7 @@
   }
   
 }
+
 .search--bar--div {
   background: white;
   width: fit-content;
@@ -234,18 +235,20 @@
   padding: 8px;
   border-radius: 15px;
   margin-bottom: 10px;
+
+  .search--icon {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  .search--input {
+    border: none;
+    overflow: visible;
+    font-size: 0.875rem;
+    margin-left: 10px;
+    
+  }
+  .search--input:focus {
+    outline: none;
+  }
 }
-.search--icon {
-  margin-top: 5px;
-  margin-left: 5px;
-}
-.search--input {
-  border: none;
-  overflow: visible;
-  font-size: 0.875rem;
-  margin-left: 10px;
-  
-}
-.search--input:focus {
-  outline: none;
-}
+

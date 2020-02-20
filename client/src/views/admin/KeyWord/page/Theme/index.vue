@@ -45,7 +45,63 @@
           </div>
         </div>
       </div>
+
       <div class="c_lg_7 c_md_12 c_sm_12 c_xs_12">
+        <div
+          class="search--module--div d_flex align_items_center justify_content_between"
+        >
+          <div class="search--bar--div">
+            <span class="search--icon">
+              <icon-base
+                icon-name="Tìm kiếm"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+              >
+                <icon-input-search />
+              </icon-base>
+            </span>
+            <input
+              class="search--input"
+              type="text"
+              placeholder="Tìm kiếm"
+              v-model="searchKey"
+            />
+          </div>
+          <select class="page--size" v-model="pageSize">
+            <option value="10" selected>Hiển thị 10</option>
+            <option value="25">Hiển thị 25</option>
+            <option value="50">Hiển thị 50</option>
+          </select>
+        </div>
+        <div class="navigation-div">
+          <div class="d_flex align_items_center justify_content_between">
+            <span
+              >Trang {{ currentPage }} trong tổng số
+              {{ totalPages }} trang.</span
+            >
+            <div>
+              <button
+                class="btn"
+                @click="nextOrPrevPage(-1)"
+                :disabled="currentPage === 1"
+              >
+                Trang trước
+              </button>
+              <button
+                class="btn"
+                @click="nextOrPrevPage(1)"
+                :disabled="currentPage === totalPages"
+              >
+                Trang sau
+              </button>
+            </div>
+          </div>
+          <form v-on:submit.prevent id="page-jump">
+            <label for="">Nhảy tới trang</label>
+            <input class="form--control" type="number" v-on:keyup.enter="pageJump($event)" />
+          </form>
+        </div>
         <div class="theme--content">
           <div class="post--data">
             <div class="item--header d_flex align_items_center px_3 py_2">
@@ -105,10 +161,32 @@ export default {
     },
     themeList() {
       return this.$store.getters.themeList;
+    },
+    currentPage() {
+      return this.$store.getters.currentPage;
+    },
+    totalPages() {
+      return this.$store.getters.totalPages;
+    },
+    searchKey: {
+      get() {
+        return this.$store.getters.searchKey;
+      },
+      set(val) {
+        this.$store.dispatch("search", val);
+      }
+    },
+    pageSize: {
+      get() {
+        return this.$store.getters.pageSize;
+      },
+      set(val) {
+        this.$store.dispatch("setPageSize", val);
+      }
     }
   },
   created() {
-    this.$store.dispatch("getAllSpinTheme");
+    this.$store.dispatch("index");
   },
   watch: {
     "currentTheme.name"(val) {
@@ -142,6 +220,16 @@ export default {
     },
     resetSpinTheme() {
       this.$store.dispatch("setThemeDefault");
+    },
+    nextOrPrevPage(val) {
+      this.$store.dispatch("nextOrPrevPage", val);
+    },
+    jumpToPage(val) {
+      this.$store.dispatch("jumpToPage", val);
+    },
+    pageJump(e) {
+      this.$store.dispatch("jumpToPage", e.target.value);
+      document.getElementById("page-jump").reset();
     }
   }
 };
