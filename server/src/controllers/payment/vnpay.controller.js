@@ -31,84 +31,158 @@ const sortObject = (o) => {
 };
 
 const createPaymentUrl = async (req, res) => {
-  console.log("[MESSAGE]: createPaymentUrl -> req", req.body);
-  var ipAddr =
-    req.headers["x-forwarded-for"] ||
-    req.connection.remoteAddress ||
-    req.socket.remoteAddress ||
-    req.connection.socket.remoteAddress;
+  try {
+    console.log("[MESSAGE]: createPaymentUrl -> req", req.body);
+    var ipAddr =
+      req.headers["x-forwarded-for"] ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress;
 
-  var dateFormat = require("dateformat");
+    var dateFormat = require("dateformat");
 
-  var tmnCode = process.env.VNP_TMNCODE;
-  var secretKey = process.env.VNP_HASHSECRET;
-  var vnpUrl = process.env.VNP_URL;
-  var returnUrl = process.env.VNP_RETURNURL;
+    var tmnCode = process.env.VNP_TMNCODE;
+    var secretKey = process.env.VNP_HASHSECRET;
+    var vnpUrl = process.env.VNP_URL;
+    var returnUrl = process.env.VNP_RETURNURL;
 
-  var date = new Date();
+    var date = new Date();
 
-  var createDate = dateFormat(date, "yyyymmddHHmmss");
-  var orderId = dateFormat(date, "HHmmss");
-  var amount = req.body.amount;
-  var bankCode = req.body.bankCode;
+    var createDate = dateFormat(date, "yyyymmddHHmmss");
+    var orderId = dateFormat(date, "HHmmss");
+    var amount = req.body.amount;
+    var bankCode = req.body.bankCode;
 
-  var orderInfo = req.body.orderDescription;
-  var orderType = req.body.orderType;
-  var locale = req.body.language;
+    var orderInfo = req.body.orderDescription;
+    var orderType = req.body.orderType;
+    var locale = req.body.language;
 
-  if (locale === null || locale === "") {
-    locale = "vn";
+    if (locale === null || locale === "") {
+      locale = "vn";
+    }
+    var currCode = "VND";
+    var vnp_Params = {};
+
+    vnp_Params.vnp_Version = "2";
+    vnp_Params.vnp_Command = "pay";
+    vnp_Params.vnp_TmnCode = tmnCode;
+    // vnp_Params['vnp_Merchant'] = ''
+    vnp_Params.vnp_Locale = locale;
+    vnp_Params.vnp_CurrCode = currCode;
+    vnp_Params.vnp_TxnRef = orderId;
+    vnp_Params.vnp_OrderInfo = orderInfo;
+    vnp_Params.vnp_OrderType = orderType;
+    vnp_Params.vnp_Amount = amount * 100;
+    vnp_Params.vnp_ReturnUrl = returnUrl;
+    vnp_Params.vnp_IpAddr = ipAddr;
+    vnp_Params.vnp_CreateDate = createDate;
+    if (bankCode !== null && bankCode !== "") {
+      vnp_Params.vnp_BankCode = bankCode;
+    }
+
+    vnp_Params = sortObject(vnp_Params);
+
+    var querystring = require("qs");
+    var signData =
+      secretKey + querystring.stringify(vnp_Params, { encode: false });
+
+    var sha256 = require("sha256");
+
+    var secureHash = sha256(signData);
+
+    vnp_Params.vnp_SecureHashType = "SHA256";
+    vnp_Params.vnp_SecureHash = secureHash;
+    vnpUrl += `?${querystring.stringify(vnp_Params, { encode: true })}`;
+
+    const { purchaseInfo } = req.body;
+
+    const paymentReceipt = new PaymentReceipt({
+      _account: req.uid,
+      amount: req.body.amount,
+      purchaseInfo: {
+        purchaseType: purchaseInfo.type,
+        membershipPackage: purchaseInfo.membershipPackage
+          ? purchaseInfo.membershipPackage
+          : undefined,
+        monthsPurchase: purchaseInfo.monthsPurchase
+          ? purchaseInfo.monthsPurchase
+          : undefined,
+        postsPurchase: purchaseInfo.postsPurchase
+          ? purchaseInfo.postsPurchase
+          : undefined,
+        postsPurchaseExpireDay: purchaseInfo.postsPurchaseExpireDay
+          ? purchaseInfo.postsPurchaseExpireDay
+          : undefined
+      },
+      method: "vnpay",
+      vnpayTransaction: vnp_Params
+    });
+
+    await paymentReceipt.save();
+ 
+
+    const monthsSubscriptionQuery = await MembershipPackage.findOne({
+      codeId: purchaseInfo.membershipPackage
+    });
+
+    if (purchaseInfo.type === "subscription") {
+
+      const monthsSubscription = [
+        {
+          title: "one",
+          value: 1
+        },
+        {
+          title: "three",
+          value: 3
+        },
+        {
+          title: "six",
+          value: 6
+        },
+        {
+          title: "twelve",
+          value: 12
+        }
+      ];
+  
+      const monthSubscriptionToPurchase = monthsSubscription.find(
+        (month) => month.value === purchaseInfo.monthsPurchase
+      );
+  
+      if (!monthSubscriptionToPurchase) {
+        return res.status(200).json({ RspCode: "99", Message: "Invalid subscription" });
+      }
+
+      const isPriceValid =
+        monthsSubscriptionQuery.price[monthSubscriptionToPurchase.title]
+          .promotional === req.body.amount;
+
+      if (!isPriceValid) {
+        return res.status(200).json({ RspCode: "99", Message: "Invalid price" });
+      }
+    }
+
+
+    if (purchaseInfo.type === "additionalPost") {
+      const calculatedPrice = purchaseInfo.postsPurchase * monthsSubscriptionQuery.postPrice;
+
+      console.log('[MESSAGE]: createPaymentUrl -> calculatedPrice', calculatedPrice);
+
+      const isPriceValid = calculatedPrice === req.body.amount;
+
+      if (!isPriceValid) {
+        return res.status(200).json({ RspCode: "99", Message: "Invalid price" });
+      }
+
+    }
+
+
+    return res.status(200).json({ code: "00", data: vnpUrl });
+  } catch (error) {
+    console.log("[ERROR]:", error);
+    return res.status(200).json({ RspCode: "99", Message: "Unknow error" });
   }
-  var currCode = "VND";
-  var vnp_Params = {};
-
-  vnp_Params.vnp_Version = "2";
-  vnp_Params.vnp_Command = "pay";
-  vnp_Params.vnp_TmnCode = tmnCode;
-  // vnp_Params['vnp_Merchant'] = ''
-  vnp_Params.vnp_Locale = locale;
-  vnp_Params.vnp_CurrCode = currCode;
-  vnp_Params.vnp_TxnRef = orderId;
-  vnp_Params.vnp_OrderInfo = orderInfo;
-  vnp_Params.vnp_OrderType = orderType;
-  vnp_Params.vnp_Amount = amount * 100;
-  vnp_Params.vnp_ReturnUrl = returnUrl;
-  vnp_Params.vnp_IpAddr = ipAddr;
-  vnp_Params.vnp_CreateDate = createDate;
-  if (bankCode !== null && bankCode !== "") {
-    vnp_Params.vnp_BankCode = bankCode;
-  }
-
-  vnp_Params = sortObject(vnp_Params);
-
-  var querystring = require("qs");
-  var signData =
-    secretKey + querystring.stringify(vnp_Params, { encode: false });
-
-  var sha256 = require("sha256");
-
-  var secureHash = sha256(signData);
-
-  vnp_Params.vnp_SecureHashType = "SHA256";
-  vnp_Params.vnp_SecureHash = secureHash;
-  vnpUrl += `?${querystring.stringify(vnp_Params, { encode: true })}`;
-
-  const paymentReceipt = new PaymentReceipt({
-    _account: req.uid,
-    membershipPackage: req.body.membershipPackage,
-    monthsPurchase: req.body.monthsPurchase,
-    method: "vnpay",
-    vnpayTransaction: vnp_Params
-  });
-
-  console.log("[MESSAGE]: createPaymentUrl -> paymentReceipt", paymentReceipt);
-
-  await paymentReceipt.save();
-
-  // Neu muon dung Redirect thi dong dong ben duoi
-  res.status(200).json({ code: "00", data: vnpUrl });
-  // Neu muon dung Redirect thi mo dong ben duoi va dong dong ben tren
-  // res.redirect(vnpUrl)
 };
 
 const vnpayReturn = async (req, res) => {
@@ -179,13 +253,16 @@ const vpnIpn = async (req, res) => {
         "vnpayTransaction.vnp_TxnRef": orderId
       });
 
+      console.log('[MESSAGE]: vpnIpn -> transaction', transaction);
+
       const userAccount = await Account.findOne({
         _id: transaction._account
       }).select("expireDate maxAccountFb membershipPackage");
 
       const membershipPackage = await MembershipPackage.findOne({
-        codeId: transaction.membershipPackage
+        codeId: transaction.purchaseInfo.membershipPackage
       });
+
 
       if (transaction) {
         await PaymentReceipt.updateOne(
@@ -193,15 +270,32 @@ const vpnIpn = async (req, res) => {
           { isPurchased: "success" }
         );
 
-        let infoToUpdate = {
-          status: true,
-          maxAccountFb: membershipPackage.membershipPackage,
-          membershipPackage: transaction.membershipPackage,
-          expireDate: new Date(userAccount.expireDate).setMonth(
-            new Date(userAccount.expireDate).getMonth() +
-              transaction.monthsPurchase
-          )
-        };
+        let infoToUpdate = {};
+
+        if (transaction.purchaseInfo.purchaseType === 'subscription') {
+          infoToUpdate = {
+            status: true,
+            maxAccountFb: membershipPackage.maxAccountFb,
+            membershipPackage: transaction.purchaseInfo.membershipPackage,
+            expireDate: new Date(userAccount.expireDate).setMonth(
+              new Date(userAccount.expireDate).getMonth() +
+                transaction.purchaseInfo.monthsPurchase
+            ),
+            remainingPostCurrentMonth: membershipPackage.limit.post
+          };
+        }
+        if (transaction.purchaseInfo.purchaseType === 'additionalPost') {
+          infoToUpdate = {
+            remainingAdditionalPost: {
+              quantity: transaction.purchaseInfo.postsPurchase,
+              expireDate: new Date().setDate(
+                new Date().getDate() +
+                  transaction.purchaseInfo.postsPurchaseExpireDay
+              )
+            }
+          };
+        }
+
 
         await Account.updateOne(
           {
@@ -209,7 +303,6 @@ const vpnIpn = async (req, res) => {
           },
           infoToUpdate
         );
-
 
         const syncData = {
           id: transaction._account,
@@ -223,12 +316,10 @@ const vpnIpn = async (req, res) => {
           .lean();
 
         try {
-
           await updateUserSync(
             `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
             syncData
           );
-    
         } catch (error) {
           console.log("[ERROR]:", error.response.data);
           returnContent = { RspCode: "99", Message: "Unknow error" };
@@ -282,7 +373,6 @@ const vpnIpn = async (req, res) => {
 
       if (transaction) {
         if (transaction.isPurchased === "pending") {
-          
           if (rspCode === "00") {
             await PaymentReceipt.updateOne(
               { "vnpayTransaction.vnp_TxnRef": orderId },
@@ -295,7 +385,7 @@ const vpnIpn = async (req, res) => {
               membershipPackage: transaction.membershipPackage,
               expireDate: new Date(userAccount.expireDate).setMonth(
                 new Date(userAccount.expireDate).getMonth() +
-              transaction.monthsPurchase
+                  transaction.monthsPurchase
               )
             };
 
@@ -318,19 +408,16 @@ const vpnIpn = async (req, res) => {
               .lean();
 
             try {
-
               await updateUserSync(
                 `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
                 syncData
               );
-    
             } catch (error) {
               console.log("[ERROR]:", error.response.data);
               returnContent = { RspCode: "99", Message: "Unknow error" };
               console.log("[MESSAGE]: returnContent", returnContent);
               return res.status(200).json(returnContent);
             }
-
           } else {
             await PaymentReceipt.updateOne(
               { "vnpayTransaction.vnp_TxnRef": orderId },

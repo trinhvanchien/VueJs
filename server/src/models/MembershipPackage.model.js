@@ -93,6 +93,10 @@ const mongoose = require( "mongoose" ),
         }
       }
     },
+    "postPrice": {
+      type: Number,
+      default: 10000
+    },
     "totalMembership": {
       "type": Number,
       "default": 0

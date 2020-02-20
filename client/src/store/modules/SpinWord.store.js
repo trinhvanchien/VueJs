@@ -7,12 +7,14 @@ const state = {
     theme: ""
   },
   words: [],
-  wordStatus: ""
+  wordStatus: "",
+  selectedTheme: ""
 };
 const getters = {
   word: state => state.word,
   words: state => state.words,
-  wordStatus: state => state.wordStatus
+  wordStatus: state => state.wordStatus,
+  selectedTheme: state => state.selectedTheme
 };
 const mutations = {
   word_request: state => {
@@ -32,6 +34,9 @@ const mutations = {
   },
   setWord: (state, payload) => {
     state.word = payload;
+  },
+  setSelectedTheme: (state, payload) => {
+    state.selectedTheme = payload;
   }
 };
 const actions = {
@@ -116,6 +121,9 @@ const actions = {
       key: "",
       theme: ""
     });
+  },
+  updateSelectedTheme: ({ commit }, payload) => {
+    commit("setSelectedTheme", payload);
   }
 };
 

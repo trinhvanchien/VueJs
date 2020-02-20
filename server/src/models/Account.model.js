@@ -49,6 +49,14 @@ const mongoose = require("mongoose"),
         time: Date
       }
     ],
+    remainingPostCurrentMonth: {
+      type: Number,
+      default: 1
+    },
+    remainingAdditionalPost: {
+      quantity: Number,
+      expireDate: Date
+    },
     other01: String, // id of phpMyadmin from older server
     other02: String,
     updated_at: Date

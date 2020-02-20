@@ -6,8 +6,17 @@ PaymentReceiptSchema = new Schema( {
     type: Schema.Types.ObjectId,
     ref: "Account"
   },
-  membershipPackage: String,
-  monthsPurchase: Number,
+  amount: Number,
+  purchaseInfo: {
+    purchaseType: {
+      type: String,
+      enum: [ "subscription", "additionalPost" ]
+    },
+    membershipPackage: String,
+    monthsPurchase: Number,
+    postsPurchase: Number,
+    postsPurchaseExpireDay: Number
+  },
   method: {
     type: String,
     enum: [ "vnpay", "bankTransfer" ]

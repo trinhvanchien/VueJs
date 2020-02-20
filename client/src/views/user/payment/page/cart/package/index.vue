@@ -5,18 +5,23 @@
     </div>
     <div class="package--price">
       <div class="price--original">
-        <del class="number">200.000 VNĐ</del>
+        <del class="number">{{
+          currencyFormat(item.price[selectedMonthSubscription.title].original)
+        }}</del>
       </div>
       <div class="price--promotional">
-        <span class="number">{{ item.price.one.promotional }}</span>
+        <span class="number">{{
+          currencyFormat(
+            item.price[selectedMonthSubscription.title].promotional
+          )
+        }}</span>
       </div>
     </div>
     <div class="package--action">
-      <button @click="upgradePackage">Nâng cấp</button>
+      <button @click="choosePackageSubscripton()">Nâng cấp</button>
     </div>
     <div class="package--info px_3">
       <div class="package--info-account package--inline">
-        <!-- TODO: giới hạn tài khoản facebook sử dụng -->
         <span>{{ item.maxAccountFb }} </span> tài khoản
       </div>
       <div
@@ -80,9 +85,28 @@
 </template>
 
 <script>
-// import { currencyFormat } from "@/utils/functions/string";
+import StringFunction from "@/utils/functions/string";
+
 export default {
-  props: ["item"]
+  props: ["item", "selectedMonthSubscription"],
+  methods: {
+    currencyFormat(money) {
+      return StringFunction.currencyFormat(money);
+    },
+    choosePackageSubscripton() {
+      const payload = {
+        type: "subscription",
+        amount: this.item.price[this.selectedMonthSubscription.title]
+          .promotional,
+        membershipPackage: this.item.name,
+        membershipPackageId: this.item.codeId,
+        monthsPurchase: this.selectedMonthSubscription.value,
+        orderDescription: `Thanh toan don hang thoi gian: ${new Date().toLocaleString()}`
+      };
+      this.$store.dispatch("setInfoPayment", payload);
+      this.$router.push({ name: "payment_method" });
+    }
+  }
 };
 </script>
 
