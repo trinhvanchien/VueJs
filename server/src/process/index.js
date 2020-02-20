@@ -61,10 +61,176 @@ const MembershipPackage = require("../models/MembershipPackage.model");
   const membershipPackageQuery = await MembershipPackage.findOne({});
 
   if (!membershipPackageQuery) {
-    await new MembershipPackage({
-      codeId: "free",
-      name: "Miễn phí",
-      permission: [ "post_page" ]
-    }).save();
+    const defaultMembershipPackageList = [
+      {
+        codeId: "free",
+        name: "Miễn phí",
+        maxAccountFb: 1,
+        permission: [
+          "post_page",
+          "limited_post_per_day",
+          "unlimited_page"
+        ],
+        limit: {
+          post: 10,
+          campaign: 0,
+          slot: 1
+        },
+        postPrice: 5000,
+        price: {
+          one: {
+            title: 1,
+            original: 0,
+            promotional: 0
+          },
+          three: {
+            title: 3,
+            original: 0,
+            promotional: 0
+          },
+          six: {
+            title: 6,
+            original: 0,
+            promotional: 0
+          },
+          twelve: {
+            title: 12,
+            original: 0,
+            promotional: 0
+          }
+        }
+      },
+      {
+        codeId: "page_care",
+        name: "Page Care",
+        maxAccountFb: 2,
+        permission: [
+          "post_page",
+          "limited_post_per_day",
+          "limited_campaign",
+          "unlimited_page",
+          "customer_support"
+        ],
+        limit: {
+          post: 50,
+          campaign: 2,
+          slot: 1
+        },
+        postPrice: 5000,
+        price: {
+          one: {
+            title: 1,
+            original: 120000,
+            promotional: 120000
+          },
+          three: {
+            title: 3,
+            original: 360000,
+            promotional: 290000
+          },
+          six: {
+            title: 6,
+            original: 720000,
+            promotional: 590000
+          },
+          twelve: {
+            title: 12,
+            original: 1440000,
+            promotional: 990000
+          }
+        }
+      },
+      {
+        codeId: "pro",
+        name: "Pro",
+        maxAccountFb: 10,
+        permission: [
+          "post_page",
+          "post_group",
+          "post_profile",
+          "limited_post_per_day",
+          "limited_campaign",
+          "unlimited_group",
+          "unlimited_page",
+          "customer_support",
+          "hoot_university"
+        ],
+        limit: {
+          post: 100,
+          campaign: 10,
+          slot: 1
+        },
+        postPrice: 10000,
+        price: {
+          one: {
+            title: 1,
+            original: 240000,
+            promotional: 190000
+          },
+          three: {
+            title: 3,
+            original: 480000,
+            promotional: 390000
+          },
+          six: {
+            title: 6,
+            original: 960000,
+            promotional: 890000
+          },
+          twelve: {
+            title: 12,
+            original: 1920000,
+            promotional: 1690000
+          }
+        }
+      },
+      {
+        codeId: "vip",
+        name: "VIP",
+        maxAccountFb: 20,
+        permission: [
+          "post_page",
+          "post_group",
+          "post_profile",
+          "unlimited_post_per_day",
+          "unlimited_campaign",
+          "unlimited_group",
+          "unlimited_page",
+          "customer_support",
+          "hoot_university"
+        ],
+        limit: {
+          post: 100,
+          campaign: 10,
+          slot: 1
+        },
+        postPrice: 10000,
+        price: {
+          one: {
+            title: 1,
+            original: 240000,
+            promotional: 190000
+          },
+          three: {
+            title: 3,
+            original: 480000,
+            promotional: 390000
+          },
+          six: {
+            title: 6,
+            original: 960000,
+            promotional: 890000
+          },
+          twelve: {
+            title: 12,
+            original: 1920000,
+            promotional: 1690000
+          }
+        }
+      }
+
+    ];
+
+    await MembershipPackage.insertMany(defaultMembershipPackageList);
   }
 })();
