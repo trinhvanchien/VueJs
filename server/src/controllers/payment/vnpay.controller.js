@@ -288,12 +288,13 @@ const vpnIpn = async (req, res) => {
                 new Date(userAccount.expireDate).getMonth() +
                   transaction.purchaseInfo.monthsPurchase
               ),
-              remainingPostCurrentMonth: membershipPackage.limit.post
+              limitPostPerDay: membershipPackage.limit.post,
+              totalPostedToday: 0
             },
             { new: true }
           )
             .select(
-              "status maxAccountFb membershipPackage expireDate remainingPostCurrentMonth"
+              "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday"
             )
             .lean();
         }

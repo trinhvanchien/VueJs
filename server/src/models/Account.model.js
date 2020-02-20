@@ -55,9 +55,13 @@ const AccountSchema = new Schema({
       time: Date
     }
   ],
-  remainingPostCurrentMonth: {
+  limitPostPerDay: {
     type: Number,
     default: 1
+  },
+  totalPostedToday: {
+    type: Number,
+    default: 0
   },
   remainingAdditionalPost: [ remainingAdditionalPostSchema ],
   other01: String, // id of phpMyadmin from older server
