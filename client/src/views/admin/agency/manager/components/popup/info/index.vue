@@ -5,7 +5,10 @@
         <!-- Start: Modal Body -->
         <div class="body">
           <div class="name mt_2">
-            <div class="font_weight_bold">Chọn đại lý</div>
+            <div class="font_weight_bold">
+              Chọn đại lý
+              <small class="ml_2">( nhập email để tìm kiếm )</small>
+            </div>
             <div class="agency--select">
               <multiselect
                 label="email"
