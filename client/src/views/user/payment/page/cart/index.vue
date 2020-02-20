@@ -57,7 +57,7 @@
     </div>
     <div class="r">
       <div class="c_lg_12 c_md_12">
-        <!-- <purchase-post /> -->
+        <purchase-post />
       </div>
     </div>
   </div>

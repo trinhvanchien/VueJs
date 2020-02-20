@@ -3,20 +3,33 @@
     <div class="purchase-post--counter">
       <div class="counter">
         <div class="counter--description">
-          <span>Số bài đăng <small>( Tối thiểu 10 bài )</small> </span>
+          <span
+            >Số bài đăng sử dụng trong 24 giờ
+            <small>( Tối thiểu 10 bài )</small>
+          </span>
         </div>
         <div class="counter--amount">
-          <button>-</button>
-          <input type="text" readonly v-model="number" class="text_center" />
-          <button>+</button>
+          <button
+            :class="{ disabled: postsPurchase <= 10 }"
+            @click="decreasePostAmount()"
+          >
+            -
+          </button>
+          <input
+            type="text"
+            readonly
+            v-model="postsPurchase"
+            class="text_center"
+          />
+          <button @click="increasePostAmount()">+</button>
         </div>
       </div>
     </div>
     <div class="purchase-post--price">
-      10000 VNĐ
+      {{ currencyFormat(calculatedTotalPostPrice) }}
     </div>
     <div class="purchase-post--button">
-      <button class="button--purchase">
+      <button @click="purchaseAdditionalPost()" class="button--purchase">
         Thanh toán
       </button>
     </div>
@@ -24,7 +37,49 @@
 </template>
 
 <script>
-export default {};
+import StringFunction from "@/utils/functions/string";
+
+export default {
+  data() {
+    return {
+      postsPurchase: 10
+    };
+  },
+  computed: {
+    calculatedTotalPostPrice() {
+      return this.$store.getters.postPrice * this.postsPurchase;
+    },
+    userMember() {
+      return this.$store.getters.userInfoMember;
+    }
+  },
+  async created() {
+    this.$store.dispatch("getPostPrice");
+  },
+  methods: {
+    currencyFormat(money) {
+      return StringFunction.currencyFormat(money);
+    },
+    increasePostAmount() {
+      this.postsPurchase += 10;
+    },
+    decreasePostAmount() {
+      this.postsPurchase -= 10;
+    },
+    purchaseAdditionalPost() {
+      const payload = {
+        type: "additionalPost",
+        amount: this.calculatedTotalPostPrice,
+        membershipPackageId: this.userMember.membershipPackage,
+        postsPurchase: this.postsPurchase,
+        postsPurchaseExpireDay: 1,
+        orderDescription: `Thanh toan don hang thoi gian: ${new Date().toLocaleString()}`
+      };
+      this.$store.dispatch("setInfoPayment", payload);
+      this.$router.push({ name: "payment_method" });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -37,9 +92,10 @@ export default {};
   &--counter {
   }
   &--price {
-    min-width: 8rem;
-    padding: 0 1rem;
     text-align: right;
+  }
+  &--button {
+    padding: 0 1rem;
   }
 }
 
@@ -55,6 +111,7 @@ export default {};
     input {
       margin: 0 0.7rem;
       outline: none;
+      cursor: default;
     }
     button {
       background-color: #f96666;
@@ -96,5 +153,10 @@ export default {};
   &:active {
     background-color: #ff0515;
   }
+}
+
+.disabled {
+  background-color: gray !important;
+  pointer-events: none;
 }
 </style>

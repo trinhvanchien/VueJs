@@ -182,9 +182,17 @@ export default {
       const paymentInfo = {
         amount: this.info.amount,
         purchaseInfo: {
-          type: "subscription",
+          type: this.info.type,
           membershipPackage: this.info.membershipPackageId,
           monthsPurchase: this.info.monthsPurchase
+            ? this.info.monthsPurchase
+            : undefined,
+          postsPurchase: this.info.postsPurchase
+            ? this.info.postsPurchase
+            : undefined,
+          postsPurchaseExpireDay: this.info.postsPurchaseExpireDay
+            ? this.info.postsPurchaseExpireDay
+            : undefined
         },
         orderDescription: this.info.orderDescription,
         bankCode: null,

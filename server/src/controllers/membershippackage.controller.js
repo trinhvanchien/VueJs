@@ -253,5 +253,18 @@ module.exports = {
         message: "Xảy ra lỗi trong quá trình xử lý dữ liệu"
       });
     }
+  },
+  getPostprice: async (req, res) => {
+    try {
+      const userAccount = await Account.findOne({ _id: req.uid }).select("membershipPackage");
+
+      const { postPrice } = await MembershipPackage.findOne({ codeId: userAccount.membershipPackage }).select("postPrice");
+  
+      return res.status(200).json( { "status": "success", "data": { postPrice } } );
+    } catch (error) {
+      return res.status(200).json( { "status": "success", "message": "Có lỗi xảy ra!" } );
+    }
+
   }
+  
 };
