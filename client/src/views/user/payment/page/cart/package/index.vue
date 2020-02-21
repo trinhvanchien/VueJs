@@ -18,7 +18,14 @@
       </div>
     </div>
     <div class="package--action">
-      <button @click="choosePackageSubscripton()">Nâng cấp</button>
+      <button
+        :class="{ disabled: item.codeId === 'free' }"
+        @click="choosePackageSubscripton()"
+      >
+        {{
+          userMember.membershipPackage === item.codeId ? "Gia hạn" : "Nâng cấp"
+        }}
+      </button>
     </div>
     <div class="package--info px_3">
       <div class="package--info-account package--inline">
@@ -89,6 +96,14 @@ import StringFunction from "@/utils/functions/string";
 
 export default {
   props: ["item", "selectedMonthSubscription"],
+  computed: {
+    calculatedTotalPostPrice() {
+      return this.$store.getters.postPrice * this.postsPurchase;
+    },
+    userMember() {
+      return this.$store.getters.userInfoMember;
+    }
+  },
   methods: {
     currencyFormat(money) {
       return StringFunction.currencyFormat(money);
@@ -157,6 +172,7 @@ export default {
   }
   &--action {
     button {
+      min-width: 130px;
       text-transform: uppercase;
       background-color: #f96666;
       border: none;
@@ -184,5 +200,10 @@ export default {
     font-size: 25px;
     font-weight: 700;
   }
+}
+
+.disabled {
+  background-color: gray !important;
+  pointer-events: none;
 }
 </style>

@@ -18,7 +18,7 @@
       <div class="content">
         <div class="snap d_flex align_items_center justify_content_center mb_4">
           <div
-            class="box d_flex flex_column align_items_center justify_content_center mr_5"
+            class="box d_flex flex_column align_items_center justify_content_center mr_2"
             :class="status === 0 ? 'active' : ''"
             @click="changeMethodPayment(0)"
           >
@@ -33,10 +33,10 @@
                 <icon-credit-card />
               </icon-base>
             </div>
-            <span>Thanh toán trực tiếp</span>
+            <span>Chuyển khoản trực tiếp</span>
           </div>
           <div
-            class="box d_flex flex_column align_items_center justify_content_center"
+            class="box d_flex flex_column align_items_center justify_content_center ml_2"
             :class="status === 1 ? 'active' : ''"
             @click="changeMethodPayment(1)"
           >
@@ -51,7 +51,7 @@
                 <icon-credit-card />
               </icon-base>
             </div>
-            <span>Thanh toán qua VN PAY</span>
+            <span>Thanh toán online VNPAY</span>
           </div>
         </div>
         <div
@@ -91,7 +91,9 @@
             </div>
             <div class="form_group">
               <label>Nội dung chuyển khoản</label>
-              <textarea class="form_control">Email đăng ký trên hoot</textarea>
+              <textarea class="form_control" readonly>
+Email đăng ký trên hoot</textarea
+              >
             </div>
           </div>
           <!--END: DEFAULT-->
@@ -113,7 +115,7 @@
               </div>
             </div>
             <div class="d_flex align_items_center">
-              <div class="form_group w-50 mr_2">
+              <div v-if="info.membershipPackage" class="form_group w-50 mr_2">
                 <label>Tên gói</label>
                 <input
                   :value="info.membershipPackage"
@@ -123,12 +125,30 @@
                   disabled
                 />
               </div>
-              <div class="form_group w-50">
+              <div v-if="info.monthsPurchase" class="form_group w-50">
                 <label>Thời gian gia hạn <small>( tháng )</small></label>
                 <input
                   :value="info.monthsPurchase"
                   type="text"
                   placeholder="Nhập số thời gian sử dụng"
+                  class="form_control"
+                  disabled
+                />
+              </div>
+              <div v-if="info.postsPurchase" class="form_group w-50 mr_2">
+                <label>Số bài viết mua thêm</label>
+                <input
+                  :value="info.postsPurchase"
+                  type="text"
+                  class="form_control"
+                  disabled
+                />
+              </div>
+              <div v-if="info.postsPurchaseExpireDay" class="form_group w-50">
+                <label>Thời gian sử dụng <small>( ngày )</small></label>
+                <input
+                  :value="info.postsPurchaseExpireDay"
+                  type="text"
                   class="form_control"
                   disabled
                 />
@@ -182,9 +202,17 @@ export default {
       const paymentInfo = {
         amount: this.info.amount,
         purchaseInfo: {
-          type: "subscription",
+          type: this.info.type,
           membershipPackage: this.info.membershipPackageId,
           monthsPurchase: this.info.monthsPurchase
+            ? this.info.monthsPurchase
+            : undefined,
+          postsPurchase: this.info.postsPurchase
+            ? this.info.postsPurchase
+            : undefined,
+          postsPurchaseExpireDay: this.info.postsPurchaseExpireDay
+            ? this.info.postsPurchaseExpireDay
+            : undefined
         },
         orderDescription: this.info.orderDescription,
         bankCode: null,
@@ -195,8 +223,6 @@ export default {
       if (this.vnpayUrl) {
         window.location.href = this.vnpayUrl;
       }
-      // TODO: function handle get result from router vnpay
-      // this.$router.push({ name: "payment_success" });
     }
   }
 };
