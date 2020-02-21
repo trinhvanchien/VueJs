@@ -64,6 +64,9 @@ const AccountSchema = new Schema({
     default: 0
   },
   remainingAdditionalPost: [ remainingAdditionalPostSchema ],
+  permission: {
+    type: [ String ]
+  },
   other01: String, // id of phpMyadmin from older server
   other02: String,
   updated_at: Date

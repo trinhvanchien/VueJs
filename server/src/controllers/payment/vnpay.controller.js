@@ -169,10 +169,6 @@ const createPaymentUrl = async (req, res) => {
       const calculatedPrice =
         purchaseInfo.postsPurchase * monthsSubscriptionQuery.postPrice;
 
-      console.log('[MESSAGE]: createPaymentUrl -> monthsSubscriptionQuery.postPrice', monthsSubscriptionQuery.postPrice);
-
-      console.log('[MESSAGE]: createPaymentUrl -> calculatedPrice', calculatedPrice);
-
       const isPriceValid = calculatedPrice === req.body.amount;
 
       if (!isPriceValid) {
@@ -245,7 +241,6 @@ const vpnIpn = async (req, res) => {
     const rspCode = vnp_Params.vnp_ResponseCode;
     const amount = vnp_Params.vnp_Amount;
 
-    console.log("rspCode", rspCode);
 
     let returnContent = {
       RspCode: "",
@@ -256,8 +251,6 @@ const vpnIpn = async (req, res) => {
       const transaction = await PaymentReceipt.findOne({
         "vnpayTransaction.vnp_TxnRef": orderId
       });
-
-      console.log("[MESSAGE]: vpnIpn -> transaction", transaction);
 
       const userAccount = await Account.findOne({
         _id: transaction._account
@@ -272,6 +265,7 @@ const vpnIpn = async (req, res) => {
           { "vnpayTransaction.vnp_TxnRef": orderId },
           { isPurchased: "success" }
         );
+        
 
         let updatedAccount = {};
 
@@ -289,12 +283,13 @@ const vpnIpn = async (req, res) => {
                   transaction.purchaseInfo.monthsPurchase
               ),
               limitPostPerDay: membershipPackage.limit.post,
-              totalPostedToday: 0
+              totalPostedToday: 0,
+              permission: membershipPackage.permission
             },
             { new: true }
           )
             .select(
-              "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday"
+              "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday permission"
             )
             .lean();
         }
@@ -389,27 +384,57 @@ const vpnIpn = async (req, res) => {
               { isPurchased: "success" }
             );
             // TODO: function update expire for user
-            let infoToUpdate = {
-              status: true,
-              maxAccountFb: membershipPackage.membershipPackage,
-              membershipPackage: transaction.membershipPackage,
-              expireDate: new Date(userAccount.expireDate).setMonth(
-                new Date(userAccount.expireDate).getMonth() +
-                  transaction.monthsPurchase
+
+
+            let updatedAccount = {};
+
+            if (transaction.purchaseInfo.purchaseType === "subscription") {
+              updatedAccount = await Account.findOneAndUpdate(
+                {
+                  _id: transaction._account
+                },
+                {
+                  status: true,
+                  maxAccountFb: membershipPackage.maxAccountFb,
+                  membershipPackage: transaction.purchaseInfo.membershipPackage,
+                  expireDate: new Date(userAccount.expireDate).setMonth(
+                    new Date(userAccount.expireDate).getMonth() +
+                      transaction.purchaseInfo.monthsPurchase
+                  ),
+                  limitPostPerDay: membershipPackage.limit.post,
+                  totalPostedToday: 0,
+                  permission: membershipPackage.permission
+                },
+                { new: true }
               )
-            };
+                .select(
+                  "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday permission"
+                )
+                .lean();
+            }
 
-            await Account.updateOne(
-              {
-                _id: transaction._account
-              },
-              infoToUpdate
-            );
+            if (transaction.purchaseInfo.purchaseType === "additionalPost") {
+              updatedAccount = await Account.findOneAndUpdate(
+                {
+                  _id: transaction._account
+                },
+                {
+                  $push: {
+                    remainingAdditionalPost: {
+                      quantity: transaction.purchaseInfo.postsPurchase,
+                      expireDate: new Date().setDate(
+                        new Date().getDate() +
+                          transaction.purchaseInfo.postsPurchaseExpireDay
+                      )
+                    }
+                  }
+                },
+                { new: true }
+              )
+                .select("remainingAdditionalPost")
+                .lean();
+            }
 
-            const syncData = {
-              id: transaction._account,
-              info: infoToUpdate
-            };
 
             const vpsContainServer = await Server.findOne({
               userAmount: userAccount._id
