@@ -99,7 +99,11 @@
           </div>
           <form v-on:submit.prevent id="page-jump">
             <label for="">Nhảy tới trang</label>
-            <input class="form--control" type="number" v-on:keyup.enter="pageJump($event)" />
+            <input
+              class="form--control"
+              type="number"
+              v-on:keyup.enter="jumpToPage($event)"
+            />
           </form>
         </div>
         <div class="theme--content">
@@ -224,10 +228,7 @@ export default {
     nextOrPrevPage(val) {
       this.$store.dispatch("nextOrPrevPage", val);
     },
-    jumpToPage(val) {
-      this.$store.dispatch("jumpToPage", val);
-    },
-    pageJump(e) {
+    jumpToPage(e) {
       this.$store.dispatch("jumpToPage", e.target.value);
       document.getElementById("page-jump").reset();
     }

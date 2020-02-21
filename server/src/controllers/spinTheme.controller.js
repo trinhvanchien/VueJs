@@ -44,7 +44,6 @@ module.exports = {
 
     dataResponse = {
       data: queryResult,
-      currentPage: req.body.currentPage,
       totalPages: Math.ceil(entryCount / 10)
     };
     console.log("[MESSAGE]: totalPages", dataResponse.totalPages);

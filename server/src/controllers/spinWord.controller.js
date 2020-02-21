@@ -43,24 +43,68 @@ module.exports = {
     return res.status(200).json(jsonResponse("success", newSpinWord));
   },
   index: async (req, res) => {
-    let dataResponse = null;
+    let dataResponse;
+    let queryResult = await SpinWord.find({})
+      .populate({ path: "theme", select: "_id name description" })
+      .limit(10);
 
-    if (req.query._id) {
-      dataResponse = await SpinWord.findOne({ _id: req.query._id })
-        .populate({ path: "theme", select: "_id name description" })
-        .sort({ createdAt: "desc" })
-        .lean();
-    } else if (
-      Object.entries(req.query).length === 0 && req.query.constructor === Object
-    ) {
-      dataResponse = await SpinWord.find({})
-        .populate({ path: "theme", select: "_id name description" })
-        .sort({ createdAt: "desc" })
-        .limit(20)
-        .lean();
+    let entryCount = await SpinWord.count({});
+
+    dataResponse = {
+      data: queryResult,
+      totalPages: Math.ceil(entryCount / 10)
+    };
+    res.status(200).json(jsonResponse("success", dataResponse));
+  },
+  indexOptions: async (req, res) => {
+    let dataResponse;
+    let searchKey = {};
+
+    if (!req.body.currentPage) {
+      req.body.currentPage = 1;
     }
 
-    return res.status(200).json(jsonResponse("success", dataResponse));
+    if (!req.body.pageSize) {
+      req.body.pageSize = 10;
+    }
+
+    if (req.body.searchKey) {
+      searchKey = {
+        $or: [
+          { name: new RegExp(req.body.searchKey.normalize(), "gi") },
+          { key: new RegExp(req.body.searchKey.normalize(), "gi") }
+        ]
+      };
+    }
+
+    let pageSkipped = (req.body.currentPage - 1) * req.body.pageSize;
+
+    let queryResult = await SpinWord.find(searchKey)
+      .populate({ path: "theme", select: "_id name description" })
+      .skip(pageSkipped)
+      .limit(req.body.pageSize);
+
+    let entryCount = await SpinWord.count(searchKey);
+
+    dataResponse = {
+      data: queryResult,
+      currentPage: req.body.currentPage,
+      totalPages: Math.ceil(entryCount / req.body.pageSize)
+    };
+
+    res.status(200).json(jsonResponse("success", dataResponse));
+  },
+  detail: async (req, res) => {
+    let dataResponse = await SpinWord.findById(req.query._id)
+      .populate({ path: "theme", select: "_id name description" })
+      .lean();
+
+    if (!dataResponse) {
+      return res
+        .status(404)
+        .json(jsonResponse({ status: 404, data: "Không tìm thấy chủ đề!" }));
+    }
+    res.status(200).json(jsonResponse("success", dataResponse));
   },
   update: async (req, res) => {
     // Check validator
@@ -167,11 +211,17 @@ module.exports = {
       if (!keyword) {
         if (wordTokens[ i + 1 ]) {
           keyword = await customThemeFilter.find(
-            filterItem => (`${wordTokens[ i ]} ${wordTokens[ i + 1 ]}`).toLowerCase() === filterItem.name.toLowerCase()
+            filterItem =>
+              `${wordTokens[ i ]} ${wordTokens[ i + 1 ]}`.toLowerCase() === filterItem.name.toLowerCase()
           );
           if (!keyword) {
             if (wordTokens[ i + 2 ]) {
-              keyword = await customThemeFilter.find(filterItem => (`${wordTokens[ i ]} ${wordTokens[ i + 1 ]} ${wordTokens[ i + 2 ]}`).toLowerCase() === filterItem.name.toLowerCase());
+              keyword = await customThemeFilter.find(
+                filterItem =>
+                  `${wordTokens[ i ]} ${wordTokens[ i + 1 ]} ${
+                    wordTokens[ i + 2 ]
+                  }`.toLowerCase() === filterItem.name.toLowerCase()
+              );
             }
           }
         }
