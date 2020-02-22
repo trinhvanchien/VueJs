@@ -365,7 +365,7 @@ const vpnIpn = async (req, res) => {
       }).select("expireDate maxAccountFb membershipPackage");
 
       const membershipPackage = await MembershipPackage.findOne({
-        codeId: transaction.membershipPackage
+        codeId: transaction.purchaseInfo.membershipPackage
       });
 
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
@@ -443,12 +443,15 @@ const vpnIpn = async (req, res) => {
               .lean();
 
             try {
-              await updateUserSync(
-                `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
-                syncData
-              );
+              const massoSyncUrl =   `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`
+              await updateUserSync(massoSyncUrl, updatedAccount);
             } catch (error) {
-              console.log("[ERROR]:", error.response.data);
+              if (error &&  error.response && error.response.data){
+                console.log("[ERROR]:", error.response.data);
+              } else {
+                console.log("[ERROR]:", error);
+              }
+            
               returnContent = { RspCode: "99", Message: "Unknow error" };
               console.log("[MESSAGE]: returnContent", returnContent);
               return res.status(200).json(returnContent);
