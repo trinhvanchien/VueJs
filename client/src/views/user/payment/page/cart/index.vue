@@ -9,7 +9,10 @@
     <div class="info">
       <span>Nâng cấp gói tài khoản</span>
     </div>
-    <div class="notification p_3">
+    <div
+      v-if="userMember && userMember.membershipPackage && userMember.expireDate"
+      class="notification p_3"
+    >
       <span>
         Bạn đang sử dụng gói
         <b>{{ userMember.membershipPackage.toUpperCase() }}</b> của hệ thống.
