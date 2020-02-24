@@ -7,6 +7,11 @@ import "@/utils/interfaces/components";
 import "@/utils/secures/headers";
 import "@/utils/secures/guards";
 
+// import "./core/middlewares/globals";
+// import "./core/middlewares/guards";
+// import "./core/middlewares/headers";
+// import "./core/middlewares/plugins";
+
 Vue.config.productionTip = false;
 
 new Vue({
