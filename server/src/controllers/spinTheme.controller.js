@@ -33,7 +33,7 @@ module.exports = {
     res.status(200).json(jsonResponse("success", newSpinTheme));
   },
   /**
-   * Dùng để xem thông tin về các chủ đề từ khóa.
+   * Dùng để xem thông tin về các chủ đề từ khóa. Sẽ xuất ra kết quả mặc định là 10 kết quả.
    */
   index: async (req, res) => {
     let dataResponse;
@@ -49,12 +49,13 @@ module.exports = {
     console.log("[MESSAGE]: totalPages", dataResponse.totalPages);
     res.status(200).json(jsonResponse("success", dataResponse));
   },
+  /**
+   * Hàm được gọi khi cần lướt qua các trang khi phân trang, tìm kiếm theo từ khóa.
+   */
   indexOptions: async (req, res) => {
     let dataResponse;
     let searchKey = {};
 
-    console.log("[MESSAGE]: req.body", req.body);
-    // console.log("[MESSAGE]: req.body.pageSize", req.body.pageSize);
     if (!req.body.currentPage) {
       req.body.currentPage = 1;
     }
@@ -89,8 +90,9 @@ module.exports = {
     res.status(200).json(jsonResponse("success", dataResponse));
   },
   detail: async (req, res) => {
-    let dataResponse = await SpinTheme.findById(req.query._id).lean();
-
+    console.log("[MESSAGE]: req.params.id", req.params.id);
+    let dataResponse = await SpinTheme.findById(req.params.id).lean();
+    
     if (!dataResponse) {
       return res
         .status(404)
@@ -99,7 +101,7 @@ module.exports = {
     res.status(200).json(jsonResponse("success", dataResponse));
   },
   update: async (req, res) => {
-    console.log(req.query);
+    console.log(req.params);
     // Check validator
     if (req.body.title === "") {
       return res.status(403).json({
@@ -108,7 +110,7 @@ module.exports = {
       });
     }
 
-    const findSpinTheme = await SpinTheme.findOne({ _id: req.query._id });
+    const findSpinTheme = await SpinTheme.findOne({ _id: req.params.id });
 
     // Check catch when update post categories
     if (!findSpinTheme) {
@@ -123,7 +125,7 @@ module.exports = {
         jsonResponse(
           "success",
           await SpinTheme.findByIdAndUpdate(
-            req.query._id,
+            req.params.id,
             { $set: req.body },
             { new: true }
           )
@@ -132,14 +134,14 @@ module.exports = {
   },
   delete: async (req, res) => {
     // Check if don't use query
-    if (req.query._id === undefined || req.query._id.length === 0) {
+    if (req.params.id === undefined || req.params.id.length === 0) {
       return res.status(403).json({
         status: "fail",
         _id: "Vui lòng cung cấp query ID để xác thực chủ đề muốn xóa!"
       });
     }
 
-    const spinThemeInfo = await SpinTheme.findOne({ _id: req.query._id });
+    const spinThemeInfo = await SpinTheme.findOne({ _id: req.params.id });
 
     // Check error
     if (!spinThemeInfo) {

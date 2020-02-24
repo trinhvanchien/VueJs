@@ -95,7 +95,7 @@ module.exports = {
     res.status(200).json(jsonResponse("success", dataResponse));
   },
   detail: async (req, res) => {
-    let dataResponse = await SpinWord.findById(req.query._id)
+    let dataResponse = await SpinWord.findById(req.params.id)
       .populate({ path: "theme", select: "_id name description" })
       .lean();
 
@@ -115,7 +115,7 @@ module.exports = {
       });
     }
 
-    const findSpinWord = await SpinWord.findOne({ _id: req.query._id });
+    const findSpinWord = await SpinWord.findOne({ _id: req.params.id });
 
     // Check catch when update post categories
     if (!findSpinWord) {
@@ -130,7 +130,7 @@ module.exports = {
         jsonResponse(
           "success",
           await SpinWord.findByIdAndUpdate(
-            req.query._id,
+            req.params.id,
             { $set: req.body },
             { new: true }
           )
@@ -139,14 +139,14 @@ module.exports = {
   },
   delete: async (req, res) => {
     // Check if don't use query
-    if (req.query._id === undefined || req.query._id.length === 0) {
+    if (req.params.id === undefined || req.params.id.length === 0) {
       return res.status(403).json({
         status: "fail",
         _id: "Vui lòng cung cấp query ID để xác thực chủ đề muốn xóa!"
       });
     }
 
-    const spinWordInfo = await SpinWord.findOne({ _id: req.query._id });
+    const spinWordInfo = await SpinWord.findOne({ _id: req.params.id });
 
     // Check error
     if (!spinWordInfo) {
