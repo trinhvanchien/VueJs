@@ -3,8 +3,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import AdminAccount from "@/modules/Admin/Account/router";
+import AdminAgency from "@/modules/Admin/Agency/router";
 
 Vue.use(VueRouter);
 
-const routes = [AdminAccount];
+const routes = [AdminAccount, AdminAgency];
 export default routes;
