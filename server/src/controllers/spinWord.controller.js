@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 /* eslint-disable newline-after-var */
@@ -186,53 +187,54 @@ module.exports = {
    * Request cần phải chứa nội dung (text) và chủ đề (theme) trong body. Khi gửi văn bản cần spin phải kèm theo 1 chủ đề.
    */
   spin: async (req, res) => {
-    // console.log("[MESSAGE]: req", req.body.text);
     let sentence = req.body.text.normalize();
 
     let chunked = Chunking.tag(sentence);
     let wordTokens = [];
 
+    let isWordRegex = /(?:^|\s)([\wáàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữự]*)(?=\s|$)/g;
     chunked.forEach(item => {
       if (item[ 0 ]) {
         wordTokens.push(item[ 0 ]);
       }
     });
-    console.log(wordTokens);
     const customTheme = await SpinTheme.findById(req.body.theme);
     const customThemeFilter = await SpinWord.find({
       theme: customTheme._id
     }).lean();
 
+
     for (let i = 0; i < wordTokens.length; i++) {
-      let keyword = await customThemeFilter.find(
-        filterItem =>
-          wordTokens[ i ].toLowerCase === filterItem.name.toLowerCase()
-      );
-      if (!keyword) {
-        if (wordTokens[ i + 1 ]) {
-          keyword = await customThemeFilter.find(
-            filterItem =>
-              `${wordTokens[ i ]} ${wordTokens[ i + 1 ]}`.toLowerCase() === filterItem.name.toLowerCase()
-          );
-          if (!keyword) {
-            if (wordTokens[ i + 2 ]) {
-              keyword = await customThemeFilter.find(
-                filterItem =>
-                  `${wordTokens[ i ]} ${wordTokens[ i + 1 ]} ${
-                    wordTokens[ i + 2 ]
-                  }`.toLowerCase() === filterItem.name.toLowerCase()
-              );
+      if (isWordRegex.test(wordTokens[ i ])) {
+        let searchPhrase = wordTokens[ i ];
+        let searchRes = await customThemeFilter.find(filterItem => searchPhrase.toLowerCase() === filterItem.name.normalize().toLowerCase());
+        let k = 1;
+        while (k <= 4) {
+          if (!searchRes) {
+            if (wordTokens[ i + k ]) {
+              if (isWordRegex.test(wordTokens[ i + k ])) {
+                searchPhrase = `${searchPhrase} ${wordTokens[ i + k ]}`;
+                searchRes = await customThemeFilter.find(filterItem => searchPhrase.toLowerCase() === filterItem.name.normalize().toLowerCase());
+                k++;
+              } else {
+                break;
+              }
+            } else {
+              break;
             }
+            
+          } else {
+            break;
           }
         }
-      }
-      if (keyword) {
-        let synonyms = customThemeFilter.filter(
-          filterItem => keyword.key === filterItem.key
-        );
-        let random = Math.floor(Math.random() * synonyms.length);
-        let regex = new RegExp(`(${keyword.name})`, "gi");
-        sentence = sentence.replace(regex, synonyms[ random ].name);
+        if (searchRes) {
+          let synonyms = customThemeFilter.filter(
+            filterItem => searchRes.key === filterItem.key
+          );
+          let random = Math.floor(Math.random() * synonyms.length);
+          let regex = new RegExp(`(${searchRes.name.normalize()})`, "gi");
+          sentence = sentence.replace(regex, synonyms[ random ].name);
+        }
       }
     }
 

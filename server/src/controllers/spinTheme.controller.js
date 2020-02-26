@@ -41,12 +41,20 @@ module.exports = {
     let queryResult = await SpinTheme.find({}).limit(10);
 
     let entryCount = await SpinTheme.count({});
-
+    
     dataResponse = {
       data: queryResult,
       totalPages: Math.ceil(entryCount / 10)
     };
     console.log("[MESSAGE]: totalPages", dataResponse.totalPages);
+    res.status(200).json(jsonResponse("success", dataResponse));
+  },
+  /**
+   * Lấy về tất cả các kết quả mà không phân trang.
+   */
+  getUnpaginated: async (req, res) => {
+    let dataResponse = await SpinTheme.find({});
+
     res.status(200).json(jsonResponse("success", dataResponse));
   },
   /**
