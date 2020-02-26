@@ -183,7 +183,7 @@ const createPaymentUrl = async (req, res) => {
     return res.status(200).json({ code: "00", data: vnpUrl });
   } catch (error) {
     console.log("[ERROR]:", error);
-    return res.status(200).json({ RspCode: "99", Message: "Unknown error" });
+    return res.status(200).json({ RspCode: "99", Message: "Unknow error" });
   }
 };
 
@@ -330,7 +330,7 @@ const vpnIpn = async (req, res) => {
           );
         } catch (error) {
           console.log("[ERROR]:", error.response.data);
-          returnContent = { RspCode: "99", Message: "Unknown error" };
+          returnContent = { RspCode: "99", Message: "Unknow error" };
           return res.status(200).json(returnContent);
         }
 
@@ -437,7 +437,6 @@ const vpnIpn = async (req, res) => {
                 .lean();
             }
 
-
             const vpsContainServer = await Server.findOne({
               userAmount: userAccount._id
             })
@@ -455,7 +454,7 @@ const vpnIpn = async (req, res) => {
                 console.log("[ERROR]:", error);
               }
             
-              returnContent = { RspCode: "99", Message: "Unknown error" };
+              returnContent = { RspCode: "99", Message: "Unknow error" };
               console.log("[MESSAGE]: returnContent", returnContent);
               return res.status(200).json(returnContent);
             }
@@ -483,68 +482,14 @@ const vpnIpn = async (req, res) => {
     return res.status(200).json(returnContent);
   } catch (error) {
     console.log("[ERROR]:", error);
-    returnContent = { RspCode: "99", Message: "Unknown error" };
+    returnContent = { RspCode: "99", Message: "Unknow error" };
     console.log("[MESSAGE]: returnContent", returnContent);
     return res.status(200).json(returnContent);
-  }
-};
-
-const paymentHistory = async (req, res) => {
-  try {
-    // req.body._account: id của người dùng.
-    if (!req.body._account) {
-      return res.status(400).json({
-        RspCode: 400,
-        message: "Không có user id."
-      });
-    }
-    /**
-     * Trang hiện tại đang lướt đến. Nếu không có thì mặc định là đang ở trang 1.
-     */
-    let currentPage = !req.body.currentPage ? 1 : req.body.currentPage;
-    /**
-     * Số kết quả muốn đổ ra ở mỗi trang. Nếu không có thì mặc định là 10 kết quả/trang.
-     */
-    let pageSize = !req.body.pageSize ? 10 : req.body.pageSize;
-    /**
-     * Số kết quả phải bỏ qua. Biến này dùng để hỗ trợ query phân trang.
-     */
-    let pageSkipped = (currentPage - 1) * pageSize;
-
-    const returnData = await PaymentReceipt.find({
-      _account: req.body._account,
-      isPurchased: "success"
-    })
-      .select("-vnpayTransaction")
-      .skip(pageSkipped)
-      .limit(pageSize)
-      .lean();
-
-    if (returnData.length === 0) {
-      return res.status(404).json({
-        RspCode: 404,
-        message: "Không tìm thấy thông tin người dùng!"
-      });
-    }
-
-    const entryCount = await PaymentReceipt.count({
-      _account: req.body._account,
-      isPurchased: "success"
-    });
-
-    return res.status(200).json({
-      data: returnData,
-      currentPage: currentPage,
-      totalPages: Math.ceil(entryCount / pageSize)
-    });
-  } catch (error) {
-    console.log("[MESSAGE]: paymentHistory -> error", error);
   }
 };
 
 module.exports = {
   createPaymentUrl,
   vnpayReturn,
-  vpnIpn,
-  paymentHistory
+  vpnIpn
 };
