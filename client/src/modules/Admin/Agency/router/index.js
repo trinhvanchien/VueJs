@@ -1,5 +1,5 @@
 const AgencyRouter = {
-  path: "admin/agency",
+  path: "/admin/agency",
   name: "admin_agency",
   meta: {
     requiredAdmin: true,

@@ -1,8 +1,8 @@
 const AccountRouter = {
-  path: "admin/account",
+  path: "/admin/account",
   name: "admin_account",
   meta: {
-    requiredAdmin: true,
+    // requiredAdmin: true,
     layout: "admin",
     title: "Quản lý tài khoản"
   },

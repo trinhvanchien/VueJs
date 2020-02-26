@@ -1,9 +1,17 @@
-import CookieFunction from "@/utils/functions/cookie";
-import router from "../../routes";
-import store from "../../store";
+import CookieFunction from "../utils/cookie";
+import router from "../router";
+import store from "../store";
 
 /********************* SECURED ROUTER ************************/
 router.beforeEach((to, from, next) => {
+  const titlePage = to.matched
+    .slice()
+    .reverse()
+    .find(r => r.meta && r.meta.title);
+
+  if (titlePage) document.title = titlePage.meta.title;
+  next();
+
   if (
     CookieFunction.getCookie("_sub") &&
     CookieFunction.getCookie("sid") &&
@@ -17,7 +25,7 @@ router.beforeEach((to, from, next) => {
     CookieFunction.getCookie("sid") &&
     CookieFunction.getCookie("cfr").toLowerCase() !== "admin" &&
     CookieFunction.getCookie("uid") &&
-    to.path === "/signin"
+    to.path === "/login"
   ) {
     window.location = `${CookieFunction.getCookie("_sub")}`;
   } else if (
@@ -25,7 +33,7 @@ router.beforeEach((to, from, next) => {
     CookieFunction.getCookie("sid") &&
     CookieFunction.getCookie("cfr").toLowerCase() !== "admin" &&
     CookieFunction.getCookie("uid") &&
-    to.path === "/signup"
+    to.path === "/login"
   ) {
     window.location = `${CookieFunction.getCookie("_sub")}`;
   } else if (to.matched.some(record => record.meta.requiredAuth)) {
@@ -37,7 +45,7 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    next("/admin/signin");
+    next("/admin/login");
   } else if (to.matched.some(record => record.meta.requiredAdmin)) {
     if (
       CookieFunction.getCookie("sid") &&
@@ -61,12 +69,12 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    next("/admin/signin");
+    next("/admin/login");
   } else if (
     store.getters.infoUserEmail === "" &&
-    to.path === "/reset-password/final"
+    to.path === "/forgot-password/final"
   ) {
-    next("/reset-password");
+    next("/forgot-password");
   } else {
     next();
   }
