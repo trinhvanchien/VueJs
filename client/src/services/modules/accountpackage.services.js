@@ -17,5 +17,8 @@ export default {
   },
   show(id) {
     return Api().get(`membership/package?_id=${id}`);
+  },
+  getPostPrice() {
+    return Api().get("membership/package/post-price");
   }
 };

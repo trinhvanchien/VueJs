@@ -7,6 +7,7 @@
 const router = require( "express-promise-router" )();
 const PackageController = require( "../../controllers/membershippackage.controller" );
 
+
 const auth = require( "../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../helpers/middleware/permission.middleware" );
 
@@ -24,5 +25,7 @@ router.route( "/:id/member" ).post( auth, permission, PackageController.addMembe
 router.route( "/:id/many" ).post( auth, permission, PackageController.addMemberToPackage );
 // router add price for old package
 router.route( "/:id/price" ).post( auth, permission, PackageController.addPriceByPackage );
+
+router.route("/post-price").get(auth, PackageController.getPostprice);
 
 module.exports = router;

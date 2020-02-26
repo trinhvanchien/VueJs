@@ -23,4 +23,7 @@ router.route( "/key" ).post( auth, SpinWordController.getWordByKey );
 /** Spin content */
 router.route( "/spin" ).post(auth, SpinWordController.spin);
 
+router.route("/indexOptions").post(auth, SpinWordController.indexOptions);
+router.route("/detail").get(auth, SpinWordController.detail);
+
 module.exports = router;

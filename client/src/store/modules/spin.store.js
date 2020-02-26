@@ -3,22 +3,30 @@ import SpinThemeServices from "@/services/modules/spinTheme.services";
 const state = {
   currentTheme: {},
   themeList: [],
-  spinStatus: ""
+  pageStatus: "",
+  searchKey: "",
+  currentPage: 1,
+  totalPages: 1,
+  pageSize: 10
 };
 const getters = {
   currentTheme: state => state.currentTheme,
   themeList: state => state.themeList,
-  spinStatus: state => state.spinStatus
+  pageStatus: state => state.pageStatus,
+  currentPage: state => state.currentPage,
+  totalPages: state => state.totalPages,
+  pageSize: state => state.pageSize,
+  searchKey: state => state.searchKey
 };
 const mutations = {
-  spin_request: state => {
-    state.spinStatus = "loading";
+  request_init: state => {
+    state.pageStatus = "loading";
   },
-  spin_success: state => {
-    state.spinStatus = "success";
+  request_success: state => {
+    state.pageStatus = "success";
   },
-  spin_error: state => {
-    state.spinStatus = "error";
+  request_error: state => {
+    state.pageStatus = "error";
   },
   setDeleteTheme: (state, payload) => {
     state.themeList = payload;
@@ -39,53 +47,70 @@ const mutations = {
       })
       .filter(item => item !== undefined);
     state.themeList[position] = payload;
+  },
+  setSearchKey: (state, payload) => {
+    state.searchKey = payload;
+  },
+  setCurrentPage: (state, payload) => {
+    state.currentPage = payload;
+    if (state.currentPage < 1) {
+      state.currentPage = 1;
+    } else if (state.currentPage > state.totalPages) {
+      state.currentPage = state.totalPages;
+    }
+  },
+  setTotalPages: (state, payload) => {
+    state.totalPages = payload;
+  },
+  setPageSize: (state, payload) => {
+    state.pageSize = payload;
   }
 };
 const actions = {
   createNewSpinTheme: async ({ commit }, payload) => {
     try {
       let result;
-      commit("spin_request");
+      commit("request_init");
       // create new spin
       await SpinThemeServices.create(payload);
 
       result = await SpinThemeServices.index();
       commit("setThemes", result.data.data);
 
-      commit("spin_success");
+      commit("request_success");
     } catch (e) {
-      commit("spin_error");
+      commit("request_error");
       return e;
     }
   },
-  getAllSpinTheme: async ({ commit }) => {
+  index: async ({ commit }) => {
     try {
-      let result;
-      commit("spin_request");
-      result = await SpinThemeServices.index();
-      commit("setThemes", result.data.data);
-      commit("spin_success");
+      commit("request_init");
+      let result = await SpinThemeServices.index();
+      commit("setThemes", result.data.data.data);
+      commit("setTotalPages", result.data.data.totalPages);
+      commit("request_success");
     } catch (e) {
-      commit("spin_error");
+      commit("request_error");
       return e;
     }
   },
   getSpinThemeById: async ({ commit }, payload) => {
     try {
       let results;
-      commit("spin_request");
+      commit("request_init");
       results = await SpinThemeServices.getById(payload);
       commit("setTheme", results.data.data);
-      commit("spin_success");
+      commit("request_success");
     } catch (e) {
-      commit("spin_error");
+      commit("request_error");
       return e;
     }
   },
   deleteSpinTheme: async ({ commit, state }, payload) => {
     try {
       let spin;
-      commit("spin_request");
+      commit("request_init");
       spin = state.themeList
         .map(item => {
           if (item._id !== payload) {
@@ -95,22 +120,22 @@ const actions = {
         .filter(item => item !== undefined);
       commit("setDeleteTheme", spin);
       await SpinThemeServices.delete(payload);
-      commit("spin_success");
+      commit("request_success");
     } catch (e) {
-      commit("spin_error");
+      commit("request_error");
       return e;
     }
   },
   updateSpinTheme: async ({ commit }, payload) => {
     try {
       let result;
-      commit("spin_request");
+      commit("request_init");
       await SpinThemeServices.update(payload._id, payload);
       result = await SpinThemeServices.index();
       commit("setThemes", result.data.data);
-      commit("spin_success");
+      commit("request_success");
     } catch (e) {
-      commit("spin_error");
+      commit("request_error");
       return e;
     }
   },
@@ -119,6 +144,85 @@ const actions = {
       name: "",
       description: ""
     });
+  },
+  nextOrPrevPage: async ({ commit }, payload) => {
+    let pageNum = state.currentPage + payload;
+    commit("setCurrentPage", pageNum);
+    try {
+      let result;
+      commit("request_init");
+      let data = {
+        searchKey: state.searchKey,
+        currentPage: state.currentPage,
+        pageSize: state.pageSize
+      };
+      result = await SpinThemeServices.indexOptions(data);
+      commit("setThemes", result.data.data.data);
+      commit("setTotalPages", result.data.data.totalPages);
+      commit("request_success");
+    } catch (e) {
+      commit("request_error");
+      return e;
+    }
+  },
+  jumpToPage: async ({ commit }, payload) => {
+    commit("setCurrentPage", payload);
+    try {
+      let result;
+      commit("request_init");
+      let data = {
+        searchKey: state.searchKey,
+        currentPage: state.currentPage,
+        pageSize: state.pageSize
+      };
+      result = await SpinThemeServices.indexOptions(data);
+      commit("setThemes", result.data.data.data);
+      commit("setTotalPages", result.data.data.totalPages);
+      commit("request_success");
+    } catch (e) {
+      commit("request_error");
+      return e;
+    }
+  },
+  search: async ({ commit }, payload) => {
+    commit("setCurrentPage", 1);
+    commit("setSearchKey", payload);
+    try {
+      let result;
+      commit("request_init");
+      let data = {
+        searchKey: state.searchKey,
+        currentPage: state.currentPage,
+        pageSize: state.pageSize
+      };
+      result = await SpinThemeServices.indexOptions(data);
+      commit("setThemes", result.data.data.data);
+      commit("setTotalPages", result.data.data.totalPages);
+      commit("request_success");
+    } catch (e) {
+      commit("request_error");
+      return e;
+    }
+  },
+  setPageSize: async ({ commit }, payload) => {
+    commit("setCurrentPage", 1);
+    commit("setPageSize", parseInt(payload));
+    try {
+      let result;
+      commit("request_init");
+      let data = {
+        searchKey: state.searchKey,
+        currentPage: state.currentPage,
+        pageSize: state.pageSize
+      };
+      result = await SpinThemeServices.indexOptions(data);
+      commit("setThemes", result.data.data.data);
+      commit("setTotalPages", result.data.data.totalPages);
+      commit("request_success");
+    } catch (e) {
+      commit("request_error");
+      return e;
+    }
   }
 };
 export default {

@@ -3,6 +3,7 @@ node_modules
 uploads
 /dist
 zinbee.pfx
+client/dist
 
 /tests/e2e/reports/
 selenium-debug.log

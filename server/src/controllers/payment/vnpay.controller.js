@@ -119,14 +119,12 @@ const createPaymentUrl = async (req, res) => {
     });
 
     await paymentReceipt.save();
- 
 
     const monthsSubscriptionQuery = await MembershipPackage.findOne({
       codeId: purchaseInfo.membershipPackage
     });
 
     if (purchaseInfo.type === "subscription") {
-
       const monthsSubscription = [
         {
           title: "one",
@@ -145,13 +143,15 @@ const createPaymentUrl = async (req, res) => {
           value: 12
         }
       ];
-  
+
       const monthSubscriptionToPurchase = monthsSubscription.find(
         (month) => month.value === purchaseInfo.monthsPurchase
       );
-  
+
       if (!monthSubscriptionToPurchase) {
-        return res.status(200).json({ RspCode: "99", Message: "Invalid subscription" });
+        return res
+          .status(200)
+          .json({ RspCode: "99", Message: "Invalid subscription" });
       }
 
       const isPriceValid =
@@ -159,24 +159,24 @@ const createPaymentUrl = async (req, res) => {
           .promotional === req.body.amount;
 
       if (!isPriceValid) {
-        return res.status(200).json({ RspCode: "99", Message: "Invalid price" });
+        return res
+          .status(200)
+          .json({ RspCode: "99", Message: "Invalid price" });
       }
     }
 
-
     if (purchaseInfo.type === "additionalPost") {
-      const calculatedPrice = purchaseInfo.postsPurchase * monthsSubscriptionQuery.postPrice;
-
-      console.log('[MESSAGE]: createPaymentUrl -> calculatedPrice', calculatedPrice);
+      const calculatedPrice =
+        purchaseInfo.postsPurchase * monthsSubscriptionQuery.postPrice;
 
       const isPriceValid = calculatedPrice === req.body.amount;
 
       if (!isPriceValid) {
-        return res.status(200).json({ RspCode: "99", Message: "Invalid price" });
+        return res
+          .status(200)
+          .json({ RspCode: "99", Message: "Invalid price" });
       }
-
     }
-
 
     return res.status(200).json({ code: "00", data: vnpUrl });
   } catch (error) {
@@ -241,7 +241,6 @@ const vpnIpn = async (req, res) => {
     const rspCode = vnp_Params.vnp_ResponseCode;
     const amount = vnp_Params.vnp_Amount;
 
-    console.log("rspCode", rspCode);
 
     let returnContent = {
       RspCode: "",
@@ -253,8 +252,6 @@ const vpnIpn = async (req, res) => {
         "vnpayTransaction.vnp_TxnRef": orderId
       });
 
-      console.log('[MESSAGE]: vpnIpn -> transaction', transaction);
-
       const userAccount = await Account.findOne({
         _id: transaction._account
       }).select("expireDate maxAccountFb membershipPackage");
@@ -263,51 +260,60 @@ const vpnIpn = async (req, res) => {
         codeId: transaction.purchaseInfo.membershipPackage
       });
 
-
       if (transaction) {
         await PaymentReceipt.updateOne(
           { "vnpayTransaction.vnp_TxnRef": orderId },
           { isPurchased: "success" }
         );
+        
 
-        let infoToUpdate = {};
+        let updatedAccount = {};
 
-        if (transaction.purchaseInfo.purchaseType === 'subscription') {
-          infoToUpdate = {
-            status: true,
-            maxAccountFb: membershipPackage.maxAccountFb,
-            membershipPackage: transaction.purchaseInfo.membershipPackage,
-            expireDate: new Date(userAccount.expireDate).setMonth(
-              new Date(userAccount.expireDate).getMonth() +
-                transaction.purchaseInfo.monthsPurchase
-            ),
-            remainingPostCurrentMonth: membershipPackage.limit.post
-          };
+        if (transaction.purchaseInfo.purchaseType === "subscription") {
+          updatedAccount = await Account.findOneAndUpdate(
+            {
+              _id: transaction._account
+            },
+            {
+              status: true,
+              maxAccountFb: membershipPackage.maxAccountFb,
+              membershipPackage: transaction.purchaseInfo.membershipPackage,
+              expireDate: new Date(userAccount.expireDate).setMonth(
+                new Date(userAccount.expireDate).getMonth() +
+                  transaction.purchaseInfo.monthsPurchase
+              ),
+              limitPostPerDay: membershipPackage.limit.post,
+              totalPostedToday: 0,
+              permission: membershipPackage.permission
+            },
+            { new: true }
+          )
+            .select(
+              "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday permission"
+            )
+            .lean();
         }
-        if (transaction.purchaseInfo.purchaseType === 'additionalPost') {
-          infoToUpdate = {
-            remainingAdditionalPost: {
-              quantity: transaction.purchaseInfo.postsPurchase,
-              expireDate: new Date().setDate(
-                new Date().getDate() +
-                  transaction.purchaseInfo.postsPurchaseExpireDay
-              )
-            }
-          };
+        if (transaction.purchaseInfo.purchaseType === "additionalPost") {
+          updatedAccount = await Account.findOneAndUpdate(
+            {
+              _id: transaction._account
+            },
+            {
+              $push: {
+                remainingAdditionalPost: {
+                  quantity: transaction.purchaseInfo.postsPurchase,
+                  expireDate: new Date().setDate(
+                    new Date().getDate() +
+                      transaction.purchaseInfo.postsPurchaseExpireDay
+                  )
+                }
+              }
+            },
+            { new: true }
+          )
+            .select("remainingAdditionalPost")
+            .lean();
         }
-
-
-        await Account.updateOne(
-          {
-            _id: transaction._account
-          },
-          infoToUpdate
-        );
-
-        const syncData = {
-          id: transaction._account,
-          info: infoToUpdate
-        };
 
         const vpsContainServer = await Server.findOne({
           userAmount: userAccount._id
@@ -318,12 +324,11 @@ const vpnIpn = async (req, res) => {
         try {
           await updateUserSync(
             `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
-            syncData
+            updatedAccount
           );
         } catch (error) {
           console.log("[ERROR]:", error.response.data);
           returnContent = { RspCode: "99", Message: "Unknow error" };
-          console.log("[MESSAGE]: returnContent", returnContent);
           return res.status(200).json(returnContent);
         }
 
@@ -360,7 +365,7 @@ const vpnIpn = async (req, res) => {
       }).select("expireDate maxAccountFb membershipPackage");
 
       const membershipPackage = await MembershipPackage.findOne({
-        codeId: transaction.membershipPackage
+        codeId: transaction.purchaseInfo.membershipPackage
       });
 
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
@@ -379,27 +384,57 @@ const vpnIpn = async (req, res) => {
               { isPurchased: "success" }
             );
             // TODO: function update expire for user
-            let infoToUpdate = {
-              status: true,
-              maxAccountFb: membershipPackage.membershipPackage,
-              membershipPackage: transaction.membershipPackage,
-              expireDate: new Date(userAccount.expireDate).setMonth(
-                new Date(userAccount.expireDate).getMonth() +
-                  transaction.monthsPurchase
+
+
+            let updatedAccount = {};
+
+            if (transaction.purchaseInfo.purchaseType === "subscription") {
+              updatedAccount = await Account.findOneAndUpdate(
+                {
+                  _id: transaction._account
+                },
+                {
+                  status: true,
+                  maxAccountFb: membershipPackage.maxAccountFb,
+                  membershipPackage: transaction.purchaseInfo.membershipPackage,
+                  expireDate: new Date(userAccount.expireDate).setMonth(
+                    new Date(userAccount.expireDate).getMonth() +
+                      transaction.purchaseInfo.monthsPurchase
+                  ),
+                  limitPostPerDay: membershipPackage.limit.post,
+                  totalPostedToday: 0,
+                  permission: membershipPackage.permission
+                },
+                { new: true }
               )
-            };
+                .select(
+                  "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday permission"
+                )
+                .lean();
+            }
 
-            await Account.updateOne(
-              {
-                _id: transaction._account
-              },
-              infoToUpdate
-            );
+            if (transaction.purchaseInfo.purchaseType === "additionalPost") {
+              updatedAccount = await Account.findOneAndUpdate(
+                {
+                  _id: transaction._account
+                },
+                {
+                  $push: {
+                    remainingAdditionalPost: {
+                      quantity: transaction.purchaseInfo.postsPurchase,
+                      expireDate: new Date().setDate(
+                        new Date().getDate() +
+                          transaction.purchaseInfo.postsPurchaseExpireDay
+                      )
+                    }
+                  }
+                },
+                { new: true }
+              )
+                .select("remainingAdditionalPost")
+                .lean();
+            }
 
-            const syncData = {
-              id: transaction._account,
-              info: infoToUpdate
-            };
 
             const vpsContainServer = await Server.findOne({
               userAmount: userAccount._id
@@ -408,12 +443,15 @@ const vpnIpn = async (req, res) => {
               .lean();
 
             try {
-              await updateUserSync(
-                `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
-                syncData
-              );
+              const massoSyncUrl =   `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`
+              await updateUserSync(massoSyncUrl, updatedAccount);
             } catch (error) {
-              console.log("[ERROR]:", error.response.data);
+              if (error &&  error.response && error.response.data){
+                console.log("[ERROR]:", error.response.data);
+              } else {
+                console.log("[ERROR]:", error);
+              }
+            
               returnContent = { RspCode: "99", Message: "Unknow error" };
               console.log("[MESSAGE]: returnContent", returnContent);
               return res.status(200).json(returnContent);
