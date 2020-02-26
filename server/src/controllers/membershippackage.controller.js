@@ -8,6 +8,8 @@
  */
 const MembershipPackage = require("../models/MembershipPackage.model");
 const Account = require("../models/Account.model");
+const Server = require("../models/Server.model");
+const { updateUserSync } = require("../microservices/synchronize/account");
 
 module.exports = {
   addMember: async (req, res) => {
@@ -15,10 +17,45 @@ module.exports = {
     const { member } = req.body;
     const currentPackageInfo = await MembershipPackage.findOne({ _id: id });
 
-    await Account.updateOne(
+    console.log("[MESSAGE]: currentPackageInfo", currentPackageInfo);
+    
+    let updatedAccount = await Account.findOneAndUpdate(
       { _id: member },
-      { membershipPackage: currentPackageInfo.codeId }
+      {
+        membershipPackage: currentPackageInfo.codeId,
+        limitPostPerDay: currentPackageInfo.limit.post,
+        campaignLimit: currentPackageInfo.limit.campaign,
+        totalPostedToday: 0,
+        permission: currentPackageInfo.permission
+      }
     );
+
+    if (!updatedAccount) {
+      return res.status(500).json({
+        status: "fail",
+        data: "Không tìm thấy thông tin người dùng."
+      });
+    }
+
+    const vpsContainServer = await Server.findOne({
+      userAmount: updatedAccount._id
+    })
+      .select("info")
+      .lean();
+
+    try {
+      await updateUserSync(
+        `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`,
+        updatedAccount
+      );
+    } catch (error) {
+      console.log("[ERROR]:", error);
+      return res.status(500).json({
+        status: "fail",
+        data: "Server xảy ra lỗi khi đồng bộ thông tin người dùng"
+      });
+    }
+
     res.status(200).json({ status: "success", data: "Thêm thành công" });
   },
   create: async (req, res) => {
