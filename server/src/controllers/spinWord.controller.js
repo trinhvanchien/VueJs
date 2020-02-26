@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 /* eslint-disable newline-after-var */
@@ -95,7 +96,7 @@ module.exports = {
     res.status(200).json(jsonResponse("success", dataResponse));
   },
   detail: async (req, res) => {
-    let dataResponse = await SpinWord.findById(req.query._id)
+    let dataResponse = await SpinWord.findById(req.params.id)
       .populate({ path: "theme", select: "_id name description" })
       .lean();
 
@@ -115,7 +116,7 @@ module.exports = {
       });
     }
 
-    const findSpinWord = await SpinWord.findOne({ _id: req.query._id });
+    const findSpinWord = await SpinWord.findOne({ _id: req.params.id });
 
     // Check catch when update post categories
     if (!findSpinWord) {
@@ -130,7 +131,7 @@ module.exports = {
         jsonResponse(
           "success",
           await SpinWord.findByIdAndUpdate(
-            req.query._id,
+            req.params.id,
             { $set: req.body },
             { new: true }
           )
@@ -139,14 +140,14 @@ module.exports = {
   },
   delete: async (req, res) => {
     // Check if don't use query
-    if (req.query._id === undefined || req.query._id.length === 0) {
+    if (req.params.id === undefined || req.params.id.length === 0) {
       return res.status(403).json({
         status: "fail",
         _id: "Vui lòng cung cấp query ID để xác thực chủ đề muốn xóa!"
       });
     }
 
-    const spinWordInfo = await SpinWord.findOne({ _id: req.query._id });
+    const spinWordInfo = await SpinWord.findOne({ _id: req.params.id });
 
     // Check error
     if (!spinWordInfo) {
@@ -186,53 +187,54 @@ module.exports = {
    * Request cần phải chứa nội dung (text) và chủ đề (theme) trong body. Khi gửi văn bản cần spin phải kèm theo 1 chủ đề.
    */
   spin: async (req, res) => {
-    // console.log("[MESSAGE]: req", req.body.text);
     let sentence = req.body.text.normalize();
 
     let chunked = Chunking.tag(sentence);
     let wordTokens = [];
 
+    let isWordRegex = /(?:^|\s)([\wáàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữự]*)(?=\s|$)/g;
     chunked.forEach(item => {
       if (item[ 0 ]) {
         wordTokens.push(item[ 0 ]);
       }
     });
-    console.log(wordTokens);
     const customTheme = await SpinTheme.findById(req.body.theme);
     const customThemeFilter = await SpinWord.find({
       theme: customTheme._id
     }).lean();
 
+
     for (let i = 0; i < wordTokens.length; i++) {
-      let keyword = await customThemeFilter.find(
-        filterItem =>
-          wordTokens[ i ].toLowerCase === filterItem.name.toLowerCase()
-      );
-      if (!keyword) {
-        if (wordTokens[ i + 1 ]) {
-          keyword = await customThemeFilter.find(
-            filterItem =>
-              `${wordTokens[ i ]} ${wordTokens[ i + 1 ]}`.toLowerCase() === filterItem.name.toLowerCase()
-          );
-          if (!keyword) {
-            if (wordTokens[ i + 2 ]) {
-              keyword = await customThemeFilter.find(
-                filterItem =>
-                  `${wordTokens[ i ]} ${wordTokens[ i + 1 ]} ${
-                    wordTokens[ i + 2 ]
-                  }`.toLowerCase() === filterItem.name.toLowerCase()
-              );
+      if (isWordRegex.test(wordTokens[ i ])) {
+        let searchPhrase = wordTokens[ i ];
+        let searchRes = await customThemeFilter.find(filterItem => searchPhrase.toLowerCase() === filterItem.name.normalize().toLowerCase());
+        let k = 1;
+        while (k <= 4) {
+          if (!searchRes) {
+            if (wordTokens[ i + k ]) {
+              if (isWordRegex.test(wordTokens[ i + k ])) {
+                searchPhrase = `${searchPhrase} ${wordTokens[ i + k ]}`;
+                searchRes = await customThemeFilter.find(filterItem => searchPhrase.toLowerCase() === filterItem.name.normalize().toLowerCase());
+                k++;
+              } else {
+                break;
+              }
+            } else {
+              break;
             }
+            
+          } else {
+            break;
           }
         }
-      }
-      if (keyword) {
-        let synonyms = customThemeFilter.filter(
-          filterItem => keyword.key === filterItem.key
-        );
-        let random = Math.floor(Math.random() * synonyms.length);
-        let regex = new RegExp(`(${keyword.name})`, "gi");
-        sentence = sentence.replace(regex, synonyms[ random ].name);
+        if (searchRes) {
+          let synonyms = customThemeFilter.filter(
+            filterItem => searchRes.key === filterItem.key
+          );
+          let random = Math.floor(Math.random() * synonyms.length);
+          let regex = new RegExp(`(${searchRes.name.normalize()})`, "gi");
+          sentence = sentence.replace(regex, synonyms[ random ].name);
+        }
       }
     }
 

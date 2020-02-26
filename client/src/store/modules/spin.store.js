@@ -132,7 +132,7 @@ const actions = {
       commit("request_init");
       await SpinThemeServices.update(payload._id, payload);
       result = await SpinThemeServices.index();
-      commit("setThemes", result.data.data);
+      commit("setThemes", result.data.data.data);
       commit("request_success");
     } catch (e) {
       commit("request_error");

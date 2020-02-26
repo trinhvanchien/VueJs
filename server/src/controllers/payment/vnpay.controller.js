@@ -1,3 +1,5 @@
+/* eslint-disable no-warning-comments */
+/* eslint-disable no-unused-vars */
 /* eslint-disable vars-on-top */
 /* eslint-disable operator-linebreak */
 /* eslint-disable global-require */
@@ -341,7 +343,7 @@ const vpnIpn = async (req, res) => {
       return res.status(200).json(returnContent);
     }
 
-    if (rspCode == "24") {
+    if (rspCode === "24") {
       returnContent = { RspCode: "00", Message: "Confirm Success" };
       console.log("[MESSAGE]: returnContent", returnContent);
       return res.status(200).json(returnContent);
@@ -370,7 +372,7 @@ const vpnIpn = async (req, res) => {
 
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-      if (transaction && transaction.vnpayTransaction.vnp_Amount != amount) {
+      if (transaction && transaction.vnpayTransaction.vnp_Amount !== amount) {
         returnContent = { RspCode: "04", Message: "Invalid amount" };
         console.log("[MESSAGE]: returnContent", returnContent);
         return res.status(200).json(returnContent);
@@ -435,7 +437,6 @@ const vpnIpn = async (req, res) => {
                 .lean();
             }
 
-
             const vpsContainServer = await Server.findOne({
               userAmount: userAccount._id
             })
@@ -443,10 +444,11 @@ const vpnIpn = async (req, res) => {
               .lean();
 
             try {
-              const massoSyncUrl =   `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`
+              const massoSyncUrl = `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}`;
+
               await updateUserSync(massoSyncUrl, updatedAccount);
             } catch (error) {
-              if (error &&  error.response && error.response.data){
+              if (error && error.response && error.response.data) {
                 console.log("[ERROR]:", error.response.data);
               } else {
                 console.log("[ERROR]:", error);
