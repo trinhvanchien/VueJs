@@ -285,34 +285,38 @@ module.exports = {
       return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại trên hệ thống!" } );
     }
 
-    //#region Regex check
+    // #region Regex check
     const phoneRegex = /^(0)+(\d{9})$/g;
+
     if ( phoneRegex.test(phone) === false ) {
-      return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại phải có 10 chữ số và phải bắt đầu bằng số 0." } )
+      return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại phải có 10 chữ số và phải bắt đầu bằng số 0." } );
     }
 
     const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\])|(([\w\-]+\.)+[a-zA-Z]{2,}))$/g;
+
     if ( emailRegex.test(email) === false ) {
       return res.status( 403 ).json( { "status": "error", "message": "Địa chỉ email không hợp lệ!" } );
     }
 
     const nameRegex = /^([^0-9\!\@\#\$\%\^\&\*\(\)\+\=\`\~\{\}\[\]\:\"\;\'\\\<\>\,\.\?\/\t]+)$/g;
+
     name = name.trim();
     if ( name.length > 50 || name.length < 6 ) {
       return res.status( 403 ).json( { "status": "error", "message": "Tên không được ngắn hơn 6 ký tự hoặc dài hơn 50 ký tự!" } );
     }
     if ( nameRegex.test(name) === false ) {
-      return res.status( 403 ).json( { "status": "error", "message": "Tên không được chứa các ký tự đặc biệt!" } ); 
+      return res.status( 403 ).json( { "status": "error", "message": "Tên không được chứa các ký tự đặc biệt!" } );
     }
-    //#endregion
+    // #endregion
 
-    //#region Check email validation
+    // #region Check email validation
     let domain = email.split("@").pop();
     const pingResult = await ping.promise.probe(domain);
+
     if ( pingResult.alive === false ) {
       return res.status(403).json({ status: "error", message: "Tên miền của email server không có thực!" });
     }
-    //#endregion
+    // #endregion
 
     newUser = await new Account( {
       name,
@@ -355,8 +359,8 @@ module.exports = {
       }
     }
 
-    //#region Gửi email thông báo đăng ký thành công
-    let url = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/signIn` : `${process.env.APP_URL}:8080/signIn`;;
+    // #region Gửi email thông báo đăng ký thành công
+    let url = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/signIn` : `${process.env.APP_URL}:8080/signIn`;
     let transporter = await mail.createTransport( {
       "service": "Gmail",
       "auth": {
@@ -379,7 +383,7 @@ module.exports = {
         }
       }
     );
-    //#endregion
+    // #endregion
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,

@@ -61,7 +61,7 @@ const AccountSchema = new Schema({
   },
   campaignLimit: {
     type: Number,
-    default: 0
+    default: 1
   },
   totalPostedToday: {
     type: Number,
