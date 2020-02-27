@@ -15,12 +15,7 @@
         <div class="modal--body">
           <div class="general--info d_flex mb_3">
             <div class="left">
-              <div
-                class="thumbnail mr_3"
-                :style="{
-                  backgroundImage: 'url(' + product.previews.thumbnail + ')'
-                }"
-              ></div>
+              <img class="thumbnail mr_3" :src="product.previews.thumbnail" />
             </div>
             <div class="right">
               <div class="right--data">
