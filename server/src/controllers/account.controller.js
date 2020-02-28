@@ -318,15 +318,22 @@ module.exports = {
     }
     // #endregion
 
-    newUser = await new Account( {
+    const freeAccountPackage = await MembershipPackage.findOne({ codeId: "free" });
+
+    newUser = new Account( {
       name,
-      "email": email.toString().toLowerCase(),
+      email: email.toString().toLowerCase(),
       phone,
       presenter,
       password,
-      "status": 1,
-      "expireDate": new Date().setDate( new Date().getDate() + 3 ),
-      "_role": memberRole.id
+      status: 1,
+      expireDate: new Date().setDate( new Date().getDate() + 3 ),
+      _role: memberRole.id,
+      membershipPackage: freeAccountPackage.codeId,
+      permission: freeAccountPackage.permission,
+      maxAccountFb: freeAccountPackage.maxAccountFb,
+      limitPostPerDay: freeAccountPackage.limit.post,
+      campaignLimit: freeAccountPackage.limit.campaign
     } );
 
     // Sync with nested server
@@ -370,7 +377,7 @@ module.exports = {
     } );
 
     // Setup template email
-    await transporter.sendMail(
+    transporter.sendMail(
       {
         "from": process.env.MAIL_USERNAME,
         "to": req.body.email,
