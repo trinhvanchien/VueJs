@@ -12,11 +12,14 @@
       cursor: pointer;
       font-size: 0.9rem;
       padding: 0.5rem 1.5rem;
-      &:hover, &:focus, &:active, &:visited {
+      &:hover,
+      &:focus,
+      &:active,
+      &:visited {
         background-color: #ff0000;
         box-shadow: none;
         outline: 0;
-        transition: all  0.5s ease;
+        transition: all 0.5s ease;
       }
     }
   }
@@ -38,10 +41,14 @@
         min-width: 100%;
         max-width: 100%;
       }
-      input, textarea {
-        background-color: #F5F5F5;
+      input,
+      textarea {
+        background-color: #f5f5f5;
         font-size: 0.9rem;
-        &:hover, &:active, &:visited, &:focus {
+        &:hover,
+        &:active,
+        &:visited,
+        &:focus {
           box-shadow: none;
           outline: 0;
         }
@@ -61,11 +68,14 @@
       cursor: pointer;
       font-size: 0.9rem;
       padding: 0.5rem 1.5rem;
-      &:hover, &:focus, &:active, &:visited {
+      &:hover,
+      &:focus,
+      &:active,
+      &:visited {
         background-color: #ff0000;
         box-shadow: none;
         outline: 0;
-        transition: all  0.5s ease;
+        transition: all 0.5s ease;
       }
     }
     .btn--submit {
@@ -76,11 +86,14 @@
       cursor: pointer;
       font-size: 0.9rem;
       padding: 0.5rem 1.5rem;
-      &:hover, &:focus, &:active, &:visited {
+      &:hover,
+      &:focus,
+      &:active,
+      &:visited {
         background-color: #ff0000;
         box-shadow: none;
         outline: 0;
-        transition: all  0.5s ease;
+        transition: all 0.5s ease;
       }
     }
   }
@@ -90,29 +103,29 @@
   .col {
     &:hover {
       .sort {
-        padding: .25rem .5rem;
+        padding: 0.25rem 0.5rem;
         svg {
           opacity: 1;
         }
       }
     }
     .active {
-      padding: .25rem .5rem !important;
+      padding: 0.25rem 0.5rem !important;
       svg {
         opacity: 1 !important;
       }
     }
     .sort {
-      border-radius: .5rem;
+      border-radius: 0.5rem;
       cursor: pointer;
-      padding: .25rem 0;
-      transition: all .4s ease;
+      padding: 0.25rem 0;
+      transition: all 0.4s ease;
       svg {
         opacity: 0;
-        stroke-width: .5;
+        stroke-width: 0.5;
         stroke: #444;
         transform: scale(1);
-        transition: all .4s ease;
+        transition: all 0.4s ease;
         vertical-align: middle;
       }
       .descending {
@@ -202,5 +215,53 @@
       left: 0;
       top: 0;
     }
+  }
+}
+.search--bar--div {
+  background: white;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  border-radius: 15px;
+
+  .search--icon {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  .search--input {
+    border: none;
+    overflow: visible;
+    font-size: 0.875rem;
+    margin-left: 10px;
+  }
+  .search--input:focus {
+    outline: none;
+  }
+}
+.page--size {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.875rem;
+  border: 10px solid white;
+  border-radius: 15px;
+}
+.page--size:focus {
+  outline: none;
+}
+.search--module--div {
+  margin-bottom: 5px;
+}
+#page-jump {
+  margin-bottom: 10px;
+  input {
+    margin-left: 15px;
+    border-radius: 10px;
+    border: white;
+    width: 65px;
+    padding: 0.4rem;
+  }
+  input:focus {
+    outline: none;
   }
 }

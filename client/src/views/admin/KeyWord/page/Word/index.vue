@@ -68,23 +68,64 @@
         </div>
       </div>
       <div class="c_lg_7 c_md_12 c_sm_12 c_xs_12">
-        <div class="search--bar--div">
-          <span class="search--icon">
-            <icon-base
-              icon-name="Tìm kiếm"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
+        <div
+          class="search--module--div d_flex align_items_center justify_content_between"
+        >
+          <form class="search--bar--div" v-on:submit.prevent>
+            <span class="search--icon">
+              <icon-base
+                icon-name="Tìm kiếm"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+              >
+                <icon-input-search />
+              </icon-base>
+            </span>
+            <input
+              class="search--input"
+              type="text"
+              placeholder="Nhập từ khóa muốn tìm kiếm và gõ enter"
+              v-on:keyup.enter="search($event)"
+            />
+          </form>
+          <select class="page--size" v-model="wordPageSize">
+            <option value="10" selected>Hiển thị 10</option>
+            <option value="25">Hiển thị 25</option>
+            <option value="50">Hiển thị 50</option>
+          </select>
+        </div>
+        <div class="navigation-div">
+          <div class="d_flex align_items_center justify_content_between">
+            <span
+              >Trang {{ currentWordPage }} trong tổng số
+              {{ totalWordPages }} trang.</span
             >
-              <icon-input-search />
-            </icon-base>
-          </span>
-          <input
-            class="search--input"
-            type="text"
-            placeholder="Tìm kiếm"
-            @keydown.enter="updateSearch"
-          />
+            <div>
+              <button
+                class="btn"
+                @click="nextOrPrevPage(-1)"
+                :disabled="currentWordPage === 1"
+              >
+                Trang trước
+              </button>
+              <button
+                class="btn"
+                @click="nextOrPrevPage(1)"
+                :disabled="currentWordPage === totalWordPages"
+              >
+                Trang sau
+              </button>
+            </div>
+          </div>
+          <form v-on:submit.prevent id="page-jump">
+            <label for="">Nhảy tới trang</label>
+            <input
+              class="form--control"
+              type="number"
+              v-on:keyup.enter="jumpToPage($event)"
+            />
+          </form>
         </div>
         <div class="theme--content">
           <div class="post--data">
@@ -100,13 +141,13 @@
             </div>
             <div
               class="item--body data--empty d_flex align_items_center justify_content_center px_3 py_2"
-              v-if="spinWord.length === 0"
+              v-if="wordList.length === 0"
             >
               Không có dữ liệu.
             </div>
             <word-item
               v-else
-              v-for="(item, index) in spinWord"
+              v-for="(item, index) in wordList"
               :key="index"
               :item="item"
               @deleteWord="handleDelete($event)"
@@ -162,16 +203,26 @@ export default {
     word() {
       return this.$store.getters.word;
     },
-    spinWord() {
-      return this.$store.getters.words;
+    wordList() {
+      return this.$store.getters.wordList;
+    },
+    currentWordPage() {
+      return this.$store.getters.currentWordPage;
+    },
+    totalWordPages() {
+      return this.$store.getters.totalWordPages;
+    },
+    wordPageSize: {
+      get() {
+        return this.$store.getters.wordPageSize;
+      },
+      set(val) {
+        this.$store.dispatch("setWordPageSize", val);
+      }
     }
   },
   created() {
-    const themeList = this.$store.getters.themeList;
-    if (themeList.length === 0) {
-      this.$store.dispatch("getAllSpinTheme");
-    }
-    this.$store.dispatch("getAllWords");
+    this.$store.dispatch("index");
   },
   watch: {
     "word.name"(val) {
@@ -187,13 +238,6 @@ export default {
     "word.theme"(val) {
       if (val !== null) {
         this.isShowAlertTheme = false;
-      }
-    },
-    updateSearch(val) {
-      // eslint-disable-next-line no-empty
-      if (val.length === 0) {
-        // eslint-disable-next-line no-console
-        console.log(val);
       }
     }
   },
@@ -240,6 +284,16 @@ export default {
     },
     importFromFilePopup() {
       this.isShowImportFromFile = true;
+    },
+    nextOrPrevPage(val) {
+      this.$store.dispatch("nextOrPrevPage", val);
+    },
+    jumpToPage(e) {
+      this.$store.dispatch("jumpToPage", e.target.value);
+      document.getElementById("page-jump").reset();
+    },
+    search(e) {
+      this.$store.dispatch("search", e.target.value);
     }
   }
 };

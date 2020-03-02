@@ -45,14 +45,12 @@
             <div class="c_md_9 left p_0">
               <div class="top r m_0">
                 <div class="thumbnail px_0 c_lg_6 c_md_12 c_xl_6">
-                  <div
+                  <img
                     v-if="item.previews.thumbnail"
                     class="thumbnail--img"
-                    :style="{
-                      backgroundImage: 'url(' + item.previews.thumbnail + ')'
-                    }"
+                    :src="item.previews.thumbnail"
                     @click="showDetailPopup(item)"
-                  ></div>
+                  />
                 </div>
                 <div
                   class="info pr_0 c_lg_6 c_md_12 c_xl_6 pt_md_1"

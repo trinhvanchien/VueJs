@@ -5,15 +5,18 @@ export default {
     return Api().get("spin-theme");
   },
   create(data) {
-    return Api().post("spin-theme", data);
+    return Api().post("spin-theme/create", data);
   },
   getById(spinId) {
-    return Api().get(`spin-theme?_id=${spinId}`);
+    return Api().get(`spin-theme/detail/${spinId}`);
   },
   update(spinId, data) {
-    return Api().patch(`spin-theme?_id=${spinId}`, data);
+    return Api().patch(`spin-theme/update/${spinId}`, data);
   },
   delete(spinId) {
-    return Api().delete(`spin-theme?_id=${spinId}`);
+    return Api().delete(`spin-theme/delete/${spinId}`);
+  },
+  indexOptions(data) {
+    return Api().post("spin-theme/index-options", data);
   }
 };
