@@ -43,7 +43,7 @@ module.exports = {
     // Is the app in deployment mode?(running on real server) If "production" then yes.
     let agencyUrl = process.env.APP_ENV === "production" ? `${process.env.APP_URL}` : `${process.env.APP_URL}:8080`;
 
-    newAgency.linkAffiliate = `${ agencyUrl }/#/a/${ newAgency._id.toString()}`;
+    newAgency.linkAffiliate = `${ agencyUrl }/gioi-thieu/${ newAgency._id.toString()}`;
 
     await newAgency.save();
     await Account.findByIdAndUpdate( { "_id": req.body._account }, { "$set": { "_role": findRole._id } }, { "new": true } );
@@ -70,15 +70,44 @@ module.exports = {
   "index": async ( req, res ) => {
     let dataResponse = null;
 
-    if ( req.query._id ) {
-      dataResponse = await Agency.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
-    } else if ( req.query._account ) {
-      dataResponse = await Agency.findOne( { "_account": req.query._account } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
-    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await Agency.find( {} ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+    if (req.query._id) {
+      dataResponse = await Agency.findOne({ _id: req.query._id })
+        .populate({ path: "_account", select: "_id name phone email" })
+        .populate({ path: "_creator", select: "_id name" })
+        .populate({ path: "_editor", select: "_id name" })
+        .populate({
+          path: "customer.listOfUser.user",
+          select: "_id name phone email"
+        })
+        .populate({ path: "_package", select: "_id title" })
+        .lean();
+    } else if (req.query._account) {
+      dataResponse = await Agency.findOne({ _account: req.query._account })
+        .populate({ path: "_account", select: "_id name phone email" })
+        .populate({ path: "_creator", select: "_id name" })
+        .populate({ path: "_editor", select: "_id name" })
+        .populate({
+          path: "customer.listOfUser.user",
+          select: "_id name phone email"
+        })
+        .populate({ path: "_package", select: "_id title" })
+        .lean();
+    } else if (
+      Object.entries(req.query).length === 0 && req.query.constructor === Object
+    ) {
+      dataResponse = await Agency.find({})
+        .populate({ path: "_account", select: "_id name phone email" })
+        .populate({ path: "_creator", select: "_id name" })
+        .populate({ path: "_editor", select: "_id name" })
+        .populate({
+          path: "customer.listOfUser.user",
+          select: "_id name phone email"
+        })
+        .populate({ path: "_package", select: "_id title" })
+        .lean();
     }
 
-    res.status( 200 ).json( jsonResponse( "success", dataResponse ) );
+    res.status(200).json(jsonResponse("success", dataResponse));
 
   },
   "update": async ( req, res ) => {

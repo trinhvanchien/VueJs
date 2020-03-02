@@ -69,13 +69,11 @@
           >
             <div class="card">
               <div class="thumbnail position_relative">
-                <div
+                <img
                   class="thumbnail--bg"
-                  :style="{
-                    backgroundImage: 'url(' + item.previews.thumbnail + ')'
-                  }"
+                  :src="item.previews.thumbnail"
                   @click="showDetailPopup(item)"
-                ></div>
+                />
                 <div class="icon position_absolute">
                   <div class="uncheck d_none">
                     <icon-base
