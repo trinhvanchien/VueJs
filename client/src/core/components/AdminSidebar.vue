@@ -58,25 +58,6 @@
           <span class="ml_2">{{ menu.text }}</span>
         </a>
       </router-link>
-      <!-- <router-link
-        class="menu--item d_flex align_items_center"
-        tag="li"
-        active-class="active"
-        exact
-        :to="{ name: 'post_code' }"
-      >
-        <a href="#">
-          <icon-base
-            icon-name="Quản lý thành viên"
-            width="24"
-            height="24"
-            viewBox="0 0 600 600"
-          >
-            <icon-agency></icon-agency>
-          </icon-base>
-          <span class="menu--item-text ml_2">Mã kích hoạt</span>
-        </a>
-      </router-link> -->
     </ul>
   </div>
 </template>
@@ -108,107 +89,118 @@ export default {
             height: 20,
             viewBox: "0 0 540 540"
           },
+          to: "admin_package"
+        },
+        {
+          text: "Quản lý tài khoản",
+          icon: {
+            iconName: "manage-account",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "admin_account"
+        },
+        {
+          text: "Quản lý ảnh",
+          icon: {
+            iconName: "manage-album",
+            tagName: "icon-image",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "admin_album"
+        },
+        {
+          text: "Quản lý VPS",
+          icon: {
+            iconName: "fbaccount",
+            tagName: "icon-location",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 65 65"
+          },
+          to: "admin_vps"
+        },
+        {
+          text: "Trợ giúp",
+          icon: {
+            iconName: "help",
+            tagName: "icon-info",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 24 24"
+          },
+          to: "admin_help"
+        },
+        {
+          text: "Danh mục mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "admin_categories"
+        },
+        {
+          text: "Chiến dịch mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "admin_schedule"
+        },
+        {
+          text: "Quản lý market",
+          icon: {
+            iconName: "manage-market",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "admin_store"
+        },
+        {
+          text: "Quản lý đại lý",
+          icon: {
+            iconName: "manage-agency",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
           to: "admin_agency"
         },
-        // {
-        //   text: "Quản lý tài khoản",
-        //   icon: {
-        //     iconName: "manage-account",
-        //     tagName: "icon-account",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 26 26"
-        //   },
-        //   to: "admin_users"
-        // },
-        // {
-        //   text: "Quản lý ảnh",
-        //   icon: {
-        //     iconName: "manage-album",
-        //     tagName: "icon-image",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 26 26"
-        //   },
-        //   to: "album"
-        // },
-        // {
-        //   text: "Quản lý VPS",
-        //   icon: {
-        //     iconName: "fbaccount",
-        //     tagName: "icon-location",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 65 65"
-        //   },
-        //   to: "admin_server"
-        // },
-        // {
-        //   text: "Trợ giúp",
-        //   icon: {
-        //     iconName: "help",
-        //     tagName: "icon-info",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 24 24"
-        //   },
-        //   to: "admin_help"
-        // },
-        // {
-        //   text: "Danh mục mẫu",
-        //   icon: {
-        //     iconName: "folder",
-        //     tagName: "icon-folder",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 540 540"
-        //   },
-        //   to: "simple_data"
-        // },
-        // {
-        //   text: "Chiến dịch mẫu",
-        //   icon: {
-        //     iconName: "folder",
-        //     tagName: "icon-folder",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 540 540"
-        //   },
-        //   to: "campaigns"
-        // },
-        // {
-        //   text: "Quản lý market",
-        //   icon: {
-        //     iconName: "manage-market",
-        //     tagName: "icon-account",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 26 26"
-        //   },
-        //   to: "manage_product"
-        // },
-        // {
-        //   text: "Quản lý đại lý",
-        //   icon: {
-        //     iconName: "manage-agency",
-        //     tagName: "icon-account",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 26 26"
-        //   },
-        //   to: "agency_list"
-        // },
-        // {
-        //   text: "Quản lý từ khóa",
-        //   icon: {
-        //     iconName: "manage-key",
-        //     tagName: "icon-post",
-        //     width: 20,
-        //     height: 20,
-        //     viewBox: "0 0 540 540"
-        //   },
-        //   to: "key_theme"
-        // }
+        {
+          text: "Quản lý từ khóa",
+          icon: {
+            iconName: "manage-key",
+            tagName: "icon-post",
+            width: 20,
+            height: 20,
+            viewBox: "0 0 540 540"
+          },
+          to: "admin_spin"
+        },
+        {
+          text: "Quản lý mã gia hạn",
+          icon: {
+            iconName: "manage-agency",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "admin_code"
+        }
       ],
       menusCoborator: [
         {
@@ -220,41 +212,52 @@ export default {
             height: 24,
             viewBox: "0 0 26 26"
           },
-          to: "admin_account"
+          to: "admin_album"
         },
-        // {
-        //   text: "Danh mục mẫu",
-        //   icon: {
-        //     iconName: "folder",
-        //     tagName: "icon-folder",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 540 540"
-        //   },
-        //   to: "simple_data"
-        // },
-        // {
-        //   text: "Chiến dịch mẫu",
-        //   icon: {
-        //     iconName: "folder",
-        //     tagName: "icon-folder",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 540 540"
-        //   },
-        //   to: "campaigns"
-        // },
-        // {
-        //   text: "Quản lý market",
-        //   icon: {
-        //     iconName: "manage-market",
-        //     tagName: "icon-account",
-        //     width: 24,
-        //     height: 24,
-        //     viewBox: "0 0 26 26"
-        //   },
-        //   to: "manage_product"
-        // }
+        {
+          text: "Danh mục mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "admin_categories"
+        },
+        {
+          text: "Chiến dịch mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "admin_schedule"
+        },
+        {
+          text: "Quản lý market",
+          icon: {
+            iconName: "manage-market",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "admin_store"
+        },
+        {
+          text: "Quản lý mã gia hạn",
+          icon: {
+            iconName: "manage-market",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "admin_code"
+        }
       ]
     };
   },

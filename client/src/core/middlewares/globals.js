@@ -167,7 +167,7 @@ Vue.component("HootLogoWhite", () =>
 Vue.component("VuePerfectScrollbar", () => import("vue-perfect-scrollbar"));
 Vue.component("VueQuillEditor", () => import("vue-quill-editor"));
 
-Vue.component("Breadcrumb", () => import("@/core/components/BreadCrumb"));
+Vue.component("BreadCrumb", () => import("@/core/components/BreadCrumb"));
 
 // Plugins Component
 Vue.component("contenteditable", () => import("@/core/libs/contenteditable"));

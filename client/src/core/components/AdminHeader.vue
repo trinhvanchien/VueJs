@@ -187,7 +187,7 @@ export default {
     };
   },
   async created() {
-    // await this.$store.dispatch( "getUserInfo" );
+    await this.$store.dispatch( "getUserInfo" );
   },
   computed: {
     user() {

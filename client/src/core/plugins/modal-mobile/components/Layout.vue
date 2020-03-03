@@ -1,20 +1,17 @@
 <template>
   <div class="ms-modal" :data-modal="name" v-if="visible">
-    <div class="ms-modal__mask" style="z-index: 999;">
+    <div class="ms-modal__mask" :style="styleCustom">
       <div class="ms-modal__container" :class="{ align_items_center: center }">
-        <div class="ms-modal__box" style>
-          <div
-            class="ms-modal__content ms-modal__content--normal"
-            :style="styleCustom"
-          >
+        <div class="ms-modal__box">
+          <div class="ms-modal__content ms-modal__content--normal">
             <div class="ms-modal__body">
               <slot :payload="payload" />
             </div>
           </div>
           <i class="ms-icon ms-modal__close" v-if="!hiddenClose" @click="close">
-            <base-icon height="18" width="18" viewBox="100 100 800 800">
+            <icon-base height="18" width="18" viewBox="0 0 25 25">
               <icon-close />
-            </base-icon>
+            </icon-base>
           </i>
         </div>
       </div>
@@ -23,7 +20,7 @@
 </template>
 
 <script>
-import Modal from "@/core/plugins/modal";
+import Modal from "@/core/plugins/modal-mobile";
 export default {
   props: {
     center: {
@@ -95,16 +92,17 @@ export default {
 .ms-modal__box {
   position: relative;
   display: inline-block;
-  padding: 48px 32px;
   transform-origin: top;
+  width: 100%;
+  height: 100%;
 }
 .ms-modal__close.ms-icon {
   position: absolute;
-  top: 48px;
-  right: 0;
+  top: 6px;
+  right: 10px;
   width: 16px;
   height: 16px;
-  color: #fff;
+  color: #f96666;
   cursor: pointer;
 }
 .ms-modal__container {
@@ -118,8 +116,9 @@ export default {
 .ms-modal__content {
   color: #555;
   background-color: #fff;
-  border-radius: 3px;
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.05), 0 16px 16px 0 rgba(0, 0, 0, 0.09);
+  width: 100%;
+  height: 100%;
 }
 .ms-modal__mask {
   position: fixed;
@@ -129,5 +128,8 @@ export default {
   left: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.6);
+}
+.ms-modal__body {
+  background-color: #fff;
 }
 </style>

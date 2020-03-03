@@ -1,6 +1,8 @@
 <template>
-  <div
-    class="modal--wrapper position_fixed d_flex justify_content_center align_items_center"
+  <ms-modal
+    name="modal-user-info"
+    :style-custom="{ width: '448px' }"
+    :hiddenClose="true"
   >
     <div class="modal--content" v-click-outside="closeAddInfo">
       <div v-if="user">
@@ -18,9 +20,9 @@
                 v-else
                 class="avatar--content avatar--default position_relative d_block"
               >
-                <span class="position_absolute">{{
-                  user.name | getFirstLetter
-                }}</span>
+                <span class="position_absolute">
+                  {{ user.name | getFirstLetter }}
+                </span>
               </div>
             </div>
             <div class="user--info">
@@ -124,12 +126,10 @@
       </div>
       <div v-else>Không có dữ liệu để hiển thị</div>
     </div>
-  </div>
+  </ms-modal>
 </template>
-
 <script>
 export default {
-  components: {},
   filters: {
     formatDate(d) {
       const newDate = new Date(d),
@@ -140,6 +140,9 @@ export default {
       return `${date}/${month}/${year}`;
     },
     getFirstLetter(string) {
+      if (string === undefined) {
+        return;
+      }
       return string.charAt(0).toUpperCase();
     }
   },
@@ -150,7 +153,7 @@ export default {
   },
   methods: {
     closeAddInfo() {
-      this.$emit("closeAddInfo", false);
+      this.$modal.hide({ name: "modal-user-info" });
     },
     async openAddEdit() {
       await this.$store.dispatch("getUserAdminById", this.user._id);
@@ -160,7 +163,85 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.modal--content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 60%;
+}
+.modal--header {
+  border-bottom: 1px solid #f1f1f1;
+  color: #646464;
+  font-size: 16px;
+  font-weight: 600;
+}
+.avatar--content {
+  border: 1px solid #f7f7f7;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: hidden;
+  width: 64px;
 
-<style scoped lang="scss">
-@import "./index.style";
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  &.avatar--img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  &.avatar--default {
+    background-color: #f7f7f7;
+    color: #ed1c24;
+    font-size: 32px;
+    font-weight: 600;
+    span {
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 50%;
+    }
+  }
+}
+.user--info {
+  .user--info-name {
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .user--info-status {
+    color: #ed1c24;
+  }
+  .user--info-time {
+    font-weight: normal;
+    color: #999;
+    font-size: 0.825rem;
+  }
+}
+
+.icon--edit {
+  color: #ed1c24;
+  cursor: pointer;
+}
+.icon--close {
+  color: #ccc;
+  cursor: pointer;
+}
+.info--detail {
+  color: #7e7e7e;
+  font-size: 16px;
+  .info--desc {
+    font-weight: 600;
+  }
+  .info--history {
+    color: #aaaaaa;
+    font-size: 14px;
+  }
+  .info--mail {
+    svg {
+      color: yellow;
+    }
+  }
+}
 </style>

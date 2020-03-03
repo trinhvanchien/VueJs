@@ -15,7 +15,6 @@
       <div v-else class="list--content">
         <app-list-view />
       </div>
-      <!--      <app-paginate />-->
     </div>
   </div>
 </template>

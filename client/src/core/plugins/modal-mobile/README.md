@@ -4,30 +4,30 @@
 ##### Basic usage
 ```vue
 <template>
-  <ms-modal
+  <ms-modal-mobile
     name="modal-name"
-    :style-custom="{ width: '524px' }"
+    :styleCustom="{ 'z-index': 9 }"
     :hiddenClose="true"
   >
     <div class="">
       <!-- Slot modal body here -->
     </div>
-  </ms-modal>
+  </ms-modal-mobile>
 </template>
 ```
 
 ##### Show and hide modal
 
 ```javascript
-this.$modal.show({ name: "modal-name" });
-this.$modal.hide({ name: "modal-name" });
+this.$modalMobile.show({ name: "modal-name" });
+this.$modalMobile.hide({ name: "modal-name" });
 ```
 
 ##### Passing data when showing modal
 
 Passing data
 ```javascript
-this.$modal.show({ name: "modal-name", payload: {
+this.$modalMobile.show({ name: "modal-name", payload: {
   // Data fields here
   resourceIndex: this.resourceIndex
 }});
@@ -36,15 +36,15 @@ this.$modal.show({ name: "modal-name", payload: {
 Use passing data
 ```vue
 <template>
-  <ms-modal
+  <ms-modal-mobile
     name="modal-name"
-    :style-custom="{ width: '524px' }"
+    :styleCustom="{ 'z-index': 9 }"
     :hiddenClose="true"
   >
     <div class="" slot-scope="props">
       <div>{{ props.payload.resourceIndex }}</div>
     </div>
-  </ms-modal>
+  </ms-modal-mobile>
 </template>
 ```
 
@@ -56,4 +56,3 @@ Use passing data
 | hidden-close          | -        | Boolean   | `false`     | Hide close default button if true |
 | on-hide-call-back     | -        | Function  | -           | The function is called when hiding modal |
 | name                  | -        | String    | -           | Modal name. It must be unique |
-| styleCustom           | -        | Object    | -           | Custom modal style |

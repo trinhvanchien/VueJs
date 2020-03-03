@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- <VuePerfectScrollbar class="scroll-area">
-      <router-view />
-    </VuePerfectScrollbar> -->
     <component :is="layout">
       <transition name="slide-faded" mode="out-in">
         <router-view />
@@ -11,16 +8,11 @@
   </div>
 </template>
 <script>
-// import VuePerfectScrollbar from "vue-perfect-scrollbar";
 const admin_layout = "customer";
 
 export default {
-  // components: {
-  //   VuePerfectScrollbar
-  // },
   computed: {
     layout() {
-      console.log(this.$route.meta.layout);
       return (this.$route.meta.layout || admin_layout) + "-layout";
     }
   },
