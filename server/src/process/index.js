@@ -65,18 +65,20 @@ const MembershipPackage = require("../models/MembershipPackage.model");
       {
         codeId: "free",
         name: "Miễn phí",
+        isOnlinePurchasable: true,
         maxAccountFb: 1,
         permission: [
           "post_page",
           "limited_post_per_day",
+          "unlimited_campaign",
           "unlimited_page"
         ],
         limit: {
-          post: 10,
+          post: 1,
           campaign: 0,
-          slot: 1
+          slot: 0
         },
-        postPrice: 5000,
+        postPrice: 10000,
         price: {
           one: {
             title: 1,
@@ -103,91 +105,139 @@ const MembershipPackage = require("../models/MembershipPackage.model");
       {
         codeId: "page_care",
         name: "Page Care",
-        maxAccountFb: 2,
+        isOnlinePurchasable: true,
+        maxAccountFb: 1,
         permission: [
           "post_page",
           "limited_post_per_day",
-          "limited_campaign",
+          "unlimited_campaign",
           "unlimited_page",
           "customer_support"
         ],
         limit: {
-          post: 50,
-          campaign: 2,
-          slot: 1
+          post: 4,
+          campaign: 0,
+          slot: 0
         },
-        postPrice: 5000,
+        postPrice: 10000,
         price: {
           one: {
             title: 1,
-            original: 120000,
-            promotional: 120000
+            original: 300000,
+            promotional: 300000
           },
           three: {
             title: 3,
-            original: 360000,
-            promotional: 290000
+            original: 0,
+            promotional: 0
           },
           six: {
             title: 6,
-            original: 720000,
-            promotional: 590000
+            original: 0,
+            promotional: 0
           },
           twelve: {
             title: 12,
-            original: 1440000,
-            promotional: 990000
+            original: 3600000,
+            promotional: 3000000
           }
         }
       },
       {
         codeId: "pro",
-        name: "Pro",
-        maxAccountFb: 10,
+        name: "Professional",
+        isOnlinePurchasable: true,
+        maxAccountFb: 1,
         permission: [
           "post_page",
           "post_group",
           "post_profile",
           "limited_post_per_day",
-          "limited_campaign",
+          "unlimited_campaign",
           "unlimited_group",
           "unlimited_page",
           "customer_support",
           "hoot_university"
         ],
         limit: {
-          post: 100,
-          campaign: 10,
-          slot: 1
+          post: 10,
+          campaign: 0,
+          slot: 0
         },
         postPrice: 10000,
         price: {
           one: {
             title: 1,
-            original: 240000,
-            promotional: 190000
+            original: 800000,
+            promotional: 800000
           },
           three: {
             title: 3,
-            original: 480000,
-            promotional: 390000
+            original: 0,
+            promotional: 0
           },
           six: {
             title: 6,
-            original: 960000,
-            promotional: 890000
+            original: 0,
+            promotional: 0
           },
           twelve: {
             title: 12,
             original: 1920000,
-            promotional: 1690000
+            promotional: 9600000
+          }
+        }
+      },
+      {
+        codeId: "trial",
+        name: "Dùng thử",
+        isOnlinePurchasable: false,
+        maxAccountFb: 1,
+        permission: [
+          "post_page",
+          "post_group",
+          "post_profile",
+          "limited_post_per_day",
+          "unlimited_campaign",
+          "unlimited_group",
+          "unlimited_page",
+          "customer_support",
+          "hoot_university"
+        ],
+        limit: {
+          post: 4,
+          campaign: 0,
+          slot: 0
+        },
+        postPrice: 10000,
+        price: {
+          one: {
+            title: 1,
+            original: 0,
+            promotional: 0
+          },
+          three: {
+            title: 3,
+            original: 0,
+            promotional: 0
+          },
+          six: {
+            title: 6,
+            original: 0,
+            promotional: 0
+          },
+          twelve: {
+            title: 12,
+            original: 0,
+            promotional: 0
           }
         }
       },
       {
         codeId: "vip",
         name: "VIP",
-        maxAccountFb: 20,
+        isOnlinePurchasable: false,
+        maxAccountFb: 2,
         permission: [
           "post_page",
           "post_group",
@@ -200,31 +250,31 @@ const MembershipPackage = require("../models/MembershipPackage.model");
           "hoot_university"
         ],
         limit: {
-          post: 100,
-          campaign: 10,
-          slot: 1
+          post: 999999,
+          campaign: 0,
+          slot: 0
         },
         postPrice: 10000,
         price: {
           one: {
             title: 1,
-            original: 240000,
-            promotional: 190000
+            original: 0,
+            promotional: 0
           },
           three: {
             title: 3,
-            original: 480000,
-            promotional: 390000
+            original: 0,
+            promotional: 0
           },
           six: {
             title: 6,
-            original: 960000,
-            promotional: 890000
+            original: 0,
+            promotional: 0
           },
           twelve: {
             title: 12,
-            original: 1920000,
-            promotional: 1690000
+            original: 0,
+            promotional: 0
           }
         }
       }

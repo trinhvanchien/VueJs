@@ -11,6 +11,7 @@ const Role = require("../models/Role.model");
 const Agency = require("../models/agency/Agency.model");
 const Server = require("../models/Server.model");
 const Code = require("../models/Code.model");
+const PaymentReceipt = require("../models/PaymentReceipt.model");
 const MembershipPackage = require("../models/MembershipPackage.model");
 const { writeForgotPassword } = require("../databases/templates/email");
 const { signUpSuccess } = require("../databases/templates/email");
@@ -103,16 +104,35 @@ module.exports = {
     res.status(200).json(jsonResponse("success", data));
   },
   getUserInfo: async (req, res) => {
-    let data = null;
+    try {
+      if (req.query._id) {
+        const userAccount = await Account.findOne({ _id: req.query._id })
+          .select("-password")
+          .lean();
 
-    if (req.query._id) {
-      data = await Account.findOne({ _id: req.query._id })
-        .select("-password")
-        .lean();
+        const isAlreadyUsedFreeTrial = await PaymentReceipt.findOne({
+          _account: req.query._id,
+          "purchaseInfo.membershipPackage": "trial"
+        });
+
+        if (isAlreadyUsedFreeTrial) {
+          return res
+            .status(200)
+            .json({
+              status: "success",
+              data: { ...userAccount, isAlreadyUsedFreeTrial: true }
+            });
+        }
+        
+        return res
+          .status(200)
+          .json({ status: "success", data: userAccount });
+      }
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Có lỗi xẩy ra" });
     }
-    return res.status(200).json(jsonResponse("success", data));
-    // data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
-    // res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   index: async (req, res) => {
     let dataResponse = null;
@@ -507,7 +527,7 @@ module.exports = {
       presenter,
       password,
       status: 1,
-      expireDate: new Date().setDate(new Date().getDate() + 3),
+      expireDate: new Date().setDate(new Date().getDate() + 7),
       _role: memberRole.id,
       membershipPackage: freeAccountPackage.codeId,
       permission: freeAccountPackage.permission,
@@ -768,7 +788,7 @@ module.exports = {
     }
 
     let newPasswordEncrypted = await bcrypt.encode(newPassword, 10);
-    
+
     await Account.updateOne(
       { _id: userInfo._id },
       { $set: { password: newPasswordEncrypted, updated_at: Date.now() } }
