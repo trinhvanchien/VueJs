@@ -16,8 +16,6 @@ module.exports = {
     const { id } = req.params;
     const { member } = req.body;
     const currentPackageInfo = await MembershipPackage.findOne({ _id: id });
-
-    console.log("[MESSAGE]: currentPackageInfo", currentPackageInfo);
     
     let updatedAccount = await Account.findOneAndUpdate(
       { _id: member },
@@ -27,12 +25,17 @@ module.exports = {
         campaignLimit: currentPackageInfo.limit.campaign,
         totalPostedToday: 0,
         permission: currentPackageInfo.permission
-      }
-    );
+      },
+      { new: true }
+    )
+      .select(
+        "status maxAccountFb membershipPackage limitPostPerDay campaignLimit totalPostedToday permission"
+      )
+      .lean();
 
     if (!updatedAccount) {
-      return res.status(500).json({
-        status: "fail",
+      return res.status(400).json({
+        status: "error",
         data: "Không tìm thấy thông tin người dùng."
       });
     }
@@ -50,8 +53,8 @@ module.exports = {
       );
     } catch (error) {
       console.log("[ERROR]:", error);
-      return res.status(500).json({
-        status: "fail",
+      return res.status(400).json({
+        status: "error",
         data: "Server xảy ra lỗi khi đồng bộ thông tin người dùng"
       });
     }
