@@ -146,6 +146,11 @@
                       <icon-edit />
                     </icon-base>
                   </div>
+                  <!-- start: button renew password -->
+                  <div class="btn--renew mt_2" @click="openPopupRenewPassword(user)">
+                    <span class="mr_2">Đặt lại mật khẩu</span>
+                  </div>
+                  <!-- end: button renew password -->
                 </div>
                 <!-- End: Edit Btn -->
               </div>
@@ -178,6 +183,13 @@
         :selectedUIDs="selected"
         @closeDialog="showDeleteDialog = $event"
       ></delete-popup>
+    </transition>
+    <transition name="popup">
+      <modal-renew-password
+        v-if="isShowRenewPasswordDialog === true"
+        :user="user"
+        @closeDialog="isShowRenewPasswordDialog = $event"
+      />
     </transition>
     <transition name="fade">
       <div

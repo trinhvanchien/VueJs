@@ -1,18 +1,21 @@
 import EditPopup from "../../popups/edit";
 import InfoPopup from "../../popups/info";
 import DeletePopup from "../../popups/delete";
+import ModalRenewPassword from "../../popups/RenewPassword";
 
 export default {
   components: {
     EditPopup,
     InfoPopup,
-    DeletePopup
+    DeletePopup,
+    ModalRenewPassword
   },
   data() {
     return {
       showEdit: false,
       showInfo: false,
       showDeleteDialog: false,
+      isShowRenewPasswordDialog: false,
       userSelectInfo: null,
       userSelectEdit: null,
       selected: []
@@ -67,6 +70,9 @@ export default {
     },
     openDeleteDialog() {
       this.showDeleteDialog = true;
+    },
+    openPopupRenewPassword() {
+      this.isShowRenewPasswordDialog = true;
     },
     userStatus(startDate, endDate) {
       const startDateTime = new Date(startDate),
