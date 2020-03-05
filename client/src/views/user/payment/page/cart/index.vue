@@ -40,7 +40,10 @@
               {{ month.value }} Tháng
             </button>
             <button
-              v-if="!userMember.isAlreadyUsedFreeTrial"
+              v-if="
+                !userMember.isAlreadyUsedFreeTrial &&
+                  userMember.membershipPackage === 'free'
+              "
               class="button--month"
               @click="startFreeTrial()"
             >
