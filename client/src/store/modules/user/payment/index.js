@@ -1,4 +1,5 @@
 import VnpayServices from "@/services/modules/user/payment/vnpay.services";
+import PaymentServices from "@/services/modules/user/payment/payment.services";
 import AccountPackageServices from "@/services/modules/accountpackage.services";
 
 const state = {
@@ -48,6 +49,9 @@ const actions = {
   getPostPrice: async ({ commit }) => {
     const getPostPriceRequest = await AccountPackageServices.getPostPrice();
     commit("setPostPrice", getPostPriceRequest.data.data.postPrice);
+  },
+  startFreeTrial: async () => {
+    await PaymentServices.startFreeTrial();
   }
 };
 

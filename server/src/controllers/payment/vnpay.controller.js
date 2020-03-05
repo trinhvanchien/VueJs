@@ -98,6 +98,17 @@ const createPaymentUrl = async (req, res) => {
 
     const { purchaseInfo } = req.body;
 
+    const monthsSubscriptionQuery = await MembershipPackage.findOne({
+      codeId: purchaseInfo.membershipPackage,
+      isOnlinePurchasable: true
+    });
+
+    if (!monthsSubscriptionQuery) {
+      return res
+        .status(200)
+        .json({ RspCode: "99", Message: "Invalid package" });
+    }
+
     const paymentReceipt = new PaymentReceipt({
       _account: req.uid,
       amount: req.body.amount,
@@ -121,10 +132,6 @@ const createPaymentUrl = async (req, res) => {
     });
 
     await paymentReceipt.save();
-
-    const monthsSubscriptionQuery = await MembershipPackage.findOne({
-      codeId: purchaseInfo.membershipPackage
-    });
 
     if (purchaseInfo.type === "subscription") {
       const monthsSubscription = [
@@ -280,8 +287,8 @@ const vpnIpn = async (req, res) => {
               status: true,
               maxAccountFb: membershipPackage.maxAccountFb,
               membershipPackage: transaction.purchaseInfo.membershipPackage,
-              expireDate: new Date(userAccount.expireDate).setMonth(
-                new Date(userAccount.expireDate).getMonth() +
+              expireDate: new Date().setMonth(
+                new Date().getMonth() +
                   transaction.purchaseInfo.monthsPurchase
               ),
               limitPostPerDay: membershipPackage.limit.post,
@@ -399,8 +406,8 @@ const vpnIpn = async (req, res) => {
                   status: true,
                   maxAccountFb: membershipPackage.maxAccountFb,
                   membershipPackage: transaction.purchaseInfo.membershipPackage,
-                  expireDate: new Date(userAccount.expireDate).setMonth(
-                    new Date(userAccount.expireDate).getMonth() +
+                  expireDate: new Date().setMonth(
+                    new Date().getMonth() +
                       transaction.purchaseInfo.monthsPurchase
                   ),
                   limitPostPerDay: membershipPackage.limit.post,

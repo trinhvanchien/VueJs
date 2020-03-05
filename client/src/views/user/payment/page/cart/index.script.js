@@ -25,27 +25,21 @@ export default {
           value: 1
         },
         {
-          title: "three",
-          value: 3
-        },
-        {
-          title: "six",
-          value: 6
-        },
-        {
           title: "twelve",
           value: 12
         }
       ],
       selectedMonthSubscription: {
-        title: "three",
-        value: 3
+        title: "twelve",
+        value: 12
       }
     };
   },
   computed: {
     packages() {
-      return this.$store.getters.membershipPackages;
+      return this.$store.getters.membershipPackages.filter(
+        item => item.isOnlinePurchasable
+      );
     },
     userMember() {
       return this.$store.getters.userInfoMember;
@@ -58,6 +52,10 @@ export default {
   methods: {
     chooseMonthSubscription(month) {
       this.selectedMonthSubscription = month;
+    },
+    async startFreeTrial() {
+      await this.$store.dispatch("startFreeTrial");
+      this.$router.push({ name: "homepage" });
     }
   }
 };
