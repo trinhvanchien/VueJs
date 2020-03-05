@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-warning-comments */
 /* eslint-disable no-unused-vars */
 /* eslint-disable vars-on-top */
@@ -377,7 +378,7 @@ const vpnIpn = async (req, res) => {
 
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-      if (transaction && transaction.vnpayTransaction.vnp_Amount !== amount) {
+      if (transaction && transaction.vnpayTransaction.vnp_Amount != amount) {
         returnContent = { RspCode: "04", Message: "Invalid amount" };
         console.log("[MESSAGE]: returnContent", returnContent);
         return res.status(200).json(returnContent);
