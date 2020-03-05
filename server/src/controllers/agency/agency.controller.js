@@ -43,7 +43,7 @@ module.exports = {
     // Is the app in deployment mode?(running on real server) If "production" then yes.
     let agencyUrl = process.env.APP_ENV === "production" ? `${process.env.APP_URL}` : `${process.env.APP_URL}:8080`;
 
-    newAgency.linkAffiliate = `${ agencyUrl }/affiliate/${ newAgency._id.toString()}`;
+    newAgency.linkAffiliate = `${ agencyUrl }/gioi-thieu/${ newAgency._id.toString()}`;
 
     await newAgency.save();
     await Account.findByIdAndUpdate( { "_id": req.body._account }, { "$set": { "_role": findRole._id } }, { "new": true } );
