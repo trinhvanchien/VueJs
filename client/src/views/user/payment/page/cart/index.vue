@@ -39,6 +39,16 @@
             >
               {{ month.value }} Tháng
             </button>
+            <button
+              v-if="
+                !userMember.isAlreadyUsedFreeTrial &&
+                  userMember.membershipPackage === 'free'
+              "
+              class="button--month"
+              @click="startFreeTrial()"
+            >
+              Dùng thử gói PROFESSIONAL 7 ngày
+            </button>
           </div>
         </div>
       </div>

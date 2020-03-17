@@ -54,6 +54,9 @@ export default {
   renewByCode(data) {
     return Api().post("users/renew/code", data);
   },
+  renewPasswordByAdmin(data) {
+    return Api().post("users/renew-password-by-admin", data);
+  },
   changeStatus(id) {
     return Api().post("users/status", id);
   },

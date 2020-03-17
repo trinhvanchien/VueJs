@@ -63,6 +63,11 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
     }
 
+    const userInfo = await Account.findById(agencyInfo._account);
+
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
+    }
     // Remove postFacebook
     await agencyInfo.remove();
     res.status( 200 ).json( jsonResponse( "success", null ) );

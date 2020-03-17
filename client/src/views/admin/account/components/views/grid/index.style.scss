@@ -148,6 +148,21 @@ $size: (
               stroke-width: .75;
             }
           }
+          .btn--renew {
+            background-color: #f96666;
+            border: solid 1px #f96666;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: .5rem .75rem;
+            cursor: pointer;
+            &:hover {
+              background-color: #fff;
+              color: #f96666;
+              transition: all 0.5 ease;
+            }
+          }
         }
         .data--wrap {
           text-align: center;

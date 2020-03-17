@@ -101,6 +101,10 @@ const mongoose = require( "mongoose" ),
       "type": Number,
       "default": 0
     },
+    isOnlinePurchasable: {
+      "type": Boolean,
+      "default": true
+    },
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"

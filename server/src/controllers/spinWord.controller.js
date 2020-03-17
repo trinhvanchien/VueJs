@@ -199,6 +199,12 @@ module.exports = {
         wordTokens.push(item[ 0 ]);
       }
     });
+    if (!req.body.theme) {
+      return res.status(400).json({
+        status: "error",
+        message: "Không có chủ đề spin."
+      });
+    }
     const customTheme = await SpinTheme.findById(req.body.theme);
     const customThemeFilter = await SpinWord.find({
       theme: customTheme._id

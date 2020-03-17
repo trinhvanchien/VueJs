@@ -626,6 +626,16 @@ const actions = {
   },
   setAuthError: ({ commit }, payload) => {
     commit("auth_error", payload);
+  },
+  renewPasswordUserAccount: async ({ commit }, payload) => {
+    try {
+      commit("auth_request");
+      await AccountServices.renewPasswordByAdmin(payload);
+      commit("auth_success");
+    } catch (error) {
+      commit("auth_error", error);
+      return error;
+    }
   }
 };
 

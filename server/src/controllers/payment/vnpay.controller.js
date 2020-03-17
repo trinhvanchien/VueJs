@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-warning-comments */
 /* eslint-disable no-unused-vars */
 /* eslint-disable vars-on-top */
@@ -98,6 +99,17 @@ const createPaymentUrl = async (req, res) => {
 
     const { purchaseInfo } = req.body;
 
+    const monthsSubscriptionQuery = await MembershipPackage.findOne({
+      codeId: purchaseInfo.membershipPackage,
+      isOnlinePurchasable: true
+    });
+
+    if (!monthsSubscriptionQuery) {
+      return res
+        .status(200)
+        .json({ RspCode: "99", Message: "Invalid package" });
+    }
+
     const paymentReceipt = new PaymentReceipt({
       _account: req.uid,
       amount: req.body.amount,
@@ -121,10 +133,6 @@ const createPaymentUrl = async (req, res) => {
     });
 
     await paymentReceipt.save();
-
-    const monthsSubscriptionQuery = await MembershipPackage.findOne({
-      codeId: purchaseInfo.membershipPackage
-    });
 
     if (purchaseInfo.type === "subscription") {
       const monthsSubscription = [
@@ -243,7 +251,6 @@ const vpnIpn = async (req, res) => {
     const rspCode = vnp_Params.vnp_ResponseCode;
     const amount = vnp_Params.vnp_Amount;
 
-
     let returnContent = {
       RspCode: "",
       Message: ""
@@ -267,7 +274,6 @@ const vpnIpn = async (req, res) => {
           { "vnpayTransaction.vnp_TxnRef": orderId },
           { isPurchased: "success" }
         );
-        
 
         let updatedAccount = {};
 
@@ -280,10 +286,10 @@ const vpnIpn = async (req, res) => {
               status: true,
               maxAccountFb: membershipPackage.maxAccountFb,
               membershipPackage: transaction.purchaseInfo.membershipPackage,
-              expireDate: new Date(userAccount.expireDate).setMonth(
-                new Date(userAccount.expireDate).getMonth() +
-                  transaction.purchaseInfo.monthsPurchase
+              expireDate: new Date().setMonth(
+                new Date().getMonth() + transaction.purchaseInfo.monthsPurchase
               ),
+              campaignLimit: membershipPackage.limit.campaign,
               limitPostPerDay: membershipPackage.limit.post,
               totalPostedToday: 0,
               permission: membershipPackage.permission
@@ -291,7 +297,7 @@ const vpnIpn = async (req, res) => {
             { new: true }
           )
             .select(
-              "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday permission"
+              "status maxAccountFb membershipPackage expireDate campaignLimit limitPostPerDay totalPostedToday permission"
             )
             .lean();
         }
@@ -372,7 +378,7 @@ const vpnIpn = async (req, res) => {
 
       // Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
 
-      if (transaction && transaction.vnpayTransaction.vnp_Amount !== amount) {
+      if (transaction && transaction.vnpayTransaction.vnp_Amount != amount) {
         returnContent = { RspCode: "04", Message: "Invalid amount" };
         console.log("[MESSAGE]: returnContent", returnContent);
         return res.status(200).json(returnContent);
@@ -387,7 +393,6 @@ const vpnIpn = async (req, res) => {
             );
             // TODO: function update expire for user
 
-
             let updatedAccount = {};
 
             if (transaction.purchaseInfo.purchaseType === "subscription") {
@@ -399,10 +404,11 @@ const vpnIpn = async (req, res) => {
                   status: true,
                   maxAccountFb: membershipPackage.maxAccountFb,
                   membershipPackage: transaction.purchaseInfo.membershipPackage,
-                  expireDate: new Date(userAccount.expireDate).setMonth(
-                    new Date(userAccount.expireDate).getMonth() +
+                  expireDate: new Date().setMonth(
+                    new Date().getMonth() +
                       transaction.purchaseInfo.monthsPurchase
                   ),
+                  campaignLimit: membershipPackage.limit.campaign,
                   limitPostPerDay: membershipPackage.limit.post,
                   totalPostedToday: 0,
                   permission: membershipPackage.permission
@@ -410,7 +416,7 @@ const vpnIpn = async (req, res) => {
                 { new: true }
               )
                 .select(
-                  "status maxAccountFb membershipPackage expireDate limitPostPerDay totalPostedToday permission"
+                  "status maxAccountFb membershipPackage expireDate campaignLimit limitPostPerDay totalPostedToday permission"
                 )
                 .lean();
             }
@@ -453,7 +459,7 @@ const vpnIpn = async (req, res) => {
               } else {
                 console.log("[ERROR]:", error);
               }
-            
+
               returnContent = { RspCode: "99", Message: "Unknow error" };
               console.log("[MESSAGE]: returnContent", returnContent);
               return res.status(200).json(returnContent);
