@@ -4,7 +4,9 @@
       <!-- Start: Active Account Statistics -->
       <div class="c_3 col">
         <div class="col--body d_flex align_items_center px_3">
-          <div class="col--icon d_flex align_items_center justify_content_center">
+          <div
+            class="col--icon d_flex align_items_center justify_content_center"
+          >
             <icon-base
               class="icon--user"
               icon-name="user"

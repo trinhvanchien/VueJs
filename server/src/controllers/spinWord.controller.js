@@ -22,6 +22,7 @@ const Chunking = require("vntk").chunking();
 module.exports = {
   create: async (req, res) => {
     let newSpinWord;
+    console.log('reqqqqqqqqqq', req.body)
 
     // check validate
     if (req.body.name === "") {

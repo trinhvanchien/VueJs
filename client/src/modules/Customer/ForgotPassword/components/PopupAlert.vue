@@ -75,7 +75,7 @@ export default {
     .modal--content {
       background-color: #272a2c;
       border-color: #444;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
       color: #333;
       padding: 1.25rem 0;
       width: 30vw;
@@ -87,7 +87,7 @@ export default {
           .loading--block {
             .desc {
               color: #ccc;
-              font-size: .875rem;
+              font-size: 0.875rem;
             }
             .loading--bar {
               background-color: transparent;
@@ -128,9 +128,9 @@ export default {
               background: #ed1c24;
               display: inline-block;
               padding: 0.4rem 1.3rem;
-              border-radius: .5rem;
+              border-radius: 0.5rem;
               font-size: 1.1rem;
-              transition: all .5s ease;
+              transition: all 0.5s ease;
               cursor: pointer;
               color: #fff;
               &:hover {
@@ -143,7 +143,7 @@ export default {
               border: 0;
               cursor: pointer;
               color: #fff;
-              font-size: .875rem;
+              font-size: 0.875rem;
               font-weight: 600;
               outline: none;
               padding: 0.5rem 0.75rem;
@@ -158,7 +158,7 @@ export default {
       }
 
       .modal--footer {
-        font-size: .875rem;
+        font-size: 0.875rem;
 
         .btn--skip {
           background-color: transparent;
@@ -182,10 +182,12 @@ export default {
 }
 
 /*Transition popup*/
-.popup-enter-active, .popup-leave-active {
+.popup-enter-active,
+.popup-leave-active {
   transition: opacity 1s;
 }
-.popup-enter, .popup-leave-to {
+.popup-enter,
+.popup-leave-to {
   opacity: 0;
 }
 
@@ -244,7 +246,6 @@ export default {
   }
 }
 
-
 // RESPONSIVE
 @media screen and (max-width: 980px) and (min-width: 768px) {
   .modal--wrapper {
@@ -255,5 +256,4 @@ export default {
     }
   }
 }
-
 </style>

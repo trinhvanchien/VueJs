@@ -97,7 +97,7 @@ export default {
   }
   .main {
     &:before {
-      background-image: linear-gradient(to right, white, rgba(0, 0, 0, .05));
+      background-image: linear-gradient(to right, white, rgba(0, 0, 0, 0.05));
       bottom: 0;
       content: "";
       left: 0;

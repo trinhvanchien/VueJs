@@ -17,6 +17,7 @@ export default {
     return Api().delete(`spin-theme/delete/${spinId}`);
   },
   indexOptions(data) {
+    console.log("index option", data);
     return Api().post("spin-theme/index-options", data);
   }
 };

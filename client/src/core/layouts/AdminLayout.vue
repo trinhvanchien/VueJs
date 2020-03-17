@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <div class="wrap--content d_none d_md_flex" v-if="innerWidth >769">
+      <div class="wrap--content d_none d_md_flex" v-if="innerWidth > 769">
         <div class="wrap--content-sidebar">
           <admin-sidebar />
         </div>
@@ -10,22 +10,22 @@
           <slot />
         </div>
       </div>
-      <div class="wrap__mobile d_block d_md_none position_relative" v-else>
+      <!-- <div class="wrap__mobile d_block d_md_none position_relative" v-else>
         <admin-header-mobile />
         <slot />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
 import AdminHeader from "@/core/components/AdminHeader";
 import AdminSidebar from "@/core/components/AdminSidebar";
-import AdminHeaderMobile from "@/core/components/AdminHeaderMobile";
+// import AdminHeaderMobile from "@/core/components/AdminHeaderMobile";
 export default {
   components: {
     AdminHeader,
-    AdminSidebar,
-    AdminHeaderMobile
+    AdminSidebar
+    // AdminHeaderMobile
   },
   data() {
     return {

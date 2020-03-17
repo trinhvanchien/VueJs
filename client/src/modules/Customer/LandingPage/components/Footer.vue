@@ -9,7 +9,12 @@
       <div class="r m_0">
         <div class="c_lg_3">
           <div class="title--footer logo">
-            <icon-base width="72" icon-name="Logo Hoot" height="36" viewBox="0 0 664 301">
+            <icon-base
+              width="72"
+              icon-name="Logo Hoot"
+              height="36"
+              viewBox="0 0 664 301"
+            >
               <hoot-logo-black />
             </icon-base>
           </div>
@@ -17,7 +22,9 @@
             Hoot luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
             nhiều thời gian hơn bên gia đình và người thân.
           </div>-->
-          <div class="font--13 mb_3">CÔNG TY TNHH CÔNG NGHỆ VÀ DỊCH VỤ MASSO VIỆT NAM</div>
+          <div class="font--13 mb_3">
+            CÔNG TY TNHH CÔNG NGHỆ VÀ DỊCH VỤ MASSO VIỆT NAM
+          </div>
           <div class="font--13">
             Địa chỉ: Số 653, Ngõ 7, Đường Hồ Tùng Mậu, Tổ 17, Phường Cầu Diễn,
             Quận Nam Từ Liêm, Thành phố Hà Nội
@@ -55,7 +62,13 @@
             <form action method="POST">
               <input type="email" required placeholder="Email" />
               <span class="icon--submit position_absolute">
-                <icon-base class icon-name="Submit" width="22" height="22" viewBox="0 0 33 33">
+                <icon-base
+                  class
+                  icon-name="Submit"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 33 33"
+                >
                   <icon-arrow-right />
                 </icon-base>
                 <!-- <icon-base class="fb" icon-name="Submit" width="24" height="24" viewBox="0 0 25 25">
@@ -132,7 +145,8 @@
               class="btn--live-chat"
               target="_blank"
               href="https://www.facebook.com/hootvietnam/"
-            >Liên hệ hỗ trợ</a>
+              >Liên hệ hỗ trợ</a
+            >
           </div>
         </div>
       </div>

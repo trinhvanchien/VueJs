@@ -215,4 +215,3 @@ Vue.component("IconInstagramSimple", () =>
 Vue.component("IconYoutube", () => import("@/core/assets/icons/IconYoutube"));
 Vue.component("IconTiwtter", () => import("@/core/assets/icons/IconTiwtter"));
 Vue.component("IconTimer", () => import("@/core/assets/icons/IconTimer"));
-

@@ -8,13 +8,23 @@
         <span>{{ user.name | getFirstLetter }}</span>
       </div>
       <div class="header__desc ml_4">
-        <span v-if="this.$route.name === 'admin_dashboard'">Trang chủ ADMIN</span>
-        <span v-if="this.$route.name === 'admin_package'">Quản lý gói tài khoản</span>
-        <span v-if="this.$route.name === 'admin_account'">Quản lý người dùng</span>
+        <span v-if="this.$route.name === 'admin_dashboard'"
+          >Trang chủ ADMIN</span
+        >
+        <span v-if="this.$route.name === 'admin_package'"
+          >Quản lý gói tài khoản</span
+        >
+        <span v-if="this.$route.name === 'admin_account'"
+          >Quản lý người dùng</span
+        >
         <span v-if="this.$route.name === 'admin_agency'">Quản lý đại lý</span>
         <span v-if="this.$route.name === 'admin_vps'">Quản lý VPS</span>
-        <span v-if="this.$route.name === 'admin_categories'">Quản lý danh mục mẫu</span>
-        <span v-if="this.$route.name === 'admin_schedule'">Quản lý chiến dịch mẫu</span>
+        <span v-if="this.$route.name === 'admin_categories'"
+          >Quản lý danh mục mẫu</span
+        >
+        <span v-if="this.$route.name === 'admin_schedule'"
+          >Quản lý chiến dịch mẫu</span
+        >
         <span v-if="this.$route.name === 'admin_code'">Quản lý mã gia hạn</span>
       </div>
     </div>

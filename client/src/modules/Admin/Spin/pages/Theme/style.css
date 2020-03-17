@@ -1,0 +1,130 @@
+button {
+  background-color: #f96666;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 1.5rem;
+}
+button:hover,
+button:focus,
+button:active,
+button:visited {
+  background-color: #ff0000;
+  box-shadow: none;
+  outline: 0;
+  transition: all 0.5s ease;
+}
+.btn-page {
+  background-color: #f2f2f2 !important;
+  color: black;
+}
+.btn-page:hover,
+.btn-page:focus,
+.btn-page:active,
+.btn-page:visited {
+  background-color: #e6e6e6 !important;
+  box-shadow: none;
+  outline: 0;
+  transition: all 0.5s ease;
+}
+.fa-trash-alt {
+  color: #585858;
+}
+.fa-edit {
+  color: #f96666;
+}
+i:hover,
+i:focus,
+i:active,
+i:visited {
+  color: #ff0000;
+  box-shadow: none;
+  outline: 0;
+  transition: all 0.5s ease;
+}
+input,
+textarea {
+  background-color: #f5f5f5 !important;
+  font-size: 0.9rem;
+  border-radius: 15px !important;
+}
+input:hover,
+textarea:hover {
+  box-shadow: none;
+  outline: 0;
+  border-color: #ff0000;
+}
+.text-error {
+  color: #f96666;
+  font-size: 15px;
+}
+.alert-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  margin-top: 80px;
+  margin-right: 20px;
+}
+.notification {
+  background-color: #04b404;
+  color: white;
+}
+thead {
+  border: 1px solid #dee2e6 !important;
+}
+tr:hover {
+  background-color: #f5f5f5 !important;
+}
+.page-size {
+  font-family: "Open Sans", sans-serif;
+  border: 2px solid #dee2e6;
+  border-radius: 15px;
+  height: 35px !important;
+}
+.search-bar-div {
+  background: white;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 15px;
+}
+.search-icon {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.search-input {
+  border: none;
+  overflow: visible;
+  font-size: 0.875rem;
+  margin-left: 10px;
+}
+.search-input:focus,
+.search-input:hover {
+  outline: none;
+  box-shadow: none;
+  border: #ff0000 1px solid;
+}
+.input-page {
+  width: 65px !important;
+}
+.input-page:focus {
+  box-shadow: none;
+  outline: 0;
+}
+select {
+  font-size: 14px;
+  width: 100px;
+}
+select:focus {
+  box-shadow: none;
+  outline: 0;
+}
+th,
+label {
+  font-size: 15px !important;
+  font-weight: unset;
+}

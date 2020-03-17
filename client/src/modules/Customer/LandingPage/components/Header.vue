@@ -221,7 +221,7 @@ $colorHover: #c31920;
   position: fixed;
   width: 100vw;
   z-index: 1000;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   .logo {
     color: $color;
     &.active--logo {
@@ -231,11 +231,11 @@ $colorHover: #c31920;
   &.active {
     background-color: $color;
     box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.18);
-    transition: background-color .4s linear;
+    transition: background-color 0.4s linear;
     .nav--menu {
       .items--header {
         color: #fff;
-        font-size: .875rem;
+        font-size: 0.875rem;
         opacity: 1;
         &:hover {
           transition: 0.4s;
@@ -246,13 +246,13 @@ $colorHover: #c31920;
   }
   .nav--menu {
     .items--header {
-      font-size: .875rem;
+      font-size: 0.875rem;
       transition: 0.4s;
-      opacity: .8;
+      opacity: 0.8;
       &:hover {
         opacity: 1;
       }
-      &.login:hover  {
+      &.login:hover {
         border-color: $colorLogo;
       }
       &.login {
@@ -277,10 +277,10 @@ $colorHover: #c31920;
   }
   //  Transition
   .slide-fade-enter-active {
-    transition: all .3s ease;
+    transition: all 0.3s ease;
   }
   .slide-fade-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
   }
   .slide-fade-enter, .slide-fade-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */ {
@@ -308,11 +308,11 @@ $colorHover: #c31920;
       color: #333;
       font-size: 1rem;
       font-weight: 600;
-      padding: 0.5rem .75rem;
+      padding: 0.5rem 0.75rem;
       &.try {
-        color: #FFF;
+        color: #fff;
         background-color: $colorLogo;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         transition: 0.4s;
         &:hover {
           color: #fff;
@@ -389,7 +389,7 @@ $colorHover: #c31920;
     }
     .header {
       .nav--menu {
-        display: none!important;
+        display: none !important;
       }
       .menu {
         z-index: 100;

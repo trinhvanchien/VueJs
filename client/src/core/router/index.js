@@ -33,7 +33,6 @@ import RegisterRouter from "@/modules/Customer/Register/router";
 
 Vue.use(VueRouter);
 
-
 const routes = [
   // Admin
   AdminAccount,

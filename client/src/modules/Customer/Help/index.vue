@@ -33,7 +33,6 @@ export default {
     AppFooter
   }
 };
-
 </script>
 
 <style lang="scss" scoped>

@@ -68,7 +68,7 @@
               v-model="searchKey"
             />
           </div>
-          <select class="page--size" v-model="pageSize">
+          <select class="page-size" v-model="pageSize">
             <option value="10" selected>Hiển thị 10</option>
             <option value="25">Hiển thị 25</option>
             <option value="50">Hiển thị 50</option>
@@ -78,7 +78,7 @@
           <div class="d_flex align_items_center justify_content_between">
             <span
               >Trang {{ currentPage }} trong tổng số
-              {{ totalPages }} trang.</span
+              {{ totalPages }} trang</span
             >
             <div>
               <button

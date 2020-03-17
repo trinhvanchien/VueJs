@@ -41,10 +41,10 @@ module.exports = {
     let queryResult = await SpinTheme.find({}).limit(10);
 
     let entryCount = await SpinTheme.count({});
-    
+
     dataResponse = {
       data: queryResult,
-      totalPages: Math.ceil(entryCount / 10)
+      totalPages: Math.ceil(entryCount / 10),
     };
     console.log("[MESSAGE]: totalPages", dataResponse.totalPages);
     res.status(200).json(jsonResponse("success", dataResponse));
@@ -100,7 +100,7 @@ module.exports = {
   detail: async (req, res) => {
     console.log("[MESSAGE]: req.params.id", req.params.id);
     let dataResponse = await SpinTheme.findById(req.params.id).lean();
-    
+
     if (!dataResponse) {
       return res
         .status(404)

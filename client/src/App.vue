@@ -15,7 +15,7 @@ export default {
     layout() {
       return (this.$route.meta.layout || admin_layout) + "-layout";
     }
-  },
+  }
 };
 </script>
 <style lang="scss">

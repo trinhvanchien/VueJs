@@ -188,7 +188,7 @@ export default {
             height: 20,
             viewBox: "0 0 540 540"
           },
-          to: "admin_spin"
+          to: "spin_theme"
         },
         {
           text: "Quản lý mã gia hạn",

@@ -15,7 +15,9 @@
             <li class="month">1 THÁNG</li>
             <li class="money">2.800.000đ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -24,7 +26,9 @@
             <li class="month">6 THÁNG</li>
             <li class="money">16.199.000đ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -33,7 +37,9 @@
             <li class="month">1 NĂM</li>
             <li class="money">28.799.000đ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -42,7 +48,9 @@
             <li class="month">DOANH NGHIỆP</li>
             <li class="money">Liên hệ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -266,17 +274,22 @@
           class="btn--live-chat"
           target="_blank"
           href="https://www.facebook.com/hootvietnam/"
-        >LIÊN HỆ NGAY BÂY GIỜ</a>
+          >LIÊN HỆ NGAY BÂY GIỜ</a
+        >
       </div>
     </div>
     <div class="d_md_none d_block content--tablet ct">
       <div class="items--content mb_4">
-        <div class="item--header text_center main--price first align_items_center">
+        <div
+          class="item--header text_center main--price first align_items_center"
+        >
           <ul>
             <li class="month">1 THÁNG</li>
             <li class="money">2.800.000đ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -354,12 +367,16 @@
         </div>
       </div>
       <div class="items--content mb_4">
-        <div class="item--header text_center main--price first align_items_center">
+        <div
+          class="item--header text_center main--price first align_items_center"
+        >
           <ul>
             <li class="month">6 THÁNG</li>
             <li class="money">16.199.000đ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -437,12 +454,16 @@
         </div>
       </div>
       <div class="items--content mb_4">
-        <div class="item--header text_center main--price first align_items_center">
+        <div
+          class="item--header text_center main--price first align_items_center"
+        >
           <ul>
             <li class="month">1 NĂM</li>
             <li class="money">28.799.000đ</li>
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -520,12 +541,16 @@
         </div>
       </div>
       <div class="items--content mb_4">
-        <div class="item--header text_center main--price first align_items_center">
+        <div
+          class="item--header text_center main--price first align_items_center"
+        >
           <ul>
             <li class="month mb_2">DOANH NGHIỆP</li>
             <!-- <li class="money">2.800.000đ</li> -->
             <li class="register">
-              <a href="https://www.facebook.com/hootvietnam/" target="_blank">Liên hệ</a>
+              <a href="https://www.facebook.com/hootvietnam/" target="_blank"
+                >Liên hệ</a
+              >
             </li>
           </ul>
         </div>
@@ -608,7 +633,8 @@
           class="btn--live-chat"
           target="_blank"
           href="https://www.facebook.com/hootvietnam/"
-        >LIÊN HỆ NGAY BÂY GIỜ</a>
+          >LIÊN HỆ NGAY BÂY GIỜ</a
+        >
       </div>
     </div>
     <!--  -->

@@ -8,7 +8,9 @@
             <icon-base width="72" height="36" viewBox="0 0 664 301">
               <hoot-logo-white />
             </icon-base>
-            <div class="center--support ml_2" @click="goToHelpHome">Trung tâm trợ giúp</div>
+            <div class="center--support ml_2" @click="goToHelpHome">
+              Trung tâm trợ giúp
+            </div>
           </div>
         </div>
         <!-- End header logo help   -->
@@ -16,7 +18,12 @@
         <div class="c_md_6">
           <div class="wrap--search">
             <div class="search">
-              <icon-base icon-name="search" width="26" height="24" viewBox="0 0 24 24">
+              <icon-base
+                icon-name="search"
+                width="26"
+                height="24"
+                viewBox="0 0 24 24"
+              >
                 <icon-input-search />
               </icon-base>
               <input
@@ -33,7 +40,12 @@
         <div class="c_md_3 d_flex align_items_center">
           <div class="content--back">
             <div class="icon">
-              <icon-base icon-name="back" width="25" height="22" viewBox="0 0 25 25">
+              <icon-base
+                icon-name="back"
+                width="25"
+                height="22"
+                viewBox="0 0 25 25"
+              >
                 <icon-logout />
               </icon-base>
             </div>
@@ -60,7 +72,10 @@
               :key="index"
             >
               {{ category.title }}
-              <ul class="dropdown--menu" v-if="category.children && category.children.length > 0">
+              <ul
+                class="dropdown--menu"
+                v-if="category.children && category.children.length > 0"
+              >
                 <li
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
@@ -73,7 +88,8 @@
                       query: { type: 'hc_global_nav' }
                     }"
                     @click.native="showCurrentHelpCategory(categoryChild._id)"
-                  >{{ categoryChild.title }}</router-link>
+                    >{{ categoryChild.title }}</router-link
+                  >
                 </li>
               </ul>
             </li>
@@ -83,7 +99,12 @@
               <a :href="`https://mail.google.com`" target="_blank">
                 <div class="mail--help d_flex">
                   <div class="icon--envelope mr_1">
-                    <icon-base icon-name="mail" width="22" height="20" viewBox="0 0 22 22">
+                    <icon-base
+                      icon-name="mail"
+                      width="22"
+                      height="20"
+                      viewBox="0 0 22 22"
+                    >
                       <icon-envelope />
                     </icon-base>
                   </div>
