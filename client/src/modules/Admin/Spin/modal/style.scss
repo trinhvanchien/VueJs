@@ -111,10 +111,15 @@
     }
   }
 }
-.select-theme .vs__search {
-  color: #cccccc !important;
-  &:focus {
-    color: #cccccc !important;
+.select-theme {
+  border-color: #cccccc !important;
+  border-radius: 0.625rem;
+  &:focus,
+  &:hover {
+    border-color: #f96666 !important;
+    border-radius: 0.625rem;
+    outline: 0 !important;
+    box-shadow: none;
   }
 }
 .input-key {
@@ -125,10 +130,12 @@
   padding: 0.5rem 0.75rem;
   width: 100%;
   &:active,
-  &:focus {
-    border-color: #f96666;
+  &:focus,
+  &:hover {
+    border-color: #f96666 !important;
     border-radius: 0.625rem;
     outline: 0 !important;
+    box-shadow: none;
   }
   &::placeholder {
     text-transform: none;

@@ -5,19 +5,10 @@
         <router-view />
       </transition>
     </component>
-    <div>Messenger</div>
-    <div
-      class="fb-customerchat"
-      theme_color="#fa3c4c"
-      page_id="105765931061134"
-      logged_in_greeting="Xin chào ! Chúng tối có thể giúp gì cho bạn?"
-      logged_out_greeting="Xin chào ! Chúng tối có thể giúp gì cho bạn?"
-    ></div>
   </div>
 </template>
 <script>
 const admin_layout = "customer";
-
 export default {
   computed: {
     layout() {
