@@ -126,9 +126,9 @@ export default {
       setTimeout(() => {
         commit("updatePageStatus", null);
       }, 1000);
-      result = await ThemeServices.index();
       await commit("setCurrentPage", state.currentPage);
-      await commit("setThemes", result.data.data.data);
+      // result = await ThemeServices.index();
+      // await commit("setThemes", result.data.data.data);
       commit("setPageSize", 10);
       await commit("setTotalPages", result.data.data.totalPages);
     },

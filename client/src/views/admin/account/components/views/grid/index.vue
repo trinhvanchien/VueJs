@@ -147,7 +147,10 @@
                     </icon-base>
                   </div>
                   <!-- start: button renew password -->
-                  <div class="btn--renew mt_2" @click="openPopupRenewPassword(user)">
+                  <div
+                    class="btn--renew mt_2"
+                    @click="openPopupRenewPassword(user)"
+                  >
                     <span class="mr_2">Đặt lại mật khẩu</span>
                   </div>
                   <!-- end: button renew password -->

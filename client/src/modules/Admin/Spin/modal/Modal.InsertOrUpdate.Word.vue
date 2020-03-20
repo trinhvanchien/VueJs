@@ -30,22 +30,26 @@
           />
           <br />
           <label>Chọn chủ đề</label>
-          <select class="custom-select select-theme" v-model="wordsObj.themes">
-            <option v-for="item in theme_Word" :key="item._id">
-              {{ item.name }}
-            </option>
-          </select>
+          <div class="theme--body-cate">
+            <multiselect
+              class="select-theme"
+              label="name"
+              placeholder="Chọn chủ đề...."
+              :options="theme_Word"
+              v-model="wordsObj.theme"
+            />
+          </div>
           <div
             class="modal--footer d_flex justify_content_between align_items_center"
           >
             <button
               v-if="modalControl === true"
               class="btn--submit"
-              @click="update"
+              @click="update(wordsObj)"
             >
               Cập nhật
             </button>
-            <button v-else class="btn--submit" @click="insert()">
+            <button v-else class="btn--submit" @click="insert(wordsObj)">
               Tạo
             </button>
             <button class="btn--submit" @click="closePopup()">
@@ -66,10 +70,7 @@ export default {
     };
   },
   created() {
-    const theme_Word = this.$store.getters.themes;
-    if (theme_Word.length === 0) {
-      this.$store.dispatch("getThemes");
-    }
+    this.$store.dispatch("getThemes");
   },
   watch: {
     "wordsObj.name"(val) {
@@ -90,13 +91,13 @@ export default {
     closePopup() {
       this.$emit("closePopup", false);
     },
-    insert() {
+    insert(val) {
       if (this.wordsObj.name === "") {
         this.isShowAlertName = true;
         return;
       } else {
-        this.$store.dispatch("createWords", this.wordsObj);
-        console.log("wordsObj", this.wordsObj);
+        this.$store.dispatch("createWords", val);
+        console.log("wordsObj", val);
         this.$store.dispatch("resetWords");
         this.closePopup();
       }

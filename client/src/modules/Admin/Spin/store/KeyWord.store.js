@@ -8,7 +8,11 @@ export default {
     pageSizeWord: 10,
     searchKeyWord: "",
     statusWord: "",
-    wordsObj: {}
+    wordsObj: {
+      name: "",
+      key: "",
+      theme: ""
+    }
   },
   getters: {
     words: state => state.words,
@@ -71,13 +75,17 @@ export default {
         searchKey: state.searchKeyWord
       };
       result = await WordServices.indexOptions(data);
-      commit("setWords", result.data.data.data);
-      commit("setTotalPagesWord", result.data.data.totalPages);
+      await commit("setWords", result.data.data.data);
+      await commit("setTotalPagesWord", result.data.data.totalPages);
     },
     createWords: async ({ commit }, payload) => {
       let result;
       await WordServices.create(payload);
       console.log("data insert", payload);
+      commit("showStatusWords", "insert");
+      setTimeout(() => {
+        commit("updateStatusWords", null);
+      }, 1000);
       result = await WordServices.index();
       await commit("setWords", result.data.data.data);
       console.log("after insert", result.data.data.data);
@@ -88,7 +96,7 @@ export default {
       commit("setWordObj", {
         name: "",
         key: "",
-        themes: ""
+        theme: ""
       });
     },
     deleteWord: async ({ commit, state }, payload) => {
@@ -155,6 +163,10 @@ export default {
     updateWord: async ({ commit }, payload) => {
       let result;
       await WordServices.update(payload._id, payload);
+      commit("showStatusWords", "update");
+      setTimeout(() => {
+        commit("updateStatusWords", null);
+      }, 1000);
       result = await WordServices.index();
       await commit("setWords", result.data.data.data);
       console.log("after update", result.data.data.data);

@@ -10,63 +10,23 @@
         <i class="far fa-check-circle" style="font-size:20px"></i
         >&nbsp;&nbsp;Xóa từ khóa thành công !!!
       </div>
-    </div>
-    <!-- =-=-=-=-=-=-= notification =-=-=-=-=-=-=-=-=-= -->
-    <!-- <div class="col-4">
-        <div class="card" style="border-radius: 20px">
-          <div class="card-body">
-            <p
-              class="card-title text-center font-weight-bold"
-              style="font-size:18px"
-              v-if="themesObj._id"
-            >
-              Cập nhật chủ đề
-            </p>
-            <p
-              class="card-title text-center font-weight-bold"
-              style="font-size:18px"
-              v-else
-            >
-              Tạo mới chủ đề
-            </p>
-            <label>Tên chủ đề</label>
-            <input
-              type="text"
-              placeholder="Nhập tên chủ đề"
-              class="form-control mb-3"
-              v-model="themesObj.name"
-            />
-            <div class="text-danger" v-if="isShowValidate === true">
-              <span>Tên chủ đề không được bỏ trống</span>
-            </div>
-            <label>Mô tả chủ đề</label>
-            <textarea
-              type="text"
-              placeholder="Nhập mô tả chủ đề"
-              class="form-control"
-              style="min-height:110px"
-              v-model="themesObj.description"
-            ></textarea>
-            <br />
-            <div>
-              <button
-                v-if="themesObj._id"
-                type="submit"
-                @click="update(themesObj)"
-              >
-                Cập nhật
-              </button>
-              <button v-else type="submit" @click="create()">
-                Tạo mới
-              </button>
-              <button v-if="themesObj._id" @click="cancel" class="float_right">
-                Hủy
-              </button>
-            </div>
-          </div>
-        </div>
+      <div
+        class="alert notification text-center"
+        v-if="statusWord === 'update'"
+        style="font-size:15px"
+      >
+        <i class="far fa-check-circle" style="font-size:20px"></i
+        >&nbsp;&nbsp;Cập nhật từ khóa thành công !!!
       </div>
-    </div> -->
+      <div
+        class="alert notification text-center"
+        v-if="statusWord === 'insert'"
+        style="font-size:15px"
+      >
+        <i class="far fa-check-circle" style="font-size:20px"></i
+        >&nbsp;&nbsp;Tạo mới từ khóa thành công !!!
+      </div>
+    </div>
     <div class="row mb-3">
       <div class="col-6 col-xs-12 d-flex">
         <div class="search-bar-div float_left mr-2">
@@ -127,7 +87,7 @@
           >
             <td>{{ item.name }}</td>
             <td>{{ item.key }}</td>
-            <td v-if="item.theme">{{ item.theme.name }}</td>
+            <td v-if="item.theme._id">{{ item.theme.name }}</td>
             <td>
               <i
                 class="far fa-trash-alt mr-3"
@@ -222,14 +182,14 @@ export default {
       this.modalControl = false;
       this.$store.dispatch("resetWords");
     },
-    showModalDelete(val) {
-      this.isShowModalDelete = true;
-      this.wordSelected = val;
-    },
     showModalUpdate(val) {
       this.$store.dispatch("getIdWord", val);
       this.isShowModalInOrUp = true;
       this.modalControl = true;
+    },
+    showModalDelete(val) {
+      this.isShowModalDelete = true;
+      this.wordSelected = val;
     }
   }
 };
