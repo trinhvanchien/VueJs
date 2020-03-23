@@ -114,13 +114,6 @@
 .select-theme {
   border-color: #cccccc !important;
   border-radius: 0.625rem;
-  &:focus,
-  &:hover {
-    border-color: #f96666 !important;
-    border-radius: 0.625rem;
-    outline: 0 !important;
-    box-shadow: none;
-  }
 }
 .input-key {
   border-radius: 0.625rem;

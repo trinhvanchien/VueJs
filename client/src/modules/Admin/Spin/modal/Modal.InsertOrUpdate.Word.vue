@@ -30,7 +30,6 @@
           />
           <br />
           <label>Chọn chủ đề</label>
-          <div class="theme--body-cate">
             <multiselect
               class="select-theme"
               label="name"
@@ -38,7 +37,6 @@
               :options="theme_Word"
               v-model="wordsObj.theme"
             />
-          </div>
           <div
             class="modal--footer d_flex justify_content_between align_items_center"
           >
