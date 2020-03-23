@@ -12,15 +12,13 @@ import "./core/middlewares/guards";
 import "./core/middlewares/headers";
 import "./core/middlewares/plugins";
 
-Vue.component("admin-layout", () =>
-    import ("./core/layouts/AdminLayout"));
-Vue.component("customer-layout", () =>
-    import ("./core/layouts/Customer"));
+Vue.component("admin-layout", () => import("./core/layouts/AdminLayout"));
+Vue.component("customer-layout", () => import("./core/layouts/Customer"));
 
 Vue.config.productionTip = false;
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");

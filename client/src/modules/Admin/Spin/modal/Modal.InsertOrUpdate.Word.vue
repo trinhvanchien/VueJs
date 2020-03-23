@@ -30,13 +30,13 @@
           />
           <br />
           <label>Chọn chủ đề</label>
-            <multiselect
-              class="select-theme"
-              label="name"
-              placeholder="Chọn chủ đề...."
-              :options="theme_Word"
-              v-model="wordsObj.theme"
-            />
+          <multiselect
+            class="select-theme"
+            label="name"
+            placeholder="Chọn chủ đề...."
+            :options="theme_Word"
+            v-model="wordsObj.theme"
+          />
           <div
             class="modal--footer d_flex justify_content_between align_items_center"
           >
